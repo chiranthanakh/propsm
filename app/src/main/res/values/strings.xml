@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">ProjectStoreManagement</string>
+    <string-array name="contactor">
+        <item>M.K Enterprises</item>
+        <item>ABB India Limited</item>
+        <item>Puma India Limited</item>
+    </string-array>
+
+    <string-array name="division">
+        <item>Berhampore</item>
+        <item>Test1</item>
+        <item>Test2</item>
+    </string-array>
+
+    <string-array name="feeder">
+        <item>DTW</item>
+        <item>Test1</item>
+        <item>Test1</item>
+    </string-array>
+    <string name="copy"><font fgcolor='#ffffff'><bold> "© Copyright 2022</bold></font><font fgcolor='#88c3f5'><bold> <a href="https://proteam.co.in/"> Pro-Team Solution Pvt Ltd </a> </bold></font><font fgcolor='#ffffff'><bold>All Right Reserved.</bold></font></string>
+
+</resources>
