@@ -1,15 +1,13 @@
-package com.proteam.projectstoremanagement.Model;
+package com.proteam.projectstoremanagement.Response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class ConSubLocation {
+public class SubLocationRaiseResponse {
 
     @SerializedName("location_id")
     @Expose
-    private String location_id;
+    private int location_id;
 
     @SerializedName("location_manual_id")
     @Expose
@@ -19,11 +17,11 @@ public class ConSubLocation {
     @Expose
     private String location_name;
 
-    public String getLocation_id() {
+    public int getLocation_id() {
         return location_id;
     }
 
-    public void setLocation_id(String location_id) {
+    public void setLocation_id(int location_id) {
         this.location_id = location_id;
     }
 
@@ -43,4 +41,3 @@ public class ConSubLocation {
         this.location_name = location_name;
     }
 }
-

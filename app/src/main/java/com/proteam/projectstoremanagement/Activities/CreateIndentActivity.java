@@ -17,8 +17,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.proteam.projectstoremanagement.Model.ConSubLocationModel;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.Constructorlocationrequest;
+import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
 import com.proteam.projectstoremanagement.Response.Contractorlocationmodel;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
 import com.proteam.projectstoremanagement.WebServices;
@@ -33,11 +35,15 @@ import retrofit2.Response;
 public class CreateIndentActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
     ImageView mToolbar;
     int mMonth,mDay,mYear;
-    Spinner spinner_contractor_name, spinner_location, spinner_feeder_name;
+    Spinner spinner_contractor_name, spinner_location, spinner_sublocation;
     EditText edt_indent_date;
 
     List contractorlist = new ArrayList();
     List location = new ArrayList();
+
+
+
+    List sublocation = new ArrayList();
 
     AppCompatButton btn_indent_generate;
 
@@ -54,9 +60,10 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         calllocationapi();
 
 
+
         spinner_contractor_name.setOnItemSelectedListener(OnCatSpinnerCL);
         spinner_location.setOnItemSelectedListener(OnCatSpinnerCL);
-        spinner_feeder_name.setOnItemSelectedListener(OnCatSpinnerCL);
+        spinner_sublocation.setOnItemSelectedListener(OnCatSpinnerCL);
 
 
     }
@@ -65,7 +72,7 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
     private void initilize() {
         spinner_contractor_name = findViewById(R.id.spinner_contractor_name);
         spinner_location = findViewById(R.id.spinner_location);
-        spinner_feeder_name = findViewById(R.id.spinner_sublocation);
+        spinner_sublocation = findViewById(R.id.spinner_sublocation);
         edt_indent_date = findViewById(R.id.edt_indent_date);
         edt_indent_date.setOnClickListener(this);
         btn_indent_generate=findViewById(R.id.btn_indent_generate);
@@ -81,6 +88,15 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
 
         WebServices<Contractorlocationmodel> webServices = new WebServices<Contractorlocationmodel >(CreateIndentActivity.this);
         webServices.constructorlocation( WebServices.ApiType.location,constructorlocationrequest );
+
+    }
+
+    private void callSublocationapi() {
+
+        SubLocationRaiseRequest subLocationRaiseRequest = new SubLocationRaiseRequest("2");
+
+        WebServices<Contractorlocationmodel> webServices = new WebServices<Contractorlocationmodel >(CreateIndentActivity.this);
+        webServices.constructorSublocation( WebServices.ApiType.sublocation,subLocationRaiseRequest );
 
     }
 
@@ -164,11 +180,35 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
 
                     ArrayAdapter adapte=new ArrayAdapter(CreateIndentActivity.this,android.R.layout.simple_list_item_1,contractorlist);
                     spinner_contractor_name.setAdapter(adapte);
+                    callSublocationapi();
+                }else {
+                    Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
+
+                }
+                break;
+
+            case sublocation:
+
+                if (response != null) {
+
+                    List list = new ArrayList();
+                    ConSubLocationModel conSubLocationModel = (ConSubLocationModel) response;
+
+                    list = conSubLocationModel.getSub_locations();
+
+                    for(int i = 0; i<list.size(); i++ ){
+
+                        sublocation.add(conSubLocationModel.getSub_locations().get(i).getLocation_name());
+                    }
+                    ArrayAdapter adapter1=new ArrayAdapter(CreateIndentActivity.this,android.R.layout.simple_list_item_1,sublocation);
+                    spinner_sublocation.setAdapter(adapter1);
 
                 }else {
                     Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
 
                 }
+                break;
+
 
         }
     }

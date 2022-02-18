@@ -8,6 +8,15 @@
         <entry key="..\:/Users/Personal/Downloads/PSM/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/Personal/Downloads/PSM/app/src/main/res/layout/activity_main.xml" value="0.11614583333333334" />
         <entry key="..\:/Users/Personal/Downloads/PSM/app/src/main/res/layout/activity_store.xml" value="0.1" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_indent_add.xml" value="0.19444444444444445" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_indent_status.xml" value="0.19444444444444445" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_pending_indent.xml" value="0.19444444444444445" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_pending_indent_list.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_raise_indent.xml" value="0.19444444444444445" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/indent_status_list_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/material_home_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/material_raise_indent.xml" value="0.19444444444444445" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/raise_indent_list_layout.xml" value="0.22" />
       </map>
     </option>
   </component>

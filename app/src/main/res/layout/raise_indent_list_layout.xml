@@ -21,6 +21,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_indent_materialCode"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -31,6 +32,7 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/tv_indent_materialName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -40,7 +42,7 @@
                 android:textSize="12sp" />
 
             <TextView
-
+                android:id="@+id/tv_indent_boqBalance"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -51,6 +53,7 @@
                 android:textSize="12sp" />
 
             <EditText
+                android:id="@+id/edt_indent_materialRaiseQty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="0dp"
@@ -66,6 +69,7 @@
 
         </LinearLayout>
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
