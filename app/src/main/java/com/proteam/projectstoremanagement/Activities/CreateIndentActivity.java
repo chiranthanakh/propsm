@@ -9,22 +9,35 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.proteam.projectstoremanagement.R;
+import com.proteam.projectstoremanagement.Request.Constructorlocationrequest;
+import com.proteam.projectstoremanagement.Response.Contractorlocationmodel;
+import com.proteam.projectstoremanagement.Utils.OnResponseListener;
+import com.proteam.projectstoremanagement.WebServices;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
-public class CreateIndentActivity extends AppCompatActivity implements View.OnClickListener {
+import retrofit2.Response;
+
+public class CreateIndentActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
     ImageView mToolbar;
     int mMonth,mDay,mYear;
-    Spinner spinner_contractor_name, spinner_division_name, spinner_feeder_name;
+    Spinner spinner_contractor_name, spinner_location, spinner_feeder_name;
     EditText edt_indent_date;
+
+    List contractorlist = new ArrayList();
+    List location = new ArrayList();
 
     AppCompatButton btn_indent_generate;
 
@@ -37,14 +50,22 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
 
 
         initilize();
+
+        calllocationapi();
+
+
         spinner_contractor_name.setOnItemSelectedListener(OnCatSpinnerCL);
-        spinner_division_name.setOnItemSelectedListener(OnCatSpinnerCL);
+        spinner_location.setOnItemSelectedListener(OnCatSpinnerCL);
         spinner_feeder_name.setOnItemSelectedListener(OnCatSpinnerCL);
+
+
+
     }
+
 
     private void initilize() {
         spinner_contractor_name = findViewById(R.id.spinner_contractor_name);
-        spinner_division_name = findViewById(R.id.spinner_division_name);
+        spinner_location = findViewById(R.id.spinner_location);
         spinner_feeder_name = findViewById(R.id.spinner_feeder_name);
         edt_indent_date = findViewById(R.id.edt_indent_date);
         edt_indent_date.setOnClickListener(this);
@@ -53,6 +74,17 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
 
 
     }
+
+
+    private void calllocationapi() {
+
+        Constructorlocationrequest constructorlocationrequest = new Constructorlocationrequest("puma_client@gmail.com",10);
+
+        WebServices<Contractorlocationmodel> webServices = new WebServices<Contractorlocationmodel >(CreateIndentActivity.this);
+        webServices.constructorlocation( WebServices.ApiType.location,constructorlocationrequest );
+
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -103,4 +135,42 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
     };
 
 
+    @Override
+    public void onResponse(Object response, WebServices.ApiType URL, boolean isSucces, int code) {
+        switch (URL) {
+            case location:
+
+                if (response != null) {
+
+                    List list = new ArrayList();
+                    List list2 = new ArrayList();
+                    Contractorlocationmodel contractorlocationmodel = (Contractorlocationmodel) response;
+
+                        list = contractorlocationmodel.getLocations();
+
+                    for(int i = 0; i<list.size(); i++ ){
+
+                        location.add(contractorlocationmodel.getLocations().get(i).getBlock_name());
+                    }
+
+                    list2 = contractorlocationmodel.getContractors();
+
+                    for(int i = 0; i<list2.size(); i++ ){
+
+                        contractorlist.add(contractorlocationmodel.getContractors().get(i).getFull_name());
+                    }
+
+                    ArrayAdapter adapter=new ArrayAdapter(CreateIndentActivity.this,android.R.layout.simple_list_item_1,location);
+                    spinner_location.setAdapter(adapter);
+
+                    ArrayAdapter adapte=new ArrayAdapter(CreateIndentActivity.this,android.R.layout.simple_list_item_1,contractorlist);
+                    spinner_contractor_name.setAdapter(adapte);
+
+                }else {
+                    Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
+
+                }
+
+        }
+    }
 }
