@@ -59,14 +59,13 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         spinner_feeder_name.setOnItemSelectedListener(OnCatSpinnerCL);
 
 
-
     }
 
 
     private void initilize() {
         spinner_contractor_name = findViewById(R.id.spinner_contractor_name);
         spinner_location = findViewById(R.id.spinner_location);
-        spinner_feeder_name = findViewById(R.id.spinner_feeder_name);
+        spinner_feeder_name = findViewById(R.id.spinner_sublocation);
         edt_indent_date = findViewById(R.id.edt_indent_date);
         edt_indent_date.setOnClickListener(this);
         btn_indent_generate=findViewById(R.id.btn_indent_generate);
