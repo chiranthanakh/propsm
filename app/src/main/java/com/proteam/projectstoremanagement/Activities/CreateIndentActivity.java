@@ -19,8 +19,10 @@ import android.widget.Toast;
 
 import com.proteam.projectstoremanagement.Model.ConSubLocationModel;
 import com.proteam.projectstoremanagement.R;
+import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.Constructorlocationrequest;
 import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
+import com.proteam.projectstoremanagement.Response.Boqlist;
 import com.proteam.projectstoremanagement.Response.Contractorlocationmodel;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
 import com.proteam.projectstoremanagement.WebServices;
@@ -28,7 +30,9 @@ import com.proteam.projectstoremanagement.WebServices;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Response;
 
@@ -40,7 +44,9 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
 
     List contractorlist = new ArrayList();
     List location = new ArrayList();
-
+    Map contractormap = new HashMap();
+    Map locationmap = new HashMap();
+    Map sublocationmap = new HashMap();
 
 
     List sublocation = new ArrayList();
@@ -99,6 +105,14 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         webServices.constructorSublocation( WebServices.ApiType.sublocation,subLocationRaiseRequest );
 
     }
+    private void callboqupdateapi() {
+
+        Boqrequest boqrequest = new Boqrequest("10","2","2");
+        WebServices<Boqlist> webServices = new WebServices<Boqlist>(CreateIndentActivity.this);
+        webServices.boqapi( WebServices.ApiType.boq,boqrequest );
+
+    }
+
 
 
     @Override
@@ -106,8 +120,11 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         switch (view.getId())
         {
             case R.id.btn_indent_generate:
-                Intent intent = new Intent(CreateIndentActivity.this,RaiseIndentActivity.class);
-                startActivity(intent);
+
+                callboqupdateapi();
+
+                //Intent intent = new Intent(CreateIndentActivity.this,RaiseIndentActivity.class);
+                //startActivity(intent);
                 break;
             case R.id.edt_indent_date:
             final Calendar c = Calendar.getInstance();
@@ -207,6 +224,8 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
                     Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
 
                 }
+                break;
+            case boq:
                 break;
 
 

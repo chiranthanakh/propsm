@@ -2,8 +2,10 @@ package com.proteam.projectstoremanagement.Utils;
 
 import com.proteam.projectstoremanagement.Model.ConSubLocationModel;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
+import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.Constructorlocationrequest;
 import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
+import com.proteam.projectstoremanagement.Response.Boqlist;
 import com.proteam.projectstoremanagement.Response.Contractorlocationmodel;
 import com.proteam.projectstoremanagement.Response.Generalresponce;
 
@@ -22,5 +24,8 @@ public interface PsmApi {
 
     @POST("Clients_apis/sub_location_list")
     Call<ConSubLocationModel> c_SUb_location(@Body SubLocationRaiseRequest subLocationRaiseRequest);
+
+    @POST("Clients_apis/boq_list")
+    Call<Boqlist> boq(@Body Boqrequest boqrequest);
 
 }
