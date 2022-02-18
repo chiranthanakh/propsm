@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mindinventory.midrawer.MIDrawerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#056c45"
+    android:orientation="vertical"
+    android:id="@+id/drawer_layout"
+    tools:context=".Activities.MainActivity"
+    android:fitsSystemWindows="true"
+    app:sliderType="slide"
+    tools:openDrawer="start">
+
+
+    <include
+        android:id="@+id/in_dashboard_layout"
+        layout="@layout/dashboard_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_gravity="start"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#056c45"
+        android:fitsSystemWindows="true">
+
+
+        <LinearLayout
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_nav_image"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:padding="15dp"
+                android:src="@drawable/user" />
+
+            <TextView
+                android:id="@+id/iv_nav_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Hello, Welcome to PIMS"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+               android:fontFamily="@font/proxima_family"/>
+
+
+            <TextView
+                android:id="@+id/tv_nav_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="Santosh"
+                android:fontFamily="@font/proxima_nova_bold"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="200dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_raise_boq_indent"
+                android:drawableStart="@drawable/indend"
+                android:drawableTint="@color/icon_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:padding="15dp"
+                android:fontFamily="@font/proxima_family"
+                android:text="Raise BOQ Indent"
+                android:textColor="@color/grey_dark"
+                android:textSize="16sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="30dp"
+                android:background="@color/grey_very_light"/>
+
+            <TextView
+                android:id="@+id/tv_individual_indent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/icon_color"
+                android:gravity="center_vertical"
+                android:padding="15dp"
+                android:drawableStart="@drawable/ind_indent"
+                android:fontFamily="@font/proxima_family"
+                android:text="New Individual Indent"
+                android:textColor="@color/grey_dark"
+                android:textSize="16sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="30dp"
+                android:background="@color/grey_very_light"/>
+
+            <TextView
+                android:id="@+id/tv_pending_indent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/icon_color"
+                android:drawableStart="@drawable/ic_pending"
+                android:gravity="center_vertical"
+                android:padding="15dp"
+                android:fontFamily="@font/proxima_family"
+                android:text="Pending Indent"
+                android:textColor="@color/grey_dark"
+                android:textSize="16sp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="30dp"
+                android:background="@color/grey_very_light"/>
+
+            <TextView
+                android:id="@+id/tv_consumption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/icon_color"
+                android:drawableStart="@drawable/consumption"
+                android:gravity="center_vertical"
+                android:padding="15dp"
+                android:fontFamily="@font/proxima_family"
+                android:text="New Consumption"
+                android:textColor="@color/grey_dark"
+                android:textSize="16sp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="30dp"
+                android:background="@color/grey_very_light"/>
+            <TextView
+                android:id="@+id/tv_consumption_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/icon_color"
+                android:drawableStart="@drawable/cum_list"
+                android:gravity="center_vertical"
+                android:padding="15dp"
+                android:fontFamily="@font/proxima_family"
+                android:text="Consumption List"
+                android:textColor="@color/grey_dark"
+                android:textSize="16sp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="30dp"
+                android:background="@color/grey_very_light"/>
+
+            <Button
+                android:id="@+id/btn_logout"
+                app:icon="@drawable/exit"
+                android:text="Logout"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"/>
+
+        </LinearLayout>
+
+
+    </com.google.android.material.navigation.NavigationView>
+
+
+</com.mindinventory.midrawer.MIDrawerView>
