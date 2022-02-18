@@ -180,7 +180,7 @@
                 android:textSize="15sp" />
 
             <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/spinner_feeder_name"
+                android:id="@+id/spinner_sublocation"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginStart="10dp"
