@@ -248,29 +248,5 @@ public class WebServices<T> {
         });
 
     }
-
-
-   /* public void profile(String api, ApiType apiTypes, ProfileModel profileModel) {
-        apiTypeVariable = apiTypes;
-        Retrofit retrofit=getRetrofitClient(BaseUrl);
-        AuditApi auditApi=retrofit.create(AuditApi.class);
-
-        call=(Call<T>)auditApi.profilelogin(profileModel);
-
-        call.enqueue(new Callback<T>() {
-            @Override
-            public void onResponse(Call<T> call, Response<T> response) {
-                System.out.println("usercompany===="+response.body());
-                t=(T)response.body();
-                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
-            }
-
-            @Override
-            public void onFailure(Call<T> call, Throwable t) {
-                onResponseListner.onResponse(null, apiTypeVariable, false,0);
-            }
-        });
-
-    }*/
 }
 

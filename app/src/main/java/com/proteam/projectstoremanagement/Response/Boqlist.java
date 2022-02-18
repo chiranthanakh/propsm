@@ -11,5 +11,11 @@ public class Boqlist {
     @Expose
     private List<Boqitems> boq_list = null;
 
+    public List<Boqitems> getBoq_list() {
+        return boq_list;
+    }
 
+    public void setBoq_list(List<Boqitems> boq_list) {
+        this.boq_list = boq_list;
+    }
 }

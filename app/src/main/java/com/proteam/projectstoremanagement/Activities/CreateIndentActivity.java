@@ -121,10 +121,14 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         {
             case R.id.btn_indent_generate:
 
-                callboqupdateapi();
+               /* String store;
+                String location = String.valueOf(locationmap.get(spinner_location.getSelectedItem().toString()));
+                String sublocation = String.valueOf(sublocationmap.get(spinner_sublocation.getSelectedItem().toString()));
 
-                //Intent intent = new Intent(CreateIndentActivity.this,RaiseIndentActivity.class);
-                //startActivity(intent);
+                callboqupdateapi();*/
+
+                Intent intent = new Intent(CreateIndentActivity.this,RaiseIndentActivity.class);
+                startActivity(intent);
                 break;
             case R.id.edt_indent_date:
             final Calendar c = Calendar.getInstance();
@@ -183,6 +187,7 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
                     for(int i = 0; i<list.size(); i++ ){
 
                         location.add(contractorlocationmodel.getLocations().get(i).getBlock_name());
+                        locationmap.put(contractorlocationmodel.getLocations().get(i).getBlock_id(), contractorlocationmodel.getLocations().get(i).getBlock_name());
                     }
 
                     list2 = contractorlocationmodel.getContractors();
@@ -190,6 +195,7 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
                     for(int i = 0; i<list2.size(); i++ ){
 
                         contractorlist.add(contractorlocationmodel.getContractors().get(i).getFull_name());
+
                     }
 
                     ArrayAdapter adapter=new ArrayAdapter(CreateIndentActivity.this,android.R.layout.simple_list_item_1,location);
@@ -216,6 +222,7 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
                     for(int i = 0; i<list.size(); i++ ){
 
                         sublocation.add(conSubLocationModel.getSub_locations().get(i).getLocation_name());
+                        sublocationmap.put(conSubLocationModel.getSub_locations().get(i).getLocation_name(),conSubLocationModel.getSub_locations().get(i).getLocation_id());
                     }
                     ArrayAdapter adapter1=new ArrayAdapter(CreateIndentActivity.this,android.R.layout.simple_list_item_1,sublocation);
                     spinner_sublocation.setAdapter(adapter1);
@@ -224,8 +231,6 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
                     Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
 
                 }
-                break;
-            case boq:
                 break;
 
 
