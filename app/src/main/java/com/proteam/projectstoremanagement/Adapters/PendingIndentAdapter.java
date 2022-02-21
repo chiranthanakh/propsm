@@ -1,11 +1,13 @@
 package com.proteam.projectstoremanagement.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 public class PendingIndentAdapter extends ArrayAdapter<PendingIndentModel> {
 
 
-    public PendingIndentAdapter(@NonNull Context context, ArrayList<PendingIndentModel> arrayList) {
+    public PendingIndentAdapter(@NonNull Context context, ArrayList<PendingIndentModel> arrayList,String status) {
         super(context, 0, arrayList);
     }
 
@@ -47,12 +49,27 @@ public class PendingIndentAdapter extends ArrayAdapter<PendingIndentModel> {
         TextView pendign_in_contractor = currentItemView.findViewById(R.id.tv_pending_indent_contactor);
         pendign_in_contractor.setText(currentNumberPosition.getContractorname());
 
+
         // then according to the position of the view assign the desired TextView 2 for the same
         TextView pending_indent_status = currentItemView.findViewById(R.id.pending_indent_status);
         pending_indent_status.setText(currentNumberPosition.getStatus());
 
+        ImageView iv_image = currentItemView.findViewById(R.id.iv_action_view);
 
-        // then return the recyclable view
+
+        if(currentNumberPosition.getStatus().equalsIgnoreCase("Pending")){
+            pending_indent_status.setTextColor(Color.parseColor("#ffcc80"));
+            iv_image.setVisibility(View.VISIBLE);
+        }else if(currentNumberPosition.getStatus().equalsIgnoreCase("Approved")){
+            pending_indent_status.setTextColor(Color.parseColor("#81c784"));
+        }else  if(currentNumberPosition.getStatus().equalsIgnoreCase("Rejected")){
+            pending_indent_status.setTextColor(Color.parseColor("#e57373"));
+        }else  if(currentNumberPosition.getStatus().equalsIgnoreCase("InProgress")){
+            pending_indent_status.setTextColor(Color.parseColor("#81c784"));
+        }
+
+
+            // then return the recyclable view
         return currentItemView;
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/react_all"
+        android:title="All" />
+
+    <item
+        android:id="@+id/java"
+        android:title="Pending" />
+
+    <item
+        android:id="@+id/kotlin"
+        android:title="Approved" />
+
+    <item
+        android:id="@+id/android"
+        android:title="Rejected" />
+
+    <item
+        android:id="@+id/react_native"
+        android:title="InProgress" />
+
+</menu>
