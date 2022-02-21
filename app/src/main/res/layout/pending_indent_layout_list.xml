@@ -52,7 +52,6 @@
                 android:gravity="start|center"
                 android:paddingLeft="20dp"
                 android:text="Pending"
-                android:textColor="@color/orange_light"
                 android:textSize="13sp" />
 
             <ImageView
@@ -61,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1.4"
+                android:visibility="gone"
                 android:background="?selectableItemBackground"
                 android:src="@drawable/eye"
                 app:tint="@color/icon_color" />
