@@ -9,10 +9,10 @@
 
     <LinearLayout
         android:id="@+id/top_bar"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#1A2562FC">
+        android:background="#1A2562FC"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/back_toolbar"
@@ -78,18 +78,45 @@
     </LinearLayout>
 
     <LinearLayout
-        app:layout_constraintTop_toBottomOf="@id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/top_bar">
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Filter"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/proxima_nova_bold"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/grey_dark"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Mondal Enterprises"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/data_table"
@@ -123,8 +150,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="0.5"
-                            android:layout_marginStart="20dp"
                             android:gravity="center_vertical"
                             android:text="Contractor Name"
                             android:textColor="@color/white"
@@ -133,21 +160,23 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="2"
                             android:gravity="center"
                             android:text="Status"
-                            android:layout_marginStart="20dp"
                             android:textColor="@color/white"
                             android:textSize="12sp" />
-                        <!--         <ImageView
-                                     android:layout_width="wrap_content"
-                                     android:layout_height="match_parent"
-                                     android:gravity="center_vertical"
-                                     android:padding="1dp"
-                                     android:layout_weight="1"
-                                     android:src="@drawable/filter"
-                                     android:textSize="12sp"
-                                     app:tint="@color/white" />-->
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:layout_marginEnd="10dp"
+                            android:padding="1dp"
+                            android:text="Action"
+                            android:textSize="12sp"
+                            android:textColor="@color/white"/>
 
                     </LinearLayout>
 
@@ -155,202 +184,23 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/ll_status_click"
+                    android:id="@+id/list_recy"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:padding="10dp">
+                    android:layout_height="500dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/data_table">
 
-                    <LinearLayout
+
+                    <ListView
+                        android:id="@+id/lv_pending_indent_list"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:orientation="horizontal">
+                        android:nestedScrollingEnabled="true"
+                        android:smoothScrollbar="true">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="start|center"
-                            android:text="1"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
+                    </ListView>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Mondal Enterprises"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:fontFamily="@font/proxima_nova_bold"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:layout_marginStart="30dp"
-                            android:gravity="center"
-                            android:text="Pending"
-                            android:textColor="@color/orange_light"
-                            android:textSize="13sp" />
-                    </LinearLayout>
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="3dp"
-                    android:background="@color/grey_very_light" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:padding="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="start|center"
-                            android:text="2"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Mondal Enterprises"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:fontFamily="@font/proxima_nova_bold"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:layout_marginStart="30dp"
-                            android:gravity="center"
-                            android:text="Pending"
-                            android:textColor="@color/orange_light"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="3dp"
-                    android:background="@color/grey_very_light" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:padding="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="start|center"
-                            android:text="3"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Mondal Enterprises"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:fontFamily="@font/proxima_nova_bold"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:layout_marginStart="30dp"
-                            android:gravity="center"
-                            android:text="Pending"
-                            android:textColor="@color/orange_light"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="3dp"
-                    android:background="@color/grey_very_light" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:padding="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="start|center"
-                            android:text="4"
-                            android:layout_marginStart="20dp"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Mondal Enterprises"
-                            android:textColor="@color/black"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:fontFamily="@font/proxima_nova_bold"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:layout_marginStart="30dp"
-                            android:gravity="center"
-                            android:text="Pending"
-                            android:textColor="@color/orange_light"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="3dp"
-                    android:background="@color/grey_very_light" />
 
 
             </LinearLayout>

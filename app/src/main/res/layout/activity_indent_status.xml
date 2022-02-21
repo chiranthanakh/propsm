@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/lato_bold"
-                    android:text="Indent Status List"
+                    android:text="Indent List"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>

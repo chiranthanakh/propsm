@@ -263,7 +263,7 @@
 
 
                  <com.google.android.material.textfield.TextInputEditText
-
+                     android:id="@+id/edt_indent_workorderno"
                      android:layout_width="match_parent"
                      android:layout_height="50dp"
                      android:background="@null"

@@ -418,7 +418,7 @@
 
                                 <TextView
                                     android:layout_marginTop="5dp"
-                                    android:id="@+id/tv_division_name"
+                                    android:id="@+id/tv_location_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
@@ -458,7 +458,7 @@
 
                                 <TextView
                                     android:layout_marginTop="5dp"
-                                    android:id="@+id/tv_feeder_name"
+                                    android:id="@+id/tv_sublocation_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
@@ -523,7 +523,7 @@
 
                             <TextView
                                 android:layout_marginTop="5dp"
-                                android:id="@+id/tv_location"
+                                android:id="@+id/tv_indent_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -621,13 +621,13 @@
                                 android:textSize="13sp" />
 
                             <TextView
-                                android:id="@+id/tv_total_item"
+                                android:id="@+id/tv_raise_indent_total_item"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/proxima_nova_bold"
                                 android:gravity="center"
-                                android:text="7"
+                                android:text=""
                                 android:textColor="@color/white"
                                 android:textSize="15sp" />
 
@@ -701,7 +701,7 @@
                 <LinearLayout
                     android:id="@+id/list_recy"
                     android:layout_width="match_parent"
-                    android:layout_height="450dp"
+                    android:layout_height="300dp"
                     android:orientation="vertical"
                     app:layout_constraintTop_toBottomOf="@id/data_table">
 

@@ -2,10 +2,12 @@ package com.proteam.projectstoremanagement.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.proteam.projectstoremanagement.Adapters.RaiseIndentAdapter;
 import com.proteam.projectstoremanagement.Adapters.UpdateIndentAdapter;
@@ -22,8 +24,11 @@ import java.util.List;
 public class UpateIndentActivity extends AppCompatActivity implements OnResponseListener, View.OnClickListener {
     ImageView mToolbar;
     ListView lv_update_indent_list;
+    TextView tv_total_item;
+
     List boqcomponentslist = new ArrayList();
     final ArrayList<RaiseIndentModel> arrayList = new ArrayList<RaiseIndentModel>();
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +40,12 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
 
         initilize();
 
+
     }
 
     private void initilize() {
 
-
+        tv_total_item=findViewById(R.id.tv_update_indent_total_item);
         lv_update_indent_list=findViewById(R.id.lv_update_indent_list);
         callboqupdateapi();
 
@@ -48,9 +54,20 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
 
     private void callboqupdateapi() {
 
-        Boqrequest boqrequest = new Boqrequest("10","2","2");
-        WebServices<Boqlist> webServices = new WebServices<Boqlist>(UpateIndentActivity.this);
-        webServices.boqapi( WebServices.ApiType.boq,boqrequest );
+        progressDialog=new ProgressDialog(UpateIndentActivity.this);
+
+        if(progressDialog!=null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+
+                Boqrequest boqrequest = new Boqrequest("10", "2", "2");
+                WebServices<Boqlist> webServices = new WebServices<Boqlist>(UpateIndentActivity.this);
+                webServices.boqapi(WebServices.ApiType.boq, boqrequest);
+            }
+        }
 
     }
 
@@ -66,6 +83,13 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
         switch (URL) {
 
             case boq:
+                if(progressDialog!=null)
+                {
+                    if(progressDialog.isShowing())
+                    {
+                        progressDialog.dismiss();
+                    }
+                }
 
                 if (isSucces) {
 
@@ -80,6 +104,9 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
 
                         }
 
+                        tv_total_item.setText(String.valueOf(boqcomponentslist.size()));
+
+
                         // the context and arrayList created above
                         UpdateIndentAdapter numbersArrayAdapter = new UpdateIndentAdapter(this, arrayList);
 
@@ -92,8 +119,6 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
                     }
 
                 }
-
-
                 break;
 
 

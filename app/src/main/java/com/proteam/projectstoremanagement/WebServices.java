@@ -15,6 +15,7 @@ import com.google.gson.GsonBuilder;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.Constructorlocationrequest;
+import com.proteam.projectstoremanagement.Request.PendingIndentRequest;
 import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
 import com.proteam.projectstoremanagement.Response.Contractorlocation;
 import com.proteam.projectstoremanagement.Response.Contractorlocationmodel;
@@ -57,7 +58,7 @@ public class WebServices<T> {
     private static OkHttpClient.Builder builder;
 
     public enum ApiType {
-       login,location,sublocation,boq
+       login,location,sublocation,boq,pendingindent
     }
 
     String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
@@ -232,6 +233,36 @@ public class WebServices<T> {
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
         call=(Call<T>)psmApi.boq(boqrequest);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
+
+
+
+    public void pendingindent( ApiType apiTypes, PendingIndentRequest pendingIndentRequest)
+    {
+
+
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.pendingindent(pendingIndentRequest);
 
         call.enqueue(new Callback<T>() {
             @Override

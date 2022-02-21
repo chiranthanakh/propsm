@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -34,13 +37,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import retrofit2.Response;
-
 public class CreateIndentActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
     ImageView mToolbar;
     int mMonth,mDay,mYear;
     Spinner spinner_contractor_name, spinner_location, spinner_sublocation;
-    EditText edt_indent_date;
+    EditText edt_indent_date,edt_indent_workorderno;
 
     List contractorlist = new ArrayList();
     List location = new ArrayList();
@@ -53,19 +54,21 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
 
     AppCompatButton btn_indent_generate;
 
+    ProgressDialog progressDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_indent_add);
+        setContentView(R.layout.activity_indent_create);
         mToolbar = findViewById(R.id.back_toolbar);
         mToolbar.setOnClickListener(view -> onBackPressed());
+
 
 
         initilize();
 
         calllocationapi();
-
-
 
         spinner_contractor_name.setOnItemSelectedListener(OnCatSpinnerCL);
         spinner_location.setOnItemSelectedListener(OnCatSpinnerCL);
@@ -83,31 +86,55 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         edt_indent_date.setOnClickListener(this);
         btn_indent_generate=findViewById(R.id.btn_indent_generate);
         btn_indent_generate.setOnClickListener(this);
-
+        edt_indent_workorderno=findViewById(R.id.edt_indent_workorderno);
 
     }
 
 
     private void calllocationapi() {
+        progressDialog=new ProgressDialog(CreateIndentActivity.this);
 
-        Constructorlocationrequest constructorlocationrequest = new Constructorlocationrequest("puma_client@gmail.com",10);
+        if(progressDialog!=null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
 
-        WebServices<Contractorlocationmodel> webServices = new WebServices<Contractorlocationmodel >(CreateIndentActivity.this);
-        webServices.constructorlocation( WebServices.ApiType.location,constructorlocationrequest );
+                Constructorlocationrequest constructorlocationrequest = new Constructorlocationrequest("puma_client@gmail.com", 10);
+
+                WebServices<Contractorlocationmodel> webServices = new WebServices<Contractorlocationmodel>(CreateIndentActivity.this);
+                webServices.constructorlocation(WebServices.ApiType.location, constructorlocationrequest);
+            }
+        }
 
     }
 
     private void callSublocationapi() {
 
-        SubLocationRaiseRequest subLocationRaiseRequest = new SubLocationRaiseRequest("2");
+        progressDialog=new ProgressDialog(CreateIndentActivity.this);
 
-        WebServices<Contractorlocationmodel> webServices = new WebServices<Contractorlocationmodel >(CreateIndentActivity.this);
-        webServices.constructorSublocation( WebServices.ApiType.sublocation,subLocationRaiseRequest );
+        if(progressDialog!=null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+
+                SubLocationRaiseRequest subLocationRaiseRequest = new SubLocationRaiseRequest("2");
+
+                WebServices<Contractorlocationmodel> webServices = new WebServices<Contractorlocationmodel>(CreateIndentActivity.this);
+                webServices.constructorSublocation(WebServices.ApiType.sublocation, subLocationRaiseRequest);
+            }
+        }
 
     }
     private void callboqupdateapi() {
 
-        Boqrequest boqrequest = new Boqrequest("10","2","2");
+        SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        String stor = sharedPreferences.getString("store_id",null);
+
+        Boqrequest boqrequest = new Boqrequest(stor,"2","2");
         WebServices<Boqlist> webServices = new WebServices<Boqlist>(CreateIndentActivity.this);
         webServices.boqapi( WebServices.ApiType.boq,boqrequest );
 
@@ -121,13 +148,26 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         {
             case R.id.btn_indent_generate:
 
-               /* String store;
+                String store;
                 String location = String.valueOf(locationmap.get(spinner_location.getSelectedItem().toString()));
                 String sublocation = String.valueOf(sublocationmap.get(spinner_sublocation.getSelectedItem().toString()));
+                String contractorname = String.valueOf(contractormap.get(spinner_contractor_name.getSelectedItem().toString()));
 
-                callboqupdateapi();*/
+                callboqupdateapi();
 
                 Intent intent = new Intent(CreateIndentActivity.this,RaiseIndentActivity.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("contractor_id",contractorname);
+                bundle.putString("location_id",location);
+                bundle.putString("sublocation_id",sublocation);
+                bundle.putString("contractor_name",spinner_contractor_name.getSelectedItem().toString());
+                bundle.putString("location_name",spinner_location.getSelectedItem().toString());
+                bundle.putString("sublocation_name",spinner_sublocation.getSelectedItem().toString());
+                bundle.putString("date", edt_indent_date.getText().toString());
+                bundle.putString("workorderno",edt_indent_workorderno.getText().toString());
+
+                intent.putExtras(bundle);
                 startActivity(intent);
                 break;
             case R.id.edt_indent_date:
@@ -176,6 +216,13 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         switch (URL) {
             case location:
 
+                if(progressDialog!=null)
+                {
+                    if(progressDialog.isShowing())
+                    {
+                        progressDialog.dismiss();
+                    }
+                }
                 if (response != null) {
 
                     List list = new ArrayList();
@@ -187,7 +234,7 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
                     for(int i = 0; i<list.size(); i++ ){
 
                         location.add(contractorlocationmodel.getLocations().get(i).getBlock_name());
-                        locationmap.put(contractorlocationmodel.getLocations().get(i).getBlock_id(), contractorlocationmodel.getLocations().get(i).getBlock_name());
+                        locationmap.put(contractorlocationmodel.getLocations().get(i).getBlock_name(), contractorlocationmodel.getLocations().get(i).getBlock_id());
                     }
 
                     list2 = contractorlocationmodel.getContractors();
@@ -212,6 +259,13 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
 
             case sublocation:
 
+                if(progressDialog!=null)
+                {
+                    if(progressDialog.isShowing())
+                    {
+                        progressDialog.dismiss();
+                    }
+                }
                 if (response != null) {
 
                     List list = new ArrayList();

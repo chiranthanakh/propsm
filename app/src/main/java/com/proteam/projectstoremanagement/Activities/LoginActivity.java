@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Response.Generalresponce;
+import com.proteam.projectstoremanagement.Response.LoginResponse;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
 import com.proteam.projectstoremanagement.Utils.Utilities;
 import com.proteam.projectstoremanagement.WebServices;
@@ -23,6 +26,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     AppCompatButton btn_login;
     EditText edt_Email,edt_Pass;
     ProgressDialog progressDialog;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +111,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 if (isSucces) {
 
-                    Generalresponce generalresponce = (Generalresponce) response;
+                    LoginResponse generalresponce = (LoginResponse) response;
 
                     if(generalresponce.getStatus().equals("true")){
 
@@ -115,8 +119,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Bundle bundle1 = new Bundle();
                         bundle1.putString("user",edt_Email.getText().toString().trim());
                         intent.putExtras(bundle1);
+
                         startActivity(intent);
+                        SharedPreferences prefs = getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("store_id",generalresponce.getStore_id());
+                        editor.commit();
                         finish();
+
                     }else{
                         Toast.makeText(this, "Please enter correct login details", Toast.LENGTH_SHORT).show();
 
