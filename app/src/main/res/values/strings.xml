@@ -19,4 +19,9 @@
     </string-array>
     <string name="copy"><font fgcolor='#ffffff'><bold> "© Copyright 2022</bold></font><font fgcolor='#88c3f5'><bold> <a href="https://proteam.co.in/"> Pro-Team Solution Pvt Ltd </a> </bold></font><font fgcolor='#ffffff'><bold>All Right Reserved.</bold></font></string>
 
+    <string-array name="status">
+        <item>Pending</item>
+        <item>Approved</item>
+        <item>Rejected</item>
+    </string-array>
 </resources>
