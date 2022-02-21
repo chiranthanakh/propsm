@@ -1,7 +1,9 @@
 package com.proteam.projectstoremanagement.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.proteam.projectstoremanagement.Activities.PendingIndentActivity;
 import com.proteam.projectstoremanagement.Model.PendingIndentListModel;
 import com.proteam.projectstoremanagement.R;
 
@@ -66,6 +69,18 @@ public class PendingIndentListAdapter extends ArrayAdapter<PendingIndentListMode
             pending_indent_status.setTextColor(Color.parseColor("#81c784"));
         }
 
+        View finalCurrentItemView = currentItemView;
+        iv_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentEvent1 = new Intent(getContext(), PendingIndentActivity.class);
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("indentid",currentNumberPosition.getId());
+                intentEvent1.putExtras(bundle1);
+                finalCurrentItemView.getContext().startActivity(intentEvent1);
+
+            }
+        });
 
             // then return the recyclable view
         return currentItemView;

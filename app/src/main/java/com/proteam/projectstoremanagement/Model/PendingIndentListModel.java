@@ -2,12 +2,21 @@ package com.proteam.projectstoremanagement.Model;
 
 public class PendingIndentListModel {
 
-    private String indentnumber, contractorname, status;
+    private String indentnumber, contractorname, status,id;
 
-    public PendingIndentListModel(String indentnumber, String contractorname, String status) {
+    public PendingIndentListModel(String indentnumber, String contractorname, String status, String id) {
         this.indentnumber = indentnumber;
         this.contractorname = contractorname;
         this.status = status;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getIndentnumber() {

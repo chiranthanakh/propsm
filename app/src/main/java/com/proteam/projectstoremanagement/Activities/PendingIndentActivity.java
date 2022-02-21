@@ -15,6 +15,7 @@ import com.proteam.projectstoremanagement.Model.PendingIndentModel;
 import com.proteam.projectstoremanagement.Model.RaiseIndentModel;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
+import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
 import com.proteam.projectstoremanagement.Request.PendingIndentRequest;
 import com.proteam.projectstoremanagement.Response.Boqlist;
 import com.proteam.projectstoremanagement.Response.Indentpending;
@@ -32,6 +33,7 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
     ProgressDialog progressDialog;
     ListView lv_pending_indent;
+    String id;
 
     List PendingIndent = new ArrayList();
     final ArrayList<PendingIndentModel> arrayList = new ArrayList<PendingIndentModel>();
@@ -41,6 +43,9 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_pending_indent);
         mToolbar = findViewById(R.id.back_toolbar);
         mToolbar.setOnClickListener(view -> onBackPressed());
+
+        Bundle bundle = getIntent().getExtras();
+        id = bundle.getString("indentid");
 
         initilze();
 
@@ -75,9 +80,10 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
                 progressDialog.show();
 
 
-                PendingIndentRequest pendingIndentRequest = new PendingIndentRequest("72");
+
+                Indentpendingrequest indentpendingrequest = new Indentpendingrequest(id);
                 WebServices<Indentpending> webServices = new WebServices<Indentpending>(PendingIndentActivity.this);
-                webServices.pendingIndentsingle(WebServices.ApiType.boq, pendingIndentRequest);
+                webServices.pendingIndentsingle(WebServices.ApiType.pendingindentsignle, indentpendingrequest);
             }
         }
 
@@ -115,7 +121,7 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
                         for (int i=0;i<PendingIndent.size();i++){
 
-                            arrayList.add(new PendingIndentModel(indentpending.getIndent_boq_list().get(i).getMaterial_manual_id(),indentpending.getIndent_boq_list().get(i).getMaterial_name(),indentpending.getIndent_boq_list().get(i).getBalance_boq(),indentpending.getIndent_boq_list().get(i).getBoq_qty()));
+                            arrayList.add(new PendingIndentModel(indentpending.getIndent_boq_list().get(i).getMaterial_manual_id(),indentpending.getIndent_boq_list().get(i).getMaterial_name(),indentpending.getIndent_boq_list().get(i).getBalance_boq(),indentpending.getIndent_boq_list().get(i).getIndent_qty()));
 
                         }
 

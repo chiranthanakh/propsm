@@ -15,6 +15,7 @@ import com.google.gson.GsonBuilder;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.Constructorlocationrequest;
+import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
 import com.proteam.projectstoremanagement.Request.PendingIndentRequest;
 import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
 import com.proteam.projectstoremanagement.Response.Contractorlocation;
@@ -281,7 +282,7 @@ public class WebServices<T> {
     }
 
 
-    public void pendingIndentsingle( ApiType apiTypes, PendingIndentRequest pendingIndentRequest)
+    public void pendingIndentsingle( ApiType apiTypes, Indentpendingrequest pendingIndentRequest)
     {
 
 
