@@ -245,7 +245,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/lato"
-                                    android:text="Division"
+                                    android:text="Location"
                                     android:textColor="@color/grey"
                                     android:textSize="13sp" />
 
@@ -284,7 +284,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/lato"
-                                    android:text="Feeder"
+                                    android:text="Sub Location"
                                     android:textColor="@color/grey"
                                     android:textSize="13sp" />
 
