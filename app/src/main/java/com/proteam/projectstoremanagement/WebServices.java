@@ -58,7 +58,7 @@ public class WebServices<T> {
     private static OkHttpClient.Builder builder;
 
     public enum ApiType {
-       login,location,sublocation,boq,pendingindent
+       login,location,sublocation,boq,pendingindent,pendingindentsignle
     }
 
     String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
@@ -263,6 +263,35 @@ public class WebServices<T> {
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
         call=(Call<T>)psmApi.pendingindent(pendingIndentRequest);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
+
+
+    public void pendingIndentsingle( ApiType apiTypes, PendingIndentRequest pendingIndentRequest)
+    {
+
+
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.pendingindentsinglestatus(pendingIndentRequest);
 
         call.enqueue(new Callback<T>() {
             @Override

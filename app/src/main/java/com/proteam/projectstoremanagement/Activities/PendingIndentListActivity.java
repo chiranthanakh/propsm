@@ -3,22 +3,18 @@ package com.proteam.projectstoremanagement.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import com.proteam.projectstoremanagement.Adapters.PendingIndentAdapter;
-import com.proteam.projectstoremanagement.Adapters.RaiseIndentAdapter;
-import com.proteam.projectstoremanagement.Model.PendingIndentModel;
+import com.proteam.projectstoremanagement.Adapters.PendingIndentListAdapter;
+import com.proteam.projectstoremanagement.Model.PendingIndentListModel;
 import com.proteam.projectstoremanagement.Response.PendingIndentList;
-import com.proteam.projectstoremanagement.Model.RaiseIndentModel;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.PendingIndentRequest;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
@@ -36,11 +32,11 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
 
 
-    final ArrayList<PendingIndentModel> arrayList = new ArrayList<PendingIndentModel>();
-    final ArrayList<PendingIndentModel> approvedlist = new ArrayList<PendingIndentModel>();
-    final ArrayList<PendingIndentModel> pendinglist = new ArrayList<PendingIndentModel>();
-    final ArrayList<PendingIndentModel> regectedlist = new ArrayList<PendingIndentModel>();
-    final ArrayList<PendingIndentModel> inprogresslist = new ArrayList<PendingIndentModel>();
+    final ArrayList<PendingIndentListModel> arrayList = new ArrayList<PendingIndentListModel>();
+    final ArrayList<PendingIndentListModel> approvedlist = new ArrayList<PendingIndentListModel>();
+    final ArrayList<PendingIndentListModel> pendinglist = new ArrayList<PendingIndentListModel>();
+    final ArrayList<PendingIndentListModel> regectedlist = new ArrayList<PendingIndentListModel>();
+    final ArrayList<PendingIndentListModel> inprogresslist = new ArrayList<PendingIndentListModel>();
 
     ProgressDialog progressDialog;
 
@@ -164,20 +160,20 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
                         for (int i=0;i<pendingindentlist.size();i++){
 
-                            arrayList.add(new PendingIndentModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus()));
+                            arrayList.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus()));
 
                             if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("Pending")){
 
-                                pendinglist.add(new PendingIndentModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus()));
+                                pendinglist.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus()));
                             }else if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("Approved")){
 
-                                approvedlist.add(new PendingIndentModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus()));
+                                approvedlist.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus()));
                             }else  if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("Rejected")){
 
-                                regectedlist.add(new PendingIndentModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus()));
+                                regectedlist.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus()));
                             }else  if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("InProgress")){
 
-                                inprogresslist.add(new PendingIndentModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus()));
+                                inprogresslist.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus()));
                             }
 
                         }
@@ -208,9 +204,9 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
     }
 
-    private void adaptormoves(ArrayList<PendingIndentModel> list, String status) {
+    private void adaptormoves(ArrayList<PendingIndentListModel> list, String status) {
 
-        PendingIndentAdapter numbersArrayAdapter = new PendingIndentAdapter(this, list,status);
+        PendingIndentListAdapter numbersArrayAdapter = new PendingIndentListAdapter(this, list,status);
 
         // create the instance of the ListView to set the numbersViewAdapter
         ListView pendingindentlist = findViewById(R.id.lv_pending_indent_list);

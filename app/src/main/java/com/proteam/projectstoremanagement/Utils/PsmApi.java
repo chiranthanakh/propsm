@@ -2,6 +2,7 @@ package com.proteam.projectstoremanagement.Utils;
 
 import com.proteam.projectstoremanagement.Model.ConSubLocationModel;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
+import com.proteam.projectstoremanagement.Response.Indentpending;
 import com.proteam.projectstoremanagement.Response.PendingIndentList;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.Constructorlocationrequest;
@@ -32,5 +33,9 @@ public interface PsmApi {
 
     @POST("Clients_apis/approver_indent_list")
     Call<PendingIndentList> pendingindent(@Body PendingIndentRequest pendingIndentRequest);
+
+
+    @POST("Clients_apis/approver_indent_list")
+    Call<Indentpending> pendingindentsinglestatus(@Body PendingIndentRequest pendingIndentRequest);
 
 }
