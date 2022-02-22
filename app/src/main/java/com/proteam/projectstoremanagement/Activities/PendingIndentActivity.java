@@ -28,8 +28,8 @@ import java.util.List;
 public class PendingIndentActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
     ImageView mToolbar;
 
-    TextView tv_p_indent_number,tv_p_approvername,tv_p_contractorName,tv_p_locationName,tv_p_sublocationName,
-            tv_p_workordernumber,tv_p_status,tv_p_indentdate;
+    TextView tv_p_indent_number,tv_p_contractorName,tv_p_locationName,tv_p_sublocationName,
+            tv_p_workordernumber,tv_p_status,tv_p_indentdate,tv_pending_indent_total_item;
 
     ProgressDialog progressDialog;
     ListView lv_pending_indent;
@@ -54,10 +54,11 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
     private void initilze() {
 
+        tv_pending_indent_total_item=findViewById(R.id.tv_pending_indent_total_item);
+
         lv_pending_indent=findViewById(R.id.lv_pending_indent);
 
         tv_p_indent_number=findViewById(R.id.tv_p_indent_number);
-        tv_p_approvername=findViewById(R.id.tv_p_approvername);
         tv_p_contractorName=findViewById(R.id.tv_p_contractorName);
         tv_p_locationName=findViewById(R.id.tv_p_locationName);
         tv_p_sublocationName=findViewById(R.id.tv_p_sublocationName);
@@ -123,9 +124,10 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
                             arrayList.add(new PendingIndentModel(indentpending.getIndent_boq_list().get(i).getMaterial_manual_id(),indentpending.getIndent_boq_list().get(i).getMaterial_name(),indentpending.getIndent_boq_list().get(i).getBalance_boq(),indentpending.getIndent_boq_list().get(i).getIndent_qty()));
 
+
                         }
 
-
+                        tv_pending_indent_total_item.setText(String.valueOf(PendingIndent.size()));
 
                         // the context and arrayList created above
                         PendingIndentAdapter numbersArrayAdapter = new PendingIndentAdapter(this, arrayList);
@@ -136,6 +138,13 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
                         // set the numbersViewAdapter for ListView
                         pendingindent.setAdapter(numbersArrayAdapter);
 
+                        tv_p_indent_number.setText(indentpending.getIndent_list().get(0).getIndent_auto_gen_id());
+                        tv_p_contractorName.setText(indentpending.getIndent_list().get(0).getContractor_name());
+                        tv_p_locationName.setText(indentpending.getIndent_list().get(0).getLocation_name());
+                        tv_p_sublocationName.setText(indentpending.getIndent_list().get(0).getSub_location_name());
+                        tv_p_workordernumber.setText(indentpending.getIndent_list().get(0).getWork_order_no());
+                        tv_p_status.setText(indentpending.getIndent_list().get(0).getStatus());
+                        tv_p_indentdate.setText(indentpending.getIndent_list().get(0).getIndent_date());
                     }
 
                 }

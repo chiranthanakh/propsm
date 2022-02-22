@@ -317,12 +317,13 @@
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/indent_status_Count_pending"
                                     android:layout_margin="5dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/shape1"
                                     android:fontFamily="@font/lato_bold"
-                                    android:text="267"
+                                    android:text=""
                                     android:gravity="center"
                                     android:textColor="@color/black"
                                     android:textSize="20sp" />
@@ -352,12 +353,13 @@
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/indent_status_Count_approve"
                                     android:layout_margin="5dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/shape3"
                                     android:fontFamily="@font/lato_bold"
-                                    android:text="654"
+                                    android:text=""
                                     android:gravity="center"
                                     android:textColor="@color/black"
                                     android:textSize="20sp" />
@@ -386,12 +388,13 @@
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/indent_status_Count_rejected"
                                     android:layout_margin="5dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/shape4"
                                     android:fontFamily="@font/lato_bold"
-                                    android:text="238"
+                                    android:text=""
                                     android:gravity="center"
                                     android:textColor="@color/black"
                                     android:textSize="20sp" />
@@ -422,12 +425,13 @@
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/indent_status_Count_close"
                                     android:layout_margin="5dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/shape2"
                                     android:fontFamily="@font/lato_bold"
-                                    android:text="169"
+                                    android:text=""
                                     android:gravity="center"
                                     android:textColor="@color/black"
                                     android:textSize="20sp" />

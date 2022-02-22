@@ -3,6 +3,7 @@ package com.proteam.projectstoremanagement.Utils;
 import com.proteam.projectstoremanagement.Model.ConSubLocationModel;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
 import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
+import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Response.Indentpending;
 import com.proteam.projectstoremanagement.Response.PendingIndentList;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
@@ -12,6 +13,7 @@ import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
 import com.proteam.projectstoremanagement.Response.Boqlist;
 import com.proteam.projectstoremanagement.Response.Contractorlocationmodel;
 import com.proteam.projectstoremanagement.Response.LoginResponse;
+import com.proteam.projectstoremanagement.Response.PsmDataStatusHome;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -38,5 +40,10 @@ public interface PsmApi {
 
     @POST("Clients_apis/approver_indent_material_list")
     Call<Indentpending> pendingindentsinglestatus(@Body Indentpendingrequest pendingIndentRequest);
+
+
+
+    @POST("Clients_apis/indent_status_count")
+    Call<PsmDataStatusHome> psddata(@Body PsmDataRequest psmDataRequest);
 
 }

@@ -6,13 +6,15 @@
     android:background="@color/white"
     android:layout_height="wrap_content">
 
+
     <LinearLayout
         android:id="@+id/ll_status_click"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="center"
-        android:padding="10dp">
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="5dp"
+        android:padding="2dp"
+        android:layout_gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,23 +24,21 @@
 
             <TextView
                 android:id="@+id/tv_pending_indent_number"
-                android:layout_width="match_parent"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.1"
-                android:gravity="start|center"
+                android:gravity="center"
                 android:fontFamily="@font/proxima_family"
-                android:text="1"
-                android:paddingLeft="30dp"
+                android:text="18"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/tv_pending_indent_contactor"
-                android:layout_width="match_parent"
+                android:layout_width="170dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:fontFamily="@font/proxima_family"
                 android:gravity="center"
+                android:layout_marginStart="5dp"
                 android:text="Mondal Enterprises"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
@@ -46,21 +46,21 @@
             <TextView
                 android:id="@+id/pending_indent_status"
                 android:fontFamily="@font/proxima_nova_bold"
-                android:layout_width="match_parent"
+                android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="start|center"
-                android:paddingLeft="20dp"
+                android:layout_marginStart="2dp"
                 android:text="Pending"
                 android:textSize="13sp" />
 
             <ImageView
                 android:id="@+id/iv_action_view"
                 android:fontFamily="@font/proxima_nova_bold"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1.4"
+                android:layout_width="50dp"
+                android:layout_marginEnd="10dp"
+                android:padding="4dp"
                 android:visibility="gone"
+                android:layout_height="match_parent"
                 android:background="?selectableItemBackground"
                 android:src="@drawable/eye"
                 app:tint="@color/icon_color" />
@@ -72,6 +72,8 @@
         android:layout_height="1dp"
         android:layout_margin="3dp"
         android:background="@color/grey_very_light" />
+
+
 
 
 
