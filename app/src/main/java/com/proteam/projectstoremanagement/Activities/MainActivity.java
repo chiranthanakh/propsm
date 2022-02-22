@@ -44,7 +44,7 @@ import lecho.lib.hellocharts.view.PieChartView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
 
 
-    ImageView ivnav,material_delete;
+    ImageView ivnav,material_delete,iv_add_material;
     DrawerLayout drawer_layout;
     TextView tv_raise_boq_indent,tv_individual_indent,tv_pending_indent,tv_consumption,tv_consumption_list,
             indent_status_Count_pending,indent_status_Count_approve,indent_status_Count_rejected,
@@ -101,7 +101,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_raise_indent = findViewById(R.id.btn_raise_indent);
         btn_raise_indent.setOnClickListener(this);
         material_delete=findViewById(R.id.material_delete);
-
+        iv_add_material=findViewById(R.id.iv_add_material);
+        iv_add_material.setOnClickListener(this);
 
 
         btn_consumption=findViewById(R.id.btn_consumption);
@@ -200,6 +201,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intentcon = new Intent(MainActivity.this,CreateConsumptionActivity.class);
                 startActivity(intentcon);
                 break;
+            case R.id.iv_add_material:
+                Intent intentaddM = new Intent(MainActivity.this,AddMaterialStockActivity.class);
+                startActivity(intentaddM);
+                break;
+
           /* case R.id.material_delete:
                 openDialog();
                 break;*/

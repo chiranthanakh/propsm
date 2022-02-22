@@ -508,6 +508,7 @@
                             android:textSize="12sp" />
 
                         <ImageView
+                            android:id="@+id/iv_add_material"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="15dp"
