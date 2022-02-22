@@ -363,5 +363,32 @@ public class WebServices<T> {
         });
 
     }
+
+    public void indentstatusdirect( ApiType apiTypes,  Indentstatusrequest indentstatusrequest)
+    {
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.indentstatusdirect(indentstatusrequest);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
+
 }
 

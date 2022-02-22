@@ -49,8 +49,6 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
 
         callapi();
 
-
-
     }
 
 
@@ -78,7 +76,7 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
 
                 Indentstatusrequest indentstatusrequest = new Indentstatusrequest("71");
 
-                WebServices<Generalresponce> webServices = new WebServices<Generalresponce>(IndentStatusActivity.this);
+                WebServices<IndentStatuslist> webServices = new WebServices<IndentStatuslist>(IndentStatusActivity.this);
                 webServices.indentstatus(WebServices.ApiType.indentstatus,indentstatusrequest );
             }
             else {
@@ -128,7 +126,6 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
 
                             arrayList.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
                         }
-
 
                         IndentStatusAdapter numbersArrayAdapter = new IndentStatusAdapter(this, arrayList);
                         ListView indentStatusList = findViewById(R.id.indent_status_listView);
