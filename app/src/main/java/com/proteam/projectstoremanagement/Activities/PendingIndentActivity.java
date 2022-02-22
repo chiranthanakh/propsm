@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.proteam.projectstoremanagement.Adapters.PendingIndentAdapter;
 import com.proteam.projectstoremanagement.Adapters.UpdateIndentAdapter;
@@ -18,6 +20,7 @@ import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
 import com.proteam.projectstoremanagement.Request.PendingIndentRequest;
 import com.proteam.projectstoremanagement.Response.Boqlist;
+import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Response.Indentpending;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
 import com.proteam.projectstoremanagement.WebServices;
@@ -33,6 +36,7 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
     ProgressDialog progressDialog;
     ListView lv_pending_indent;
+    Button btn_approve;
     String id;
 
     List PendingIndent = new ArrayList();
@@ -65,6 +69,8 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
         tv_p_workordernumber=findViewById(R.id.tv_p_workordernumber);
         tv_p_status=findViewById(R.id.tv_p_status);
         tv_p_indentdate=findViewById(R.id.tv_p_indentdate);
+        btn_approve = findViewById(R.id.btn_approve);
+        btn_approve.setOnClickListener(this);
 
         callboqupdateapi();
     }
@@ -92,11 +98,37 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
 
 
-
-
-
     @Override
     public void onClick(View v) {
+
+        switch (v.getId()) {
+
+            case R.id.btn_approve:
+
+                callupdateapi();
+
+                break;
+
+        }
+
+
+    }
+
+    private void callupdateapi() {
+
+        progressDialog=new ProgressDialog(PendingIndentActivity.this);
+
+        if(progressDialog!=null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+                PendingIntentupdaterequest pendingIntentupdaterequest = new PendingIntentupdaterequest("9","Approve","approved successfully");
+                WebServices<Generalresponce> webServices = new WebServices<Generalresponce>(PendingIndentActivity.this);
+                webServices.pendingintentupdate(WebServices.ApiType.general, pendingIntentupdaterequest);
+            }
+        }
 
     }
 
@@ -150,6 +182,36 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
                 }
                 break;
 
+            case general:
+                if(progressDialog!=null)
+                {
+                    if(progressDialog.isShowing())
+                    {
+                        progressDialog.dismiss();
+                    }
+                }
+
+                if (isSucces) {
+
+                    if(response!=null) {
+
+
+                        Generalresponce generalresponce = (Generalresponce) response;
+
+                        Toast.makeText(this, generalresponce.getStatus(), Toast.LENGTH_SHORT).show();
+
+                    }else {
+
+                        Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }else{
+                    Toast.makeText(this, "Check your internet connection", Toast.LENGTH_SHORT).show();
+
+                }
+
+                break;
 
         }
     }

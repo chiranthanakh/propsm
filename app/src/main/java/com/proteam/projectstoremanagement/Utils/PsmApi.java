@@ -1,10 +1,12 @@
 package com.proteam.projectstoremanagement.Utils;
 
+import com.proteam.projectstoremanagement.Activities.PendingIntentupdaterequest;
 import com.proteam.projectstoremanagement.Model.ConSubLocationModel;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
 import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
 import com.proteam.projectstoremanagement.Request.Indentstatusrequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
+import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Response.IndentStatusdirectlist;
 import com.proteam.projectstoremanagement.Response.IndentStatuslist;
 import com.proteam.projectstoremanagement.Response.Indentpending;
@@ -51,5 +53,8 @@ public interface PsmApi {
 
     @POST("Clients_apis/riser_direct_indent_list")
     Call<IndentStatusdirectlist> indentstatusdirect(@Body Indentstatusrequest indentstatusrequest);
+
+    @POST("Clients_apis/approver_approve_indent")
+    Call<Generalresponce> pendingupdate(@Body PendingIntentupdaterequest pendingIntentupdaterequest);
 
 }

@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import com.proteam.projectstoremanagement.Activities.PendingIntentupdaterequest;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.Constructorlocationrequest;
@@ -61,7 +62,7 @@ public class WebServices<T> {
     private static OkHttpClient.Builder builder;
 
     public enum ApiType {
-       login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus
+       general,login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus
     }
 
     String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
@@ -373,6 +374,33 @@ public class WebServices<T> {
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
         call=(Call<T>)psmApi.indentstatusdirect(indentstatusrequest);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
+
+
+    public void pendingintentupdate( ApiType apiTypes,  PendingIntentupdaterequest pendingIntentupdaterequest)
+    {
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.pendingupdate(pendingIntentupdaterequest);
 
         call.enqueue(new Callback<T>() {
             @Override
