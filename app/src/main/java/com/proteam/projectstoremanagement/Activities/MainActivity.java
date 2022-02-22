@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,11 +18,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.proteam.projectstoremanagement.Adapters.MaterialDetailsAdapter;
+import com.proteam.projectstoremanagement.Adapters.PendingIndentAdapter;
 import com.proteam.projectstoremanagement.Model.MaterialModel;
+import com.proteam.projectstoremanagement.Model.PendingIndentModel;
 import com.proteam.projectstoremanagement.R;
+import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
+import com.proteam.projectstoremanagement.Request.PsmDataRequest;
+import com.proteam.projectstoremanagement.Response.Indentpending;
+import com.proteam.projectstoremanagement.Response.PsmDataStatusHome;
+import com.proteam.projectstoremanagement.Utils.OnResponseListener;
+import com.proteam.projectstoremanagement.WebServices;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +41,14 @@ import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.view.PieChartView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
 
 
     ImageView ivnav,material_delete;
     DrawerLayout drawer_layout;
-    TextView tv_raise_boq_indent,tv_individual_indent,tv_pending_indent,tv_consumption,tv_consumption_list;
+    TextView tv_raise_boq_indent,tv_individual_indent,tv_pending_indent,tv_consumption,tv_consumption_list,
+            indent_status_Count_pending,indent_status_Count_approve,indent_status_Count_rejected,
+            indent_status_Count_close;
 
     private List<MaterialModel> materialdetails = new ArrayList<>();
     private RecyclerView rv_material;
@@ -45,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     List<SliceValue> pieData = new ArrayList<>();
     Button btn_raise_indent, btn_consumption;
-
+    ProgressDialog progressDialog;
     Context context = this;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -99,12 +112,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_consumption=findViewById(R.id.tv_consumption);
         tv_consumption_list=findViewById(R.id.tv_consumption_list);
 
+
+        indent_status_Count_pending=findViewById(R.id.indent_status_Count_pending);
+        indent_status_Count_approve=findViewById(R.id.indent_status_Count_approve);
+        indent_status_Count_rejected=findViewById(R.id.indent_status_Count_rejected);
+        indent_status_Count_close=findViewById(R.id.indent_status_Count_close);
+
         tv_raise_boq_indent.setOnClickListener(this);
         tv_individual_indent.setOnClickListener(this);
         tv_pending_indent.setOnClickListener(this);
         tv_consumption.setOnClickListener(this);
         tv_consumption_list.setOnClickListener(this);
-
+        callboqupdateapi();
     }
 
     private  void prepareNoticeData()
@@ -124,6 +143,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+
+    }
+
+    private void callboqupdateapi() {
+
+        progressDialog=new ProgressDialog(MainActivity.this);
+
+        if(progressDialog!=null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+
+
+                PsmDataRequest psmDataRequest = new PsmDataRequest("71");
+                WebServices<PsmDataStatusHome> webServices = new WebServices<PsmDataStatusHome>(MainActivity.this);
+                webServices.psmdatahome(WebServices.ApiType.psmdata, psmDataRequest);
+            }
+        }
 
     }
 
@@ -184,5 +223,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         AlertDialog alertDialog=builder.create();
         alertDialog.show();
+    }
+
+    @Override
+    public void onResponse(Object response, WebServices.ApiType URL, boolean isSucces, int code) {
+        switch (URL) {
+
+            case psmdata:
+                if(progressDialog!=null)
+                {
+                    if(progressDialog.isShowing())
+                    {
+                        progressDialog.dismiss();
+                    }
+                }
+
+                if (isSucces) {
+
+                    if(response!=null) {
+
+                        PsmDataStatusHome psmDataStatusHome = (PsmDataStatusHome) response;
+
+                        indent_status_Count_pending.setText(psmDataStatusHome.getPending());
+                        indent_status_Count_approve.setText(psmDataStatusHome.getApproved());
+                        indent_status_Count_rejected.setText(psmDataStatusHome.getRejected());
+                        indent_status_Count_close.setText(psmDataStatusHome.getClose());
+                    }
+                    else
+                    {
+                        Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else
+                {
+                    Toast.makeText(this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+
+        }
     }
 }
