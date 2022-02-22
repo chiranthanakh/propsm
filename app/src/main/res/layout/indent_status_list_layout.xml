@@ -25,6 +25,7 @@
                 android:layout_weight="1"
                 android:gravity="start|center"
                 android:text="1"
+                android:fontFamily="@font/proxima_family"
                 android:layout_marginStart="20dp"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
@@ -35,20 +36,21 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:fontFamily="@font/proxima_family"
                 android:text="Mondal Enterprises"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/in_status"
-                android:fontFamily="@font/proxima_nova_bold"
+                android:fontFamily="@font/proxima_family"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginStart="30dp"
                 android:gravity="center"
                 android:text="Pending"
-                android:textColor="@color/orange_light"
+                android:textColor="@color/black"
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>

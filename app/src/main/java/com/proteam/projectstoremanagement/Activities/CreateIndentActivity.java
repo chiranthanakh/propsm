@@ -82,6 +82,7 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         spinner_contractor_name = findViewById(R.id.spinner_contractor_name);
         spinner_location = findViewById(R.id.spinner_location);
         spinner_sublocation = findViewById(R.id.spinner_sublocation);
+
         edt_indent_date = findViewById(R.id.edt_indent_date);
         edt_indent_date.setOnClickListener(this);
         btn_indent_generate=findViewById(R.id.btn_indent_generate);
@@ -148,6 +149,15 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         {
             case R.id.btn_indent_generate:
 
+             /*   if (spinner_contractor_name.getSelectedItemId()..trim().equals(null)) {
+                    Toast.makeText(this, "Select the Contractor Name", Toast.LENGTH_SHORT).show();
+                }*/
+
+               /* if (spinner_contractor_name.getSelectedItem()!="") {
+
+                    Toast.makeText(this, "Select the Contractor Name", Toast.LENGTH_SHORT).show();
+                }*/
+
                 String store;
                 String location = String.valueOf(locationmap.get(spinner_location.getSelectedItem().toString()));
                 String sublocation = String.valueOf(sublocationmap.get(spinner_sublocation.getSelectedItem().toString()));
@@ -170,6 +180,8 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
+
+
             case R.id.edt_indent_date:
             final Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
@@ -248,8 +260,10 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
                     ArrayAdapter adapter=new ArrayAdapter(CreateIndentActivity.this,android.R.layout.simple_list_item_1,location);
                     spinner_location.setAdapter(adapter);
 
+
                     ArrayAdapter adapte=new ArrayAdapter(CreateIndentActivity.this,android.R.layout.simple_list_item_1,contractorlist);
                     spinner_contractor_name.setAdapter(adapte);
+
                     callSublocationapi();
                 }else {
                     Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
@@ -280,6 +294,7 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
                     }
                     ArrayAdapter adapter1=new ArrayAdapter(CreateIndentActivity.this,android.R.layout.simple_list_item_1,sublocation);
                     spinner_sublocation.setAdapter(adapter1);
+
 
                 }else {
                     Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
