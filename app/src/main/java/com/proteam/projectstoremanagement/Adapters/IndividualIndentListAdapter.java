@@ -1,6 +1,7 @@
 package com.proteam.projectstoremanagement.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,20 @@ public class IndividualIndentListAdapter extends ArrayAdapter<IndividualIndentLi
         // then according to the position of the view assign the desired TextView 2 for the same
         TextView Individual_IStatus = currentItemView.findViewById(R.id.tv_individual_indent_Status);
         Individual_IStatus.setText(currentNumberPosition.getIndividualIndentStatus());
+
+
+        if(currentNumberPosition.getIndividualIndentStatus().equalsIgnoreCase("Pending")){
+            Individual_IStatus.setTextColor(Color.parseColor("#ffcc80"));
+        }else if(currentNumberPosition.getIndividualIndentStatus().equalsIgnoreCase("Approved")){
+            Individual_IStatus.setTextColor(Color.parseColor("#81c784"));
+        }else  if(currentNumberPosition.getIndividualIndentStatus().equalsIgnoreCase("Rejected")){
+            Individual_IStatus.setTextColor(Color.parseColor("#e57373"));
+        }
+        else  if(currentNumberPosition.getIndividualIndentStatus().equalsIgnoreCase("InProgress"))
+        {
+            Individual_IStatus.setTextColor(Color.parseColor("#81c784"));
+        }
+
 
         // then return the recyclable view
         return currentItemView;

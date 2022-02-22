@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectStoreManagement">
         <activity
+            android:name=".Activities.AddMaterialStockActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.IndividualIndentListActivity"
             android:exported="false" />
         <activity

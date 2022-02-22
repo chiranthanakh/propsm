@@ -48,7 +48,6 @@
                 android:layout_marginStart="30dp"
                 android:gravity="center"
                 android:text="Pending"
-                android:textColor="@color/orange_light"
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>

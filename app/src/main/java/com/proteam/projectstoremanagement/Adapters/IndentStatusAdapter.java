@@ -1,6 +1,7 @@
 package com.proteam.projectstoremanagement.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class IndentStatusAdapter extends ArrayAdapter<IndentStatusModel> {
         // then according to the position of the view assign the desired TextView 2 for the same
         TextView in_status = currentItemView.findViewById(R.id.in_status);
         in_status.setText(currentNumberPosition.getStatus());
+
 
         // then return the recyclable view
         return currentItemView;
