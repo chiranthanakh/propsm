@@ -2,23 +2,39 @@ package com.proteam.projectstoremanagement.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.proteam.projectstoremanagement.Adapters.IndentStatusAdapter;
 import com.proteam.projectstoremanagement.Model.IndentStatusModel;
+import com.proteam.projectstoremanagement.Model.Loginmodel;
 import com.proteam.projectstoremanagement.R;
+import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
+import com.proteam.projectstoremanagement.Request.Indentstatusrequest;
+import com.proteam.projectstoremanagement.Response.Generalresponce;
+import com.proteam.projectstoremanagement.Response.IndentStatuslist;
+import com.proteam.projectstoremanagement.Response.Indentstatusitems;
+import com.proteam.projectstoremanagement.Utils.OnResponseListener;
+import com.proteam.projectstoremanagement.Utils.Utilities;
+import com.proteam.projectstoremanagement.WebServices;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class IndentStatusActivity extends AppCompatActivity implements View.OnClickListener {
+public class IndentStatusActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
     ImageView mToolbar;
     FloatingActionButton fab_add_raise;
     ListView indent_status_listView;
+    ProgressDialog progressDialog;
+    final ArrayList<IndentStatusModel> arrayList = new ArrayList<IndentStatusModel>();
+    List list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,30 +43,12 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
         mToolbar.setOnClickListener(view -> onBackPressed());
         initialize();
 
-        final ArrayList<IndentStatusModel> arrayList = new ArrayList<IndentStatusModel>();
+        callapi();
 
-        arrayList.add(new IndentStatusModel("1","Mondal Enterprises","Pending"));
-        arrayList.add(new IndentStatusModel("2","Bright Energy","Pending"));
-        arrayList.add(new IndentStatusModel("3","Shree Krishna Precast","Approved"));
-        arrayList.add(new IndentStatusModel("4","Bright Energy","Rejected"));
-        arrayList.add(new IndentStatusModel("5","Mondal Enterprises","Rejected"));
-        arrayList.add(new IndentStatusModel("6","Shree Krishna Precast","Approved"));
-        arrayList.add(new IndentStatusModel("7","Mondal Enterprises","Approved"));
-        arrayList.add(new IndentStatusModel("8","Bright Energy","Pending"));
-        arrayList.add(new IndentStatusModel("9","Mondal Enterprises","Rejected"));
-        arrayList.add(new IndentStatusModel("10","Shree Krishna Precast","Rejected"));
-        arrayList.add(new IndentStatusModel("11","Mondal Enterprises","Approved"));
 
-        // Now create the instance of the NumebrsViewAdapter and pass
-        // the context and arrayList created above
-        IndentStatusAdapter numbersArrayAdapter = new IndentStatusAdapter(this, arrayList);
 
-        // create the instance of the ListView to set the numbersViewAdapter
-        ListView indentStatusList = findViewById(R.id.indent_status_listView);
-
-        // set the numbersViewAdapter for ListView
-        indentStatusList.setAdapter(numbersArrayAdapter);
     }
+
 
     private void initialize()
     {
@@ -58,6 +56,30 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
         fab_add_raise.setOnClickListener(this);
         indent_status_listView=findViewById(R.id.indent_status_listView);
 
+    }
+
+
+    private void callapi() {
+
+        progressDialog=new ProgressDialog(IndentStatusActivity.this);
+        if(progressDialog!=null)
+        {
+            if(!progressDialog.isShowing())
+            {
+
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+                Indentstatusrequest indentstatusrequest = new Indentstatusrequest("71");
+
+                WebServices<Generalresponce> webServices = new WebServices<Generalresponce>(IndentStatusActivity.this);
+                webServices.indentstatus(WebServices.ApiType.indentstatus,indentstatusrequest );
+            }
+            else {
+
+            }
+        }
     }
 
     @Override
@@ -70,4 +92,56 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
                 break;
         }
     }
+
+    @Override
+    public void onResponse(Object response, WebServices.ApiType URL, boolean isSucces, int code) {
+
+        switch (URL) {
+            case indentstatus:
+
+                if(progressDialog!=null)
+                {
+                    if(progressDialog.isShowing())
+                    {
+                        progressDialog.dismiss();
+                    }
+                }
+
+                if (isSucces) {
+
+                    if(response!=null){
+
+                         list = new ArrayList();
+                        IndentStatuslist indentStatuslist = (IndentStatuslist) response;
+
+                        list = indentStatuslist.getBoq_indent();
+
+                        for (int i = 0; i<list.size(); i++){
+
+                            arrayList.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
+
+                        }
+
+
+                        IndentStatusAdapter numbersArrayAdapter = new IndentStatusAdapter(this, arrayList);
+                        ListView indentStatusList = findViewById(R.id.indent_status_listView);
+                        indentStatusList.setAdapter(numbersArrayAdapter);
+
+                    }else {
+
+                        Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }else{
+                    Toast.makeText(this, "Check your internet connection", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+                break;
+
+        }
+
+        }
 }

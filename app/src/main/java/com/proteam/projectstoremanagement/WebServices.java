@@ -16,6 +16,7 @@ import com.proteam.projectstoremanagement.Model.Loginmodel;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.Constructorlocationrequest;
 import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
+import com.proteam.projectstoremanagement.Request.Indentstatusrequest;
 import com.proteam.projectstoremanagement.Request.PendingIndentRequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
@@ -60,7 +61,7 @@ public class WebServices<T> {
     private static OkHttpClient.Builder builder;
 
     public enum ApiType {
-       login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata
+       login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus
     }
 
     String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
@@ -313,8 +314,6 @@ public class WebServices<T> {
 
     public void psmdatahome( ApiType apiTypes, PsmDataRequest psmDataRequest)
     {
-
-
         apiTypeVariable = apiTypes;
         Retrofit retrofit=getRetrofitClient(BaseUrl);
 
@@ -322,6 +321,32 @@ public class WebServices<T> {
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
         call=(Call<T>)psmApi.psddata(psmDataRequest);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
+
+    public void indentstatus( ApiType apiTypes,  Indentstatusrequest indentstatusrequest)
+    {
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.indentstatus(indentstatusrequest);
 
         call.enqueue(new Callback<T>() {
             @Override

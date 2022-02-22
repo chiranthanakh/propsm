@@ -3,7 +3,9 @@ package com.proteam.projectstoremanagement.Utils;
 import com.proteam.projectstoremanagement.Model.ConSubLocationModel;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
 import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
+import com.proteam.projectstoremanagement.Request.Indentstatusrequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
+import com.proteam.projectstoremanagement.Response.IndentStatuslist;
 import com.proteam.projectstoremanagement.Response.Indentpending;
 import com.proteam.projectstoremanagement.Response.PendingIndentList;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
@@ -41,9 +43,10 @@ public interface PsmApi {
     @POST("Clients_apis/approver_indent_material_list")
     Call<Indentpending> pendingindentsinglestatus(@Body Indentpendingrequest pendingIndentRequest);
 
-
-
     @POST("Clients_apis/indent_status_count")
     Call<PsmDataStatusHome> psddata(@Body PsmDataRequest psmDataRequest);
+
+    @POST("Clients_apis/riser_boq_indent_list")
+    Call<IndentStatuslist> indentstatus(@Body Indentstatusrequest indentstatusrequest);
 
 }
