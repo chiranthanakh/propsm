@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     private void initilize()
     {
-        drawer_layout=findViewById(R.id.drawer_layout);
+        drawer_layout=findViewById(R.id.drawer_layout_main);
         ivnav=findViewById(R.id.iv_nav_view);
         ivnav.setOnClickListener(this);
         rv_material = (RecyclerView) findViewById(R.id.rv_material);
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentpending);
                 break;
             case R.id.tv_individual_indent:
-                Intent intentindividual = new Intent(MainActivity.this,IndividualIndentActivity.class);
+                Intent intentindividual = new Intent(MainActivity.this,IndividualIndentListActivity.class);
                 startActivity(intentindividual);
                 break;
             case R.id.tv_consumption:

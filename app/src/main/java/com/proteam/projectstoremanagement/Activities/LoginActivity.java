@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 progressDialog.show();
                 Loginmodel loginmodel = new Loginmodel(edt_Email.getText().toString(),edt_Pass.getText().toString());
 
-                WebServices<Generalresponce> webServices = new WebServices<Generalresponce>(LoginActivity.this);
+                WebServices<LoginResponse> webServices = new WebServices<LoginResponse>(LoginActivity.this);
                 webServices.login(Utilities.getBaseURL(LoginActivity.this), WebServices.ApiType.login,loginmodel );
             }
             else {
@@ -111,9 +111,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 if (isSucces) {
 
-                    LoginResponse generalresponce = (LoginResponse) response;
+                    LoginResponse loginResponse = (LoginResponse) response;
 
-                    if(generalresponce.getStatus().equals("true")){
+                    if(loginResponse.getStatus().equals("true")){
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         Bundle bundle1 = new Bundle();
@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         startActivity(intent);
                         SharedPreferences prefs = getSharedPreferences("myPref", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = prefs.edit();
-                        editor.putString("store_id",generalresponce.getStore_id());
+                        editor.putString("store_id",loginResponse.getStore_id());
                         editor.commit();
                         finish();
 
