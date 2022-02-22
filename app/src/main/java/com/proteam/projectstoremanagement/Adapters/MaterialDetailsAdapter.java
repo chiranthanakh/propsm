@@ -1,83 +1,62 @@
 package com.proteam.projectstoremanagement.Adapters;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.Nullable;
 
-import com.proteam.projectstoremanagement.Activities.MainActivity;
-import com.proteam.projectstoremanagement.Model.MaterialModel;
+import com.proteam.projectstoremanagement.Model.MaterialSModel;
+import com.proteam.projectstoremanagement.Model.MaterialStockModel;
 import com.proteam.projectstoremanagement.R;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class MaterialDetailsAdapter extends RecyclerView.Adapter<MaterialDetailsAdapter.MyViewHolder> {
+public class MaterialDetailsAdapter extends ArrayAdapter<MaterialSModel> {
 
-    private List<MaterialModel> materialdetails;
-
-
-    public MaterialDetailsAdapter(List<MaterialModel> materialdetails) {
-        this.materialdetails = materialdetails;
+    public MaterialDetailsAdapter(@NonNull Context context, ArrayList<MaterialSModel> arrayList) {
+        super(context, 0, arrayList);
     }
 
     @NonNull
     @Override
-    public MaterialDetailsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.material_home_layout, parent, false);
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        return new MyViewHolder(itemView);
-    }
+        // convertView which is recyclable view
+        View currentItemView = convertView;
 
-    @Override
-    public void onBindViewHolder(@NonNull MaterialDetailsAdapter.MyViewHolder holder, int position) {
-        MaterialModel materialModel = materialdetails.get(position);
-        holder.material_code.setText(materialModel.getMaterialcode());
-        holder.material_name.setText(materialModel.getMaterialname());
-        holder.closing_stock.setText(materialModel.getClosingstock());
-
-
-        holder.cc_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(),"click on item: "+materialModel.getMaterialcode(),Toast.LENGTH_LONG).show();
-
-               /* Intent intent = new Intent(context, ReportsActivity.class);
-                context.startActivity(intent);*/
-            }
-        });
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return materialdetails.size();
-    }
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView material_code, material_name, closing_stock;
-        public ImageView material_delete;
-        public LinearLayout cc_layout;
-
-        public MyViewHolder(@NonNull View view) {
-            super(view);
-            material_code = (TextView) view.findViewById(R.id.tv_material_code);
-            material_name = (TextView) view.findViewById(R.id.tv_material_name);
-            closing_stock = (TextView) view.findViewById(R.id.tv_closing_stock);
-            material_delete = (ImageView) view.findViewById(R.id.material_delete);
-            cc_layout = (LinearLayout) itemView.findViewById(R.id.cc_layout);
-
-
+        // of the recyclable view is null then inflate the custom layout for the same
+        if (currentItemView == null) {
+            currentItemView = LayoutInflater.from(getContext()).inflate(R.layout.material_home_layout, parent, false);
         }
+
+        // get the position of the view from the ArrayAdapter
+        MaterialSModel currentNumberPosition = getItem(position);
+
+        // then according to the position of the view assign the desired image for the same
+        TextView material_code = currentItemView.findViewById(R.id.tv_Stock_material_code);
+        material_code.setText(currentNumberPosition.getMaterial_manual_id());
+
+        // then according to the position of the view assign the desired TextView 1 for the same
+        TextView material_name = currentItemView.findViewById(R.id.tv_Stock_material_name);
+        material_name.setText(currentNumberPosition.getMaterial_name());
+
+
+        // then according to the position of the view assign the desired TextView 2 for the same
+        TextView material_stock = currentItemView.findViewById(R.id.tv_Stock_closing_stock);
+        material_stock.setText(currentNumberPosition.getClosing_stock());
+
+        ImageView iv_image = currentItemView.findViewById(R.id.Stock_material_delete);
+
+
+
+        // then return the recyclable view
+        return currentItemView;
     }
 
 }

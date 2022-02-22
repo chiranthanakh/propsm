@@ -2,8 +2,10 @@ package com.proteam.projectstoremanagement.Utils;
 
 import com.proteam.projectstoremanagement.Model.ConSubLocationModel;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
+import com.proteam.projectstoremanagement.Model.MaterialStockModel;
 import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
 import com.proteam.projectstoremanagement.Request.Indentstatusrequest;
+import com.proteam.projectstoremanagement.Request.MaterialStockRequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Response.IndentStatusdirectlist;
 import com.proteam.projectstoremanagement.Response.IndentStatuslist;
@@ -52,4 +54,6 @@ public interface PsmApi {
     @POST("Clients_apis/riser_direct_indent_list")
     Call<IndentStatusdirectlist> indentstatusdirect(@Body Indentstatusrequest indentstatusrequest);
 
+    @POST("Clients_apis/get_meterial_closing_stock_details")
+    Call<MaterialStockRequest> materialstockhome(@Body MaterialStockModel materialStockModel);
 }

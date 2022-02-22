@@ -4,8 +4,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
@@ -22,14 +20,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.proteam.projectstoremanagement.Adapters.IndividualIndentListAdapter;
 import com.proteam.projectstoremanagement.Adapters.MaterialDetailsAdapter;
-import com.proteam.projectstoremanagement.Adapters.PendingIndentAdapter;
-import com.proteam.projectstoremanagement.Model.MaterialModel;
-import com.proteam.projectstoremanagement.Model.PendingIndentModel;
+import com.proteam.projectstoremanagement.Model.IndividualIndentListModel;
+import com.proteam.projectstoremanagement.Model.MaterialSModel;
+import com.proteam.projectstoremanagement.Model.MaterialStockModel;
 import com.proteam.projectstoremanagement.R;
-import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
+import com.proteam.projectstoremanagement.Request.MaterialStockRequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
-import com.proteam.projectstoremanagement.Response.Indentpending;
+import com.proteam.projectstoremanagement.Response.IndentStatusdirectlist;
 import com.proteam.projectstoremanagement.Response.PsmDataStatusHome;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
 import com.proteam.projectstoremanagement.WebServices;
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             indent_status_Count_pending,indent_status_Count_approve,indent_status_Count_rejected,
             indent_status_Count_close;
 
-    private List<MaterialModel> materialdetails = new ArrayList<>();
+    private List<MaterialSModel> materialdetails = new ArrayList<>();
     private RecyclerView rv_material;
     private MaterialDetailsAdapter materialDetailsAdapter;
 
@@ -60,6 +59,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btn_raise_indent, btn_consumption;
     ProgressDialog progressDialog;
     Context context = this;
+    ListView lv_material_stock_home;
+
+    final ArrayList<MaterialSModel> arrayList = new ArrayList<MaterialSModel>();
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +84,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pieChartView.setPieChartData(pieChartData);
 
 
-        materialDetailsAdapter = new MaterialDetailsAdapter(materialdetails);
-        RecyclerView.LayoutManager nlayoutManager = new LinearLayoutManager(getApplicationContext());
-        rv_material.setLayoutManager(nlayoutManager);
-        rv_material.setItemAnimator(new DefaultItemAnimator());
-        rv_material.setAdapter(materialDetailsAdapter);
-        prepareNoticeData();
-
 
 
     }
@@ -96,11 +92,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         drawer_layout=findViewById(R.id.drawer_layout_main);
         ivnav=findViewById(R.id.iv_nav_view);
         ivnav.setOnClickListener(this);
-        rv_material = (RecyclerView) findViewById(R.id.rv_material);
+        lv_material_stock_home=findViewById(R.id.lv_material_stock_home);
         pieChartView = findViewById(R.id.chart);
         btn_raise_indent = findViewById(R.id.btn_raise_indent);
         btn_raise_indent.setOnClickListener(this);
-        material_delete=findViewById(R.id.material_delete);
         iv_add_material=findViewById(R.id.iv_add_material);
         iv_add_material.setOnClickListener(this);
 
@@ -125,25 +120,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_consumption.setOnClickListener(this);
         tv_consumption_list.setOnClickListener(this);
         callboqupdateapi();
+        callmaterialstockapi();
     }
 
-    private  void prepareNoticeData()
-    {
-        MaterialModel  materialDetails = new MaterialModel("22", "Blue", "0 ");
-        materialdetails.add(materialDetails);
-
-        materialDetails = new MaterialModel("1232", "Mat", "0 ");
-        materialdetails.add(materialDetails);
-        materialDetails = new MaterialModel("300yuf1", "V-Bracket(ISMC 75x40x6)", "0 ");
-        materialdetails.add(materialDetails);
-        materialDetails = new MaterialModel("30sy02", "Top Adopter", "376 ");
-
-        materialdetails.add(materialDetails);
-        materialDetails = new MaterialModel("3003", "Flat(65x6)(1No)", "0 ");
-        materialdetails.add(materialDetails);
 
 
+    private void callmaterialstockapi() {
 
+        //progressDialog=new ProgressDialog(MainActivity.this);
+
+
+        MaterialStockModel materialStockModel = new MaterialStockModel("72");
+        WebServices<MaterialStockRequest> webServices = new WebServices<MaterialStockRequest>(MainActivity.this);
+        webServices.materialstocklisthome(WebServices.ApiType.materialstock, materialStockModel);
+
+
+        /*if(progressDialog!=null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+
+       }
+        }*/
 
     }
 
@@ -264,6 +264,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 {
                     Toast.makeText(this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
                 }
+                break;
+
+            case materialstock:
+
+                if(progressDialog!=null)
+                {
+                    if(progressDialog.isShowing())
+                    {
+                        progressDialog.dismiss();
+                    }
+                }
+
+                if (isSucces) {
+
+                    if(response!=null) {
+
+
+
+                        List list = new ArrayList();
+                        MaterialStockRequest materialStockRequest = (MaterialStockRequest) response;
+
+                        list = materialStockRequest.getMaterial_closing_details();
+
+                        for (int i = 0; i < list.size(); i++) {
+
+                            arrayList.add(new MaterialSModel(materialStockRequest.getMaterial_closing_details().get(i).getMaterial_manual_id(), materialStockRequest.getMaterial_closing_details().get(i).getMaterial_name(), materialStockRequest.getMaterial_closing_details().get(i).getClosing_stock()));
+                        }
+
+                        MaterialDetailsAdapter numbersArrayAdapter = new MaterialDetailsAdapter(this, arrayList);
+                        ListView materialstocklist = findViewById(R.id.lv_material_stock_home);
+                        materialstocklist.setAdapter(numbersArrayAdapter);
+
+
+
+
+                    }
+                    else
+                    {
+                        Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else
+                {
+                    Toast.makeText(this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
 
 
