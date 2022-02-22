@@ -1,6 +1,8 @@
 package com.proteam.projectstoremanagement.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -29,6 +31,8 @@ import java.util.List;
 
 public class IndentStatusActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
     ImageView mToolbar;
+    DrawerLayout drawer_layout;
+
     FloatingActionButton fab_add_raise;
     ListView indent_status_listView;
     ProgressDialog progressDialog;
@@ -40,7 +44,7 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indent_status);
         mToolbar = findViewById(R.id.back_toolbar);
-        mToolbar.setOnClickListener(view -> onBackPressed());
+
         initialize();
 
         callapi();
@@ -55,7 +59,8 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
         fab_add_raise=findViewById(R.id.fab_add_raise);
         fab_add_raise.setOnClickListener(this);
         indent_status_listView=findViewById(R.id.indent_status_listView);
-
+        mToolbar.setOnClickListener(this);
+        drawer_layout=findViewById(R.id.drawer_layout);
     }
 
 
@@ -89,6 +94,9 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
             case R.id.fab_add_raise:
                 Intent intent = new Intent(IndentStatusActivity.this,CreateIndentActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.back_toolbar:
+                drawer_layout.openDrawer(GravityCompat.START);
                 break;
         }
     }

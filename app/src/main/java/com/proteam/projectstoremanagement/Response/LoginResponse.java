@@ -21,6 +21,14 @@ public class LoginResponse {
     @Expose
     private String store_manual_id;
 
+    @SerializedName("store_name")
+    @Expose
+    private String store_name;
+
+    @SerializedName("role")
+    @Expose
+    private String role;
+
     public String getStatus() {
         return status;
     }
@@ -51,5 +59,21 @@ public class LoginResponse {
 
     public void setStore_manual_id(String store_manual_id) {
         this.store_manual_id = store_manual_id;
+    }
+
+    public String getStore_name() {
+        return store_name;
+    }
+
+    public void setStore_name(String store_name) {
+        this.store_name = store_name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

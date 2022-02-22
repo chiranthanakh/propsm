@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.mindinventory.midrawer.MIDrawerView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#056c45"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
     android:orientation="vertical"
-    android:id="@+id/drawer_layout_main"
-    tools:context=".Activities.MainActivity"
+    android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true"
     app:sliderType="slide"
     tools:openDrawer="start">
 
-
-    <include
-        android:id="@+id/in_dashboard_layout"
-        layout="@layout/dashboard_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view_mainA"
+        android:id="@+id/nav_view"
         android:layout_gravity="start"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -53,7 +44,7 @@
                 android:text="Hello, Welcome to PIMS"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-               android:fontFamily="@font/proxima_family"/>
+                android:fontFamily="@font/proxima_family"/>
 
 
             <TextView
@@ -190,6 +181,5 @@
 
 
     </com.google.android.material.navigation.NavigationView>
-
 
 </com.mindinventory.midrawer.MIDrawerView>
