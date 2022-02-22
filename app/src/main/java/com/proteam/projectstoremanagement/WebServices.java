@@ -14,6 +14,7 @@ import com.google.gson.GsonBuilder;
 
 import com.proteam.projectstoremanagement.Activities.PendingIntentupdaterequest;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
+import com.proteam.projectstoremanagement.Model.MaterialStockModel;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.Constructorlocationrequest;
 import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
@@ -62,7 +63,7 @@ public class WebServices<T> {
     private static OkHttpClient.Builder builder;
 
     public enum ApiType {
-       general,login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus
+       general,login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus,materialstock
     }
 
     String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
@@ -404,6 +405,32 @@ public class WebServices<T> {
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
         call=(Call<T>)psmApi.pendingupdate(pendingIntentupdaterequest);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
+
+    public void materialstocklisthome( ApiType apiTypes,  MaterialStockModel materialStockModel)
+    {
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.materialstockhome(materialStockModel);
 
         call.enqueue(new Callback<T>() {
             @Override

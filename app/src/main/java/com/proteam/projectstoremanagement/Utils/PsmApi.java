@@ -3,8 +3,10 @@ package com.proteam.projectstoremanagement.Utils;
 import com.proteam.projectstoremanagement.Activities.PendingIntentupdaterequest;
 import com.proteam.projectstoremanagement.Model.ConSubLocationModel;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
+import com.proteam.projectstoremanagement.Model.MaterialStockModel;
 import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
 import com.proteam.projectstoremanagement.Request.Indentstatusrequest;
+import com.proteam.projectstoremanagement.Request.MaterialStockRequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Response.IndentStatusdirectlist;
@@ -57,4 +59,6 @@ public interface PsmApi {
     @POST("Clients_apis/approver_approve_indent")
     Call<Generalresponce> pendingupdate(@Body PendingIntentupdaterequest pendingIntentupdaterequest);
 
+    @POST("Clients_apis/get_meterial_closing_stock_details")
+    Call<MaterialStockRequest> materialstockhome(@Body MaterialStockModel materialStockModel);
 }
