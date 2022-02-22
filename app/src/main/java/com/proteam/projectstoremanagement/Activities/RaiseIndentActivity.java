@@ -2,15 +2,19 @@ package com.proteam.projectstoremanagement.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.view.MenuItemCompat;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.proteam.projectstoremanagement.Adapters.RaiseIndentAdapter;
@@ -29,6 +33,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
     AppCompatButton btn_indent_preview;
     TextView tv_raise_indent_total_item,tv_contractor_name,tv_location_name,tv_sublocation_name,tv_indent_date,tv_work_order_number;
     ListView lv_raise_indent_list;
+    EditText search;
 
     List boqcomponentslist = new ArrayList();
     final ArrayList<RaiseIndentModel> arrayList = new ArrayList<RaiseIndentModel>();
@@ -74,6 +79,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
         tv_work_order_number=findViewById(R.id.tv_work_order_number);
         btn_indent_preview.setOnClickListener(this);
         lv_raise_indent_list=findViewById(R.id.lv_raise_indent_list);
+        search = findViewById(R.id.edt_search);
 
         tv_contractor_name.setText(contrctorname);
         tv_location_name.setText(location);
@@ -81,7 +87,11 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
         tv_indent_date.setText(date);
         tv_work_order_number.setText(workorderno);
         callboqupdateapi();
+
+
     }
+
+
 
     private void callboqupdateapi() {
 
@@ -103,6 +113,12 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+
+
+    }
 
     @Override
     public void onClick(View view) {
@@ -144,21 +160,16 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                         }
 
                         tv_raise_indent_total_item.setText(String.valueOf(boqcomponentslist.size()));
-
                         // Now create the instance of the NumebrsViewAdapter and pass
                         // the context and arrayList created above
                         RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(this, arrayList);
-
                         // create the instance of the ListView to set the numbersViewAdapter
                         ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
-
                         // set the numbersViewAdapter for ListView
                         pendingindentstatus.setAdapter(numbersArrayAdapter);
 
                     }
-
                 }
-
 
                 break;
 

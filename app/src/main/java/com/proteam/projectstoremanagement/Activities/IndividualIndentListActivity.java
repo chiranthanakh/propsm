@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -37,10 +38,13 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_indent_list);
+        mToolbar = findViewById(R.id.back_toolbar);
+        mToolbar.setOnClickListener(view -> onBackPressed());
+
+
         initialize();
 
         callapi();
-
 
     }
 
@@ -87,6 +91,7 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
                 break;
         }
     }
+
 
     @Override
     public void onResponse(Object response, WebServices.ApiType URL, boolean isSucces, int code) {

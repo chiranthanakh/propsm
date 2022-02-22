@@ -60,7 +60,6 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
         filter = findViewById(R.id.iv_filter);
         filter.setOnClickListener(this);
 
-
     }
 
     private void callpendingindentapi() {
@@ -76,7 +75,6 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
                 WebServices<PendingIndentList> webServices = new WebServices<PendingIndentList>(PendingIndentListActivity.this);
                 webServices.pendingindent(WebServices.ApiType.pendingindent, pendingIndentRequest);
             }
-
         }
     }
 
@@ -85,6 +83,7 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
     {
         switch (view.getId())
         {
+
         /*    case R.id.ll_status_click:
                 Intent intent = new Intent(PendingIndentListActivity.this,PendingIndentActivity.class);
                 startActivity(intent);
@@ -129,9 +128,6 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
                 // Showing the popup menu
                 popupMenu.show();
 
-
-
-
                 break;
         }
     }
@@ -175,7 +171,6 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
                                 inprogresslist.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
                             }
-
                         }
 
                         adaptormoves(arrayList,"0");
@@ -200,7 +195,6 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
 
         }
-
 
     }
 
