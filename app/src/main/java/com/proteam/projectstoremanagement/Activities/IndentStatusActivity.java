@@ -127,7 +127,6 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
                         for (int i = 0; i<list.size(); i++){
 
                             arrayList.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
-
                         }
 
 
