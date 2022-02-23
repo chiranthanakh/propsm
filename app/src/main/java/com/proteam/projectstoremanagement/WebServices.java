@@ -4,10 +4,7 @@ package com.proteam.projectstoremanagement;
 import android.app.Activity;
 import android.app.IntentService;
 import android.content.Context;
-import android.util.Log;
 import android.widget.Adapter;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,24 +16,19 @@ import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.Constructorlocationrequest;
 import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
 import com.proteam.projectstoremanagement.Request.Indentstatusrequest;
+import com.proteam.projectstoremanagement.Request.MaterialStockDeleteRequest;
 import com.proteam.projectstoremanagement.Request.PendingIndentRequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
-import com.proteam.projectstoremanagement.Response.Contractorlocation;
-import com.proteam.projectstoremanagement.Response.Contractorlocationmodel;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
 import com.proteam.projectstoremanagement.Utils.PsmApi;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,7 +55,8 @@ public class WebServices<T> {
     private static OkHttpClient.Builder builder;
 
     public enum ApiType {
-       general,login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus,materialstock
+       general,login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus,materialstock,
+        materialstockname,deletestockMhome
     }
 
     String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
@@ -431,6 +424,58 @@ public class WebServices<T> {
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
         call=(Call<T>)psmApi.materialstockhome(materialStockModel);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
+
+
+    public void stockmaterialname( ApiType apiTypes)
+    {
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.stockmaterialnamehome();
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
+
+    public void deleteMstockdata( ApiType apiTypes, MaterialStockDeleteRequest materialStockDeleteRequest) {
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.deleteMstock(materialStockDeleteRequest);
 
         call.enqueue(new Callback<T>() {
             @Override

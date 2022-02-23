@@ -11,14 +11,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.proteam.projectstoremanagement.Activities.MainActivity;
 import com.proteam.projectstoremanagement.Model.MaterialSModel;
 import com.proteam.projectstoremanagement.Model.MaterialStockModel;
 import com.proteam.projectstoremanagement.R;
+import com.proteam.projectstoremanagement.Request.MaterialStockDeleteRequest;
+import com.proteam.projectstoremanagement.Response.MaterialStockDeleteResponse;
+import com.proteam.projectstoremanagement.Utils.OnResponseListener;
+import com.proteam.projectstoremanagement.WebServices;
 
 import java.util.ArrayList;
 
 public class MaterialDetailsAdapter extends ArrayAdapter<MaterialSModel> {
-
+    Context context;
     public MaterialDetailsAdapter(@NonNull Context context, ArrayList<MaterialSModel> arrayList) {
         super(context, 0, arrayList);
     }
@@ -52,6 +57,15 @@ public class MaterialDetailsAdapter extends ArrayAdapter<MaterialSModel> {
         material_stock.setText(currentNumberPosition.getClosing_stock());
 
         ImageView iv_image = currentItemView.findViewById(R.id.Stock_material_delete);
+
+  /*    iv_image.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+
+              WebServices<MaterialStockDeleteResponse> webServices = new WebServices<MaterialStockDeleteResponse>((OnResponseListener<MaterialStockDeleteResponse>) context);
+              webServices.deleteMstockdata(WebServices.ApiType.deletestockMhome,materialStockDeleteRequest);
+          }
+      });*/
 
 
 

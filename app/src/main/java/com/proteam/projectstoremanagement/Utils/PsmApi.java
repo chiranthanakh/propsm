@@ -6,12 +6,14 @@ import com.proteam.projectstoremanagement.Model.Loginmodel;
 import com.proteam.projectstoremanagement.Model.MaterialStockModel;
 import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
 import com.proteam.projectstoremanagement.Request.Indentstatusrequest;
+import com.proteam.projectstoremanagement.Request.MaterialStockDeleteRequest;
 import com.proteam.projectstoremanagement.Request.MaterialStockRequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Response.IndentStatusdirectlist;
 import com.proteam.projectstoremanagement.Response.IndentStatuslist;
 import com.proteam.projectstoremanagement.Response.Indentpending;
+import com.proteam.projectstoremanagement.Response.MaterialStockDeleteResponse;
 import com.proteam.projectstoremanagement.Response.PendingIndentList;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.Constructorlocationrequest;
@@ -21,9 +23,11 @@ import com.proteam.projectstoremanagement.Response.Boqlist;
 import com.proteam.projectstoremanagement.Response.Contractorlocationmodel;
 import com.proteam.projectstoremanagement.Response.LoginResponse;
 import com.proteam.projectstoremanagement.Response.PsmDataStatusHome;
+import com.proteam.projectstoremanagement.Response.StockMaterialNameResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface PsmApi {
@@ -61,4 +65,13 @@ public interface PsmApi {
 
     @POST("Clients_apis/get_meterial_closing_stock_details")
     Call<MaterialStockRequest> materialstockhome(@Body MaterialStockModel materialStockModel);
+
+    @POST("Clients_apis/materials_list")
+    Call<StockMaterialNameResponse> stockmaterialnamehome();
+
+
+    @POST("Clients_apis/delete_meterial_closing_stock_details")
+    Call<MaterialStockDeleteResponse> deleteMstock(@Body MaterialStockDeleteRequest materialStockDeleteRequest);
+
+
 }

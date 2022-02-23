@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_calendar"
+        android:enabled="true"
+        android:icon="@drawable/indend"
+        android:title="Raise BOQ Indent"/>
+    <item
+        android:id="@+id/nav_store"
+        android:enabled="true"
+        android:icon="@drawable/ind_indent"
+        android:title="Individual Indent" />
+    <item
+        android:id="@+id/nav_audit"
+        android:enabled="true"
+        android:icon="@drawable/consumption"
+        android:title="Consumption"/>
+    <item
+        android:id="@+id/nav_profile"
+        android:enabled="true"
+        android:icon="@drawable/cum_list"
+        android:title="Consumption List"/>
+
+</menu>

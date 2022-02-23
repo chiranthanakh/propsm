@@ -38,5 +38,6 @@
     <color name="green_light">#81c784</color>
     <color name="blue_very_light">#b3e5fc</color>
     <color name="grey_new">#9E9E9E</color>
+    <color name="header_background">#1A2562FC</color>
 
 </resources>

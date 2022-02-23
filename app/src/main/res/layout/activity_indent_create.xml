@@ -76,6 +76,12 @@
         </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -316,5 +322,11 @@
 
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+    <include
+        layout="@layout/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
