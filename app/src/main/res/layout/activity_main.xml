@@ -165,7 +165,7 @@
 
                 <Button
                     android:id="@+id/btn_change_pass"
-                    app:icon="@drawable/exit"
+                    app:icon="@drawable/c_pass"
                     android:text="Change Password"
                     android:layout_weight="1"
                     android:layout_marginStart="5dp"

@@ -171,7 +171,7 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
                             }
                         }
 
-                        adaptormoves(arrayList,"0");
+                        adaptormoves(pendinglist,"0");
 
                         //tv_raise_indent_total_item.setText(String.valueOf(boqcomponentslist.size()));
 

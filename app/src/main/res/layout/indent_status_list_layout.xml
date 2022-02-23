@@ -43,7 +43,7 @@
 
             <TextView
                 android:id="@+id/in_status"
-                android:fontFamily="@font/proxima_family"
+                android:fontFamily="@font/proxima_nova_bold"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
