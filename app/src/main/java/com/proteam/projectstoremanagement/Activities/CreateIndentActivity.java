@@ -153,7 +153,7 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
                     Toast.makeText(this, "Select the Contractor Name", Toast.LENGTH_SHORT).show();
                 }*/
 
-               /* if (spinner_contractor_name.getSelectedItem()!="") {
+             /*  if (spinner_contractor_name.getSelectedItem()!="") {
 
                     Toast.makeText(this, "Select the Contractor Name", Toast.LENGTH_SHORT).show();
                 }*/

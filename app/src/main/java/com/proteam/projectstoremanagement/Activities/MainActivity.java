@@ -2,6 +2,7 @@ package com.proteam.projectstoremanagement.Activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,11 +44,13 @@ import lecho.lib.hellocharts.view.PieChartView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
 
 
-    ImageView ivnav,material_delete,iv_add_material;
+    ImageView ivnav,iv_add_material;
     DrawerLayout drawer_layout;
     TextView tv_raise_boq_indent,tv_individual_indent,tv_pending_indent,tv_consumption,tv_consumption_list,
             indent_status_Count_pending,indent_status_Count_approve,indent_status_Count_rejected,
             indent_status_Count_close;
+
+    Button btn_change_pass;
 
     private List<MaterialSModel> materialdetails = new ArrayList<>();
     private RecyclerView rv_material;
@@ -108,7 +111,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_consumption=findViewById(R.id.tv_consumption);
         tv_consumption_list=findViewById(R.id.tv_consumption_list);
 
-
+        btn_change_pass=findViewById(R.id.btn_change_pass);
+        btn_change_pass.setOnClickListener(this);
         indent_status_Count_pending=findViewById(R.id.indent_status_Count_pending);
         indent_status_Count_approve=findViewById(R.id.indent_status_Count_approve);
         indent_status_Count_rejected=findViewById(R.id.indent_status_Count_rejected);
@@ -171,6 +175,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId())
         {
+            case R.id.btn_change_pass:
+                Intent intentChangePass = new Intent(MainActivity.this, ChangePasswordActivity.class);
+                startActivity(intentChangePass);
+                break;
+
             case R.id.btn_consumption:
                 Intent intentconhome = new Intent(MainActivity.this, CreateConsumptionActivity.class);
                 startActivity(intentconhome);
