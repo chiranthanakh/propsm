@@ -55,8 +55,6 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
     {
         lv_pending_indent_list=findViewById(R.id.lv_pending_indent_list);
         callpendingindentapi();
-
-
         filter = findViewById(R.id.iv_filter);
         filter.setOnClickListener(this);
 
