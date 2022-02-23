@@ -50,9 +50,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId())
         {
             case R.id.btn_login:
-                Intent intent= new Intent(LoginActivity.this, MainActivity.class);
+                /*Intent intent= new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
-                finish();
+                finish();*/
 
                 if(!edt_Email.getText().toString().equals("")){
 
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         Bundle bundle1 = new Bundle();
-                        bundle1.putString("user",edt_Email.getText().toString().trim());
+                        bundle1.putString("user_id",loginResponse.getUser_id());
                         bundle1.putString("role",loginResponse.getRole());
                         intent.putExtras(bundle1);
 

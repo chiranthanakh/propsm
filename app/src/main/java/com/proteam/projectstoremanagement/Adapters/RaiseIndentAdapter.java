@@ -1,12 +1,15 @@
 package com.proteam.projectstoremanagement.Adapters;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,14 +17,19 @@ import androidx.annotation.Nullable;
 import com.proteam.projectstoremanagement.Model.IndentStatusModel;
 import com.proteam.projectstoremanagement.Model.RaiseIndentModel;
 import com.proteam.projectstoremanagement.R;
+import com.proteam.projectstoremanagement.Utils.OnChange;
 
 import java.util.ArrayList;
 
 public class RaiseIndentAdapter extends ArrayAdapter<RaiseIndentModel> {
 
+    private OnChange mCallback;
 
-    public RaiseIndentAdapter(@NonNull Context context, ArrayList<RaiseIndentModel> arrayList) {
+
+    public RaiseIndentAdapter(@NonNull Context context, ArrayList<RaiseIndentModel> arrayList,OnChange listner) {
         super(context, 0, arrayList);
+        this.mCallback = listner;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -53,6 +61,31 @@ public class RaiseIndentAdapter extends ArrayAdapter<RaiseIndentModel> {
 
         EditText raisequy = currentItemView.findViewById(R.id.edt_indent_materialRaiseQty);
         raisequy.setText(currentNumberPosition.getRaiseqty());
+
+        raisequy.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if(s.toString().equals(null)){
+                    Toast.makeText(getContext(), "Please enter correct login details", Toast.LENGTH_SHORT).show();
+                }else {
+                    mCallback.onChange1(s.toString(),position);
+                }
+
+
+
+            }
+        });
 
         // then return the recyclable view
         return currentItemView;

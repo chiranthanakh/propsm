@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,11 +37,14 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
     ProgressDialog progressDialog;
     ListView lv_pending_indent;
-    Button btn_approve;
+    Button btn_approve,btn_reject;
     String id;
+    EditText remarks;
+    Indentpending indentpending;
 
     List PendingIndent = new ArrayList();
     final ArrayList<PendingIndentModel> arrayList = new ArrayList<PendingIndentModel>();
+    List indentids = new ArrayList();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,8 +72,11 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
         tv_p_sublocationName=findViewById(R.id.tv_p_sublocationName);
         tv_p_workordernumber=findViewById(R.id.tv_p_workordernumber);
         tv_p_status=findViewById(R.id.tv_p_status);
+        remarks = findViewById(R.id.et_remarks1);
         tv_p_indentdate=findViewById(R.id.tv_p_indentdate);
         btn_approve = findViewById(R.id.btn_approve);
+        btn_reject = findViewById(R.id.btn_reject);
+        btn_reject.setOnClickListener(this);
         btn_approve.setOnClickListener(this);
 
         callboqupdateapi();
@@ -105,7 +112,13 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
             case R.id.btn_approve:
 
-                callupdateapi();
+                callupdateapi("Approved");
+
+                break;
+
+            case R.id.btn_reject:
+
+                callupdateapi("Rejected");
 
                 break;
 
@@ -114,7 +127,7 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    private void callupdateapi() {
+    private void callupdateapi(String status) {
 
         progressDialog=new ProgressDialog(PendingIndentActivity.this);
 
@@ -124,9 +137,20 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-                PendingIntentupdaterequest pendingIntentupdaterequest = new PendingIntentupdaterequest("9","Approve","approved successfully");
+
+                /*for (int i=0;i<indentids.size();i++){
+
+                    PendingIntentupdaterequest pendingIntentupdaterequest = new PendingIntentupdaterequest(indentpending.getIndent_list().get(i).getIndent_id(),status,remarks.getText().toString());
+                    WebServices<Generalresponce> webServices = new WebServices<Generalresponce>(PendingIndentActivity.this);
+                    webServices.pendingintentupdate(WebServices.ApiType.general, pendingIntentupdaterequest);
+
+                } */
+
+                PendingIntentupdaterequest pendingIntentupdaterequest = new PendingIntentupdaterequest(indentpending.getIndent_list().get(0).getIndent_id(),status,remarks.getText().toString());
                 WebServices<Generalresponce> webServices = new WebServices<Generalresponce>(PendingIndentActivity.this);
                 webServices.pendingintentupdate(WebServices.ApiType.general, pendingIntentupdaterequest);
+
+
             }
         }
 
@@ -149,13 +173,14 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
                     if(response!=null) {
 
-                        Indentpending indentpending = (Indentpending) response;
+                         indentpending = (Indentpending) response;
                         PendingIndent = indentpending.getIndent_boq_list();
 
                         for (int i=0;i<PendingIndent.size();i++){
 
                             arrayList.add(new PendingIndentModel(indentpending.getIndent_boq_list().get(i).getMaterial_manual_id(),indentpending.getIndent_boq_list().get(i).getMaterial_name(),indentpending.getIndent_boq_list().get(i).getBalance_boq(),indentpending.getIndent_boq_list().get(i).getIndent_qty()));
 
+                            indentids.add(indentpending.getIndent_list().get(i).getIndent_id());
 
                         }
 

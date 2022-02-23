@@ -25,6 +25,7 @@ public class PendingIndentListAdapter extends ArrayAdapter<PendingIndentListMode
 
     public PendingIndentListAdapter(@NonNull Context context, ArrayList<PendingIndentListModel> arrayList, String status) {
         super(context, 0, arrayList);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -63,10 +64,13 @@ public class PendingIndentListAdapter extends ArrayAdapter<PendingIndentListMode
             iv_image.setVisibility(View.VISIBLE);
         }else if(currentNumberPosition.getStatus().equalsIgnoreCase("Approved")){
             pending_indent_status.setTextColor(Color.parseColor("#81c784"));
+            iv_image.setVisibility(View.GONE);
         }else  if(currentNumberPosition.getStatus().equalsIgnoreCase("Rejected")){
             pending_indent_status.setTextColor(Color.parseColor("#e57373"));
+            iv_image.setVisibility(View.GONE);
         }else  if(currentNumberPosition.getStatus().equalsIgnoreCase("InProgress")){
             pending_indent_status.setTextColor(Color.parseColor("#81c784"));
+            iv_image.setVisibility(View.GONE);
         }
 
         View finalCurrentItemView = currentItemView;

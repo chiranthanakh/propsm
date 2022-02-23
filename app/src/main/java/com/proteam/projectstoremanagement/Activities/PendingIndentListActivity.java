@@ -46,15 +46,21 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
         setContentView(R.layout.activity_pending_indent_list);
         mToolbar = findViewById(R.id.back_toolbar);
         mToolbar.setOnClickListener(view -> onBackPressed());
+
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initilize();
-
-
+        callpendingindentapi();
     }
 
     private void initilize()
     {
         lv_pending_indent_list=findViewById(R.id.lv_pending_indent_list);
-        callpendingindentapi();
         filter = findViewById(R.id.iv_filter);
         filter.setOnClickListener(this);
 
@@ -171,7 +177,7 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
                             }
                         }
 
-                        adaptormoves(arrayList,"0");
+                        adaptormoves(pendinglist,"0");
 
                         //tv_raise_indent_total_item.setText(String.valueOf(boqcomponentslist.size()));
 

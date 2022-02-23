@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ProgressDialog progressDialog;
     Context context = this;
     ListView lv_material_stock_home;
+    String role,userid;
 
     final ArrayList<MaterialSModel> arrayList = new ArrayList<MaterialSModel>();
 
@@ -94,8 +95,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
 
         Bundle bundle = getIntent().getExtras();
-        //String role = bundle.getString("role");
-        String role = "Approver";
+        role = bundle.getString("role");
+        userid = bundle.getString("user_id");
+        //String role = "Approver";
         drawer_layout=findViewById(R.id.drawer_layout_main);
         ivnav=findViewById(R.id.iv_nav_view);
         ivnav.setOnClickListener(this);
@@ -144,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //progressDialog=new ProgressDialog(MainActivity.this);
 
 
-        MaterialStockModel materialStockModel = new MaterialStockModel("72");
+        MaterialStockModel materialStockModel = new MaterialStockModel(userid);
         WebServices<MaterialStockRequest> webServices = new WebServices<MaterialStockRequest>(MainActivity.this);
         webServices.materialstocklisthome(WebServices.ApiType.materialstock, materialStockModel);
 
