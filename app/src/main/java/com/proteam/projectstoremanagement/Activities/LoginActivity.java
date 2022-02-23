@@ -117,12 +117,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         Bundle bundle1 = new Bundle();
                         bundle1.putString("user",edt_Email.getText().toString().trim());
+                        bundle1.putString("role",loginResponse.getRole());
                         intent.putExtras(bundle1);
 
                         startActivity(intent);
                         SharedPreferences prefs = getSharedPreferences("myPref", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString("store_id",loginResponse.getStore_id());
+                        editor.putString("role",loginResponse.getRole());
                         editor.commit();
                         finish();
 

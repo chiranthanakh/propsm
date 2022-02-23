@@ -145,64 +145,66 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        switch (view.getId())
-        {
+        switch (view.getId()) {
             case R.id.btn_indent_generate:
 
-             /*   if (spinner_contractor_name.getSelectedItemId()..trim().equals(null)) {
-                    Toast.makeText(this, "Select the Contractor Name", Toast.LENGTH_SHORT).show();
-                }*/
-
-             /*  if (spinner_contractor_name.getSelectedItem()!="") {
+                if (spinner_location.getSelectedItem() == null) {
+                    Toast.makeText(this, "Select location", Toast.LENGTH_SHORT).show();
+                } else if (spinner_contractor_name.getSelectedItem() == null) {
 
                     Toast.makeText(this, "Select the Contractor Name", Toast.LENGTH_SHORT).show();
-                }*/
+                } else if (spinner_sublocation.getSelectedItem() == null) {
 
-                String store;
-                String location = String.valueOf(locationmap.get(spinner_location.getSelectedItem().toString()));
-                String sublocation = String.valueOf(sublocationmap.get(spinner_sublocation.getSelectedItem().toString()));
-                String contractorname = String.valueOf(contractormap.get(spinner_contractor_name.getSelectedItem().toString()));
+                    Toast.makeText(this, "Select sublocation", Toast.LENGTH_SHORT).show();
+                } else {
 
-                callboqupdateapi();
+                    String store;
+                    String location = String.valueOf(locationmap.get(spinner_location.getSelectedItem().toString()));
+                    String sublocation = String.valueOf(sublocationmap.get(spinner_sublocation.getSelectedItem().toString()));
+                    String contractorname = String.valueOf(contractormap.get(spinner_contractor_name.getSelectedItem().toString()));
 
-                Intent intent = new Intent(CreateIndentActivity.this,RaiseIndentActivity.class);
+                    callboqupdateapi();
+                    Intent intent = new Intent(CreateIndentActivity.this, RaiseIndentActivity.class);
 
-                Bundle bundle = new Bundle();
-                bundle.putString("contractor_id",contractorname);
-                bundle.putString("location_id",location);
-                bundle.putString("sublocation_id",sublocation);
-                bundle.putString("contractor_name",spinner_contractor_name.getSelectedItem().toString());
-                bundle.putString("location_name",spinner_location.getSelectedItem().toString());
-                bundle.putString("sublocation_name",spinner_sublocation.getSelectedItem().toString());
-                bundle.putString("date", edt_indent_date.getText().toString());
-                bundle.putString("workorderno",edt_indent_workorderno.getText().toString());
+                    Bundle bundle = new Bundle();
+                    bundle.putString("contractor_id", contractorname);
+                    bundle.putString("location_id", location);
+                    bundle.putString("sublocation_id", sublocation);
+                    bundle.putString("contractor_name", spinner_contractor_name.getSelectedItem().toString());
+                    bundle.putString("location_name", spinner_location.getSelectedItem().toString());
+                    bundle.putString("sublocation_name", spinner_sublocation.getSelectedItem().toString());
+                    bundle.putString("date", edt_indent_date.getText().toString());
+                    bundle.putString("workorderno", edt_indent_workorderno.getText().toString());
 
-                intent.putExtras(bundle);
-                startActivity(intent);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+
+                }
                 break;
 
 
             case R.id.edt_indent_date:
-            final Calendar c = Calendar.getInstance();
-            mYear = c.get(Calendar.YEAR);
-            mMonth = c.get(Calendar.MONTH);
-            mDay = c.get(Calendar.DAY_OF_MONTH);
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(CreateIndentActivity.this,
-                    new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker view, int year, int monthofyear, int dayOfMonth) {
-                            Calendar calendar =Calendar.getInstance();
-                            calendar.set(Calendar.MONTH,monthofyear);
-                            calendar.set(Calendar.YEAR,year);
-                            calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(CreateIndentActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthofyear, int dayOfMonth) {
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.set(Calendar.MONTH, monthofyear);
+                                calendar.set(Calendar.YEAR, year);
+                                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MM-yyyy");
-                            edt_indent_date.setText(simpleDateFormat.format(calendar.getTime()));
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                                edt_indent_date.setText(simpleDateFormat.format(calendar.getTime()));
 
-                        }
-                    },mYear, mMonth, mDay);
-            datePickerDialog.show();
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+
             break;
         }
     }

@@ -92,6 +92,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     private void initilize()
     {
+
+        Bundle bundle = getIntent().getExtras();
+        //String role = bundle.getString("role");
+        String role = "Approver";
         drawer_layout=findViewById(R.id.drawer_layout_main);
         ivnav=findViewById(R.id.iv_nav_view);
         ivnav.setOnClickListener(this);
@@ -117,6 +121,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         indent_status_Count_approve=findViewById(R.id.indent_status_Count_approve);
         indent_status_Count_rejected=findViewById(R.id.indent_status_Count_rejected);
         indent_status_Count_close=findViewById(R.id.indent_status_Count_close);
+
+        if(role.equals("Approver")){
+
+        }else{
+            tv_pending_indent.setVisibility(View.GONE);
+        }
 
         tv_raise_boq_indent.setOnClickListener(this);
         tv_individual_indent.setOnClickListener(this);
