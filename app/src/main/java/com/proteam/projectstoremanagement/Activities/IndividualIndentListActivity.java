@@ -6,9 +6,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,12 +30,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IndividualIndentListActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
-    ImageView mToolbar;
+    ImageView mToolbar,iv_individual_indent_filter;
 
     FloatingActionButton fab_add_individual_indent;
     ListView lv_individual_indent_status;
     ProgressDialog progressDialog;
     final ArrayList<IndividualIndentListModel> arrayList = new ArrayList<IndividualIndentListModel>();
+
+    final ArrayList<IndividualIndentListModel> approvedlist = new ArrayList<IndividualIndentListModel>();
+    final ArrayList<IndividualIndentListModel> pendinglist = new ArrayList<IndividualIndentListModel>();
+    final ArrayList<IndividualIndentListModel> regectedlist = new ArrayList<IndividualIndentListModel>();
+    final ArrayList<IndividualIndentListModel> inprogresslist = new ArrayList<IndividualIndentListModel>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +60,8 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
         fab_add_individual_indent=findViewById(R.id.fab_add_individual_indent);
         fab_add_individual_indent.setOnClickListener(this);
         lv_individual_indent_status=findViewById(R.id.lv_individual_indent_status);
-
+        iv_individual_indent_filter=findViewById(R.id.iv_individual_indent_filter);
+        iv_individual_indent_filter.setOnClickListener(this);
     }
 
 
@@ -89,6 +97,46 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
                 Intent intent = new Intent(IndividualIndentListActivity.this,IndividualIndentActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.iv_individual_indent_filter:
+
+                PopupMenu popupMenu = new PopupMenu(IndividualIndentListActivity.this, iv_individual_indent_filter);
+
+                popupMenu.getMenuInflater().inflate(R.menu.menu_items, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        // Toast message on menu item clicked
+
+                        if(menuItem.getTitle().equals("Pending")){
+
+                            individualindentfilter(pendinglist,"1");
+
+                        }else if(menuItem.getTitle().equals("Approved")){
+
+                            individualindentfilter(approvedlist,"2");
+
+                        }else if(menuItem.getTitle().equals("Rejected")){
+
+                            individualindentfilter(regectedlist, "3");
+
+                        }else if(menuItem.getTitle().equals("InProgress")){
+
+                            individualindentfilter(inprogresslist, "4");
+
+                        }else if(menuItem.getTitle().equals("All")){
+
+                            individualindentfilter(arrayList, "4");
+
+                        }
+
+                        Toast.makeText(IndividualIndentListActivity.this, "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+                // Showing the popup menu
+                popupMenu.show();
+
+                break;
         }
     }
 
@@ -118,11 +166,28 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
                         for (int i = 0; i < list.size(); i++) {
 
                             arrayList.add(new IndividualIndentListModel(indentStatusdirectlist.getDirect_indent().get(i).getIndent_auto_gen_id(), indentStatusdirectlist.getDirect_indent().get(i).getContractor_name(), indentStatusdirectlist.getDirect_indent().get(i).getStatus()));
-                        }
 
-                        IndividualIndentListAdapter numbersArrayAdapter = new IndividualIndentListAdapter(this, arrayList);
+                            if(indentStatusdirectlist.getDirect_indent().get(i).getStatus().equalsIgnoreCase("Pending"))
+                            {
+                                pendinglist.add(new IndividualIndentListModel(indentStatusdirectlist.getDirect_indent().get(i).getIndent_auto_gen_id(),indentStatusdirectlist.getDirect_indent().get(i).getContractor_name(),indentStatusdirectlist.getDirect_indent().get(i).getStatus()));
+                            }
+                            else if(indentStatusdirectlist.getDirect_indent().get(i).getStatus().equalsIgnoreCase("Approved"))
+                            {
+                                approvedlist.add(new IndividualIndentListModel(indentStatusdirectlist.getDirect_indent().get(i).getIndent_auto_gen_id(),indentStatusdirectlist.getDirect_indent().get(i).getContractor_name(),indentStatusdirectlist.getDirect_indent().get(i).getStatus()));
+                            }
+                            else if(indentStatusdirectlist.getDirect_indent().get(i).getStatus().equalsIgnoreCase("Rejected"))
+                            {
+                                regectedlist.add(new IndividualIndentListModel(indentStatusdirectlist.getDirect_indent().get(i).getIndent_auto_gen_id(),indentStatusdirectlist.getDirect_indent().get(i).getContractor_name(),indentStatusdirectlist.getDirect_indent().get(i).getStatus()));
+                            }
+                            else if(indentStatusdirectlist.getDirect_indent().get(i).getStatus().equalsIgnoreCase("InProgress"))
+                            {
+                                inprogresslist.add(new IndividualIndentListModel(indentStatusdirectlist.getDirect_indent().get(i).getIndent_auto_gen_id(),indentStatusdirectlist.getDirect_indent().get(i).getContractor_name(),indentStatusdirectlist.getDirect_indent().get(i).getStatus()));
+                            }
+                        }
+                        individualindentfilter(pendinglist,"0");
+                     /*   IndividualIndentListAdapter numbersArrayAdapter = new IndividualIndentListAdapter(this, arrayList);
                         ListView indentStatusList = findViewById(R.id.lv_individual_indent_status);
-                        indentStatusList.setAdapter(numbersArrayAdapter);
+                        indentStatusList.setAdapter(numbersArrayAdapter);*/
 
                     } else {
 
@@ -137,5 +202,18 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
 
 
         }
+    }
+
+    private void individualindentfilter(ArrayList<IndividualIndentListModel> list, String status) {
+
+        IndividualIndentListAdapter numbersArrayAdapter = new IndividualIndentListAdapter(this, list);
+
+        // create the instance of the ListView to set the numbersViewAdapter
+        ListView individualindentlist = findViewById(R.id.lv_individual_indent_status);
+
+        // set the numbersViewAdapter for ListView
+        individualindentlist.setAdapter(numbersArrayAdapter);
+
+
     }
 }

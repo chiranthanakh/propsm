@@ -50,6 +50,17 @@ public class IndentStatusAdapter extends ArrayAdapter<IndentStatusModel> {
         in_status.setText(currentNumberPosition.getStatus());
 
 
+
+        if(currentNumberPosition.getStatus().equalsIgnoreCase("Pending")){
+            in_status.setTextColor(Color.parseColor("#ffcc80"));
+        }else if(currentNumberPosition.getStatus().equalsIgnoreCase("Approved")){
+            in_status.setTextColor(Color.parseColor("#81c784"));
+        }else  if(currentNumberPosition.getStatus().equalsIgnoreCase("Rejected")){
+            in_status.setTextColor(Color.parseColor("#e57373"));
+        }else  if(currentNumberPosition.getStatus().equalsIgnoreCase("InProgress")){
+            in_status.setTextColor(Color.parseColor("#81c784"));
+        }
+
         // then return the recyclable view
         return currentItemView;
     }

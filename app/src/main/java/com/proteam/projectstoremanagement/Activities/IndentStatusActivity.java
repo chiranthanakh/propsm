@@ -7,15 +7,19 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.proteam.projectstoremanagement.Adapters.IndentStatusAdapter;
+import com.proteam.projectstoremanagement.Adapters.PendingIndentListAdapter;
 import com.proteam.projectstoremanagement.Model.IndentStatusModel;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
+import com.proteam.projectstoremanagement.Model.PendingIndentListModel;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
 import com.proteam.projectstoremanagement.Request.Indentstatusrequest;
@@ -30,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IndentStatusActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
-    ImageView mToolbar;
+    ImageView mToolbar,iv_indent_filter;
 
 
     FloatingActionButton fab_add_raise;
@@ -38,6 +42,12 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
     ProgressDialog progressDialog;
     final ArrayList<IndentStatusModel> arrayList = new ArrayList<IndentStatusModel>();
     List list;
+
+
+    final ArrayList<IndentStatusModel> approvedlist = new ArrayList<IndentStatusModel>();
+    final ArrayList<IndentStatusModel> pendinglist = new ArrayList<IndentStatusModel>();
+    final ArrayList<IndentStatusModel> regectedlist = new ArrayList<IndentStatusModel>();
+    final ArrayList<IndentStatusModel> inprogresslist = new ArrayList<IndentStatusModel>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +68,8 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
         fab_add_raise=findViewById(R.id.fab_add_raise);
         fab_add_raise.setOnClickListener(this);
         indent_status_listView=findViewById(R.id.indent_status_listView);
-
+        iv_indent_filter=findViewById(R.id.iv_indent_filter);
+        iv_indent_filter.setOnClickListener(this);
     }
 
 
@@ -93,6 +104,46 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
                 Intent intent = new Intent(IndentStatusActivity.this,CreateIndentActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.iv_indent_filter:
+
+                PopupMenu popupMenu = new PopupMenu(IndentStatusActivity.this, iv_indent_filter);
+
+                popupMenu.getMenuInflater().inflate(R.menu.menu_items, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        // Toast message on menu item clicked
+
+                        if(menuItem.getTitle().equals("Pending")){
+
+                            indentfilter(pendinglist,"1");
+
+                        }else if(menuItem.getTitle().equals("Approved")){
+
+                            indentfilter(approvedlist,"2");
+
+                        }else if(menuItem.getTitle().equals("Rejected")){
+
+                            indentfilter(regectedlist, "3");
+
+                        }else if(menuItem.getTitle().equals("InProgress")){
+
+                            indentfilter(inprogresslist, "4");
+
+                        }else if(menuItem.getTitle().equals("All")){
+
+                            indentfilter(arrayList, "4");
+
+                        }
+
+                        Toast.makeText(IndentStatusActivity.this, "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+                // Showing the popup menu
+                popupMenu.show();
+
+                break;
 
         }
     }
@@ -123,11 +174,29 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
                         for (int i = 0; i<list.size(); i++){
 
                             arrayList.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
+
+
+                            if(indentStatuslist.getBoq_indent().get(i).getStatus().equalsIgnoreCase("Pending")){
+
+                                pendinglist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
+                            }
+                            else if(indentStatuslist.getBoq_indent().get(i).getStatus().equalsIgnoreCase("Approved")){
+
+                                approvedlist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
+                            }else  if(indentStatuslist.getBoq_indent().get(i).getStatus().equalsIgnoreCase("Rejected")){
+
+                                regectedlist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
+                            }else  if(indentStatuslist.getBoq_indent().get(i).getStatus().equalsIgnoreCase("InProgress")){
+
+                                inprogresslist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
+                            }
                         }
 
-                        IndentStatusAdapter numbersArrayAdapter = new IndentStatusAdapter(this, arrayList);
+                        indentfilter(pendinglist,"0");
+
+                 /*       IndentStatusAdapter numbersArrayAdapter = new IndentStatusAdapter(this, arrayList);
                         ListView indentStatusList = findViewById(R.id.indent_status_listView);
-                        indentStatusList.setAdapter(numbersArrayAdapter);
+                        indentStatusList.setAdapter(numbersArrayAdapter);*/
 
                     }else {
 
@@ -146,4 +215,17 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
         }
 
         }
+
+    private void indentfilter(ArrayList<IndentStatusModel> list, String status) {
+
+        IndentStatusAdapter numbersArrayAdapter = new IndentStatusAdapter(this, list);
+
+        // create the instance of the ListView to set the numbersViewAdapter
+        ListView indentlist = findViewById(R.id.indent_status_listView);
+
+        // set the numbersViewAdapter for ListView
+        indentlist.setAdapter(numbersArrayAdapter);
+
+
+    }
 }

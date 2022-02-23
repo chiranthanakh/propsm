@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:padding="10dp">
 
@@ -22,10 +22,11 @@
                 android:id="@+id/tv_individual_indentNO"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
                 android:layout_weight="1"
                 android:gravity="start|center"
                 android:text="1"
-                android:layout_marginStart="20dp"
+                android:fontFamily="@font/proxima_family"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
 
@@ -35,17 +36,18 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:fontFamily="@font/proxima_family"
                 android:text="Mondal Enterprises"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/tv_individual_indent_Status"
-                android:fontFamily="@font/proxima_nova_bold"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginStart="30dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/proxima_nova_bold"
                 android:gravity="center"
                 android:text="Pending"
                 android:textSize="13sp" />
