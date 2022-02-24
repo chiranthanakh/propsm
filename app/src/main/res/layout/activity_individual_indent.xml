@@ -77,7 +77,14 @@
         </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
     <androidx.core.widget.NestedScrollView
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -90,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:orientation="vertical">
 
@@ -128,7 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:orientation="vertical">
 
@@ -165,7 +172,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:orientation="vertical">
 
@@ -202,7 +209,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -249,7 +256,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -291,7 +298,7 @@
                 android:textColorHint="@color/grey"
                 android:fontFamily="@font/lato"
                 app:hintTextColor="@color/black"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:textCursorDrawable="@drawable/cursor"
                 android:drawableTint="@color/grey"
                 android:layout_marginStart="20dp"
@@ -309,7 +316,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
                 android:text="Submit"
                 android:backgroundTint="#8fc74a"
@@ -320,5 +327,10 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+    <include
+        layout="@layout/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

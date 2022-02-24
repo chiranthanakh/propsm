@@ -4,8 +4,8 @@
     <item
         android:id="@+id/nav_calendar"
         android:enabled="true"
-        android:icon="@drawable/indend"
-        android:title="Raise BOQ Indent"/>
+        android:icon="@drawable/indent_bottom"
+        android:title="Indents"/>
     <item
         android:id="@+id/nav_store"
         android:enabled="true"
@@ -15,11 +15,7 @@
         android:id="@+id/nav_audit"
         android:enabled="true"
         android:icon="@drawable/consumption"
-        android:title="Consumption"/>
-    <item
-        android:id="@+id/nav_profile"
-        android:enabled="true"
-        android:icon="@drawable/cum_list"
-        android:title="Consumption List"/>
+        android:title="Consumptions"/>
+
 
 </menu>

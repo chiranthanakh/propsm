@@ -9,9 +9,11 @@
     tools:context=".Activities.CreateIndentActivity">
 
     <LinearLayout
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#1A2562FC">
+        android:background="#1A2562FC"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/back_toolbar"
@@ -77,253 +79,256 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/proxima_family"
-                android:padding="5dp"
-                android:text="Name of the contractor *"
-                android:textColor="@color/grey_dark"
-                android:textSize="15sp" />
-
-            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/spinner_contractor_name"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/spinner_background"
-                android:gravity="center_vertical"
-                android:fontFamily="@font/lato_bold"
-                android:textColor="@color/black"
-                app:cancelButtonColor="@color/black"
-                app:cancelButtontext="CLOSE"
-                app:dialogTitle="Contractor Name"
-                app:hintText="Select contractor name"
-                app:onlyLightTheme="true" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/proxima_family"
-                android:padding="5dp"
-                android:text="Select location *"
-                android:textColor="@color/grey_dark"
-                android:textSize="15sp" />
-
-            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/spinner_location"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/spinner_background"
-                android:gravity="center_vertical"
-                android:textColor="@color/black"
-                android:fontFamily="@font/lato_bold"
-                app:cancelButtonColor="@color/black"
-                app:cancelButtontext="CLOSE"
-                app:dialogTitle="Select Location"
-                app:hintText="Select Location name"
-                app:onlyLightTheme="true" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/proxima_family"
-                android:padding="5dp"
-                android:text="Select sub location *"
-                android:textColor="@color/grey_dark"
-                android:textSize="15sp" />
-
-            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                android:id="@+id/spinner_sublocation"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/spinner_background"
-                android:gravity="center_vertical"
-                android:textColor="@color/black"
-                android:fontFamily="@font/lato_bold"
-                app:cancelButtonColor="@color/black"
-                app:cancelButtontext="CLOSE"
-                app:dialogTitle="Select Sub Location"
-                app:hintText="Select sub location name"
-                app:onlyLightTheme="true" />
-        </LinearLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="20dp">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/grey_dark"
-                app:boxStrokeWidthFocused="0.9dp"
-                app:boxStrokeColor="@color/grey"
-                app:hintTextColor="@color/grey_dark"
-                app:boxStrokeWidth="0.5dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:startIconTint="@color/grey_light">
-
-
-               <!-- <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edt_Email"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@null"
-                    android:hint="Indent date"
-                    android:padding="0dp"
-                    android:inputType="text"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/proxima_family"
+                        android:padding="5dp"
+                        android:text="Name of the contractor *"
+                        android:textColor="@color/grey_dark"
+                        android:textSize="15sp" />
+
+                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                        android:id="@+id/spinner_contractor_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/spinner_background"
+                        android:fontFamily="@font/lato_bold"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/black"
+                        app:cancelButtonColor="@color/black"
+                        app:cancelButtontext="CLOSE"
+                        app:dialogTitle="Contractor Name"
+                        app:hintText="Select contractor name"
+                        app:onlyLightTheme="true" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/proxima_family"
+                        android:padding="5dp"
+                        android:text="Select location *"
+                        android:textColor="@color/grey_dark"
+                        android:textSize="15sp" />
+
+                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                        android:id="@+id/spinner_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/spinner_background"
+                        android:fontFamily="@font/lato_bold"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/black"
+                        app:cancelButtonColor="@color/black"
+                        app:cancelButtontext="CLOSE"
+                        app:dialogTitle="Select Location"
+                        app:hintText="Select Location name"
+                        app:onlyLightTheme="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/proxima_family"
+                        android:padding="5dp"
+                        android:text="Select sub location *"
+                        android:textColor="@color/grey_dark"
+                        android:textSize="15sp" />
+
+                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                        android:id="@+id/spinner_sublocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/spinner_background"
+                        android:fontFamily="@font/lato_bold"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/black"
+                        app:cancelButtonColor="@color/black"
+                        app:cancelButtontext="CLOSE"
+                        app:dialogTitle="Select Sub Location"
+                        app:hintText="Select sub location name"
+                        app:onlyLightTheme="true" />
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/grey_dark"
+                        app:boxStrokeColor="@color/grey"
+                        app:boxStrokeWidth="0.5dp"
+                        app:boxStrokeWidthFocused="0.9dp"
+                        app:hintTextColor="@color/grey_dark"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconTint="@color/grey_light">
+
+
+                        <!-- <com.google.android.material.textfield.TextInputEditText
+                             android:id="@+id/edt_Email"
+                             android:layout_width="match_parent"
+                             android:layout_height="50dp"
+                             android:background="@null"
+                             android:hint="Indent date"
+                             android:padding="0dp"
+                             android:inputType="text"
+                             android:fontFamily="@font/lato"
+                             android:textColor="@color/black"
+                             android:textColorHint="@color/grey"
+                             android:textSize="15sp" />
+                     </com.google.android.material.textfield.TextInputLayout>-->
+                        <EditText
+                            android:id="@+id/edt_indent_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:focusable="false"
+                            android:fontFamily="@font/lato"
+                            android:hint="Select indent date"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/grey_dark"
+                        app:boxStrokeColor="@color/grey"
+                        app:boxStrokeWidth="0.5dp"
+                        app:boxStrokeWidthFocused="0.9dp"
+                        app:hintTextColor="@color/grey_dark"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconTint="@color/grey_light">
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edt_indent_workorderno"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@null"
+                            android:fontFamily="@font/lato"
+                            android:hint="Work order number"
+                            android:inputType="number"
+                            android:padding="0dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/grey"
+                            android:textSize="15sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <EditText
+                    android:id="@+id/et_remarks"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:backgroundTint="@color/grey_dark"
+                    android:drawableTint="@color/grey"
                     android:fontFamily="@font/lato"
+                    android:hint="Remarks"
+                    android:maxLines="5"
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey"
-                    android:textSize="15sp" />
-            </com.google.android.material.textfield.TextInputLayout>-->
-                <EditText
-                    android:id="@+id/edt_indent_date"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:textSize="15sp"
+                    android:theme="@style/LightTheme"
+                    app:hintTextColor="@color/black" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_indent_generate"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:textColor="@color/black"
-                    android:hint="Select indent date"
-                    android:textColorHint="@color/black"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/lato"
-                    android:focusable="false" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:backgroundTint="#8fc74a"
+                    android:text="Generate"
+                    android:textColor="@color/white"
+                    android:textStyle="bold">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="20dp">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/grey_dark"
-                app:boxStrokeWidthFocused="0.9dp"
-                app:boxStrokeColor="@color/grey"
-                app:hintTextColor="@color/grey_dark"
-                app:boxStrokeWidth="0.5dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:startIconTint="@color/grey_light">
+                </androidx.appcompat.widget.AppCompatButton>
 
 
-                 <com.google.android.material.textfield.TextInputEditText
-                     android:id="@+id/edt_indent_workorderno"
-                     android:layout_width="match_parent"
-                     android:layout_height="50dp"
-                     android:background="@null"
-                     android:hint="Work order number"
-                     android:padding="0dp"
-                     android:inputType="number"
-                     android:fontFamily="@font/lato"
-                     android:textColor="@color/black"
-                     android:textColorHint="@color/grey"
-                     android:textSize="15sp" />
-             </com.google.android.material.textfield.TextInputLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <EditText
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:textColor="@color/black"
-            android:maxLines="5"
-            android:textColorHint="@color/grey"
-            android:fontFamily="@font/lato"
-            app:hintTextColor="@color/black"
-            android:layout_marginTop="20dp"
-            android:textCursorDrawable="@drawable/cursor"
-            android:drawableTint="@color/grey"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:textSize="15sp"
-            android:id="@+id/et_remarks"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:hint="Remarks"
-            android:backgroundTint="@color/grey_dark"
-            android:theme="@style/LightTheme"
-            />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_indent_generate"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
-            android:text="Generate"
-            android:backgroundTint="#8fc74a"
-            android:textColor="@color/white"
-            android:textStyle="bold">
-
-        </androidx.appcompat.widget.AppCompatButton>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
 
-    </LinearLayout>
+
+
     <include
         layout="@layout/app_bar_layout"
         android:layout_width="match_parent"

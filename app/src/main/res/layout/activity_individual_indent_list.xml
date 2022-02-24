@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eceff1"
+    android:background="@color/white"
     tools:context=".Activities.IndividualIndentListActivity">
 
     <LinearLayout
@@ -78,154 +78,131 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/filter"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
         app:layout_constraintTop_toBottomOf="@id/top_bar">
 
-        <androidx.core.widget.NestedScrollView
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:gravity="center_vertical"
+            android:text="Filter"
+            android:textColor="@color/grey_dark"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/iv_individual_indent_filter"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:spinnerMode="dialog"
+            android:src="@drawable/filter"
+            android:text="select"
+            android:textColor="@color/black"
+            android:visibility="visible"
+            app:tint="@color/icon_color" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filter">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:backgroundTint="@color/white"
+            android:elevation="3dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+
                 <LinearLayout
-                    android:padding="10dp"
+                    android:id="@+id/list_bar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/electric_blue"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="Filter"
-                        android:gravity="center_vertical"
-                        android:fontFamily="@font/proxima_nova_bold"
                         android:layout_marginStart="10dp"
-                        android:textColor="@color/grey_dark"
-                        android:textSize="18sp" />
-                    <ImageView
-                        android:id="@+id/iv_individual_indent_filter"
-                        android:text="select"
-                        android:textColor="@color/black"
-                        android:layout_width="match_parent"
-                        android:spinnerMode="dialog"
+                        android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:paddingStart="10dp"
+                        android:text="Indent Number"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="0.5"
+                        android:gravity="center_vertical"
+                        android:text="Contractor Name"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="20dp"
                         android:layout_weight="2"
-                        android:src="@drawable/filter"
-                        android:visibility="visible"
-                        android:layout_height="30dp"
-                        app:tint="@color/icon_color" />
+                        android:gravity="center"
+                        android:text="Status"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+                    <!--         <ImageView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="match_parent"
+                                 android:gravity="center_vertical"
+                                 android:padding="1dp"
+                                 android:layout_weight="1"
+                                 android:src="@drawable/filter"
+                                 android:textSize="12sp"
+                                 app:tint="@color/white" />-->
+
                 </LinearLayout>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:backgroundTint="#eceff1"
-                android:elevation="3dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="5dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-
-                    <LinearLayout
-                        android:id="@+id/data_table"
+                    <ListView
+                        android:id="@+id/lv_individual_indent_status"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        app:layout_constraintTop_toBottomOf="@id/search">
+                        android:nestedScrollingEnabled="true"
+                        android:smoothScrollbar="true"
+                        android:paddingBottom="@dimen/margin_70dp"
+                        android:overScrollMode="never"
+                        android:clipToPadding="false">
 
-
-                        <LinearLayout
-                            android:id="@+id/list_bar"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:background="@color/electric_blue"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:paddingTop="8dp"
-                            android:paddingBottom="8dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="10dp"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:text="Indent Number"
-                                android:textColor="@color/white"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="20dp"
-                                android:layout_weight="0.5"
-                                android:gravity="center_vertical"
-                                android:text="Contractor Name"
-                                android:textColor="@color/white"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="20dp"
-                                android:layout_weight="2"
-                                android:gravity="center"
-                                android:text="Status"
-                                android:textColor="@color/white"
-                                android:textSize="12sp" />
-                            <!--         <ImageView
-                                         android:layout_width="wrap_content"
-                                         android:layout_height="match_parent"
-                                         android:gravity="center_vertical"
-                                         android:padding="1dp"
-                                         android:layout_weight="1"
-                                         android:src="@drawable/filter"
-                                         android:textSize="12sp"
-                                         app:tint="@color/white" />-->
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="600dp">
-
-
-                        <ListView
-                            android:id="@+id/lv_individual_indent_status"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:nestedScrollingEnabled="true"
-                            android:smoothScrollbar="true">
-
-                        </ListView>
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+                    </ListView>
 
             </LinearLayout>
 
-        </androidx.core.widget.NestedScrollView>
+        </androidx.cardview.widget.CardView>
+
+
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add_individual_indent"
             android:layout_width="45dp"
@@ -235,14 +212,19 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="60dp"
             android:src="@drawable/plus"
             app:backgroundTint="#8fc74a"
             app:fabCustomSize="45dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:maxImageSize="16dp" />
-    </RelativeLayout>
 
+    <include
+        layout="@layout/app_bar_layout"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

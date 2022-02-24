@@ -206,6 +206,7 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
 
     private void individualindentfilter(ArrayList<IndividualIndentListModel> list, String status) {
 
+
         IndividualIndentListAdapter numbersArrayAdapter = new IndividualIndentListAdapter(this, list);
 
         // create the instance of the ListView to set the numbersViewAdapter

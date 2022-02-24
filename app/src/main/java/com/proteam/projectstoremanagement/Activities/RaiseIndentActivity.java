@@ -207,6 +207,8 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
     void filter(String text){
 
         if(text.equals("")){
+
+
             RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(this, arrayList,this);
             ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
             pendingindentstatus.setAdapter(numbersArrayAdapter);
@@ -219,10 +221,12 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                 RaiseIndentModel model = arrayList.get(i);
 
+
                 if(boqlist.getBoq_list().get(i).getMaterial_name().toLowerCase().trim().contains(text.toLowerCase().trim())){
                     temp.add(new RaiseIndentModel(model.getMaterialcode(),model.getMaterialname(),model.getBoqbalance(),model.getRaiseqty()));
                 }
             }
+
 
             RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(this, temp,this);
             ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);

@@ -218,6 +218,7 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
 
     private void indentfilter(ArrayList<IndentStatusModel> list, String status) {
 
+
         IndentStatusAdapter numbersArrayAdapter = new IndentStatusAdapter(this, list);
 
         // create the instance of the ListView to set the numbersViewAdapter

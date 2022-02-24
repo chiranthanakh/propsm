@@ -9,6 +9,10 @@ public class LoginResponse {
     @Expose
     private String status;
 
+    @SerializedName("username")
+    @Expose
+    private String username;
+
     @SerializedName("user_id")
     @Expose
     private String user_id;
@@ -35,6 +39,14 @@ public class LoginResponse {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getUser_id() {
