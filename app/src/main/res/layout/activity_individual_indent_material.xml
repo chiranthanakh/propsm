@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,6 +9,7 @@
     tools:context=".Activities.IndividualIndentMaterialActivity">
 
     <LinearLayout
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#1A2562FC"
@@ -77,463 +78,352 @@
         </LinearLayout>
     </LinearLayout>
 
-    <androidx.core.widget.NestedScrollView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/top_bar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/proxima_family"
+                    android:padding="5dp"
+                    android:text="Material Name"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="15sp" />
 
-                        android:layout_marginBottom="5dp"
-                        android:fontFamily="@font/proxima_family"
-                        android:padding="5dp"
-                        android:text="Material Name"
-                        android:textColor="@color/grey_dark"
-                        android:textSize="15sp" />
-
-                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                        android:id="@+id/sp_indi_material"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/spinner_background"
-                        android:entries="@array/contactor"
-                        android:fontFamily="@font/lato_bold"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/black"
-                        app:cancelButtonColor="@color/black"
-                        app:cancelButtontext="CLOSE"
-                        app:dialogTitle="Contractor Name"
-                        app:hintText="Select Material"
-                        app:onlyLightTheme="true" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/sp_indi_material"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="45dp"
+
                     android:layout_marginEnd="10dp"
-                    android:layout_weight="2"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/proxima_family"
-                        android:padding="5dp"
-                        android:text="Intent Qty."
-                        android:textColor="@color/grey_dark"
-                        android:textSize="15sp" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColorHint="@color/black"
-                            app:boxStrokeColor="@color/grey"
-                            app:boxStrokeWidth="0.5dp"
-                            app:boxStrokeWidthFocused="0.9dp"
-                            app:hintTextColor="@color/black"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="43dp"
-                                android:background="@null"
-                                android:fontFamily="@font/lato"
-                                android:hint="Qty."
-                                android:inputType="number"
-                                android:padding="0dp"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="14sp" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <!-- <EditText
-                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                         android:textColor="@color/black"
-                         android:maxLines="5"
-                         android:textColorHint="@color/grey"
-                         android:fontFamily="@font/lato"
-                         app:hintTextColor="@color/black"
-                         android:textCursorDrawable="@drawable/cursor"
-                         android:drawableTint="@color/grey"
-                         android:layout_marginStart="10dp"
-                         android:layout_marginTop="10dp"
-                         android:textSize="15sp"
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:hint="QTY"
-                         android:inputType="number"
-                         android:backgroundTint="@color/grey_dark"
-                         android:theme="@style/LightTheme"
-                         />-->
-
-                </LinearLayout>
+                    android:background="@drawable/spinner_background"
+                    android:entries="@array/contactor"
+                    android:fontFamily="@font/lato_bold"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    app:cancelButtonColor="@color/black"
+                    app:cancelButtontext="CLOSE"
+                    app:dialogTitle="Contractor Name"
+                    app:hintText="Select Material"
+                    app:onlyLightTheme="true" />
 
             </LinearLayout>
 
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
-                android:backgroundTint="#8fc74a"
-                android:text="Add Material"
-                android:textColor="@color/white"
-                android:textStyle="bold">
-
-            </androidx.appcompat.widget.AppCompatButton>
-
             <LinearLayout
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="2"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/search"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/electric_blue"
-                    app:layout_constraintTop_toBottomOf="@id/details">
-
-                    <androidx.appcompat.widget.Toolbar
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_weight="1"
-
-                        app:contentInsetStartWithNavigation="0dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginBottom="3dp"
-                            android:background="@drawable/edittext_back"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/iv_search"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:padding="13dp"
-                                android:src="@drawable/search_hallow"
-                                app:tint="@color/grey" />
-
-                            <EditText
-                                android:id="@+id/edt_search"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:background="@null"
-                                android:gravity="center_vertical"
-                                android:hint="Search here..."
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/grey_light"
-                                android:textSize="18sp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@id/iv_search" />
-
-                            <ProgressBar
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:padding="5dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                        </LinearLayout>
-                    </androidx.appcompat.widget.Toolbar>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2.5">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:gravity="center_horizontal"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:fontFamily="@font/lato"
-                                android:gravity="center"
-                                android:text="Total Items"
-                                android:textColor="@color/white"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tv_individual_total_item"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/proxima_nova_bold"
-                                android:gravity="center"
-                                android:text="2"
-                                android:textColor="@color/white"
-                                android:textSize="15sp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/data_table"
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@id/search">
+                    android:fontFamily="@font/proxima_family"
+                    android:padding="5dp"
+                    android:text="Intent Qty."
+                    android:textColor="@color/grey_dark"
+                    android:textSize="15sp" />
 
-
-                    <LinearLayout
-                        android:id="@+id/list_bar"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:background="@color/electric_blue"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:paddingTop="8dp"
-                        android:paddingRight="8dp"
-                        android:paddingLeft="8dp"
-                        android:paddingBottom="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_weight="0.8"
-                            android:gravity="center_vertical"
-                            android:text="Material Code"
-                            android:textColor="@color/white"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:text="Material Name"
-                            android:textColor="@color/white"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Indent Qty"
-                            android:textColor="@color/white"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/list_recy"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@id/data_table">
+                    android:layout_height="match_parent">
 
-                    <LinearLayout
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
-                        android:padding="5dp"
-                        app:layout_constraintTop_toBottomOf="@id/data_table">
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/black"
+                        app:boxStrokeColor="@color/grey"
+                        app:boxStrokeWidth="0.5dp"
+                        app:boxStrokeWidthFocused="0.9dp"
+                        app:hintTextColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                        <LinearLayout
+
+                        <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_horizontal"
-                            android:orientation="horizontal">
+                            android:layout_height="43dp"
+                            android:background="@null"
+                            android:fontFamily="@font/lato"
+                            android:hint="Qty."
+                            android:inputType="number"
+                            android:padding="0dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="14sp" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="10dp"
-                                android:layout_weight="1"
-                                android:gravity="start|center"
-                                android:text="1458848"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="8 MTR Long PCC Pole.."
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
+                <!-- <EditText
+                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                     android:textColor="@color/black"
+                     android:maxLines="5"
+                     android:textColorHint="@color/grey"
+                     android:fontFamily="@font/lato"
+                     app:hintTextColor="@color/black"
+                     android:textCursorDrawable="@drawable/cursor"
+                     android:drawableTint="@color/grey"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="10dp"
+                     android:textSize="15sp"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:hint="QTY"
+                     android:inputType="number"
+                     android:backgroundTint="@color/grey_dark"
+                     android:theme="@style/LightTheme"
+                     />-->
+
+            </LinearLayout>
+
+        </LinearLayout>
 
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="0dp"
-                                android:layout_weight="1"
-                                android:backgroundTint="@color/grey_dark"
-                                android:gravity="center"
-                                android:text="123"
-                                android:textColor="@color/black"
-                                android:textCursorDrawable="@drawable/cursor"
-                                android:textSize="12sp"
-                                android:theme="@style/LightTheme" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="30dp"
+            android:backgroundTint="#8fc74a"
+            android:text="Add Material"
+            android:textColor="@color/white"
+            android:textStyle="bold">
 
-                        </LinearLayout>
-                    </LinearLayout>
+        </androidx.appcompat.widget.AppCompatButton>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_margin="3dp"
-                        android:background="@color/grey_very_light" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
-                        android:padding="5dp"
-                        app:layout_constraintTop_toBottomOf="@id/data_table">
+        <LinearLayout
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/electric_blue"
+            app:layout_constraintTop_toBottomOf="@id/details">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_horizontal"
-                            android:orientation="horizontal">
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="10dp"
-                                android:layout_weight="1"
-                                android:gravity="start|center"
-                                android:text="1458848"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="8 MTR Long PCC Pole.."
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="0dp"
-                                android:layout_weight="1"
-                                android:backgroundTint="@color/grey_dark"
-                                android:gravity="center"
-                                android:text="123"
-                                android:textColor="@color/black"
-                                android:textCursorDrawable="@drawable/cursor"
-                                android:textSize="12sp"
-                                android:theme="@style/LightTheme" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_margin="3dp"
-                        android:background="@color/grey_very_light" />
-                </LinearLayout>
+                app:contentInsetStartWithNavigation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/edittext_back"
                     android:orientation="horizontal">
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                    <ImageView
+                        android:id="@+id/iv_search"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="13dp"
+                        android:src="@drawable/search_hallow"
+                        app:tint="@color/grey" />
+
+                    <EditText
+                        android:id="@+id/edt_search"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:backgroundTint="#8fc74a"
-                        android:fontFamily="@font/proxima_nova_bold"
-                        android:text="Save"
-                        android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:hint="Search here..."
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey_light"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_search" />
 
-                    <androidx.appcompat.widget.AppCompatButton
+
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:backgroundTint="#8fc74a"
-                        android:fontFamily="@font/proxima_nova_bold"
-                        android:text="Approval"
-                        android:textColor="@color/white">
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:fontFamily="@font/lato"
+                        android:gravity="center"
+                        android:text="Total Items"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
 
-                    </androidx.appcompat.widget.AppCompatButton>
-
-                    <androidx.appcompat.widget.AppCompatButton
+                    <TextView
+                        android:id="@+id/tv_individual_total_item"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:backgroundTint="#8fc74a"
                         android:fontFamily="@font/proxima_nova_bold"
-                        android:text="Back"
-                        android:textColor="@color/white">
-
-                    </androidx.appcompat.widget.AppCompatButton>
-
+                        android:gravity="center"
+                        android:text="2"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/data_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/search">
+
+
+            <LinearLayout
+                android:id="@+id/list_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/electric_blue"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingTop="8dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.8"
+                    android:gravity="center_vertical"
+                    android:text="Material Code"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Material Name"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Indent Qty"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lv_individual_in_material"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="170dp"
+            android:nestedScrollingEnabled="true"
+            android:overScrollMode="never"
+            android:smoothScrollbar="true" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:backgroundTint="#8fc74a"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:text="Save"
+            android:textColor="@color/white">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:backgroundTint="#8fc74a"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:text="Approval"
+            android:textColor="@color/white">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:backgroundTint="#8fc74a"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:text="Back"
+            android:textColor="@color/white">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/bottom_nav"
+        layout="@layout/app_bar_layout"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content" />
+</androidx.constraintlayout.widget.ConstraintLayout>

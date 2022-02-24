@@ -5,7 +5,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,6 +45,9 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
     final ArrayList<IndentStatusModel> arrayList = new ArrayList<IndentStatusModel>();
     List list;
 
+    String userid;
+    SharedPreferences.Editor editor;
+
 
     final ArrayList<IndentStatusModel> approvedlist = new ArrayList<IndentStatusModel>();
     final ArrayList<IndentStatusModel> pendinglist = new ArrayList<IndentStatusModel>();
@@ -55,6 +60,13 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_indent_status);
         mToolbar = findViewById(R.id.back_toolbar);
         mToolbar.setOnClickListener(view -> onBackPressed());
+
+
+        SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        editor=sharedPreferences.edit();
+        String user = sharedPreferences.getString("userid",null);
+
+        userid = sharedPreferences.getString("userid",null);
 
         initialize();
 
@@ -85,7 +97,7 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-                Indentstatusrequest indentstatusrequest = new Indentstatusrequest("71");
+                Indentstatusrequest indentstatusrequest = new Indentstatusrequest(userid);
 
                 WebServices<IndentStatuslist> webServices = new WebServices<IndentStatuslist>(IndentStatusActivity.this);
                 webServices.indentstatus(WebServices.ApiType.indentstatus,indentstatusrequest );
@@ -176,17 +188,17 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
                             arrayList.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
 
 
-                            if(indentStatuslist.getBoq_indent().get(i).getStatus().equalsIgnoreCase("Pending")){
+                            if(indentStatuslist.getBoq_indent().get(i).getStatus().contains("Pending")){
 
                                 pendinglist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
                             }
-                            else if(indentStatuslist.getBoq_indent().get(i).getStatus().equalsIgnoreCase("Approved")){
+                            else if(indentStatuslist.getBoq_indent().get(i).getStatus().contains("Approved")){
 
                                 approvedlist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
-                            }else  if(indentStatuslist.getBoq_indent().get(i).getStatus().equalsIgnoreCase("Rejected")){
+                            }else  if(indentStatuslist.getBoq_indent().get(i).getStatus().contains("Rejected")){
 
                                 regectedlist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
-                            }else  if(indentStatuslist.getBoq_indent().get(i).getStatus().equalsIgnoreCase("InProgress")){
+                            }else  if(indentStatuslist.getBoq_indent().get(i).getStatus().contains("InProgress")){
 
                                 inprogresslist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
                             }

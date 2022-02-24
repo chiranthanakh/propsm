@@ -118,6 +118,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Bundle bundle1 = new Bundle();
                         bundle1.putString("user_id",loginResponse.getUser_id());
                         bundle1.putString("role",loginResponse.getRole());
+
                         intent.putExtras(bundle1);
 
                         startActivity(intent);
@@ -126,6 +127,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         editor.putString("store_id",loginResponse.getStore_id());
                         editor.putString("role",loginResponse.getRole());
                         editor.putString("userid",loginResponse.getUser_id());
+                        editor.putString("username",loginResponse.getUsername());
                         editor.putString("email",edt_Email.getText().toString());
                         editor.commit();
                         finish();

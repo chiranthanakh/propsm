@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     DrawerLayout drawer_layout;
     TextView tv_raise_boq_indent,tv_individual_indent,tv_pending_indent,tv_consumption,tv_consumption_list,
             indent_status_Count_pending,indent_status_Count_approve,indent_status_Count_rejected,
-            indent_status_Count_close,iv_nav_email;
+            indent_status_Count_close,iv_nav_email,tv_nav_username;
 
     Button btn_change_pass;
 
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ProgressDialog progressDialog;
     Context context = this;
     ListView lv_material_stock_home;
-    String role,userid,email;
+    String role,userid,email,username;
     SharedPreferences.Editor editor;
 
     final ArrayList<MaterialSModel> arrayList = new ArrayList<MaterialSModel>();
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         role = sharedPreferences.getString("role",null);
         userid = sharedPreferences.getString("userid",null);
         email = sharedPreferences.getString("email",null);
+        username = sharedPreferences.getString("username",null);
 
         initilize();
 
@@ -127,6 +128,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_logout = findViewById(R.id.btn_logout);
         btn_logout.setOnClickListener(this);
         iv_add_material.setOnClickListener(this);
+        tv_nav_username=findViewById(R.id.tv_nav_username);
+        tv_nav_username.setText(username);
 
         iv_nav_email = findViewById(R.id.iv_nav_email);
         iv_nav_email.setText(email);
@@ -196,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-                PsmDataRequest psmDataRequest = new PsmDataRequest("71");
+                PsmDataRequest psmDataRequest = new PsmDataRequest(userid);
                 WebServices<PsmDataStatusHome> webServices = new WebServices<PsmDataStatusHome>(MainActivity.this);
                 webServices.psmdatahome(WebServices.ApiType.psmdata, psmDataRequest);
             }
