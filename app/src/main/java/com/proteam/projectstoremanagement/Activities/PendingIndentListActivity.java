@@ -202,6 +202,8 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
     }
 
+
+
     private void adaptormoves(ArrayList<PendingIndentListModel> list, String status) {
 
         PendingIndentListAdapter numbersArrayAdapter = new PendingIndentListAdapter(this, list,status);
