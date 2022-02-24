@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -15,11 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.proteam.projectstoremanagement.R;
+import com.proteam.projectstoremanagement.Request.Addmaterialrequest;
+import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Response.StockMaterialNameResponse;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
 import com.proteam.projectstoremanagement.WebServices;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AddMaterialStockActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
@@ -30,6 +35,7 @@ public class AddMaterialStockActivity extends AppCompatActivity implements View.
     String id;
 
     List stockmaterialnamelist = new ArrayList();
+    HashMap map = new HashMap();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +65,6 @@ public class AddMaterialStockActivity extends AppCompatActivity implements View.
                 progressDialog.setCancelable(false);
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
-
-
-
 
                 WebServices<StockMaterialNameResponse> webServices = new WebServices<StockMaterialNameResponse>(AddMaterialStockActivity.this);
                 webServices.stockmaterialname(WebServices.ApiType.materialstockname);
@@ -96,6 +99,7 @@ public class AddMaterialStockActivity extends AppCompatActivity implements View.
                     for(int i = 0; i<list.size(); i++ ){
 
                         stockmaterialnamelist.add(stockMaterialNameResponse.getMaterial_list().get(i).getMaterial_name());
+                        map.put(stockMaterialNameResponse.getMaterial_list().get(i).getMaterial_name(),stockMaterialNameResponse.getMaterial_list().get(i).getMaterial_id());
                  }
 
 
@@ -108,6 +112,38 @@ public class AddMaterialStockActivity extends AppCompatActivity implements View.
                     Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
 
                 }
+                break;
+
+            case addmaterial:
+
+                if(progressDialog!=null)
+                {
+                    if(progressDialog.isShowing())
+                    {
+                        progressDialog.dismiss();
+                    }
+                }
+
+                if (isSucces) {
+
+                    if(response!=null) {
+
+
+                        Generalresponce generalresponce = (Generalresponce) response;
+                        Toast.makeText(this, generalresponce.getStatus(), Toast.LENGTH_SHORT).show();
+
+
+                    }
+                    else
+                    {
+                        Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else
+                {
+                    Toast.makeText(this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
         }
 
@@ -124,8 +160,33 @@ public class AddMaterialStockActivity extends AppCompatActivity implements View.
                 else
                 {
 
+                    String id = String.valueOf(map.get(sp_material_nameStock.getSelectedItem().toString()));
+
+                    SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    String user = sharedPreferences.getString("userid",null);
+
+
+                    calladdapi(id,user);
                 }
                 break;
+        }
+    }
+
+    private void calladdapi(String id, String user) {
+
+        progressDialog=new ProgressDialog(AddMaterialStockActivity.this);
+
+        if(progressDialog!=null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+                Addmaterialrequest addmaterialrequest = new Addmaterialrequest(id,user);
+                WebServices<Generalresponce> webServices = new WebServices<Generalresponce>(AddMaterialStockActivity.this);
+                webServices.addmaterial(WebServices.ApiType.addmaterial,addmaterialrequest);
+            }
         }
     }
 

@@ -12,6 +12,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -27,10 +28,13 @@ import com.proteam.projectstoremanagement.Model.IndividualIndentListModel;
 import com.proteam.projectstoremanagement.Model.MaterialSModel;
 import com.proteam.projectstoremanagement.Model.MaterialStockModel;
 import com.proteam.projectstoremanagement.R;
+import com.proteam.projectstoremanagement.Request.MaterialStockDeleteRequest;
 import com.proteam.projectstoremanagement.Request.MaterialStockRequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
+import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Response.IndentStatusdirectlist;
 import com.proteam.projectstoremanagement.Response.PsmDataStatusHome;
+import com.proteam.projectstoremanagement.Utils.OnClick;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
 import com.proteam.projectstoremanagement.WebServices;
 
@@ -41,14 +45,14 @@ import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.view.PieChartView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener, OnClick {
 
 
     ImageView ivnav,iv_add_material;
     DrawerLayout drawer_layout;
     TextView tv_raise_boq_indent,tv_individual_indent,tv_pending_indent,tv_consumption,tv_consumption_list,
             indent_status_Count_pending,indent_status_Count_approve,indent_status_Count_rejected,
-            indent_status_Count_close;
+            indent_status_Count_close,iv_nav_email;
 
     Button btn_change_pass;
 
@@ -59,11 +63,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     PieChartView pieChartView;
 
     List<SliceValue> pieData = new ArrayList<>();
-    Button btn_raise_indent, btn_consumption;
+    Button btn_raise_indent, btn_consumption,btn_logout;
     ProgressDialog progressDialog;
     Context context = this;
     ListView lv_material_stock_home;
-    String role,userid;
+    String role,userid,email;
+    SharedPreferences.Editor editor;
 
     final ArrayList<MaterialSModel> arrayList = new ArrayList<MaterialSModel>();
 
@@ -73,6 +78,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        editor=sharedPreferences.edit();
+        String user = sharedPreferences.getString("userid",null);
+
+        if(user==null){
+
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        role = sharedPreferences.getString("role",null);
+        userid = sharedPreferences.getString("userid",null);
+        email = sharedPreferences.getString("email",null);
 
         initilize();
 
@@ -94,10 +112,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initilize()
     {
 
-        Bundle bundle = getIntent().getExtras();
+        /*Bundle bundle = getIntent().getExtras();
         role = bundle.getString("role");
-        userid = bundle.getString("user_id");
-        //String role = "Approver";
+        userid = bundle.getString("user_id");*/
+        // role = "Approver";
         drawer_layout=findViewById(R.id.drawer_layout_main);
         ivnav=findViewById(R.id.iv_nav_view);
         ivnav.setOnClickListener(this);
@@ -106,9 +124,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_raise_indent = findViewById(R.id.btn_raise_indent);
         btn_raise_indent.setOnClickListener(this);
         iv_add_material=findViewById(R.id.iv_add_material);
+        btn_logout = findViewById(R.id.btn_logout);
+        btn_logout.setOnClickListener(this);
         iv_add_material.setOnClickListener(this);
 
-
+        iv_nav_email = findViewById(R.id.iv_nav_email);
+        iv_nav_email.setText(email);
         btn_consumption=findViewById(R.id.btn_consumption);
         btn_consumption.setOnClickListener(this);
         tv_raise_boq_indent=findViewById(R.id.tv_raise_boq_indent);
@@ -136,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_consumption.setOnClickListener(this);
         tv_consumption_list.setOnClickListener(this);
         callboqupdateapi();
-        callmaterialstockapi();
+       // callmaterialstockapi();
     }
 
 
@@ -183,6 +204,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        callmaterialstockapi();
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId())
@@ -227,6 +255,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentaddM);
                 break;
 
+
+            case R.id.btn_logout:
+                editor.clear();
+                editor.commit();
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+
           /* case R.id.material_delete:
                 openDialog();
                 break;*/
@@ -251,6 +288,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AlertDialog alertDialog=builder.create();
         alertDialog.show();
     }
+
+    @Override
+    public void onClickitem(String value) {
+
+        progressDialog=new ProgressDialog(MainActivity.this);
+
+        if(progressDialog!=null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+
+                MaterialStockDeleteRequest materialStockDeleteRequest = new MaterialStockDeleteRequest(value);
+                WebServices<Generalresponce> webServices = new WebServices<Generalresponce>(MainActivity.this);
+                webServices.deleteMstockdata(WebServices.ApiType.deletestockMhome,materialStockDeleteRequest);
+}
+        }
+
+
+
+    }
+
+
 
     @Override
     public void onResponse(Object response, WebServices.ApiType URL, boolean isSucces, int code) {
@@ -301,8 +362,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     if(response!=null) {
 
-
-
                         List list = new ArrayList();
                         MaterialStockRequest materialStockRequest = (MaterialStockRequest) response;
 
@@ -310,15 +369,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         for (int i = 0; i < list.size(); i++) {
 
-                            arrayList.add(new MaterialSModel(materialStockRequest.getMaterial_closing_details().get(i).getMaterial_manual_id(), materialStockRequest.getMaterial_closing_details().get(i).getMaterial_name(), materialStockRequest.getMaterial_closing_details().get(i).getClosing_stock()));
+                            arrayList.add(new MaterialSModel(materialStockRequest.getMaterial_closing_details().get(i).getMaterial_manual_id(), materialStockRequest.getMaterial_closing_details().get(i).getMaterial_name(), materialStockRequest.getMaterial_closing_details().get(i).getClosing_stock(),materialStockRequest.getMaterial_closing_details().get(i).getFavorite_id()));
                         }
 
-                        MaterialDetailsAdapter numbersArrayAdapter = new MaterialDetailsAdapter(this, arrayList);
+                        MaterialDetailsAdapter numbersArrayAdapter = new MaterialDetailsAdapter(this, arrayList,this);
                         ListView materialstocklist = findViewById(R.id.lv_material_stock_home);
                         materialstocklist.setAdapter(numbersArrayAdapter);
-
-
-
+                        materialstocklist.invalidate();
 
                     }
                     else
@@ -333,7 +390,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
 
+            case deletestockMhome:
+
+                if (isSucces) {
+
+                    if(response!=null) {
+
+
+                        Generalresponce generalresponce = (Generalresponce) response;
+                        Toast.makeText(this, generalresponce.getStatus(), Toast.LENGTH_SHORT).show();
+
+                        callmaterialstockapi();
+
+                    }
+                    else
+                    {
+                        Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else
+                {
+                    Toast.makeText(this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+
+
+                break;
+
 
         }
     }
+
 }

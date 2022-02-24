@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class MaterialStockResponse {
 
-    @SerializedName("id")
+    @SerializedName("favorite_id")
     @Expose
-    private String id;
+    private String favorite_id;
 
     @SerializedName("material_id")
     @Expose
@@ -33,12 +33,12 @@ public class MaterialStockResponse {
     @Expose
     private String closing_stock;
 
-    public String getId() {
-        return id;
+    public String getFavorite_id() {
+        return favorite_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setFavorite_id(String favorite_id) {
+        this.favorite_id = favorite_id;
     }
 
     public String getMaterial_id() {

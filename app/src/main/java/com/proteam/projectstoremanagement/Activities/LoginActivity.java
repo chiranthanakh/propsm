@@ -125,6 +125,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString("store_id",loginResponse.getStore_id());
                         editor.putString("role",loginResponse.getRole());
+                        editor.putString("userid",loginResponse.getUser_id());
+                        editor.putString("email",edt_Email.getText().toString());
                         editor.commit();
                         finish();
 
