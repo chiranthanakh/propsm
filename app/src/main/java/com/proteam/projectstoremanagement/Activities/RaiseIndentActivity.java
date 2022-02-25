@@ -281,7 +281,6 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
         dialog.setContentView(R.layout.dialog_gcadmincount);
         dialog.show();
 
-
         EditText et_count = dialog.findViewById(R.id.edt_gc_count);
         et_count.setText(value);
 
