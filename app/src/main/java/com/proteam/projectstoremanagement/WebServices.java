@@ -21,6 +21,7 @@ import com.proteam.projectstoremanagement.Request.MaterialStockDeleteRequest;
 import com.proteam.projectstoremanagement.Request.PendingIndentRequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
+import com.proteam.projectstoremanagement.Response.RaiseIndentConfirmRequest;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
 import com.proteam.projectstoremanagement.Utils.PsmApi;
 
@@ -57,7 +58,7 @@ public class WebServices<T> {
 
     public enum ApiType {
        general,login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus,materialstock,
-        materialstockname,deletestockMhome,addmaterial
+        materialstockname,deletestockMhome,addmaterial,confirmRaiseIndent
     }
 
     String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
@@ -501,6 +502,32 @@ public class WebServices<T> {
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
         call=(Call<T>)psmApi.addmaterial(addmaterialrequest);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
+
+
+    public void confirmRaiseIndent( ApiType apiTypes, RaiseIndentConfirmRequest raiseIndentConfirmRequest) {
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.confirmraiseindent(raiseIndentConfirmRequest);
 
         call.enqueue(new Callback<T>() {
             @Override

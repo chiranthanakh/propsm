@@ -1,6 +1,8 @@
 package com.proteam.projectstoremanagement.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +28,9 @@ public class MaterialDetailsAdapter extends ArrayAdapter<MaterialSModel> {
 
     private OnClick mClick;
 
-    public MaterialDetailsAdapter(@NonNull Context context, ArrayList<MaterialSModel> arrayList,OnClick listner) {
+
+
+    public MaterialDetailsAdapter(@NonNull Context context, ArrayList<MaterialSModel> arrayList, OnClick listner) {
         super(context, 0, arrayList);
         this.mClick = listner;
         notifyDataSetChanged();
@@ -62,19 +66,44 @@ public class MaterialDetailsAdapter extends ArrayAdapter<MaterialSModel> {
 
         ImageView iv_image = currentItemView.findViewById(R.id.Stock_material_delete);
 
-    iv_image.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
+        iv_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
               mClick.onClickitem(currentNumberPosition.getFavorite_id());
 
-          }
-      });
 
+            }
+        });
 
 
         // then return the recyclable view
         return currentItemView;
     }
+
+    /*public void openDialogReject(String de) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Alert");
+        builder.setMessage("Are You Sure Want to Delete?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+               mClick.onClickitem();
+                dialog.cancel();
+
+
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+
+
+            }
+        });
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
+
+    }*/
 
 }

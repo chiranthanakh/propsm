@@ -3,6 +3,8 @@ package com.proteam.projectstoremanagement.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +43,8 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
     ProgressDialog progressDialog;
 
+    String userid;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +52,11 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
         mToolbar = findViewById(R.id.back_toolbar);
         mToolbar.setOnClickListener(view -> onBackPressed());
 
+        SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        editor=sharedPreferences.edit();
+        String user = sharedPreferences.getString("userid",null);
 
+        userid = sharedPreferences.getString("userid",null);
 
     }
 
@@ -76,7 +84,7 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-                PendingIndentRequest pendingIndentRequest = new PendingIndentRequest("72");
+                PendingIndentRequest pendingIndentRequest = new PendingIndentRequest(userid);
                 WebServices<PendingIndentList> webServices = new WebServices<PendingIndentList>(PendingIndentListActivity.this);
                 webServices.pendingindent(WebServices.ApiType.pendingindent, pendingIndentRequest);
             }
@@ -163,6 +171,11 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
                         pendingindentlist = pendingIndentModel.getIndent_list();
 
                         arrayList.clear();
+                        pendinglist.clear();
+                        approvedlist.clear();
+                        regectedlist.clear();
+                        inprogresslist.clear();
+                        Issued.clear();
                         for (int i=0;i<pendingindentlist.size();i++){
 
 

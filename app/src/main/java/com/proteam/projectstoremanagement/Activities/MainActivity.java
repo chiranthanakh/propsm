@@ -48,11 +48,11 @@ import lecho.lib.hellocharts.view.PieChartView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener, OnClick {
 
 
-    ImageView ivnav,iv_add_material;
+    ImageView ivnav, iv_add_material;
     DrawerLayout drawer_layout;
-    TextView tv_raise_boq_indent,tv_individual_indent,tv_pending_indent,tv_consumption,tv_consumption_list,
-            indent_status_Count_pending,indent_status_Count_approve,indent_status_Count_rejected,
-            indent_status_Count_close,iv_nav_email,tv_nav_username;
+    TextView tv_raise_boq_indent, tv_individual_indent, tv_pending_indent, tv_consumption, tv_consumption_list,
+            indent_status_Count_pending, indent_status_Count_approve, indent_status_Count_rejected,
+            indent_status_Count_close, iv_nav_email, tv_nav_username;
 
     Button btn_change_pass;
 
@@ -63,11 +63,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     PieChartView pieChartView;
 
     List<SliceValue> pieData = new ArrayList<>();
-    Button btn_raise_indent, btn_consumption,btn_logout;
+    Button btn_raise_indent, btn_consumption, btn_logout;
     ProgressDialog progressDialog;
     Context context = this;
     ListView lv_material_stock_home;
-    String role,userid,email,username;
+    String role, userid, email, username;
     SharedPreferences.Editor editor;
 
     final ArrayList<MaterialSModel> arrayList = new ArrayList<MaterialSModel>();
@@ -78,20 +78,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
-        editor=sharedPreferences.edit();
-        String user = sharedPreferences.getString("userid",null);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        String user = sharedPreferences.getString("userid", null);
 
-        if(user==null){
+        if (user == null) {
 
-            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
         }
-        role = sharedPreferences.getString("role",null);
-        userid = sharedPreferences.getString("userid",null);
-        email = sharedPreferences.getString("email",null);
-        username = sharedPreferences.getString("username",null);
+        role = sharedPreferences.getString("role", null);
+        userid = sharedPreferences.getString("userid", null);
+        email = sharedPreferences.getString("email", null);
+        username = sharedPreferences.getString("username", null);
 
         initilize();
 
@@ -103,54 +103,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         PieChartData pieChartData = new PieChartData(pieData);
         pieChartData.setHasLabels(true).setValueLabelTextSize(11);
-       // pieChartData.setHasCenterCircle(true).setCenterText1("Project Store Management\nStatus").setCenterText1FontSize(9).setCenterText1Color(Color.parseColor("#FF000000"));
+        // pieChartData.setHasCenterCircle(true).setCenterText1("Project Store Management\nStatus").setCenterText1FontSize(9).setCenterText1Color(Color.parseColor("#FF000000"));
         pieChartView.setPieChartData(pieChartData);
 
 
-
-
     }
-    private void initilize()
-    {
+
+    private void initilize() {
 
         /*Bundle bundle = getIntent().getExtras();
         role = bundle.getString("role");
         userid = bundle.getString("user_id");*/
         // role = "Approver";
-        drawer_layout=findViewById(R.id.drawer_layout_main);
-        ivnav=findViewById(R.id.iv_nav_view);
+        drawer_layout = findViewById(R.id.drawer_layout_main);
+        ivnav = findViewById(R.id.iv_nav_view);
         ivnav.setOnClickListener(this);
-        lv_material_stock_home=findViewById(R.id.lv_material_stock_home);
+        lv_material_stock_home = findViewById(R.id.lv_material_stock_home);
         pieChartView = findViewById(R.id.chart);
         btn_raise_indent = findViewById(R.id.btn_raise_indent);
         btn_raise_indent.setOnClickListener(this);
-        iv_add_material=findViewById(R.id.iv_add_material);
+        iv_add_material = findViewById(R.id.iv_add_material);
         btn_logout = findViewById(R.id.btn_logout);
         btn_logout.setOnClickListener(this);
         iv_add_material.setOnClickListener(this);
-        tv_nav_username=findViewById(R.id.tv_nav_username);
+        tv_nav_username = findViewById(R.id.tv_nav_username);
         tv_nav_username.setText(username);
 
         iv_nav_email = findViewById(R.id.iv_nav_email);
         iv_nav_email.setText(email);
-        btn_consumption=findViewById(R.id.btn_consumption);
+        btn_consumption = findViewById(R.id.btn_consumption);
         btn_consumption.setOnClickListener(this);
-        tv_raise_boq_indent=findViewById(R.id.tv_raise_boq_indent);
-        tv_individual_indent=findViewById(R.id.tv_individual_indent);
-        tv_pending_indent=findViewById(R.id.tv_pending_indent);
-        tv_consumption=findViewById(R.id.tv_consumption);
-        tv_consumption_list=findViewById(R.id.tv_consumption_list);
+        tv_raise_boq_indent = findViewById(R.id.tv_raise_boq_indent);
+        tv_individual_indent = findViewById(R.id.tv_individual_indent);
+        tv_pending_indent = findViewById(R.id.tv_pending_indent);
+        tv_consumption = findViewById(R.id.tv_consumption);
+        tv_consumption_list = findViewById(R.id.tv_consumption_list);
 
-        btn_change_pass=findViewById(R.id.btn_change_pass);
+        btn_change_pass = findViewById(R.id.btn_change_pass);
         btn_change_pass.setOnClickListener(this);
-        indent_status_Count_pending=findViewById(R.id.indent_status_Count_pending);
-        indent_status_Count_approve=findViewById(R.id.indent_status_Count_approve);
-        indent_status_Count_rejected=findViewById(R.id.indent_status_Count_rejected);
-        indent_status_Count_close=findViewById(R.id.indent_status_Count_close);
+        indent_status_Count_pending = findViewById(R.id.indent_status_Count_pending);
+        indent_status_Count_approve = findViewById(R.id.indent_status_Count_approve);
+        indent_status_Count_rejected = findViewById(R.id.indent_status_Count_rejected);
+        indent_status_Count_close = findViewById(R.id.indent_status_Count_close);
 
-        if(role.equals("Approver")){
+        if (role.equals("Approver")) {
 
-        }else{
+        } else {
             tv_pending_indent.setVisibility(View.GONE);
         }
 
@@ -160,13 +158,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_consumption.setOnClickListener(this);
         tv_consumption_list.setOnClickListener(this);
         callboqupdateapi();
-       // callmaterialstockapi();
-
-
+        // callmaterialstockapi();
 
 
     }
-
 
 
     private void callmaterialstockapi() {
@@ -193,14 +188,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void callboqupdateapi() {
 
-        progressDialog=new ProgressDialog(MainActivity.this);
+        progressDialog = new ProgressDialog(MainActivity.this);
 
-        if(progressDialog!=null) {
+        if (progressDialog != null) {
             if (!progressDialog.isShowing()) {
                 progressDialog.setCancelable(false);
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
-
 
 
                 PsmDataRequest psmDataRequest = new PsmDataRequest(userid);
@@ -220,8 +214,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId())
-        {
+        switch (view.getId()) {
             case R.id.btn_change_pass:
                 Intent intentChangePass = new Intent(MainActivity.this, ChangePasswordActivity.class);
                 startActivity(intentChangePass);
@@ -242,23 +235,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentRaise);
                 break;
             case R.id.tv_raise_boq_indent:
-                Intent intentraiseindent = new Intent(MainActivity.this,IndentStatusActivity.class);
+                Intent intentraiseindent = new Intent(MainActivity.this, IndentStatusActivity.class);
                 startActivity(intentraiseindent);
                 break;
             case R.id.tv_pending_indent:
-                Intent intentpending = new Intent(MainActivity.this,PendingIndentListActivity.class);
+                Intent intentpending = new Intent(MainActivity.this, PendingIndentListActivity.class);
                 startActivity(intentpending);
                 break;
             case R.id.tv_individual_indent:
-                Intent intentindividual = new Intent(MainActivity.this,IndividualIndentListActivity.class);
+                Intent intentindividual = new Intent(MainActivity.this, IndividualIndentListActivity.class);
                 startActivity(intentindividual);
                 break;
             case R.id.tv_consumption:
-                Intent intentcon = new Intent(MainActivity.this,CreateConsumptionActivity.class);
+                Intent intentcon = new Intent(MainActivity.this, CreateConsumptionActivity.class);
                 startActivity(intentcon);
                 break;
             case R.id.iv_add_material:
-                Intent intentaddM = new Intent(MainActivity.this,AddMaterialStockActivity.class);
+                Intent intentaddM = new Intent(MainActivity.this, AddMaterialStockActivity.class);
                 startActivity(intentaddM);
                 break;
 
@@ -266,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_logout:
                 editor.clear();
                 editor.commit();
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -277,31 +270,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-    public void openDialog() {
+
+    public void openDialog(String de) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Delete?");
+        builder.setTitle("Alert");
         builder.setMessage("Are you sure u want to delete?");
         builder.setCancelable(false);
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+
+                //   onClickitem(de);
                 dialog.cancel();
-                finish();
+
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
         });
-        AlertDialog alertDialog=builder.create();
+        AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 
     @Override
     public void onClickitem(String value) {
 
-        progressDialog=new ProgressDialog(MainActivity.this);
+        progressDialog = new ProgressDialog(MainActivity.this);
 
-        if(progressDialog!=null) {
+        if (progressDialog != null) {
             if (!progressDialog.isShowing()) {
                 progressDialog.setCancelable(false);
                 progressDialog.setMessage("Please wait...");
@@ -310,14 +306,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 MaterialStockDeleteRequest materialStockDeleteRequest = new MaterialStockDeleteRequest(value);
                 WebServices<Generalresponce> webServices = new WebServices<Generalresponce>(MainActivity.this);
-                webServices.deleteMstockdata(WebServices.ApiType.deletestockMhome,materialStockDeleteRequest);
-}
+                webServices.deleteMstockdata(WebServices.ApiType.deletestockMhome, materialStockDeleteRequest);
+            }
         }
 
 
-
     }
-
 
 
     @Override
@@ -325,17 +319,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (URL) {
 
             case psmdata:
-                if(progressDialog!=null)
-                {
-                    if(progressDialog.isShowing())
-                    {
+                if (progressDialog != null) {
+                    if (progressDialog.isShowing()) {
                         progressDialog.dismiss();
                     }
                 }
 
                 if (isSucces) {
 
-                    if(response!=null) {
+                    if (response != null) {
 
                         PsmDataStatusHome psmDataStatusHome = (PsmDataStatusHome) response;
 
@@ -343,31 +335,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         indent_status_Count_approve.setText(psmDataStatusHome.getApproved());
                         indent_status_Count_rejected.setText(psmDataStatusHome.getRejected());
                         indent_status_Count_close.setText(psmDataStatusHome.getClose());
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
                     }
 
-                } else
-                {
+                } else {
                     Toast.makeText(this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
             case materialstock:
 
-                if(progressDialog!=null)
-                {
-                    if(progressDialog.isShowing())
-                    {
+                if (progressDialog != null) {
+                    if (progressDialog.isShowing()) {
                         progressDialog.dismiss();
                     }
                 }
 
                 if (isSucces) {
 
-                    if(response!=null) {
+                    if (response != null) {
 
                         List list = new ArrayList();
                         MaterialStockRequest materialStockRequest = (MaterialStockRequest) response;
@@ -376,22 +363,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         arrayList.clear();
                         for (int i = 0; i < list.size(); i++) {
 
-                            arrayList.add(new MaterialSModel(materialStockRequest.getMaterial_closing_details().get(i).getMaterial_manual_id(), materialStockRequest.getMaterial_closing_details().get(i).getMaterial_name(), materialStockRequest.getMaterial_closing_details().get(i).getClosing_stock(),materialStockRequest.getMaterial_closing_details().get(i).getFavorite_id()));
+                            arrayList.add(new MaterialSModel(materialStockRequest.getMaterial_closing_details().get(i).getMaterial_manual_id(), materialStockRequest.getMaterial_closing_details().get(i).getMaterial_name(), materialStockRequest.getMaterial_closing_details().get(i).getClosing_stock(), materialStockRequest.getMaterial_closing_details().get(i).getFavorite_id()));
                         }
 
-                        MaterialDetailsAdapter numbersArrayAdapter = new MaterialDetailsAdapter(this, arrayList,this);
+                        MaterialDetailsAdapter numbersArrayAdapter = new MaterialDetailsAdapter(this, arrayList, this);
                         ListView materialstocklist = findViewById(R.id.lv_material_stock_home);
                         materialstocklist.setAdapter(numbersArrayAdapter);
                         materialstocklist.invalidate();
 
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
                     }
 
-                } else
-                {
+                } else {
                     Toast.makeText(this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
                 }
 
@@ -401,7 +385,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (isSucces) {
 
-                    if(response!=null) {
+                    if (response != null) {
 
 
                         Generalresponce generalresponce = (Generalresponce) response;
@@ -409,14 +393,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         callmaterialstockapi();
 
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
                     }
 
-                } else
-                {
+                } else {
                     Toast.makeText(this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
                 }
 

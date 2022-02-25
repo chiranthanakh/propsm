@@ -2,7 +2,11 @@ package com.proteam.projectstoremanagement.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +49,11 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
     List PendingIndent = new ArrayList();
     final ArrayList<PendingIndentModel> arrayList = new ArrayList<PendingIndentModel>();
     List indentids = new ArrayList();
+
+    Context context=this;
+
+    String userid;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +63,8 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
         Bundle bundle = getIntent().getExtras();
         id = bundle.getString("indentid");
+
+
 
         initilze();
 
@@ -112,13 +123,23 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
             case R.id.btn_approve:
 
-                callupdateapi("Approved");
+                openDialog2("Approved");
+               // callupdateapi("Approved");
 
                 break;
 
             case R.id.btn_reject:
 
-                callupdateapi("Rejected");
+                if (remarks.length() == 0) {
+                    Toast.makeText(this, "Please enter the remarks", Toast.LENGTH_SHORT).show();
+                   // remarks.setError("Please enter the remarks");
+                }
+                else
+                {
+                    openDialogReject("Rejected");
+                }
+
+               // callupdateapi("Rejected");
 
                 break;
 
@@ -137,14 +158,6 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-
-                /*for (int i=0;i<indentids.size();i++){
-
-                    PendingIntentupdaterequest pendingIntentupdaterequest = new PendingIntentupdaterequest(indentpending.getIndent_list().get(i).getIndent_id(),status,remarks.getText().toString());
-                    WebServices<Generalresponce> webServices = new WebServices<Generalresponce>(PendingIndentActivity.this);
-                    webServices.pendingintentupdate(WebServices.ApiType.general, pendingIntentupdaterequest);
-
-                } */
 
                 PendingIntentupdaterequest pendingIntentupdaterequest = new PendingIntentupdaterequest(indentpending.getIndent_list().get(0).getIndent_id(),status,remarks.getText().toString());
                 WebServices<Generalresponce> webServices = new WebServices<Generalresponce>(PendingIndentActivity.this);
@@ -176,11 +189,12 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
                          indentpending = (Indentpending) response;
                         PendingIndent = indentpending.getIndent_boq_list();
 
+                        arrayList.clear();
                         for (int i=0;i<PendingIndent.size();i++){
 
                             arrayList.add(new PendingIndentModel(indentpending.getIndent_boq_list().get(i).getMaterial_manual_id(),indentpending.getIndent_boq_list().get(i).getMaterial_name(),indentpending.getIndent_boq_list().get(i).getBalance_boq(),indentpending.getIndent_boq_list().get(i).getIndent_qty()));
 
-                            indentids.add(indentpending.getIndent_list().get(i).getIndent_id());
+                            indentids.add(indentpending.getIndent_list().get(0).getIndent_id());
 
                         }
 
@@ -239,5 +253,58 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
                 break;
 
         }
+    }
+
+    public void openDialog2(String it) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Alert");
+        builder.setMessage("Are You Sure Want to Approve?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+
+                callupdateapi(it);
+                dialog.cancel();
+
+
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+
+
+            }
+        });
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
+
+    }
+
+
+    public void openDialogReject(String re) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Alert");
+        builder.setMessage("Are You Sure Want to Reject?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+
+                callupdateapi(re);
+                dialog.cancel();
+
+
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+
+
+            }
+        });
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
+
     }
 }

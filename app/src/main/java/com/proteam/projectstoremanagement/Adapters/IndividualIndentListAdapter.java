@@ -51,16 +51,20 @@ public class IndividualIndentListAdapter extends ArrayAdapter<IndividualIndentLi
         Individual_IStatus.setText(currentNumberPosition.getIndividualIndentStatus());
 
 
-        if(currentNumberPosition.getIndividualIndentStatus().equalsIgnoreCase("Pending")){
+        if(currentNumberPosition.getIndividualIndentStatus().contains("Pending")){
             Individual_IStatus.setTextColor(Color.parseColor("#ffcc80"));
-        }else if(currentNumberPosition.getIndividualIndentStatus().equalsIgnoreCase("Approved")){
+        }else if(currentNumberPosition.getIndividualIndentStatus().contains("Approved")){
             Individual_IStatus.setTextColor(Color.parseColor("#81c784"));
-        }else  if(currentNumberPosition.getIndividualIndentStatus().equalsIgnoreCase("Rejected")){
+        }else  if(currentNumberPosition.getIndividualIndentStatus().contains("Rejected")){
             Individual_IStatus.setTextColor(Color.parseColor("#e57373"));
         }
-        else  if(currentNumberPosition.getIndividualIndentStatus().equalsIgnoreCase("InProgress"))
+        else  if(currentNumberPosition.getIndividualIndentStatus().contains("InProgress"))
         {
             Individual_IStatus.setTextColor(Color.parseColor("#81c784"));
+        }
+        else if(currentNumberPosition.getIndividualIndentStatus().contains("Issued"))
+        {
+            Individual_IStatus.setTextColor(Color.parseColor("#696969"));
         }
 
 

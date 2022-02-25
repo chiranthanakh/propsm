@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectStoreManagement">
         <activity
+            android:name=".Activities.RaiseIndentEditActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.ChangePasswordActivity"
             android:exported="false" />
         <activity
@@ -30,7 +33,8 @@
             android:exported="false" />
         <activity
             android:name=".Activities.ConsumptionMaterialActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Activities.CreateConsumptionActivity"
             android:exported="false"

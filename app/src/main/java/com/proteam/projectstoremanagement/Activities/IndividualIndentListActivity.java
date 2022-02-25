@@ -46,6 +46,7 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
     final ArrayList<IndividualIndentListModel> pendinglist = new ArrayList<IndividualIndentListModel>();
     final ArrayList<IndividualIndentListModel> regectedlist = new ArrayList<IndividualIndentListModel>();
     final ArrayList<IndividualIndentListModel> inprogresslist = new ArrayList<IndividualIndentListModel>();
+    final ArrayList<IndividualIndentListModel> Issued = new ArrayList<IndividualIndentListModel>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,8 +135,12 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
 
                         }else if(menuItem.getTitle().equals("All")){
 
-                            individualindentfilter(arrayList, "4");
+                            individualindentfilter(arrayList, "5");
 
+                        }
+                        else if(menuItem.getTitle().equals("Issued"))
+                        {
+                            individualindentfilter(arrayList,"6");
                         }
 
                         Toast.makeText(IndividualIndentListActivity.this, "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
@@ -172,25 +177,35 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
 
                         list = indentStatusdirectlist.getDirect_indent();
 
+                        arrayList.clear();
+                        pendinglist.clear();
+                        approvedlist.clear();
+                        regectedlist.clear();
+                        inprogresslist.clear();
+                        Issued.clear();
                         for (int i = 0; i < list.size(); i++) {
 
                             arrayList.add(new IndividualIndentListModel(indentStatusdirectlist.getDirect_indent().get(i).getIndent_auto_gen_id(), indentStatusdirectlist.getDirect_indent().get(i).getContractor_name(), indentStatusdirectlist.getDirect_indent().get(i).getStatus()));
 
-                            if(indentStatusdirectlist.getDirect_indent().get(i).getStatus().equalsIgnoreCase("Pending"))
+                            if(indentStatusdirectlist.getDirect_indent().get(i).getStatus().contains("Pending"))
                             {
                                 pendinglist.add(new IndividualIndentListModel(indentStatusdirectlist.getDirect_indent().get(i).getIndent_auto_gen_id(),indentStatusdirectlist.getDirect_indent().get(i).getContractor_name(),indentStatusdirectlist.getDirect_indent().get(i).getStatus()));
                             }
-                            else if(indentStatusdirectlist.getDirect_indent().get(i).getStatus().equalsIgnoreCase("Approved"))
+                            else if(indentStatusdirectlist.getDirect_indent().get(i).getStatus().contains("Approved"))
                             {
                                 approvedlist.add(new IndividualIndentListModel(indentStatusdirectlist.getDirect_indent().get(i).getIndent_auto_gen_id(),indentStatusdirectlist.getDirect_indent().get(i).getContractor_name(),indentStatusdirectlist.getDirect_indent().get(i).getStatus()));
                             }
-                            else if(indentStatusdirectlist.getDirect_indent().get(i).getStatus().equalsIgnoreCase("Rejected"))
+                            else if(indentStatusdirectlist.getDirect_indent().get(i).getStatus().contains("Rejected"))
                             {
                                 regectedlist.add(new IndividualIndentListModel(indentStatusdirectlist.getDirect_indent().get(i).getIndent_auto_gen_id(),indentStatusdirectlist.getDirect_indent().get(i).getContractor_name(),indentStatusdirectlist.getDirect_indent().get(i).getStatus()));
                             }
-                            else if(indentStatusdirectlist.getDirect_indent().get(i).getStatus().equalsIgnoreCase("InProgress"))
+                            else if(indentStatusdirectlist.getDirect_indent().get(i).getStatus().contains("InProgress"))
                             {
                                 inprogresslist.add(new IndividualIndentListModel(indentStatusdirectlist.getDirect_indent().get(i).getIndent_auto_gen_id(),indentStatusdirectlist.getDirect_indent().get(i).getContractor_name(),indentStatusdirectlist.getDirect_indent().get(i).getStatus()));
+                            }
+                            else if(indentStatusdirectlist.getDirect_indent().get(i).getStatus().contains("Issued"))
+                            {
+                                Issued.add(new IndividualIndentListModel(indentStatusdirectlist.getDirect_indent().get(i).getIndent_auto_gen_id(),indentStatusdirectlist.getDirect_indent().get(i).getContractor_name(),indentStatusdirectlist.getDirect_indent().get(i).getStatus()));
                             }
                         }
                         individualindentfilter(pendinglist,"0");

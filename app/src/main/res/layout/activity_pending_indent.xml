@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,6 +10,7 @@
     tools:context=".Activities.PendingIndentActivity">
 
     <LinearLayout
+        android:id="@+id/top_bar"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -79,16 +80,19 @@
     </LinearLayout>
 
     <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="60dp"
         android:orientation="vertical">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/cc_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -157,7 +161,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/proxima_nova_bold"
-                                    android:text="23"
+                                    android:text=""
                                     android:textColor="@color/grey_dark"
                                     android:textSize="15sp" />
 
@@ -187,7 +191,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/proxima_nova_bold"
-                                    android:text="Azizur Rahman Departmental"
+                                    android:text=""
                                     android:textAllCaps="false"
                                     android:textColor="@color/grey_dark"
                                     android:textSize="15sp" />
@@ -227,7 +231,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/proxima_nova_bold"
-                                    android:text="Kandi"
+                                    android:text=""
                                     android:textColor="@color/grey_dark"
                                     android:textSize="15sp" />
                             </LinearLayout>
@@ -255,7 +259,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/proxima_nova_bold"
-                                    android:text="DTW"
+                                    android:text=""
                                     android:textColor="@color/grey_dark"
                                     android:textSize="15sp" />
                             </LinearLayout>
@@ -323,7 +327,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/proxima_nova_bold"
-                                    android:text="20-20-2022"
+                                    android:text=""
                                     android:textColor="@color/grey_dark"
                                     android:textSize="15sp" />
                             </LinearLayout>
@@ -363,7 +367,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:fontFamily="@font/proxima_nova_bold"
-                                    android:text="Pending"
+                                    android:text=""
                                     android:textColor="@color/grey_dark"
                                     android:textSize="15sp" />
                             </LinearLayout>
@@ -456,7 +460,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/proxima_nova_bold"
                                 android:gravity="center"
-                                android:text="2"
+                                android:text=""
                                 android:textColor="@color/white"
                                 android:textSize="15sp" />
 
@@ -531,7 +535,7 @@
                 <LinearLayout
                     android:id="@+id/list_recy"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="165dp"
                     android:orientation="vertical"
                     app:layout_constraintTop_toBottomOf="@id/data_table">
 
@@ -540,23 +544,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:nestedScrollingEnabled="true"
-                        android:smoothScrollbar="true">
+                        android:smoothScrollbar="true"
+                        android:overScrollMode="never"
+                        android:clipToPadding="false"/>
 
-                    </ListView>
 
 
                 </LinearLayout>
 
 
                 <EditText
-                    app:layout_constraintTop_toBottomOf="@id/list_recy"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:textColor="@color/black"
                     android:maxLines="5"
                     android:textColorHint="@color/grey"
                     android:fontFamily="@font/lato"
                     app:hintTextColor="@color/black"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:textCursorDrawable="@drawable/cursor"
                     android:drawableTint="@color/grey"
                     android:layout_marginStart="20dp"
@@ -570,10 +574,9 @@
                     android:theme="@style/LightTheme"/>
 
                 <LinearLayout
-                    app:layout_constraintTop_toBottomOf="@id/et_remarks1"
+                    android:paddingBottom="60dp"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="20dp"
                     android:layout_height="match_parent">
                     <androidx.appcompat.widget.AppCompatButton
                         android:insetTop="0dp"
@@ -611,8 +614,15 @@
                     </androidx.appcompat.widget.AppCompatButton>
                 </LinearLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
-</LinearLayout>
+    <include
+        layout="@layout/app_bar_layout"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
