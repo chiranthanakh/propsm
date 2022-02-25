@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.view.MenuItemCompat;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.drm.DrmStore;
@@ -14,11 +17,14 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.proteam.projectstoremanagement.Adapters.RaiseIndentAdapter;
 import com.proteam.projectstoremanagement.Model.RaiseIndentModel;
@@ -93,7 +99,6 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
         tv_indent_date.setText(date);
         tv_work_order_number.setText(workorderno);
         callboqupdateapi();
-
 
     }
 
@@ -197,21 +202,18 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                     }
                 }
-
                 break;
 
         }
     }
 
-
     void filter(String text){
 
         if(text.equals("")){
 
-
-            RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(this, arrayList,this);
+            /*RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(this, arrayList,this);
             ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
-            pendingindentstatus.setAdapter(numbersArrayAdapter);
+            pendingindentstatus.setAdapter(numbersArrayAdapter);*/
         }else {
 
             temp.clear();
@@ -227,11 +229,9 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                 }
             }
 
-
             RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(this, temp,this);
             ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
             pendingindentstatus.setAdapter(numbersArrayAdapter);
-
 
         }
 
@@ -244,21 +244,38 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
     public void onChange1(String value, int position) {
 
 
-        if(search.getText().toString().equals("")){
+       /* if(search.getText().toString().equals("")){
 
+            //arrayList.set(position, new RaiseIndentModel(arrayList.get(position).getMaterialcode(),arrayList.get(position).getMaterialname(),arrayList.get(position).getBoqbalance(),value));
 
+            //System.out.println("notext "+value+"  "+position);
 
         }else {
 
-            //RaiseIndentModel model = temp.get(position);
+            RaiseIndentModel model1 = temp.get(position);
 
-            //if(arrayList.get())
+            String mcode=model1.getMaterialcode();
 
-            RaiseIndentModel model = arrayList.get(position);
-            model.getMaterialcode();
-            arrayList.set(position, new RaiseIndentModel(model.getMaterialcode(),model.getMaterialname(),model.getBoqbalance(),value));
+            for(int i=0;i<arrayList.size();i++){
+
+                if(arrayList.get(i).getMaterialcode().equalsIgnoreCase(mcode)){
+
+                    arrayList.set(i, new RaiseIndentModel(arrayList.get(i).getMaterialcode(),arrayList.get(i).getMaterialname(),arrayList.get(i).getBoqbalance(),value));
+
+                   // System.out.println("search text "+value+"  "+position);
+
+                }
+
+            }
+
+        }*/
+
+        //opengcadminDialog(value);
 
 
-        }
+
     }
+
+
+
 }

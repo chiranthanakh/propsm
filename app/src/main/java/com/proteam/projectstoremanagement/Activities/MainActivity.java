@@ -161,6 +161,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_consumption_list.setOnClickListener(this);
         callboqupdateapi();
        // callmaterialstockapi();
+
+
+
+
     }
 
 

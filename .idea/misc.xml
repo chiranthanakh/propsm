@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Personal/AndroidStudioProjects/propsm/app/src/main/res/drawable/gc.xml" value="0.1425" />
+        <entry key="..\:/Users/Personal/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_raise_indent.xml" value="0.16145833333333334" />
+        <entry key="..\:/Users/Personal/AndroidStudioProjects/propsm/app/src/main/res/layout/dialog_gcadmincount.xml" value="0.22" />
+        <entry key="..\:/Users/Personal/AndroidStudioProjects/propsm/app/src/main/res/layout/raise_indent_list_layout.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/Personal/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/Personal/Downloads/PSM/app/src/main/res/layout/activity_indent_add.xml" value="0.33" />
         <entry key="..\:/Users/Personal/Downloads/PSM/app/src/main/res/layout/activity_login.xml" value="0.1" />
