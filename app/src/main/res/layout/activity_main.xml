@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Hello, Welcome to PIMS"
+                android:text="Welcome to PIMS"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                android:fontFamily="@font/proxima_family"/>

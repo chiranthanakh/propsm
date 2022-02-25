@@ -53,6 +53,7 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
     final ArrayList<IndentStatusModel> pendinglist = new ArrayList<IndentStatusModel>();
     final ArrayList<IndentStatusModel> regectedlist = new ArrayList<IndentStatusModel>();
     final ArrayList<IndentStatusModel> inprogresslist = new ArrayList<IndentStatusModel>();
+    final ArrayList<IndentStatusModel> Issued = new ArrayList<IndentStatusModel>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,8 +145,11 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
 
                         }else if(menuItem.getTitle().equals("All")){
 
-                            indentfilter(arrayList, "4");
+                            indentfilter(arrayList, "5");
 
+                        }else if(menuItem.getTitle().equals("Issued"))
+                        {
+                            indentfilter(Issued,"6");
                         }
 
                         Toast.makeText(IndentStatusActivity.this, "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
@@ -182,7 +186,7 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
                         IndentStatuslist indentStatuslist = (IndentStatuslist) response;
 
                         list = indentStatuslist.getBoq_indent();
-
+                        arrayList.clear();
                         for (int i = 0; i<list.size(); i++){
 
                             arrayList.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
@@ -201,6 +205,10 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
                             }else  if(indentStatuslist.getBoq_indent().get(i).getStatus().contains("InProgress")){
 
                                 inprogresslist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
+                            }
+                            else if(indentStatuslist.getBoq_indent().get(i).getStatus().contains("Issued"))
+                            {
+                                Issued.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
                             }
                         }
 

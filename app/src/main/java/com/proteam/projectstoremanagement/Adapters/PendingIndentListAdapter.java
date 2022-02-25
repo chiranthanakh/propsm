@@ -71,6 +71,10 @@ public class PendingIndentListAdapter extends ArrayAdapter<PendingIndentListMode
         }else  if(currentNumberPosition.getStatus().equalsIgnoreCase("InProgress")){
             pending_indent_status.setTextColor(Color.parseColor("#81c784"));
             iv_image.setVisibility(View.GONE);
+        }else if(currentNumberPosition.getStatus().equalsIgnoreCase("Issued"))
+        {
+            pending_indent_status.setTextColor(Color.parseColor("#696969"));
+            iv_image.setVisibility(View.GONE);
         }
 
         View finalCurrentItemView = currentItemView;

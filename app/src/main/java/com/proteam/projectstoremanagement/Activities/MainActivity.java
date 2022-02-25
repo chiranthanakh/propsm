@@ -373,7 +373,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         MaterialStockRequest materialStockRequest = (MaterialStockRequest) response;
 
                         list = materialStockRequest.getMaterial_closing_details();
-
+                        arrayList.clear();
                         for (int i = 0; i < list.size(); i++) {
 
                             arrayList.add(new MaterialSModel(materialStockRequest.getMaterial_closing_details().get(i).getMaterial_manual_id(), materialStockRequest.getMaterial_closing_details().get(i).getMaterial_name(), materialStockRequest.getMaterial_closing_details().get(i).getClosing_stock(),materialStockRequest.getMaterial_closing_details().get(i).getFavorite_id()));

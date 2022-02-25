@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:enabled="true"
+        android:icon="@drawable/home_bottom"
+        android:title="Dashboard"/>
     <item
         android:id="@+id/nav_calendar"
         android:enabled="true"
         android:icon="@drawable/indent_bottom"
-        android:title="Indents"/>
+        android:title="BOQ Indents"/>
     <item
         android:id="@+id/nav_store"
         android:enabled="true"

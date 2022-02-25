@@ -3,7 +3,9 @@ package com.proteam.projectstoremanagement.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +37,9 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
     FloatingActionButton fab_add_individual_indent;
     ListView lv_individual_indent_status;
     ProgressDialog progressDialog;
+    String userid;
+    SharedPreferences.Editor editor;
+
     final ArrayList<IndividualIndentListModel> arrayList = new ArrayList<IndividualIndentListModel>();
 
     final ArrayList<IndividualIndentListModel> approvedlist = new ArrayList<IndividualIndentListModel>();
@@ -47,7 +52,11 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
         setContentView(R.layout.activity_individual_indent_list);
         mToolbar = findViewById(R.id.back_toolbar);
         mToolbar.setOnClickListener(view -> onBackPressed());
+        SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        editor=sharedPreferences.edit();
+        String user = sharedPreferences.getString("userid",null);
 
+        userid = sharedPreferences.getString("userid",null);
 
         initialize();
 
@@ -77,7 +86,7 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-                Indentstatusrequest indentstatusrequest = new Indentstatusrequest("71");
+                Indentstatusrequest indentstatusrequest = new Indentstatusrequest(userid);
 
                 WebServices<IndentStatusdirectlist> webServices = new WebServices<IndentStatusdirectlist>(IndividualIndentListActivity.this);
                 webServices.indentstatusdirect(WebServices.ApiType.indentstatus,indentstatusrequest );
