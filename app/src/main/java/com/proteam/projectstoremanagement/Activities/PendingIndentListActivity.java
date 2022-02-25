@@ -37,6 +37,7 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
     final ArrayList<PendingIndentListModel> pendinglist = new ArrayList<PendingIndentListModel>();
     final ArrayList<PendingIndentListModel> regectedlist = new ArrayList<PendingIndentListModel>();
     final ArrayList<PendingIndentListModel> inprogresslist = new ArrayList<PendingIndentListModel>();
+    final ArrayList<PendingIndentListModel> Issued = new ArrayList<PendingIndentListModel>();
 
     ProgressDialog progressDialog;
 
@@ -121,8 +122,11 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
                         }else if(menuItem.getTitle().equals("All")){
 
-                            adaptormoves(arrayList, "4");
+                            adaptormoves(arrayList, "5");
 
+                        }else if(menuItem.getTitle().equals("Issued"))
+                        {
+                            adaptormoves(Issued,"6");
                         }
 
                         Toast.makeText(PendingIndentListActivity.this, "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
@@ -158,7 +162,9 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
                         PendingIndentList pendingIndentModel = (PendingIndentList) response;
                         pendingindentlist = pendingIndentModel.getIndent_list();
 
+                        arrayList.clear();
                         for (int i=0;i<pendingindentlist.size();i++){
+
 
                             arrayList.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
 
@@ -174,6 +180,10 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
                             }else  if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("InProgress")){
 
                                 inprogresslist.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
+                            }
+                            else if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("Issued"))
+                            {
+                                Issued.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
                             }
                         }
 

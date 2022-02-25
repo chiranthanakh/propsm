@@ -19,5 +19,8 @@
     <item
         android:id="@+id/react_native"
         android:title="InProgress" />
+    <item
+        android:id="@+id/react_issued"
+        android:title="Issued" />
 
 </menu>
