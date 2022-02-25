@@ -10,6 +10,7 @@ import com.proteam.projectstoremanagement.Request.Indentstatusrequest;
 import com.proteam.projectstoremanagement.Request.MaterialStockDeleteRequest;
 import com.proteam.projectstoremanagement.Request.MaterialStockRequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
+import com.proteam.projectstoremanagement.Request.RaiseIndentPreview;
 import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Response.IndentStatusdirectlist;
 import com.proteam.projectstoremanagement.Response.IndentStatuslist;
@@ -22,6 +23,7 @@ import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
 import com.proteam.projectstoremanagement.Response.Boqlist;
 import com.proteam.projectstoremanagement.Response.Contractorlocationmodel;
 import com.proteam.projectstoremanagement.Response.LoginResponse;
+import com.proteam.projectstoremanagement.Response.PreviewResponsce;
 import com.proteam.projectstoremanagement.Response.PsmDataStatusHome;
 import com.proteam.projectstoremanagement.Response.StockMaterialNameResponse;
 
@@ -74,6 +76,10 @@ public interface PsmApi {
 
     @POST("Clients_apis/save_favorite_materials")
     Call<Generalresponce> addmaterial(@Body Addmaterialrequest addmaterialrequest);
+
+
+    @POST("Clients_apis/preview_boq_indents")
+    Call<PreviewResponsce> preview(@Body RaiseIndentPreview preview);
 
 
 }

@@ -1,4 +1,4 @@
-package com.proteam.projectstoremanagement.Response;
+package com.proteam.projectstoremanagement.Request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -37,17 +37,16 @@ public class RaiseIndentPreviewResponse {
     @Expose
     private String remarks;
 
-    @SerializedName("material_id")
-    @Expose
-    private String material_id;
-
-    @SerializedName("indent_qty")
-    @Expose
-    private String indent_qty;
-
-    @SerializedName("boq_qty")
-    @Expose
-    private String boq_qty;
+    public RaiseIndentPreviewResponse(String contractor, String location, String sub_location, String work_order_number, String indent_date, String store_id, String user_id, String remarks) {
+        this.contractor = contractor;
+        this.location = location;
+        this.sub_location = sub_location;
+        this.work_order_number = work_order_number;
+        this.indent_date = indent_date;
+        this.store_id = store_id;
+        this.user_id = user_id;
+        this.remarks = remarks;
+    }
 
     public String getContractor() {
         return contractor;
@@ -113,27 +112,5 @@ public class RaiseIndentPreviewResponse {
         this.remarks = remarks;
     }
 
-    public String getMaterial_id() {
-        return material_id;
-    }
 
-    public void setMaterial_id(String material_id) {
-        this.material_id = material_id;
-    }
-
-    public String getIndent_qty() {
-        return indent_qty;
-    }
-
-    public void setIndent_qty(String indent_qty) {
-        this.indent_qty = indent_qty;
-    }
-
-    public String getBoq_qty() {
-        return boq_qty;
-    }
-
-    public void setBoq_qty(String boq_qty) {
-        this.boq_qty = boq_qty;
-    }
 }

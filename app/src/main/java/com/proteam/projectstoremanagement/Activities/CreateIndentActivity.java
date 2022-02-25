@@ -219,8 +219,8 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
-          // ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            //((TextView) parent.getChildAt(0)).setTextSize(15);
+          //((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+          //((TextView) parent.getChildAt(0)).setTextSize(15);
         }
     };
 
