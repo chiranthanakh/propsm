@@ -211,9 +211,10 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
         if(text.equals("")){
 
-            /*RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(this, arrayList,this);
+            RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(this, arrayList,this);
             ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
-            pendingindentstatus.setAdapter(numbersArrayAdapter);*/
+            pendingindentstatus.setAdapter(numbersArrayAdapter);
+
         }else {
 
             temp.clear();
@@ -222,7 +223,6 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                 //use .toLowerCase() for better matches
 
                 RaiseIndentModel model = arrayList.get(i);
-
 
                 if(boqlist.getBoq_list().get(i).getMaterial_name().toLowerCase().trim().contains(text.toLowerCase().trim())){
                     temp.add(new RaiseIndentModel(model.getMaterialcode(),model.getMaterialname(),model.getBoqbalance(),model.getRaiseqty()));
@@ -270,12 +270,42 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
         }*/
 
-        //opengcadminDialog(value);
-
+        opengcadminDialog(value,position);
 
 
     }
 
+    private void opengcadminDialog(String value,int position) {
+        final Dialog dialog =new Dialog(this);
+
+        dialog.setContentView(R.layout.dialog_gcadmincount);
+        dialog.show();
+
+
+        EditText et_count = dialog.findViewById(R.id.edt_gc_count);
+        et_count.setText(value);
+
+        Button bt_submit = dialog.findViewById(R.id.btn_gc_submit);
+
+        Boolean state = false;
+
+        bt_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                arrayList.set(position, new RaiseIndentModel(arrayList.get(position).getMaterialcode(),arrayList.get(position).getMaterialname(),arrayList.get(position).getBoqbalance(),et_count.getText().toString()));
+
+                RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(RaiseIndentActivity.this, arrayList,RaiseIndentActivity.this);
+                ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
+                pendingindentstatus.setAdapter(numbersArrayAdapter);
+
+
+                dialog.dismiss();
+
+            }
+        });
+
+    }
 
 
 }

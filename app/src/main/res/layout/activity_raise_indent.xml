@@ -349,13 +349,6 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/iv_search" />
 
-                        <ProgressBar
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:padding="5dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
 
                     </LinearLayout>
                 </androidx.appcompat.widget.Toolbar>
