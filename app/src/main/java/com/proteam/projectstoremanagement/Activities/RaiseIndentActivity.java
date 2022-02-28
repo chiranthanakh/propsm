@@ -144,7 +144,6 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                     itemslist.add(new Raiseintentdataitems(arrayList.get(i).getMaterial_id(),arrayList.get(i).getBoqbalance(),arrayList.get(i).getRaiseqty()));
 
-
                 }
 
 
@@ -248,6 +247,13 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                 break;
 
             case priview:
+                if(progressDialog!=null)
+                {
+                    if(progressDialog.isShowing())
+                    {
+                        progressDialog.dismiss();
+                    }
+                }
 
             if (isSucces) {
 
