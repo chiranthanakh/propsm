@@ -28,7 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.proteam.projectstoremanagement.Adapters.RaiseIndentAdapter;
-import com.proteam.projectstoremanagement.Model.Previewmodel;
+
 import com.proteam.projectstoremanagement.Model.RaiseIndentModel;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
