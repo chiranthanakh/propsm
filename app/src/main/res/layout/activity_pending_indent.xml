@@ -554,6 +554,7 @@
 
 
                 <EditText
+                    android:visibility="gone"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:textColor="@color/black"
                     android:maxLines="5"
@@ -581,6 +582,7 @@
                     android:layout_height="50dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
+                    android:visibility="gone"
                     android:text="Approved"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
@@ -596,6 +598,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:text="Rejected"
@@ -614,6 +617,7 @@
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"
+                    android:visibility="gone"
                     android:layout_marginEnd="10dp"
                     android:text="Issued"
                     android:layout_alignParentEnd="true"
@@ -628,6 +632,7 @@
                     android:insetBottom="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:visibility="gone"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:text="InProgress"
@@ -640,6 +645,8 @@
                 <LinearLayout
                     android:paddingBottom="60dp"
                     android:orientation="horizontal"
+                    android:id="@+id/pending"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 

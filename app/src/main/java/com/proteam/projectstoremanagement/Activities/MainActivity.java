@@ -120,6 +120,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override public void run() {
                         // Stop animation (This will be after 3 seconds)
                         mSwipeRefreshLayout.setRefreshing(false);
+                        /*callboqupdateapi();
+                        callboqupdateapi();*/
                     }
                 }, 3000); // Delay in millis
             }

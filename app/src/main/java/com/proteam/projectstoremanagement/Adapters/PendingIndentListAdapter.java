@@ -84,6 +84,7 @@ public class PendingIndentListAdapter extends ArrayAdapter<PendingIndentListMode
                 Intent intentEvent1 = new Intent(getContext(), PendingIndentActivity.class);
                 Bundle bundle1 = new Bundle();
                 bundle1.putString("indentid",currentNumberPosition.getId());
+                bundle1.putString("status",currentNumberPosition.getStatus());
                 intentEvent1.putExtras(bundle1);
                 finalCurrentItemView.getContext().startActivity(intentEvent1);
 

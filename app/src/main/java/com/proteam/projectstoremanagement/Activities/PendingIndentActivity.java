@@ -7,11 +7,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,9 +39,10 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
     ProgressDialog progressDialog;
     ListView lv_pending_indent;
-    Button btn_approve,btn_reject;
-    String id;
+    Button btn_approve,btn_reject,btn_Indent_approved,btn_Indent_rejected,btn_Indent_issued,btn_Indent_InProgress;
+    String id,status;
     EditText remarks;
+    LinearLayout pendinglayout;
     Indentpending indentpending;
 
     List PendingIndent = new ArrayList();
@@ -59,6 +62,7 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
         Bundle bundle = getIntent().getExtras();
         id = bundle.getString("indentid");
+        status = bundle.getString("status");
 
 
 
@@ -78,6 +82,11 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
         tv_p_locationName=findViewById(R.id.tv_p_locationName);
         tv_p_sublocationName=findViewById(R.id.tv_p_sublocationName);
         tv_p_workordernumber=findViewById(R.id.tv_p_workordernumber);
+        btn_Indent_InProgress = findViewById(R.id.btn_Indent_InProgress);
+        btn_Indent_approved = findViewById(R.id.btn_Indent_approved);
+        pendinglayout = findViewById(R.id.pending);
+        btn_Indent_rejected = findViewById(R.id.btn_Indent_rejected);
+        btn_Indent_issued = findViewById(R.id.btn_Indent_issued);
         tv_p_status=findViewById(R.id.tv_p_status);
         remarks = findViewById(R.id.et_remarks1);
         tv_p_indentdate=findViewById(R.id.tv_p_indentdate);
@@ -85,6 +94,20 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
         btn_reject = findViewById(R.id.btn_reject);
         btn_reject.setOnClickListener(this);
         btn_approve.setOnClickListener(this);
+
+        if(status.equalsIgnoreCase("Pending")){
+           pendinglayout.setVisibility(View.VISIBLE);
+            remarks.setVisibility(View.VISIBLE);
+        }else if(status.equalsIgnoreCase("Approved")){
+            btn_Indent_approved.setVisibility(View.VISIBLE);
+        }else  if(status.equalsIgnoreCase("Rejected")){
+           btn_Indent_rejected.setVisibility(View.VISIBLE);
+        }else  if(status.equalsIgnoreCase("InProgress")){
+           btn_Indent_InProgress.setVisibility(View.VISIBLE);
+        }else if(status.equalsIgnoreCase("Issued"))
+        {
+            btn_Indent_issued.setVisibility(View.VISIBLE);
+        }
 
         callboqupdateapi();
     }
@@ -186,6 +209,7 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
                         PendingIndent = indentpending.getIndent_boq_list();
 
                         arrayList.clear();
+
                         for (int i=0;i<PendingIndent.size();i++){
 
                             arrayList.add(new PendingIndentModel(indentpending.getIndent_boq_list().get(i).getMaterial_manual_id(),indentpending.getIndent_boq_list().get(i).getMaterial_name(),indentpending.getIndent_boq_list().get(i).getBalance_boq(),indentpending.getIndent_boq_list().get(i).getIndent_qty()));
