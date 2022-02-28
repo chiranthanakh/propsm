@@ -25,6 +25,7 @@ import com.proteam.projectstoremanagement.Response.Contractorlocationmodel;
 import com.proteam.projectstoremanagement.Response.LoginResponse;
 import com.proteam.projectstoremanagement.Response.PreviewResponsce;
 import com.proteam.projectstoremanagement.Response.PsmDataStatusHome;
+import com.proteam.projectstoremanagement.Response.RaiseIndentConfirmRequest;
 import com.proteam.projectstoremanagement.Response.StockMaterialNameResponse;
 
 import retrofit2.Call;
@@ -81,5 +82,8 @@ public interface PsmApi {
     @POST("Clients_apis/preview_boq_indents")
     Call<PreviewResponsce> preview(@Body RaiseIndentPreview preview);
 
+
+    @POST("Clients_apis/submit_boq_indents")
+    Call<Generalresponce> confirmraiseindent(@Body RaiseIndentConfirmRequest raiseIndentConfirmRequest);
 
 }
