@@ -20,8 +20,8 @@ import com.proteam.projectstoremanagement.Request.Indentstatusrequest;
 import com.proteam.projectstoremanagement.Request.MaterialStockDeleteRequest;
 import com.proteam.projectstoremanagement.Request.PendingIndentRequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
+import com.proteam.projectstoremanagement.Request.RaiseIndentPreview;
 import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
-import com.proteam.projectstoremanagement.Response.RaiseIndentConfirmRequest;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
 import com.proteam.projectstoremanagement.Utils.PsmApi;
 
@@ -58,7 +58,7 @@ public class WebServices<T> {
 
     public enum ApiType {
        general,login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus,materialstock,
-        materialstockname,deletestockMhome,addmaterial,confirmRaiseIndent
+        materialstockname,deletestockMhome,addmaterial,priview
     }
 
     String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
@@ -519,15 +519,13 @@ public class WebServices<T> {
 
     }
 
-
-    public void confirmRaiseIndent( ApiType apiTypes, RaiseIndentConfirmRequest raiseIndentConfirmRequest) {
+    public void prevewapi( ApiType apiTypes, RaiseIndentPreview raiseIndentPreview) {
         apiTypeVariable = apiTypes;
         Retrofit retrofit=getRetrofitClient(BaseUrl);
 
-
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
-        call=(Call<T>)psmApi.confirmraiseindent(raiseIndentConfirmRequest);
+        call=(Call<T>)psmApi.preview(raiseIndentPreview);
 
         call.enqueue(new Callback<T>() {
             @Override
@@ -544,6 +542,7 @@ public class WebServices<T> {
         });
 
     }
+
 
 
 }

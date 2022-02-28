@@ -71,9 +71,9 @@ public class RaiseIndentAdapter extends ArrayAdapter<RaiseIndentModel> {
             @Override
             public void onClick(View v) {
 
-                //mCallback.onChange1(raisequy.getText().toString(),position);
+                mCallback.onChange1(raisequy.getText().toString(),position);
 
-                opengcadminDialog(raisequy.getText().toString());
+               // opengcadminDialog(raisequy.getText().toString());
 
             }
         });
@@ -121,9 +121,7 @@ public class RaiseIndentAdapter extends ArrayAdapter<RaiseIndentModel> {
         Button bt_submit = dialog.findViewById(R.id.btn_gc_submit);
 
 
-
         Boolean state = false;
-
 
         bt_submit.setOnClickListener(new View.OnClickListener() {
             @Override

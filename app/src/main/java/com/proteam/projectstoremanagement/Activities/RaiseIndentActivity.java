@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.drm.DrmStore;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -27,10 +28,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.proteam.projectstoremanagement.Adapters.RaiseIndentAdapter;
+import com.proteam.projectstoremanagement.Model.Previewmodel;
 import com.proteam.projectstoremanagement.Model.RaiseIndentModel;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
+import com.proteam.projectstoremanagement.Request.RaiseIndentPreview;
+import com.proteam.projectstoremanagement.Request.RaiseIndentPreviewResponse;
+import com.proteam.projectstoremanagement.Request.Raiseintentdataitems;
 import com.proteam.projectstoremanagement.Response.Boqlist;
+import com.proteam.projectstoremanagement.Response.Generalresponce;
+import com.proteam.projectstoremanagement.Response.PreviewResponsce;
 import com.proteam.projectstoremanagement.Utils.OnChange;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
 import com.proteam.projectstoremanagement.WebServices;
@@ -49,7 +56,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
     List boqcomponentslist = new ArrayList();
     final ArrayList<RaiseIndentModel> arrayList = new ArrayList<RaiseIndentModel>();
-    String location,sublocation,contrctorname,stor,location_id,sublocation_id,contrctorname_id,date,workorderno;
+    String location,sublocation,contrctorname,storeid,location_id,sublocation_id,contrctorname_id,date,workorderno;
     ProgressDialog progressDialog;
 
     @Override
@@ -61,7 +68,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
         SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
-        stor = sharedPreferences.getString("store_id",null);
+        storeid = sharedPreferences.getString("store_id",null);
 
 
         Bundle bundle = getIntent().getExtras();
@@ -81,7 +88,6 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
     private void initialize()
     {
 
-
         tv_indent_date=findViewById(R.id.tv_indent_date);
         tv_sublocation_name=findViewById(R.id.tv_sublocation_name);
         tv_location_name=findViewById(R.id.tv_location_name);
@@ -98,7 +104,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
         tv_sublocation_name.setText(sublocation);
         tv_indent_date.setText(date);
         tv_work_order_number.setText(workorderno);
-        callboqupdateapi();
+
 
     }
 
@@ -114,9 +120,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-                //Boqrequest boqrequest = new Boqrequest(stor,location,sublocation);
-
-                Boqrequest boqrequest = new Boqrequest("10", "2", "2");
+                Boqrequest boqrequest = new Boqrequest(storeid, location_id, sublocation_id);
                 WebServices<Boqlist> webServices = new WebServices<Boqlist>(RaiseIndentActivity.this);
                 webServices.boqapi(WebServices.ApiType.boq, boqrequest);
             }
@@ -124,9 +128,47 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
     }
 
+    private void callpreviewapi() {
+
+        progressDialog=new ProgressDialog(RaiseIndentActivity.this);
+
+        if(progressDialog!=null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+                ArrayList<Raiseintentdataitems> itemslist = new ArrayList<>();
+
+                for(int i=0;i<arrayList.size();i++){
+
+                    itemslist.add(new Raiseintentdataitems(arrayList.get(i).getMaterial_id(),arrayList.get(i).getBoqbalance(),arrayList.get(i).getRaiseqty()));
+
+
+                }
+
+
+                ArrayList<RaiseIndentPreviewResponse> locationdetail = new ArrayList<RaiseIndentPreviewResponse>();
+
+                locationdetail.add(new RaiseIndentPreviewResponse(contrctorname_id,location_id,sublocation_id,workorderno,date,storeid,"72","success"));
+
+
+
+                RaiseIndentPreview raiseIndentPreview1 = new RaiseIndentPreview(locationdetail,itemslist);
+                WebServices<Boqlist> webServices = new WebServices<Boqlist>(RaiseIndentActivity.this);
+                webServices.prevewapi(WebServices.ApiType.priview, raiseIndentPreview1);
+            }
+        }
+
+    }
+
+
+
     @Override
     protected void onResume() {
         super.onResume();
+
+        callboqupdateapi();
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -160,8 +202,9 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
         switch (view.getId())
         {
             case R.id.btn_indent_preview:
-                Intent intent = new Intent(RaiseIndentActivity.this,UpateIndentActivity.class);
-                startActivity(intent);
+                //callpreviewapi();
+
+                callpreviewapi();
                 break;
         }
 
@@ -190,7 +233,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                         for (int i=0;i<boqcomponentslist.size();i++){
 
-                            arrayList.add(new RaiseIndentModel(boqlist.getBoq_list().get(i).getMaterial_manual_id(),boqlist.getBoq_list().get(i).getMaterial_name(),boqlist.getBoq_list().get(i).getBalance_boq(),boqlist.getBoq_list().get(i).getQty()));
+                            arrayList.add(new RaiseIndentModel(boqlist.getBoq_list().get(i).getMaterial_manual_id(),boqlist.getBoq_list().get(i).getMaterial_name(),boqlist.getBoq_list().get(i).getBalance_boq(),boqlist.getBoq_list().get(i).getQty(),boqlist.getBoq_list().get(i).getMaterial_id()));
 
                         }
 
@@ -204,6 +247,57 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                 }
                 break;
 
+            case priview:
+
+            if (isSucces) {
+
+                if(response!=null) {
+
+
+
+                    PreviewResponsce previewResponsce = (PreviewResponsce) response;
+
+
+                    ArrayList prviewlist = new ArrayList();
+                    List list = new ArrayList();
+
+                    list = previewResponsce.getMaterial_details();
+
+                    for (int i=0;i<list.size();i++){
+
+                        prviewlist.add( previewResponsce.getMaterial_details().get(i).getMaterial_name()+"--"+
+                                previewResponsce.getMaterial_details().get(i).getMaterial_id()+"--"+
+                                previewResponsce.getMaterial_details().get(i).getIndent_id()+"--"+
+                                previewResponsce.getMaterial_details().get(i).getBoq_qty()+"--"+
+                                previewResponsce.getMaterial_details().get(i).getIndent_qty()+"--"+
+                                previewResponsce.getMaterial_details().get(i).getBoq_balance_qty()+"--"+
+                                previewResponsce.getMaterial_details().get(i).getClosing_stock()+"--"+
+                                previewResponsce.getMaterial_details().get(i).getMaterial_manual_id());
+
+
+                    }
+
+
+
+
+                    Intent intent = new Intent(RaiseIndentActivity.this,UpateIndentActivity.class);
+
+                    intent.putExtra("arraylist", prviewlist);
+                    startActivity(intent);
+
+
+                }
+                else
+                {
+                    Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
+                }
+
+            } else
+            {
+                Toast.makeText(this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+
+
         }
     }
 
@@ -211,9 +305,10 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
         if(text.equals("")){
 
-            /*RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(this, arrayList,this);
+            RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(this, arrayList,this);
             ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
-            pendingindentstatus.setAdapter(numbersArrayAdapter);*/
+            pendingindentstatus.setAdapter(numbersArrayAdapter);
+
         }else {
 
             temp.clear();
@@ -223,9 +318,8 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                 RaiseIndentModel model = arrayList.get(i);
 
-
                 if(boqlist.getBoq_list().get(i).getMaterial_name().toLowerCase().trim().contains(text.toLowerCase().trim())){
-                    temp.add(new RaiseIndentModel(model.getMaterialcode(),model.getMaterialname(),model.getBoqbalance(),model.getRaiseqty()));
+                    temp.add(new RaiseIndentModel(model.getMaterialcode(),model.getMaterialname(),model.getBoqbalance(),model.getRaiseqty(),model.getMaterial_id()));
                 }
             }
 
@@ -235,47 +329,68 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
         }
 
-        //update recyclerview
-       // pendingindentstatus.updateList(temp);
+
     }
 
 
     @Override
     public void onChange1(String value, int position) {
 
-
-       /* if(search.getText().toString().equals("")){
-
-            //arrayList.set(position, new RaiseIndentModel(arrayList.get(position).getMaterialcode(),arrayList.get(position).getMaterialname(),arrayList.get(position).getBoqbalance(),value));
-
-            //System.out.println("notext "+value+"  "+position);
-
-        }else {
-
-            RaiseIndentModel model1 = temp.get(position);
-
-            String mcode=model1.getMaterialcode();
-
-            for(int i=0;i<arrayList.size();i++){
-
-                if(arrayList.get(i).getMaterialcode().equalsIgnoreCase(mcode)){
-
-                    arrayList.set(i, new RaiseIndentModel(arrayList.get(i).getMaterialcode(),arrayList.get(i).getMaterialname(),arrayList.get(i).getBoqbalance(),value));
-
-                   // System.out.println("search text "+value+"  "+position);
-
-                }
-
-            }
-
-        }*/
-
-        //opengcadminDialog(value);
-
+        opengcadminDialog(value,position);
 
 
     }
 
+    private void opengcadminDialog(String value,int position) {
+        final Dialog dialog =new Dialog(this);
+
+        dialog.setContentView(R.layout.dialog_gcadmincount);
+        dialog.show();
+
+        EditText et_count = dialog.findViewById(R.id.edt_gc_count);
+        et_count.setText(value);
+
+        Button bt_submit = dialog.findViewById(R.id.btn_gc_submit);
+
+        Boolean state = false;
+
+        bt_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(search.getText().toString().equals("")){
+
+                    arrayList.set(position, new RaiseIndentModel(arrayList.get(position).getMaterialcode(),arrayList.get(position).getMaterialname(),arrayList.get(position).getBoqbalance(),et_count.getText().toString(),arrayList.get(position).getMaterial_id()));
+
+                    RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(RaiseIndentActivity.this, arrayList,RaiseIndentActivity.this);
+                    ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
+                    pendingindentstatus.setAdapter(numbersArrayAdapter);
+
+                    dialog.dismiss();
+
+                }else {
+
+                    RaiseIndentModel model = temp.get(position);
+
+                    for(int i=0;i<arrayList.size();i++){
+
+                        if(arrayList.get(i).getMaterialcode().equals(temp.get(position).getMaterialcode())){
+
+                            arrayList.set(i, new RaiseIndentModel(arrayList.get(i).getMaterialcode(),arrayList.get(i).getMaterialname(),arrayList.get(i).getBoqbalance(),et_count.getText().toString(),arrayList.get(i).getMaterial_id()));
+
+                            RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(RaiseIndentActivity.this, arrayList,RaiseIndentActivity.this);
+                            ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
+                            pendingindentstatus.setAdapter(numbersArrayAdapter);
+
+                            dialog.dismiss();
+                        }
+                    }
+                }
+
+            }
+        });
+
+    }
 
 
 }

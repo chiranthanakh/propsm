@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.proteam.projectstoremanagement.Adapters.RaiseIndentAdapter;
 import com.proteam.projectstoremanagement.Adapters.UpdateIndentAdapter;
+import com.proteam.projectstoremanagement.Model.Previewmodel;
 import com.proteam.projectstoremanagement.Model.RaiseIndentModel;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
@@ -37,6 +39,7 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
     List boqcomponentslist = new ArrayList();
     final ArrayList<RaiseIndentModel> arrayList = new ArrayList<RaiseIndentModel>();
     ProgressDialog progressDialog;
+    String location_id,sublocation_id,store_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,22 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
         mToolbar.setOnClickListener(view -> onBackPressed());
 
 
+        ArrayList list = (ArrayList) getIntent().getSerializableExtra("arraylist");
+
+        for (int i=0;i<list.size();i++){
+
+            String[] data = String.valueOf(list.get(i)).split("--");
+
+            arrayList.add(new RaiseIndentModel(data[2],data[0],data[5],data[3],data[1]));
+
+
+        }
+
+
+        /*Bundle bundle = getIntent().getExtras();
+         location_id = bundle.getString("location_id");
+         sublocation_id =bundle.getString("sublocation_id");
+         store_id = bundle.getString("storeid");*/
 
         initilize();
 
@@ -75,7 +94,8 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
                 progressDialog.show();
 
 
-                Boqrequest boqrequest = new Boqrequest("10", "2", "2");
+
+                Boqrequest boqrequest = new Boqrequest("10","2","2");
                 WebServices<Boqlist> webServices = new WebServices<Boqlist>(UpateIndentActivity.this);
                 webServices.boqapi(WebServices.ApiType.boq, boqrequest);
             }
@@ -137,7 +157,7 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
 
                         for (int i=0;i<boqcomponentslist.size();i++){
 
-                            arrayList.add(new RaiseIndentModel(boqlist.getBoq_list().get(i).getMaterial_manual_id(),boqlist.getBoq_list().get(i).getMaterial_name(),boqlist.getBoq_list().get(i).getBalance_boq(),boqlist.getBoq_list().get(i).getQty()));
+                           // arrayList.add(new RaiseIndentModel(boqlist.getBoq_list().get(i).getMaterial_manual_id(),boqlist.getBoq_list().get(i).getMaterial_name(),boqlist.getBoq_list().get(i).getBalance_boq(),boqlist.getBoq_list().get(i).getQty()));
 
                         }
 
