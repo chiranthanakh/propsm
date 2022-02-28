@@ -17,14 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.proteam.projectstoremanagement.Adapters.PendingIndentAdapter;
-import com.proteam.projectstoremanagement.Adapters.UpdateIndentAdapter;
 import com.proteam.projectstoremanagement.Model.PendingIndentModel;
-import com.proteam.projectstoremanagement.Model.RaiseIndentModel;
 import com.proteam.projectstoremanagement.R;
-import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
-import com.proteam.projectstoremanagement.Request.PendingIndentRequest;
-import com.proteam.projectstoremanagement.Response.Boqlist;
+import com.proteam.projectstoremanagement.Request.PendingIntentupdaterequest;
 import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Response.Indentpending;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
@@ -216,6 +212,9 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
                         tv_p_workordernumber.setText(indentpending.getIndent_list().get(0).getWork_order_no());
                         tv_p_status.setText(indentpending.getIndent_list().get(0).getStatus());
                         tv_p_indentdate.setText(indentpending.getIndent_list().get(0).getIndent_date());
+
+
+
                     }
 
                 }

@@ -573,11 +573,76 @@
                     android:backgroundTint="@color/grey_dark"
                     android:theme="@style/LightTheme"/>
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_Indent_approved"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Approved"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:fontFamily="@font/proxima_nova_bold"
+                    android:backgroundTint="#8fc74a"
+                    android:textColor="@color/white">
+                </androidx.appcompat.widget.AppCompatButton>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_Indent_rejected"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Rejected"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:fontFamily="@font/proxima_nova_bold"
+                    android:backgroundTint="@color/red_light"
+                    android:textColor="@color/white">
+                </androidx.appcompat.widget.AppCompatButton>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_Indent_issued"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Issued"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:fontFamily="@font/proxima_nova_bold"
+                    android:backgroundTint="@color/grey_light"
+                    android:textColor="@color/white">
+                </androidx.appcompat.widget.AppCompatButton>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_Indent_InProgress"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="InProgress"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:fontFamily="@font/proxima_nova_bold"
+                    android:backgroundTint="#8fc74a"
+                    android:textColor="@color/white">
+                </androidx.appcompat.widget.AppCompatButton>
                 <LinearLayout
                     android:paddingBottom="60dp"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <androidx.appcompat.widget.AppCompatButton
                         android:insetTop="0dp"
                         android:insetBottom="0dp"
@@ -586,15 +651,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
                         android:text="Approve"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
                         android:fontFamily="@font/proxima_nova_bold"
                         android:backgroundTint="#8fc74a"
                         android:textColor="@color/white">
-
                     </androidx.appcompat.widget.AppCompatButton>
+
                     <androidx.appcompat.widget.AppCompatButton
                         android:insetTop="0dp"
                         android:insetBottom="0dp"
@@ -602,7 +666,7 @@
                         android:layout_height="50dp"
                         android:id="@+id/btn_reject"
                         android:layout_weight="1"
-                        android:layout_marginStart="10dp"
+
                         android:layout_marginEnd="10dp"
                         android:text="Reject"
                         android:layout_alignParentEnd="true"
@@ -610,7 +674,6 @@
                         android:fontFamily="@font/proxima_nova_bold"
                         android:backgroundTint="@color/red_light"
                         android:textColor="@color/white">
-
                     </androidx.appcompat.widget.AppCompatButton>
                 </LinearLayout>
 

@@ -117,7 +117,6 @@
 
                         android:layout_marginEnd="10dp"
                         android:background="@drawable/spinner_background"
-                        android:entries="@array/contactor"
                         android:fontFamily="@font/lato_bold"
                         android:gravity="center_vertical"
                         android:textColor="@color/black"

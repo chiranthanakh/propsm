@@ -64,17 +64,17 @@ public class PendingIndentListAdapter extends ArrayAdapter<PendingIndentListMode
             iv_image.setVisibility(View.VISIBLE);
         }else if(currentNumberPosition.getStatus().equalsIgnoreCase("Approved")){
             pending_indent_status.setTextColor(Color.parseColor("#81c784"));
-            iv_image.setVisibility(View.GONE);
+            iv_image.setVisibility(View.VISIBLE);
         }else  if(currentNumberPosition.getStatus().equalsIgnoreCase("Rejected")){
             pending_indent_status.setTextColor(Color.parseColor("#e57373"));
-            iv_image.setVisibility(View.GONE);
+            iv_image.setVisibility(View.VISIBLE);
         }else  if(currentNumberPosition.getStatus().equalsIgnoreCase("InProgress")){
             pending_indent_status.setTextColor(Color.parseColor("#81c784"));
-            iv_image.setVisibility(View.GONE);
+            iv_image.setVisibility(View.VISIBLE);
         }else if(currentNumberPosition.getStatus().equalsIgnoreCase("Issued"))
         {
             pending_indent_status.setTextColor(Color.parseColor("#696969"));
-            iv_image.setVisibility(View.GONE);
+            iv_image.setVisibility(View.VISIBLE);
         }
 
         View finalCurrentItemView = currentItemView;

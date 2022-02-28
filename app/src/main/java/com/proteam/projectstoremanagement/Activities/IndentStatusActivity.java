@@ -16,6 +16,9 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.proteam.projectstoremanagement.Adapters.IndentStatusAdapter;
 import com.proteam.projectstoremanagement.Adapters.PendingIndentListAdapter;
@@ -38,6 +41,7 @@ import java.util.List;
 public class IndentStatusActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
     ImageView mToolbar,iv_indent_filter;
 
+    BottomNavigationItemView nav_home,nav_Individual_indent,nav_consumption;
 
     FloatingActionButton fab_add_raise;
     ListView indent_status_listView;
@@ -83,6 +87,13 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
         indent_status_listView=findViewById(R.id.indent_status_listView);
         iv_indent_filter=findViewById(R.id.iv_indent_filter);
         iv_indent_filter.setOnClickListener(this);
+
+        nav_home=findViewById(R.id.nav_home);
+        nav_home.setOnClickListener(this);
+        nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
+        nav_Individual_indent.setOnClickListener(this);
+        nav_consumption=findViewById(R.id.nav_consumption);
+        nav_consumption.setOnClickListener(this);
     }
 
 
@@ -113,6 +124,21 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         switch (view.getId())
         {
+            case R.id.nav_consumption:
+                Intent intentConList = new Intent(IndentStatusActivity.this,ConsumptionListActivity.class);
+                startActivity(intentConList);
+                finishAndRemoveTask();
+                break;
+            case R.id.nav_Individual_indent:
+                Intent intentIndividual = new Intent(IndentStatusActivity.this,IndividualIndentListActivity.class);
+                startActivity(intentIndividual);
+                finishAndRemoveTask();
+                break;
+            case R.id.nav_home:
+                Intent intentHome = new Intent(IndentStatusActivity.this,MainActivity.class);
+                startActivity(intentHome);
+                finishAndRemoveTask();
+                break;
             case R.id.fab_add_raise:
                 Intent intent = new Intent(IndentStatusActivity.this,CreateIndentActivity.class);
                 startActivity(intent);

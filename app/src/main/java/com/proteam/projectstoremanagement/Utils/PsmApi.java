@@ -1,6 +1,6 @@
 package com.proteam.projectstoremanagement.Utils;
 
-import com.proteam.projectstoremanagement.Activities.PendingIntentupdaterequest;
+import com.proteam.projectstoremanagement.Request.PendingIntentupdaterequest;
 import com.proteam.projectstoremanagement.Model.ConSubLocationModel;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
 import com.proteam.projectstoremanagement.Model.MaterialStockModel;
