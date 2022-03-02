@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.proteam.projectstoremanagement.R;
 
 import java.text.SimpleDateFormat;
@@ -22,6 +23,8 @@ import java.util.Calendar;
 
 public class IndividualIndentActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView mToolbar;
+    BottomNavigationItemView nav_home,nav_boq_indent,nav_Individual_indent,nav_consumption;
+
     int mMonth,mDay,mYear;
     Spinner sp_indi_contractorName,sp_indi_location,sp_indi_sublocation;
     EditText edt_indi_date,edt_indi_orderNumber,edt_indi_remarks;
@@ -55,6 +58,15 @@ public class IndividualIndentActivity extends AppCompatActivity implements View.
         btn_indi_submit=findViewById(R.id.btn_indi_submit);
         btn_indi_submit.setOnClickListener(this);
 
+        nav_home=findViewById(R.id.nav_home);
+        nav_home.setOnClickListener(this);
+        nav_boq_indent=findViewById(R.id.nav_boq_indent);
+        nav_boq_indent.setOnClickListener(this);
+        nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
+        nav_Individual_indent.setOnClickListener(this);
+        nav_consumption=findViewById(R.id.nav_consumption);
+        nav_consumption.setOnClickListener(this);
+
 
     }
 
@@ -62,10 +74,31 @@ public class IndividualIndentActivity extends AppCompatActivity implements View.
     public void onClick(View view) {
         switch (view.getId())
         {
+            case R.id.nav_home:
+                Intent hoIntent = new Intent(IndividualIndentActivity.this,MainActivity.class);
+                startActivity(hoIntent);
+                finishAffinity();
+                break;
+            case R.id.nav_boq_indent:
+                Intent boIntent = new Intent(IndividualIndentActivity.this,IndentStatusActivity.class);
+                startActivity(boIntent);
+                finishAffinity();
+                break;
+            case R.id.nav_Individual_indent:
+                Intent Intentindi = new Intent(IndividualIndentActivity.this,IndividualIndentListActivity.class);
+                startActivity(Intentindi);
+                finishAffinity();
+                break;
+            case R.id.nav_consumption:
+                Intent Intentcon = new Intent(IndividualIndentActivity.this,ConsumptionListActivity.class);
+                startActivity(Intentcon);
+                finishAffinity();
+                break;
             case R.id.btn_indi_submit:
                 Intent intentsubmit = new Intent(IndividualIndentActivity.this,IndividualIndentMaterialActivity.class);
                 startActivity(intentsubmit);
                 break;
+
             case R.id.edt_indi_date:
                 final Calendar c = Calendar.getInstance();
                 mYear = c.get(Calendar.YEAR);

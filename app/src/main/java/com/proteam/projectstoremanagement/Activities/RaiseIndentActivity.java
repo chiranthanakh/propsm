@@ -216,23 +216,23 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
             case R.id.nav_consumption:
                 Intent intentConList = new Intent(RaiseIndentActivity.this,ConsumptionListActivity.class);
                 startActivity(intentConList);
-                finishAndRemoveTask();
+                finishAffinity();
                 break;
             case R.id.nav_Individual_indent:
                 Intent intentIndividual = new Intent(RaiseIndentActivity.this,IndividualIndentListActivity.class);
                 startActivity(intentIndividual);
-                finishAndRemoveTask();
+                finishAffinity();
                 break;
             case R.id.nav_home:
                 Intent intentHome = new Intent(RaiseIndentActivity.this,MainActivity.class);
                 startActivity(intentHome);
-                finishAndRemoveTask();
+                finishAffinity();
                 break;
 
             case R.id.nav_boq_indent:
                 Intent intentBoq = new Intent(RaiseIndentActivity.this,IndentStatusActivity.class);
                 startActivity(intentBoq);
-                finishAndRemoveTask();
+                finishAffinity();
                 break;
             case R.id.btn_indent_preview:
                 //callpreviewapi();

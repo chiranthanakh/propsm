@@ -163,22 +163,22 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
             case R.id.nav_boq_indent:
                 Intent intentIndentStatus = new Intent(CreateIndentActivity.this,IndentStatusActivity.class);
                 startActivity(intentIndentStatus);
-                finishAndRemoveTask();
+                finishAffinity();
                 break;
             case R.id.nav_consumption:
                 Intent intentConList = new Intent(CreateIndentActivity.this,ConsumptionListActivity.class);
                 startActivity(intentConList);
-                finishAndRemoveTask();
+                finishAffinity();
                 break;
             case R.id.nav_Individual_indent:
                 Intent intentIndividual = new Intent(CreateIndentActivity.this,IndividualIndentListActivity.class);
                 startActivity(intentIndividual);
-                finishAndRemoveTask();
+                finishAffinity();
                 break;
             case R.id.nav_home:
                 Intent intentHome = new Intent(CreateIndentActivity.this,MainActivity.class);
                 startActivity(intentHome);
-                finishAndRemoveTask();
+                finishAffinity();
                 break;
 
             case R.id.btn_indent_generate:

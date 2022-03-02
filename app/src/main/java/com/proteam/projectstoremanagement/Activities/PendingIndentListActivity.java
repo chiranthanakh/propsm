@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.proteam.projectstoremanagement.Adapters.PendingIndentListAdapter;
 import com.proteam.projectstoremanagement.Model.PendingIndentListModel;
 import com.proteam.projectstoremanagement.Response.PendingIndentList;
@@ -27,6 +29,8 @@ import java.util.List;
 
 public class PendingIndentListActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
     ImageView mToolbar, filter;
+    BottomNavigationItemView nav_home,nav_boq_indent,nav_Individual_indent,nav_consumption;
+
     LinearLayout ll_status_click;
     ListView lv_pending_indent_list;
 
@@ -72,7 +76,14 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
         lv_pending_indent_list=findViewById(R.id.lv_pending_indent_list);
         filter = findViewById(R.id.iv_filter);
         filter.setOnClickListener(this);
-
+        nav_home=findViewById(R.id.nav_home);
+        nav_home.setOnClickListener(this);
+        nav_boq_indent=findViewById(R.id.nav_boq_indent);
+        nav_boq_indent.setOnClickListener(this);
+        nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
+        nav_Individual_indent.setOnClickListener(this);
+        nav_consumption=findViewById(R.id.nav_consumption);
+        nav_consumption.setOnClickListener(this);
     }
 
     private void callpendingindentapi() {
@@ -96,6 +107,26 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
     {
         switch (view.getId())
         {
+            case R.id.nav_home:
+                Intent Intenthome = new Intent(PendingIndentListActivity.this,MainActivity.class);
+                startActivity(Intenthome);
+                finishAffinity();
+                break;
+            case R.id.nav_boq_indent:
+                Intent Intentboq = new Intent(PendingIndentListActivity.this,IndentStatusActivity.class);
+                startActivity(Intentboq);
+                finishAffinity();
+                break;
+            case R.id.nav_Individual_indent:
+                Intent Intentindi = new Intent(PendingIndentListActivity.this,IndividualIndentListActivity.class);
+                startActivity(Intentindi);
+                finishAffinity();
+                break;
+            case R.id.nav_consumption:
+                Intent Intentcon = new Intent(PendingIndentListActivity.this,ConsumptionListActivity.class);
+                startActivity(Intentcon);
+                finishAffinity();
+                break;
 
         /*    case R.id.ll_status_click:
                 Intent intent = new Intent(PendingIndentListActivity.this,PendingIndentActivity.class);

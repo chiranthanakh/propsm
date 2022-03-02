@@ -2,6 +2,7 @@ package com.proteam.projectstoremanagement.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.proteam.projectstoremanagement.Adapters.IndividualIndentMaterialAdapter;
 import com.proteam.projectstoremanagement.Model.IndentStatusModel;
 import com.proteam.projectstoremanagement.Model.IndividualIndentMaterialModel;
@@ -18,8 +20,10 @@ import com.proteam.projectstoremanagement.R;
 
 import java.util.ArrayList;
 
-public class IndividualIndentMaterialActivity extends AppCompatActivity {
+public class IndividualIndentMaterialActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView mToolbar;
+    BottomNavigationItemView nav_home,nav_boq_indent,nav_Individual_indent,nav_consumption;
+
     Spinner sp_indi_material;
     ListView lv_individual_in_material;
     @Override
@@ -70,6 +74,45 @@ public class IndividualIndentMaterialActivity extends AppCompatActivity {
     {
         sp_indi_material=findViewById(R.id.sp_indi_material);
         lv_individual_in_material=findViewById(R.id.lv_individual_in_material);
+        nav_home=findViewById(R.id.nav_home);
+        nav_home.setOnClickListener(this);
+        nav_boq_indent=findViewById(R.id.nav_boq_indent);
+        nav_boq_indent.setOnClickListener(this);
+        nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
+        nav_Individual_indent.setOnClickListener(this);
+        nav_consumption=findViewById(R.id.nav_consumption);
+        nav_consumption.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId())
+        {
+            case R.id.nav_home:
+                Intent IntentHome = new Intent(IndividualIndentMaterialActivity.this,MainActivity.class);
+                startActivity(IntentHome);
+               // finishAndRemoveTask();
+              finishAffinity();
+                break;
+            case R.id.nav_boq_indent:
+                Intent Intentboq = new Intent(IndividualIndentMaterialActivity.this,IndentStatusActivity.class);
+                startActivity(Intentboq);
+               // finishAndRemoveTask();
+                finishAffinity();
+                break;
+            case R.id.nav_Individual_indent:
+                Intent IntentIndi = new Intent(IndividualIndentMaterialActivity.this,IndividualIndentListActivity.class);
+                startActivity(IntentIndi);
+                //finishAndRemoveTask();
+                finishAffinity();
+                break;
+            case R.id.nav_consumption:
+                Intent Intentcon = new Intent(IndividualIndentMaterialActivity.this,ConsumptionListActivity.class);
+                startActivity(Intentcon);
+                //finishAndRemoveTask();
+                finishAffinity();
+                break;
+        }
     }
 
     private AdapterView.OnItemSelectedListener OnCatSpinnerCL = new AdapterView.OnItemSelectedListener() {
@@ -85,4 +128,6 @@ public class IndividualIndentMaterialActivity extends AppCompatActivity {
             ((TextView) parent.getChildAt(0)).setTextSize(14);
         }
     };
+
+
 }

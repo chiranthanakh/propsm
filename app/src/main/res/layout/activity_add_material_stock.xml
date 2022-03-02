@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".Activities.AddMaterialStockActivity">
 
     <LinearLayout
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#1A2562FC"
@@ -77,108 +78,108 @@
         </LinearLayout>
     </LinearLayout>
 
-    <androidx.core.widget.NestedScrollView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/top_bar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:layout_marginBottom="5dp"
-                        android:fontFamily="@font/proxima_family"
-                        android:padding="5dp"
-                        android:text="Material Name"
-                        android:textColor="@color/grey_dark"
-                        android:textSize="15sp" />
-
-                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                        android:id="@+id/sp_material_nameStock"
-                        android:layout_width="match_parent"
-                        android:layout_height="55dp"
-
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/spinner_background"
-                        android:fontFamily="@font/lato_bold"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/black"
-                        app:cancelButtonColor="@color/black"
-                        app:cancelButtontext="CLOSE"
-                        app:dialogTitle="Material Name"
-                        app:hintText="Select Material Name"
-                        app:onlyLightTheme="true" />
-
-                </LinearLayout>
-
-
-
-            </LinearLayout>
+            android:orientation="horizontal">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_add_material"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/proxima_family"
+                    android:padding="5dp"
+                    android:text="Material Name"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="15sp" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/sp_material_nameStock"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:backgroundTint="#8fc74a"
-                    android:text="Add Material"
-                    android:textColor="@color/white"
-                    android:textStyle="bold">
+                    android:layout_height="55dp"
 
-                </androidx.appcompat.widget.AppCompatButton>
-
-                <!-- <EditText
-                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                     android:textColor="@color/black"
-                     android:maxLines="5"
-                     android:textColorHint="@color/grey"
-                     android:fontFamily="@font/lato"
-                     app:hintTextColor="@color/black"
-                     android:textCursorDrawable="@drawable/cursor"
-                     android:drawableTint="@color/grey"
-                     android:layout_marginStart="10dp"
-                     android:layout_marginTop="10dp"
-                     android:textSize="15sp"
-                     android:layout_width="match_parent"
-                     android:layout_height="match_parent"
-                     android:hint="QTY"
-                     android:inputType="number"
-                     android:backgroundTint="@color/grey_dark"
-                     android:theme="@style/LightTheme"
-                     />-->
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/spinner_background"
+                    android:fontFamily="@font/lato_bold"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    app:cancelButtonColor="@color/black"
+                    app:cancelButtontext="CLOSE"
+                    app:dialogTitle="Material Name"
+                    app:hintText="Select Material Name"
+                    app:onlyLightTheme="true" />
 
             </LinearLayout>
 
 
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            android:orientation="vertical">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_add_material"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:backgroundTint="#8fc74a"
+                android:text="Add Material"
+                android:textColor="@color/white"
+                android:textStyle="bold">
+
+            </androidx.appcompat.widget.AppCompatButton>
+
+            <!-- <EditText
+                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                 android:textColor="@color/black"
+                 android:maxLines="5"
+                 android:textColorHint="@color/grey"
+                 android:fontFamily="@font/lato"
+                 app:hintTextColor="@color/black"
+                 android:textCursorDrawable="@drawable/cursor"
+                 android:drawableTint="@color/grey"
+                 android:layout_marginStart="10dp"
+                 android:layout_marginTop="10dp"
+                 android:textSize="15sp"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:hint="QTY"
+                 android:inputType="number"
+                 android:backgroundTint="@color/grey_dark"
+                 android:theme="@style/LightTheme"
+                 />-->
 
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
 
 
-</LinearLayout>
+    </LinearLayout>
+
+    <include
+        layout="@layout/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

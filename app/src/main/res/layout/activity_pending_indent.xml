@@ -82,8 +82,8 @@
     <LinearLayout
         app:layout_constraintTop_toBottomOf="@id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
+        android:layout_height="wrap_content"
+
         android:orientation="vertical">
 
         <androidx.core.widget.NestedScrollView
@@ -535,7 +535,7 @@
                 <LinearLayout
                     android:id="@+id/list_recy"
                     android:layout_width="match_parent"
-                    android:layout_height="165dp"
+                    android:layout_height="200dp"
                     android:orientation="vertical"
                     app:layout_constraintTop_toBottomOf="@id/data_table">
 
@@ -575,14 +575,15 @@
                     android:theme="@style/LightTheme"/>
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:visibility="gone"
                     android:id="@+id/btn_Indent_approved"
                     android:insetTop="0dp"
+                    android:layout_marginTop="30dp"
                     android:insetBottom="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:visibility="gone"
                     android:text="Approved"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
@@ -592,13 +593,14 @@
                 </androidx.appcompat.widget.AppCompatButton>
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:visibility="gone"
                     android:id="@+id/btn_Indent_rejected"
                     android:insetTop="0dp"
+                    android:layout_marginTop="30dp"
                     android:insetBottom="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:visibility="gone"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:text="Rejected"
@@ -615,6 +617,7 @@
                     android:insetBottom="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginTop="30dp"
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"
                     android:visibility="gone"
@@ -632,6 +635,7 @@
                     android:insetBottom="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginTop="30dp"
                     android:visibility="gone"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
@@ -643,10 +647,10 @@
                     android:textColor="@color/white">
                 </androidx.appcompat.widget.AppCompatButton>
                 <LinearLayout
-                    android:paddingBottom="60dp"
+                    android:visibility="gone"
+                    android:paddingBottom="120dp"
                     android:orientation="horizontal"
                     android:id="@+id/pending"
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -673,7 +677,6 @@
                         android:layout_height="50dp"
                         android:id="@+id/btn_reject"
                         android:layout_weight="1"
-
                         android:layout_marginEnd="10dp"
                         android:text="Reject"
                         android:layout_alignParentEnd="true"
@@ -690,6 +693,7 @@
     </LinearLayout>
 
     <include
+        android:id="@+id/nav_bar"
         layout="@layout/app_bar_layout"
         android:layout_width="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

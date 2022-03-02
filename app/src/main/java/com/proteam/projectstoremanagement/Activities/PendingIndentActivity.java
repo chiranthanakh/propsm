@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.proteam.projectstoremanagement.Adapters.PendingIndentAdapter;
 import com.proteam.projectstoremanagement.Model.PendingIndentModel;
 import com.proteam.projectstoremanagement.R;
@@ -33,6 +35,8 @@ import java.util.List;
 
 public class PendingIndentActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
     ImageView mToolbar;
+
+    BottomNavigationItemView nav_home,nav_boq_indent,nav_Individual_indent,nav_consumption;
 
     TextView tv_p_indent_number,tv_p_contractorName,tv_p_locationName,tv_p_sublocationName,
             tv_p_workordernumber,tv_p_status,tv_p_indentdate,tv_pending_indent_total_item;
@@ -71,7 +75,16 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    private void initilze() {
+    private void initilze()
+    {
+        nav_home=findViewById(R.id.nav_home);
+        nav_home.setOnClickListener(this);
+        nav_boq_indent=findViewById(R.id.nav_boq_indent);
+        nav_boq_indent.setOnClickListener(this);
+        nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
+        nav_Individual_indent.setOnClickListener(this);
+        nav_consumption=findViewById(R.id.nav_consumption);
+        nav_consumption.setOnClickListener(this);
 
         tv_pending_indent_total_item=findViewById(R.id.tv_pending_indent_total_item);
 
@@ -138,7 +151,28 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()) {
+        switch (v.getId())
+        {
+            case R.id.nav_home:
+                Intent Intenthome = new Intent(PendingIndentActivity.this,MainActivity.class);
+                startActivity(Intenthome);
+                finishAffinity();
+                break;
+            case R.id.nav_boq_indent:
+                Intent Intentboq = new Intent(PendingIndentActivity.this,IndentStatusActivity.class);
+                startActivity(Intentboq);
+                finishAffinity();
+                break;
+            case R.id.nav_Individual_indent:
+                Intent Intentindi = new Intent(PendingIndentActivity.this,IndividualIndentListActivity.class);
+                startActivity(Intentindi);
+                finishAffinity();
+                break;
+            case R.id.nav_consumption:
+                Intent IntentCon = new Intent(PendingIndentActivity.this,ConsumptionListActivity.class);
+                startActivity(IntentCon);
+                finishAffinity();
+                break;
 
             case R.id.btn_approve:
 

@@ -127,17 +127,17 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
             case R.id.nav_consumption:
                 Intent intentConList = new Intent(IndentStatusActivity.this,ConsumptionListActivity.class);
                 startActivity(intentConList);
-                finishAndRemoveTask();
+                finishAffinity();
                 break;
             case R.id.nav_Individual_indent:
                 Intent intentIndividual = new Intent(IndentStatusActivity.this,IndividualIndentListActivity.class);
                 startActivity(intentIndividual);
-                finishAndRemoveTask();
+                finishAffinity();
                 break;
             case R.id.nav_home:
                 Intent intentHome = new Intent(IndentStatusActivity.this,MainActivity.class);
                 startActivity(intentHome);
-                finishAndRemoveTask();
+                finishAffinity();
                 break;
             case R.id.fab_add_raise:
                 Intent intent = new Intent(IndentStatusActivity.this,CreateIndentActivity.class);
