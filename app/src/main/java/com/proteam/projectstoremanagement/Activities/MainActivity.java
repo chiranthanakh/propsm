@@ -159,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_raise_boq_indent = findViewById(R.id.tv_raise_boq_indent);
         tv_individual_indent = findViewById(R.id.tv_individual_indent);
         tv_pending_indent = findViewById(R.id.tv_pending_indent);
-        tv_consumption = findViewById(R.id.tv_consumption);
         tv_consumption_list = findViewById(R.id.tv_consumption_list);
 
         btn_change_pass = findViewById(R.id.btn_change_pass);
@@ -178,7 +177,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_raise_boq_indent.setOnClickListener(this);
         tv_individual_indent.setOnClickListener(this);
         tv_pending_indent.setOnClickListener(this);
-        tv_consumption.setOnClickListener(this);
         tv_consumption_list.setOnClickListener(this);
         callboqupdateapi();
         // callmaterialstockapi();
@@ -244,7 +242,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_consumption:
-                Intent intentconhome = new Intent(MainActivity.this, CreateConsumptionActivity.class);
+            case R.id.tv_consumption_list:
+                Intent intentconhome = new Intent(MainActivity.this, ConsumptionListActivity.class);
                 startActivity(intentconhome);
                 break;
             case R.id.iv_nav_view:
@@ -269,10 +268,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_individual_indent:
                 Intent intentindividual = new Intent(MainActivity.this, IndividualIndentListActivity.class);
                 startActivity(intentindividual);
-                break;
-            case R.id.tv_consumption:
-                Intent intentCon = new Intent(MainActivity.this, CreateConsumptionActivity.class);
-                startActivity(intentCon);
                 break;
             case R.id.iv_add_material:
                 Intent intentAddM = new Intent(MainActivity.this, AddMaterialStockActivity.class);

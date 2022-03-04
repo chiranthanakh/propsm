@@ -1,5 +1,7 @@
 package com.proteam.projectstoremanagement.Utils;
 
+import com.proteam.projectstoremanagement.Request.ConsumptionDetailsRequest;
+import com.proteam.projectstoremanagement.Request.ConsumptionListRequest;
 import com.proteam.projectstoremanagement.Request.PendingIntentupdaterequest;
 import com.proteam.projectstoremanagement.Model.ConSubLocationModel;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
@@ -11,6 +13,8 @@ import com.proteam.projectstoremanagement.Request.MaterialStockDeleteRequest;
 import com.proteam.projectstoremanagement.Request.MaterialStockRequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Request.RaiseIndentPreview;
+import com.proteam.projectstoremanagement.Response.ConsumptionDetailsDataResponse;
+import com.proteam.projectstoremanagement.Response.ConsumptionListResponse;
 import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Response.IndentStatusdirectlist;
 import com.proteam.projectstoremanagement.Response.IndentStatuslist;
@@ -86,4 +90,10 @@ public interface PsmApi {
     @POST("Clients_apis/submit_boq_indents")
     Call<Generalresponce> confirmraiseindent(@Body RaiseIndentConfirmRequest raiseIndentConfirmRequest);
 
+    @POST("Clients_apis/client_consumption_list")
+    Call<ConsumptionListResponse> consumptionlistdata(@Body ConsumptionListRequest consumptionListRequest);
+
+
+    @POST("Clients_apis/consumption_list_single_data")
+    Call<ConsumptionDetailsDataResponse> ConsumptionDataDetails(@Body ConsumptionDetailsRequest consumptionDetailsRequest);
 }
