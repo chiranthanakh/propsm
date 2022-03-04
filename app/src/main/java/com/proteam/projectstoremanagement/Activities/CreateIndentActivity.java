@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.proteam.projectstoremanagement.Model.ConSubLocationModel;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
@@ -39,6 +40,9 @@ import java.util.Map;
 
 public class CreateIndentActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
     ImageView mToolbar;
+
+    BottomNavigationItemView nav_home,nav_Individual_indent,nav_consumption,nav_boq_indent;
+
     int mMonth,mDay,mYear;
     Spinner spinner_contractor_name, spinner_location, spinner_sublocation;
     EditText edt_indent_date,edt_indent_workorderno;
@@ -88,6 +92,15 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         btn_indent_generate=findViewById(R.id.btn_indent_generate);
         btn_indent_generate.setOnClickListener(this);
         edt_indent_workorderno=findViewById(R.id.edt_indent_workorderno);
+
+        nav_home=findViewById(R.id.nav_home);
+        nav_home.setOnClickListener(this);
+        nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
+        nav_Individual_indent.setOnClickListener(this);
+        nav_consumption=findViewById(R.id.nav_consumption);
+        nav_consumption.setOnClickListener(this);
+        nav_boq_indent=findViewById(R.id.nav_boq_indent);
+        nav_boq_indent.setOnClickListener(this);
 
     }
 
@@ -146,6 +159,28 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+
+            case R.id.nav_boq_indent:
+                Intent intentIndentStatus = new Intent(CreateIndentActivity.this,IndentStatusActivity.class);
+                startActivity(intentIndentStatus);
+                finishAffinity();
+                break;
+            case R.id.nav_consumption:
+                Intent intentConList = new Intent(CreateIndentActivity.this,ConsumptionListActivity.class);
+                startActivity(intentConList);
+                finishAffinity();
+                break;
+            case R.id.nav_Individual_indent:
+                Intent intentIndividual = new Intent(CreateIndentActivity.this,IndividualIndentListActivity.class);
+                startActivity(intentIndividual);
+                finishAffinity();
+                break;
+            case R.id.nav_home:
+                Intent intentHome = new Intent(CreateIndentActivity.this,MainActivity.class);
+                startActivity(intentHome);
+                finishAffinity();
+                break;
+
             case R.id.btn_indent_generate:
 
                 if (spinner_location.getSelectedItem() == null) {
@@ -219,8 +254,8 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
-          //((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-          //((TextView) parent.getChildAt(0)).setTextSize(15);
+          ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+          ((TextView) parent.getChildAt(0)).setTextSize(15);
         }
     };
 

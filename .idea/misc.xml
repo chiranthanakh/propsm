@@ -19,7 +19,8 @@
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/drawable/shape2.xml" value="0.2203125" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_add_material_stock.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_change_password.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_consumption_list.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_consumption_details.xml" value="0.2" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_consumption_list.xml" value="0.22" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_consumption_material.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_create_consumption.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_indent_add.xml" value="0.19444444444444445" />
@@ -36,6 +37,8 @@
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_raise_indent_edit.xml" value="0.22" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_upate_indent.xml" value="0.19537037037037036" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/app_bar_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/consumption_details_list.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/consumption_list_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/dashboard_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/dialog_gcadmincount.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/indent_status_list_layout.xml" value="0.20416666666666666" />

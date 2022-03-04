@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -15,6 +16,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -47,6 +49,7 @@ import lecho.lib.hellocharts.view.PieChartView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener, OnClick {
 
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     ImageView ivnav, iv_add_material;
     DrawerLayout drawer_layout;
@@ -107,9 +110,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pieChartView.setPieChartData(pieChartData);
 
 
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code here
+                Toast.makeText(getApplicationContext(), "Refreshing!", Toast.LENGTH_LONG).show();
+                // To keep animation for 4 seconds
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        // Stop animation (This will be after 3 seconds)
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        /*callboqupdateapi();
+                        callboqupdateapi();*/
+                    }
+                }, 3000); // Delay in millis
+            }
+        });
     }
 
+
+
     private void initilize() {
+
+       mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.sf_container);
 
         /*Bundle bundle = getIntent().getExtras();
         role = bundle.getString("role");
@@ -136,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_raise_boq_indent = findViewById(R.id.tv_raise_boq_indent);
         tv_individual_indent = findViewById(R.id.tv_individual_indent);
         tv_pending_indent = findViewById(R.id.tv_pending_indent);
-        tv_consumption = findViewById(R.id.tv_consumption);
         tv_consumption_list = findViewById(R.id.tv_consumption_list);
 
         btn_change_pass = findViewById(R.id.btn_change_pass);
@@ -155,7 +177,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_raise_boq_indent.setOnClickListener(this);
         tv_individual_indent.setOnClickListener(this);
         tv_pending_indent.setOnClickListener(this);
-        tv_consumption.setOnClickListener(this);
         tv_consumption_list.setOnClickListener(this);
         callboqupdateapi();
         // callmaterialstockapi();
@@ -221,7 +242,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_consumption:
-                Intent intentconhome = new Intent(MainActivity.this, CreateConsumptionActivity.class);
+            case R.id.tv_consumption_list:
+                Intent intentconhome = new Intent(MainActivity.this, ConsumptionListActivity.class);
                 startActivity(intentconhome);
                 break;
             case R.id.iv_nav_view:
@@ -233,10 +255,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_raise_indent:
                 Intent intentRaise = new Intent(MainActivity.this, IndentStatusActivity.class);
                 startActivity(intentRaise);
+
                 break;
             case R.id.tv_raise_boq_indent:
-                Intent intentraiseindent = new Intent(MainActivity.this, IndentStatusActivity.class);
-                startActivity(intentraiseindent);
+                Intent intentraiseIndent = new Intent(MainActivity.this, IndentStatusActivity.class);
+                startActivity(intentraiseIndent);
                 break;
             case R.id.tv_pending_indent:
                 Intent intentpending = new Intent(MainActivity.this, PendingIndentListActivity.class);
@@ -246,13 +269,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intentindividual = new Intent(MainActivity.this, IndividualIndentListActivity.class);
                 startActivity(intentindividual);
                 break;
-            case R.id.tv_consumption:
-                Intent intentcon = new Intent(MainActivity.this, CreateConsumptionActivity.class);
-                startActivity(intentcon);
-                break;
             case R.id.iv_add_material:
-                Intent intentaddM = new Intent(MainActivity.this, AddMaterialStockActivity.class);
-                startActivity(intentaddM);
+                Intent intentAddM = new Intent(MainActivity.this, AddMaterialStockActivity.class);
+                startActivity(intentAddM);
                 break;
 
 

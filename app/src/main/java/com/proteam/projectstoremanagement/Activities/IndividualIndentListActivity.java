@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.proteam.projectstoremanagement.Adapters.IndentStatusAdapter;
 import com.proteam.projectstoremanagement.Adapters.IndividualIndentListAdapter;
@@ -33,6 +34,7 @@ import java.util.List;
 
 public class IndividualIndentListActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
     ImageView mToolbar,iv_individual_indent_filter;
+    BottomNavigationItemView nav_home,nav_boq_indent,nav_consumption;
 
     FloatingActionButton fab_add_individual_indent;
     ListView lv_individual_indent_status;
@@ -67,6 +69,13 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
 
     private void initialize()
     {
+        nav_home=findViewById(R.id.nav_home);
+        nav_home.setOnClickListener(this);
+        nav_boq_indent=findViewById(R.id.nav_boq_indent);
+        nav_boq_indent.setOnClickListener(this);
+        nav_consumption=findViewById(R.id.nav_consumption);
+        nav_consumption.setOnClickListener(this);
+
         fab_add_individual_indent=findViewById(R.id.fab_add_individual_indent);
         fab_add_individual_indent.setOnClickListener(this);
         lv_individual_indent_status=findViewById(R.id.lv_individual_indent_status);
@@ -103,6 +112,22 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
     public void onClick(View view) {
         switch (view.getId())
         {
+            case R.id.nav_home:
+                Intent homeintent = new Intent(IndividualIndentListActivity.this,MainActivity.class);
+                startActivity(homeintent);
+                finishAffinity();
+                break;
+            case R.id.nav_boq_indent:
+                Intent bointent = new Intent(IndividualIndentListActivity.this,IndentStatusActivity.class);
+                startActivity(bointent);
+                finishAffinity();
+                break;
+            case R.id.nav_consumption:
+                Intent cointent = new Intent(IndividualIndentListActivity.this,ConsumptionListActivity.class);
+                startActivity(cointent);
+                finishAffinity();
+                break;
+
             case R.id.fab_add_individual_indent:
                 Intent intent = new Intent(IndividualIndentListActivity.this,IndividualIndentActivity.class);
                 startActivity(intent);

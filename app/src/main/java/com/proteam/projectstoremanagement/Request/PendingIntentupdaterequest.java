@@ -1,4 +1,4 @@
-package com.proteam.projectstoremanagement.Activities;
+package com.proteam.projectstoremanagement.Request;
 
 public class PendingIntentupdaterequest {
 

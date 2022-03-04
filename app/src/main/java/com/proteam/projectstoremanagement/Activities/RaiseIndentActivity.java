@@ -27,6 +27,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.proteam.projectstoremanagement.Adapters.RaiseIndentAdapter;
 
 import com.proteam.projectstoremanagement.Model.RaiseIndentModel;
@@ -47,6 +48,8 @@ import java.util.List;
 
 public class RaiseIndentActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener, OnChange {
     ImageView mToolbar;
+    BottomNavigationItemView nav_home,nav_boq_indent,nav_Individual_indent,nav_consumption;
+
     AppCompatButton btn_indent_preview;
     TextView tv_raise_indent_total_item,tv_contractor_name,tv_location_name,tv_sublocation_name,tv_indent_date,tv_work_order_number;
     ListView lv_raise_indent_list;
@@ -104,6 +107,16 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
         tv_sublocation_name.setText(sublocation);
         tv_indent_date.setText(date);
         tv_work_order_number.setText(workorderno);
+
+
+        nav_home=findViewById(R.id.nav_home);
+        nav_home.setOnClickListener(this);
+        nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
+        nav_Individual_indent.setOnClickListener(this);
+        nav_consumption=findViewById(R.id.nav_consumption);
+        nav_consumption.setOnClickListener(this);
+        nav_boq_indent=findViewById(R.id.nav_boq_indent);
+        nav_boq_indent.setOnClickListener(this);
 
 
     }
@@ -200,6 +213,27 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
         switch (view.getId())
         {
+            case R.id.nav_consumption:
+                Intent intentConList = new Intent(RaiseIndentActivity.this,ConsumptionListActivity.class);
+                startActivity(intentConList);
+                finishAffinity();
+                break;
+            case R.id.nav_Individual_indent:
+                Intent intentIndividual = new Intent(RaiseIndentActivity.this,IndividualIndentListActivity.class);
+                startActivity(intentIndividual);
+                finishAffinity();
+                break;
+            case R.id.nav_home:
+                Intent intentHome = new Intent(RaiseIndentActivity.this,MainActivity.class);
+                startActivity(intentHome);
+                finishAffinity();
+                break;
+
+            case R.id.nav_boq_indent:
+                Intent intentBoq = new Intent(RaiseIndentActivity.this,IndentStatusActivity.class);
+                startActivity(intentBoq);
+                finishAffinity();
+                break;
             case R.id.btn_indent_preview:
                 //callpreviewapi();
 
@@ -230,6 +264,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                         boqlist = (Boqlist) response;
                         boqcomponentslist = boqlist.getBoq_list();
 
+                        arrayList.clear();
                         for (int i=0;i<boqcomponentslist.size();i++){
 
                             arrayList.add(new RaiseIndentModel(boqlist.getBoq_list().get(i).getMaterial_manual_id(),boqlist.getBoq_list().get(i).getMaterial_name(),boqlist.getBoq_list().get(i).getBalance_boq(),boqlist.getBoq_list().get(i).getQty(),boqlist.getBoq_list().get(i).getMaterial_id()));
@@ -268,6 +303,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                     List list = new ArrayList();
 
                     list = previewResponsce.getMaterial_details();
+
 
                     for (int i=0;i<list.size();i++){
 
@@ -377,6 +413,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                 }else {
 
                     RaiseIndentModel model = temp.get(position);
+
 
                     for(int i=0;i<arrayList.size();i++){
 

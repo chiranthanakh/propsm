@@ -8,17 +8,17 @@
         android:icon="@drawable/home_bottom"
         android:title="Dashboard"/>
     <item
-        android:id="@+id/nav_calendar"
+        android:id="@+id/nav_boq_indent"
         android:enabled="true"
         android:icon="@drawable/indent_bottom"
         android:title="BOQ Indents"/>
     <item
-        android:id="@+id/nav_store"
+        android:id="@+id/nav_Individual_indent"
         android:enabled="true"
         android:icon="@drawable/ind_indent"
         android:title="Individual Indent" />
     <item
-        android:id="@+id/nav_audit"
+        android:id="@+id/nav_consumption"
         android:enabled="true"
         android:icon="@drawable/consumption"
         android:title="Consumptions"/>

@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.Addmaterialrequest;
 import com.proteam.projectstoremanagement.Response.Generalresponce;
@@ -29,6 +31,8 @@ import java.util.List;
 
 public class AddMaterialStockActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
     ImageView mToolbar;
+    BottomNavigationItemView nav_home,nav_boq_indent,nav_Individual_indent,nav_consumption;
+
     AppCompatButton btn_add_material;
     Spinner sp_material_nameStock;
     ProgressDialog progressDialog;
@@ -50,6 +54,15 @@ public class AddMaterialStockActivity extends AppCompatActivity implements View.
 
     private void initilize()
     {
+        nav_home=findViewById(R.id.nav_home);
+        nav_home.setOnClickListener(this);
+        nav_boq_indent=findViewById(R.id.nav_boq_indent);
+        nav_boq_indent.setOnClickListener(this);
+        nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
+        nav_Individual_indent.setOnClickListener(this);
+        nav_consumption=findViewById(R.id.nav_consumption);
+        nav_consumption.setOnClickListener(this);
+
         btn_add_material=findViewById(R.id.btn_add_material);
         btn_add_material.setOnClickListener(this);
         sp_material_nameStock=findViewById(R.id.sp_material_nameStock);
@@ -153,6 +166,26 @@ public class AddMaterialStockActivity extends AppCompatActivity implements View.
     public void onClick(View view) {
         switch (view.getId())
         {
+            case R.id.nav_home:
+                Intent intnthome = new Intent(AddMaterialStockActivity.this,MainActivity.class);
+                startActivity(intnthome);
+                finishAffinity();
+                break;
+            case R.id.nav_boq_indent:
+                Intent intentboq = new Intent(AddMaterialStockActivity.this,IndentStatusActivity.class);
+                startActivity(intentboq);
+                finishAffinity();
+                break;
+            case R.id.nav_Individual_indent:
+                Intent intent_indivi = new Intent(AddMaterialStockActivity.this,IndividualIndentListActivity.class);
+                startActivity(intent_indivi);
+                finishAffinity();
+                break;
+            case R.id.nav_consumption:
+                Intent intent_Cons = new Intent(AddMaterialStockActivity.this, ConsumptionListActivity.class);
+                startActivity(intent_Cons);
+                finishAffinity();
+                break;
             case R.id.btn_add_material:
                 if (sp_material_nameStock.getSelectedItem() == null) {
                     Toast.makeText(this, "Select Material Name", Toast.LENGTH_SHORT).show();

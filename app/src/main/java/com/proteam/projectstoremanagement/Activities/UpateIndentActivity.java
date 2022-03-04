@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.proteam.projectstoremanagement.Adapters.RaiseIndentAdapter;
 import com.proteam.projectstoremanagement.Adapters.UpdateIndentAdapter;
 
@@ -32,6 +34,8 @@ import java.util.List;
 
 public class UpateIndentActivity extends AppCompatActivity implements OnResponseListener, View.OnClickListener {
     ImageView mToolbar;
+    BottomNavigationItemView nav_home,nav_boq_indent,nav_Individual_indent,nav_consumption;
+
     ListView lv_update_indent_list;
     TextView tv_total_item;
     AppCompatButton btn_indent_confirm;
@@ -71,6 +75,15 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
     }
 
     private void initilize() {
+
+        nav_home=findViewById(R.id.nav_home);
+        nav_home.setOnClickListener(this);
+        nav_boq_indent=findViewById(R.id.nav_boq_indent);
+        nav_boq_indent.setOnClickListener(this);
+        nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
+        nav_Individual_indent.setOnClickListener(this);
+        nav_consumption=findViewById(R.id.nav_consumption);
+        nav_consumption.setOnClickListener(this);
 
         tv_total_item=findViewById(R.id.tv_update_indent_total_item);
         lv_update_indent_list=findViewById(R.id.lv_update_indent_list);
@@ -127,6 +140,26 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
     public void onClick(View v) {
         switch (v.getId())
         {
+            case R.id.nav_home:
+                Intent navintent= new Intent(UpateIndentActivity.this,MainActivity.class);
+                startActivity(navintent);
+                finishAffinity();
+                break;
+            case R.id. nav_boq_indent:
+                Intent boquintent = new Intent(UpateIndentActivity.this,IndentStatusActivity.class);
+                startActivity(boquintent);
+                finishAffinity();
+                break;
+            case R.id.nav_Individual_indent:
+                Intent indIntent = new Intent(UpateIndentActivity.this,IndividualIndentListActivity.class);
+                startActivity(indIntent);
+                finishAffinity();
+                break;
+            case R.id.nav_consumption:
+                Intent conIntent= new Intent(UpateIndentActivity.this,ConsumptionListActivity.class);
+                startActivity(conIntent);
+                finishAffinity();
+                break;
             case R.id.btn_indent_confirm:
 
                    callConfirmApi();

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.proteam.projectstoremanagement.R;
 
 import java.text.SimpleDateFormat;
@@ -22,6 +23,8 @@ import java.util.Calendar;
 
 public class CreateConsumptionActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView mToolbar;
+    BottomNavigationItemView nav_home,nav_boq_indent,nav_Individual_indent,nav_consumption;
+
     Spinner sp_con_contractorname,sp_con_location,sp_con_sublocation;
     EditText edt_con_date,edt_con_ordernum,edt_con_remarks;
     AppCompatButton btn_con_generate;
@@ -54,8 +57,14 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
         btn_con_generate=findViewById(R.id.btn_con_generate);
         btn_con_generate.setOnClickListener(this);
 
-
-
+        nav_home=findViewById(R.id.nav_home);
+        nav_home.setOnClickListener(this);
+        nav_boq_indent=findViewById(R.id.nav_boq_indent);
+        nav_boq_indent.setOnClickListener(this);
+        nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
+        nav_Individual_indent.setOnClickListener(this);
+        nav_consumption=findViewById(R.id.nav_consumption);
+        nav_consumption.setOnClickListener(this);
 
     }
 
@@ -63,6 +72,26 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
     public void onClick(View view) {
         switch (view.getId())
         {
+            case R.id.nav_home:
+                Intent intentHome = new Intent(CreateConsumptionActivity.this,MainActivity.class);
+                startActivity(intentHome);
+                finishAffinity();
+            break;
+            case R.id.nav_boq_indent:
+                Intent intentboq = new Intent(CreateConsumptionActivity.this,IndentStatusActivity.class);
+                startActivity(intentboq);
+                finishAffinity();
+            break;
+            case R.id.nav_Individual_indent:
+                Intent intentIndi = new Intent(CreateConsumptionActivity.this,IndividualIndentListActivity.class);
+                startActivity(intentIndi);
+                finishAffinity();
+            break;
+            case R.id.nav_consumption:
+                Intent intentCList = new Intent(CreateConsumptionActivity.this,ConsumptionListActivity.class);
+                startActivity(intentCList);
+                finishAffinity();
+                break;
             case R.id.btn_con_generate:
                 Intent intentconsave = new Intent(CreateConsumptionActivity.this,ConsumptionMaterialActivity.class);
                 startActivity(intentconsave);
