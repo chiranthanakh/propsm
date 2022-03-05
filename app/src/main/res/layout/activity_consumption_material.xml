@@ -151,7 +151,7 @@
                                 android:textSize="13sp" />
 
                             <TextView
-                                android:id="@+id/tv_contractor_name"
+                                android:id="@+id/tv_con_contractor_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -182,7 +182,7 @@
                                 android:textSize="13sp" />
 
                             <TextView
-                                android:id="@+id/tv_division_name"
+                                android:id="@+id/tv_con_locationName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -222,7 +222,7 @@
                                 android:textSize="13sp" />
 
                             <TextView
-                                android:id="@+id/tv_feeder_name"
+                                android:id="@+id/tv_con_subLocationName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -252,7 +252,7 @@
                                 android:textSize="13sp" />
 
                             <TextView
-                                android:id="@+id/tv_work_order_number"
+                                android:id="@+id/tv_con_workOrder"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
@@ -287,7 +287,7 @@
                             android:textSize="12sp" />
 
                         <TextView
-                            android:id="@+id/tv_location"
+                            android:id="@+id/tv_con_conDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -467,7 +467,7 @@
             </LinearLayout>
 
             <ListView
-                android:id="@+id/lv_raise_indent_list1"
+                android:id="@+id/lv_Con_detailsList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
@@ -483,21 +483,45 @@
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <LinearLayout
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:backgroundTint="#8fc74a"
-        android:fontFamily="@font/proxima_nova_bold"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:layout_marginBottom="10dp"
-        android:text="Preview"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@id/bottom_nav" />
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_Con_save"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#8fc74a"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:layout_marginBottom="10dp"
+            android:text="Save"
+            android:textColor="@color/white" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_Con_back"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#8fc74a"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:layout_marginBottom="10dp"
+            android:text="Back"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+
 
     <include
         app:layout_constraintBottom_toBottomOf="parent"

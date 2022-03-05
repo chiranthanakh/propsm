@@ -114,7 +114,13 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-                Constructorlocationrequest constructorlocationrequest = new Constructorlocationrequest("puma_client@gmail.com", 10);
+
+                SharedPreferences sharedPreferences = this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                String email = sharedPreferences.getString("email", null);
+                int storeid = Integer.parseInt(sharedPreferences.getString("store_id",null));
+
+                Constructorlocationrequest constructorlocationrequest = new Constructorlocationrequest(email, storeid);
 
                 WebServices<Contractorlocationmodel> webServices = new WebServices<Contractorlocationmodel>(CreateIndentActivity.this);
                 webServices.constructorlocation(WebServices.ApiType.location, constructorlocationrequest);

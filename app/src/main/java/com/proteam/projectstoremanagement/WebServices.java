@@ -9,9 +9,11 @@ import android.widget.Adapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+
 import com.proteam.projectstoremanagement.Model.Changepassmodel;
 import com.proteam.projectstoremanagement.Request.ConsumptionDetailsRequest;
 import com.proteam.projectstoremanagement.Request.ConsumptionListRequest;
+import com.proteam.projectstoremanagement.Request.ConsumptionMaterialListRequest;
 import com.proteam.projectstoremanagement.Request.PendingIntentupdaterequest;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
 import com.proteam.projectstoremanagement.Model.MaterialStockModel;
@@ -63,7 +65,7 @@ public class WebServices<T> {
     public enum ApiType {
        general,login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus,materialstock,
         materialstockname,deletestockMhome,addmaterial,priview,confirmRaiseIndent,ConsList,
-        consumptionDetails,boqedit
+        consumptionDetails,boqedit,consumptionMateriallsit
     }
 
     String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
@@ -683,6 +685,32 @@ public class WebServices<T> {
     }
 
 
+    public void consumptionMaDetails( ApiType apiTypes, ConsumptionMaterialListRequest consumptionMaterialListRequest)
+    {
 
+
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.consumptionMaterial(consumptionMaterialListRequest);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
 }
 

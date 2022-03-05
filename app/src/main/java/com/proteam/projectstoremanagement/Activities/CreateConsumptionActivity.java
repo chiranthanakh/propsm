@@ -109,7 +109,12 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-                Constructorlocationrequest constructorlocationrequest = new Constructorlocationrequest("puma_client@gmail.com", 10);
+                SharedPreferences sharedPreferences = this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                String email = sharedPreferences.getString("email", null);
+                int storeid = Integer.parseInt(sharedPreferences.getString("store_id",null));
+
+                Constructorlocationrequest constructorlocationrequest = new Constructorlocationrequest(email, storeid);
 
                 WebServices<Contractorlocationmodel> webServices = new WebServices<Contractorlocationmodel>(CreateConsumptionActivity.this);
                 webServices.constructorlocation(WebServices.ApiType.location, constructorlocationrequest);
@@ -301,7 +306,8 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
                     Contractorlocationmodel contractorlocationmodel = (Contractorlocationmodel) response;
 
                     list = contractorlocationmodel.getLocations();
-
+                    location.clear();
+                    locationmap.clear();
                     for(int i = 0; i<list.size(); i++ ){
 
                         location.add(contractorlocationmodel.getLocations().get(i).getBlock_name());
@@ -309,7 +315,7 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
                     }
 
                     list2 = contractorlocationmodel.getContractors();
-
+                    contractorlist.clear();
                     for(int i = 0; i<list2.size(); i++ ){
 
                         contractorlist.add(contractorlocationmodel.getContractors().get(i).getFull_name());
@@ -346,6 +352,8 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
 
                     list = conSubLocationModel.getSub_locations();
 
+                    sublocation.clear();
+                    sublocationmap.clear();
                     for(int i = 0; i<list.size(); i++ ){
 
                         sublocation.add(conSubLocationModel.getSub_locations().get(i).getLocation_name());

@@ -15,28 +15,37 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.proteam.projectstoremanagement.Adapters.ConsumptionMaterialAdapter;
+import com.proteam.projectstoremanagement.Adapters.RaiseIndentAdapter;
+import com.proteam.projectstoremanagement.Model.ConsumptionMaterialsModel;
 import com.proteam.projectstoremanagement.Model.RaiseIndentModel;
 import com.proteam.projectstoremanagement.R;
+import com.proteam.projectstoremanagement.Request.Boqrequest;
+import com.proteam.projectstoremanagement.Request.ConsumptionMaterialListRequest;
 import com.proteam.projectstoremanagement.Response.Boqlist;
+import com.proteam.projectstoremanagement.Response.ConsumptionMaterialListResponse;
+import com.proteam.projectstoremanagement.Utils.OnResponseListener;
+import com.proteam.projectstoremanagement.WebServices;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConsumptionMaterialActivity extends AppCompatActivity implements View.OnClickListener {
+public class ConsumptionMaterialActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
     ImageView mToolbar;
     BottomNavigationItemView nav_home,nav_boq_indent,nav_Individual_indent,nav_consumption;
 
-    List boqcomponentslist = new ArrayList();
-    final ArrayList<RaiseIndentModel> arrayList = new ArrayList<RaiseIndentModel>();
-    String location,sublocation,contrctorname,storeid,location_id,sublocation_id,contrctorname_id,date,workorderno;
     ProgressDialog progressDialog;
 
-    AppCompatButton btn_indent_preview;
-    TextView tv_raise_indent_total_item,tv_contractor_name,tv_location_name,tv_sublocation_name,tv_indent_date,tv_work_order_number;
-    ListView lv_raise_indent_list;
-    EditText search;
-    Boqlist boqlist;
-    ArrayList<RaiseIndentModel> temp = new ArrayList();;
+    AppCompatButton btn_Con_save,btn_Con_back;
+    TextView tv_con_contractor_name,tv_con_locationName,tv_con_subLocationName,tv_con_workOrder,tv_con_conDate,tv_con_total_item;
+    ListView lv_Con_detailsList;
+    EditText ConSearch;
+
+    String location,sublocation,contrctorname,storeid,location_id,sublocation_id,contrctorname_id,date,workorderno;
+
+
+    List consumptionmaterial = new ArrayList();
+    final ArrayList<ConsumptionMaterialsModel> arrayList = new ArrayList<ConsumptionMaterialsModel>();
 
 
     @Override
@@ -66,34 +75,27 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
     }
     private void initilize()
     {
-        nav_home=findViewById(R.id.nav_home);
-        nav_home.setOnClickListener(this);
-        nav_boq_indent=findViewById(R.id.nav_boq_indent);
-        nav_boq_indent.setOnClickListener(this);
-        nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
-        nav_Individual_indent.setOnClickListener(this);
-        nav_consumption=findViewById(R.id.nav_consumption);
-        nav_consumption.setOnClickListener(this);
+
+        tv_con_conDate=findViewById(R.id.tv_con_conDate);
+        tv_con_subLocationName=findViewById(R.id.tv_con_subLocationName);
+        tv_con_locationName=findViewById(R.id.tv_con_locationName);
+        tv_con_contractor_name = findViewById(R.id.tv_con_contractor_name);
+        tv_con_workOrder=findViewById(R.id.tv_con_workOrder);
+        lv_Con_detailsList=findViewById(R.id.lv_Con_detailsList);
+        ConSearch = findViewById(R.id.edt_Con_search);
+        tv_con_total_item=findViewById(R.id.tv_con_total_item);
+
+        btn_Con_save=findViewById(R.id.btn_Con_save);
+        btn_Con_back=findViewById(R.id.btn_Con_back);
+
+        tv_con_contractor_name.setText(contrctorname);
+        tv_con_subLocationName.setText(sublocation);
+        tv_con_locationName.setText(location);
+        tv_con_workOrder.setText(workorderno);
+        tv_con_conDate.setText(date);
 
 
-        tv_indent_date=findViewById(R.id.tv_indent_date);
-        tv_sublocation_name=findViewById(R.id.tv_sublocation_name);
-        tv_location_name=findViewById(R.id.tv_location_name);
-        tv_raise_indent_total_item=findViewById(R.id.tv_raise_indent_total_item);
-        btn_indent_preview=findViewById(R.id.btn_indent_preview);
-        tv_contractor_name = findViewById(R.id.tv_contractor_name);
-        tv_work_order_number=findViewById(R.id.tv_work_order_number);
-       // btn_indent_preview.setOnClickListener(this);
-        lv_raise_indent_list=findViewById(R.id.lv_raise_indent_list);
-        search = findViewById(R.id.edt_search);
-
-       // tv_contractor_name.setText(contrctorname);
-        //tv_location_name.setText(location);
-        //tv_sublocation_name.setText(sublocation);
-        //tv_indent_date.setText(date);
-        //tv_work_order_number.setText(workorderno);
-
-
+       // For Navigation
         nav_home=findViewById(R.id.nav_home);
         nav_home.setOnClickListener(this);
         nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
@@ -103,6 +105,66 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
         nav_boq_indent=findViewById(R.id.nav_boq_indent);
         nav_boq_indent.setOnClickListener(this);
 
+        callConsumptionMDetails();
+
+    }
+
+    private void callConsumptionMDetails() {
+
+        progressDialog=new ProgressDialog(ConsumptionMaterialActivity.this);
+
+        if(progressDialog!=null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+                ConsumptionMaterialListRequest consumptionMaterialListRequest = new ConsumptionMaterialListRequest("1","1","1","1");
+                WebServices<ConsumptionMaterialListResponse> webServices = new WebServices<ConsumptionMaterialListResponse>(ConsumptionMaterialActivity.this);
+                webServices.consumptionMaDetails(WebServices.ApiType.consumptionMateriallsit, consumptionMaterialListRequest);
+            }
+        }
+
+    }
+
+    @Override
+    public void onResponse(Object response, WebServices.ApiType URL, boolean isSucces, int code)
+    {
+        switch (URL)
+        {
+            case consumptionMateriallsit:
+                if(progressDialog!=null)
+                {
+                    if(progressDialog.isShowing())
+                    {
+                        progressDialog.dismiss();
+                    }
+                }
+
+                if (isSucces) {
+
+                    if(response!=null) {
+
+                        ConsumptionMaterialListResponse consumptionMaterialListResponse = (ConsumptionMaterialListResponse) response;
+                        consumptionmaterial = consumptionMaterialListResponse.getList_of_materials();
+
+                        arrayList.clear();
+                        for (int i=0;i<consumptionmaterial.size();i++){
+
+                            arrayList.add(new ConsumptionMaterialsModel(consumptionMaterialListResponse.getList_of_materials().get(i).getMaterial_manual_id(),consumptionMaterialListResponse.getList_of_materials().get(i).getMaterial_name(),consumptionMaterialListResponse.getList_of_materials().get(i).getIssued_qty()));
+
+                        }
+                        tv_con_total_item.setText(String.valueOf(consumptionmaterial.size()));
+
+                        ConsumptionMaterialAdapter numbersArrayAdapter = new ConsumptionMaterialAdapter(this, arrayList,this);
+                        ListView consumptionMaterialDetails = findViewById(R.id.lv_Con_detailsList);
+
+                        consumptionMaterialDetails.setAdapter(numbersArrayAdapter);
+
+                    }
+                }
+                break;
+        }
     }
 
     @Override
@@ -132,4 +194,6 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
         }
 
     }
+
+
 }
