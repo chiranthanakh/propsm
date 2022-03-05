@@ -137,7 +137,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-                Boqrequest boqrequest = new Boqrequest(storeid, "1", sublocation_id);
+                Boqrequest boqrequest = new Boqrequest(storeid, location_id, sublocation_id);
                 WebServices<Boqlist> webServices = new WebServices<Boqlist>(RaiseIndentActivity.this);
                 webServices.boqapi(WebServices.ApiType.boq, boqrequest);
             }
@@ -198,7 +198,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-    private void callupdatepreviewapi() {
+    private void callupdatepreviewapi(String id) {
 
         progressDialog=new ProgressDialog(RaiseIndentActivity.this);
 
@@ -212,7 +212,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                 for(int i=0;i<arrayList.size();i++){
 
-                    itemslist.add(new Updatepreviewitems(arrayList.get(i).getMaterial_id(),arrayList.get(i).getBoqbalance(),arrayList.get(i).getRaiseqty()));
+                    itemslist.add(new Updatepreviewitems(id,arrayList.get(i).getRaiseqty(),arrayList.get(i).getMaterial_id()));
 
                 }
                 ArrayList<RaiseIndentPreviewResponse> locationdetail = new ArrayList<RaiseIndentPreviewResponse>();
@@ -220,7 +220,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                 SharedPreferences.Editor editor=sharedPreferences.edit();
                 String user = sharedPreferences.getString("userid",null);
 
-                locationdetail.add(new RaiseIndentPreviewResponse(contrctorname_id,location_id,sublocation_id,workorderno,date,storeid,user,"success"));
+               // locationdetail.add(new RaiseIndentPreviewResponse(contrctorname_id,location_id,sublocation_id,workorderno,date,storeid,user,"success"));
 
                 Updatepreviewlist updatepreviewlist = new Updatepreviewlist(itemslist);
                 WebServices<Boqlist> webServices = new WebServices<Boqlist>(RaiseIndentActivity.this);
@@ -303,9 +303,10 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                 Bundle bundle = getIntent().getExtras();
                 Boolean state = bundle.getBoolean("status");
+                String indentid = bundle.getString("indent_id");
 
                 if(state){
-                    callupdatepreviewapi();
+                    callupdatepreviewapi(indentid);
                 }else {
                     callpreviewapi();
                 }
@@ -380,14 +381,14 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                     for (int i=0;i<list.size();i++){
 
                         prviewlist.add(
+                                previewResponsce.getMaterial_details().get(i).getMaterial_manual_id()+"--"+
                                 previewResponsce.getMaterial_details().get(i).getMaterial_name()+"--"+
+                                        previewResponsce.getMaterial_details().get(i).getBoq_balance_qty()+"--"+
                                 previewResponsce.getMaterial_details().get(i).getMaterial_id()+"--"+
                                         previewResponsce.getMaterial_details().get(i).getIndent_qty()+"--"+
-                                        previewResponsce.getMaterial_details().get(i).getBoq_balance_qty()+"--"+
                                         previewResponsce.getMaterial_details().get(i).getIndent_id()+"--"+
                                 previewResponsce.getMaterial_details().get(i).getBoq_qty()+"--"+
-                                previewResponsce.getMaterial_details().get(i).getClosing_stock()+"--"+
-                                previewResponsce.getMaterial_details().get(i).getMaterial_manual_id());
+                                previewResponsce.getMaterial_details().get(i).getClosing_stock());
 
                     }
 
@@ -432,7 +433,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                         arrayList.clear();
                         for (int i=0;i<editlist.size();i++){
 
-                            arrayList.add(new RaiseIndentModel(indenteditList.getMaterial_details().get(i).getMaterial_manual_id(),indenteditList.getMaterial_details().get(i).getMaterial_name(),indenteditList.getMaterial_details().get(i).getBoq_balance_qty(),indenteditList.getMaterial_details().get(i).getBoq_qty(),indenteditList.getMaterial_details().get(i).getMaterial_id()));
+                            arrayList.add(new RaiseIndentModel(indenteditList.getMaterial_details().get(i).getMaterial_manual_id(),indenteditList.getMaterial_details().get(i).getMaterial_name(),indenteditList.getMaterial_details().get(i).getBoq_balance_qty(),indenteditList.getMaterial_details().get(i).getIndent_qty(),indenteditList.getMaterial_details().get(i).getMaterial_id()));
 
                         }
 

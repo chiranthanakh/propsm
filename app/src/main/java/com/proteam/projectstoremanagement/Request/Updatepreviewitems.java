@@ -19,10 +19,10 @@ public class Updatepreviewitems {
     @Expose
     private String indent_qty;
 
-    public Updatepreviewitems(String indent_id, String material_id, String indent_qty) {
+    public Updatepreviewitems(String indent_id,String indent_qty,String material_id) {
         this.indent_id = indent_id;
-        this.material_id = material_id;
         this.indent_qty = indent_qty;
+        this.material_id = material_id;
     }
 
     public String getIndent_id() {

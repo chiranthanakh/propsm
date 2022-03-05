@@ -64,11 +64,14 @@ public class ChangePasswordActivity extends AppCompatActivity implements OnRespo
             if(!progressDialog.isShowing())
             {
 
+                SharedPreferences sharedPreferences = this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                String email = sharedPreferences.getString("email", null);
                 progressDialog.setCancelable(false);
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-                Changepassmodel changepassmodel = new Changepassmodel("puma_approver@gmail.com",edt_old_password.getText().toString(),edt_new_password.getText().toString());
+                Changepassmodel changepassmodel = new Changepassmodel(email,edt_old_password.getText().toString().trim(),edt_new_password.getText().toString().trim());
                 WebServices<LoginResponse> webServices = new WebServices<LoginResponse>(ChangePasswordActivity.this);
                 webServices.changepass(Utilities.getBaseURL(ChangePasswordActivity.this), WebServices.ApiType.login,changepassmodel );
             }

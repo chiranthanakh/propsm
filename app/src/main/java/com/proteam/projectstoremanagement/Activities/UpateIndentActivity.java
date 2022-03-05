@@ -57,15 +57,15 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
 
         if(list.size()!=0){
 
-            String[] data1 = String.valueOf(list.get(3)).split("--");
+            String[] data1 = String.valueOf(list.get(0)).split("--");
 
-            indentid = data1[2];
+            indentid = data1[5];
 
             for (int i=0;i<list.size();i++){
 
                 String[] data = String.valueOf(list.get(i)).split("--");
 
-                arrayList.add(new RaiseIndentModel(data[0],data[0],data[5],data[2],data[1]));
+                arrayList.add(new RaiseIndentModel(data[0],data[1],data[2],data[4],data[3]));
 
             }
 

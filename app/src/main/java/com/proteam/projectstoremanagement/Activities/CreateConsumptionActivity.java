@@ -52,12 +52,9 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
     Map contractormap = new HashMap();
     Map locationmap = new HashMap();
     Map sublocationmap = new HashMap();
-
-
     List sublocation = new ArrayList();
 
     AppCompatButton btn_indent_generate;
-
 
     ProgressDialog progressDialog;
     @Override

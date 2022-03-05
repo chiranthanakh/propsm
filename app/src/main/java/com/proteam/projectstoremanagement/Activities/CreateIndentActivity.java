@@ -142,7 +142,7 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
 
                 String blockid = String.valueOf(locationmap.get(spinner_location.getSelectedItem()));
                 //String blockid = spinner_location.getSelectedItem().toString();
-                SubLocationRaiseRequest subLocationRaiseRequest = new SubLocationRaiseRequest("1");
+                SubLocationRaiseRequest subLocationRaiseRequest = new SubLocationRaiseRequest(blockid);
 
                 WebServices<Contractorlocationmodel> webServices = new WebServices<Contractorlocationmodel>(CreateIndentActivity.this);
                 webServices.constructorSublocation(WebServices.ApiType.sublocation, subLocationRaiseRequest);
@@ -270,8 +270,8 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
-        //  ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-          //((TextView) parent.getChildAt(0)).setTextSize(15);
+          ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+          ((TextView) parent.getChildAt(0)).setTextSize(15);
         }
     };
 
@@ -285,8 +285,8 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
-//            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-//           ((TextView) parent.getChildAt(0)).setTextSize(15);
+            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+            ((TextView) parent.getChildAt(0)).setTextSize(15);
         }
     };
 
