@@ -156,10 +156,10 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
                         }
                         tv_con_total_item.setText(String.valueOf(consumptionmaterial.size()));
 
-                        ConsumptionMaterialAdapter numbersArrayAdapter = new ConsumptionMaterialAdapter(this, arrayList,this);
+                /*        ConsumptionMaterialAdapter numbersArrayAdapter = new ConsumptionMaterialAdapter(this, arrayList,this);
                         ListView consumptionMaterialDetails = findViewById(R.id.lv_Con_detailsList);
 
-                        consumptionMaterialDetails.setAdapter(numbersArrayAdapter);
+                        consumptionMaterialDetails.setAdapter(numbersArrayAdapter);*/
 
                     }
                 }
