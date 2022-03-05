@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "207470482710",
+    "project_id": "pro-psm",
+    "storage_bucket": "pro-psm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207470482710:android:c4ce412a2d61cc7091ac37",
+        "android_client_info": {
+          "package_name": "com.proteam.projectstoremanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207470482710-lg3n7bcp4cf281e6a747vl61d78pokrd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATJIsEnCAslAXlw1cYov_Tzy2CwOuZ0_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207470482710-lg3n7bcp4cf281e6a747vl61d78pokrd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
