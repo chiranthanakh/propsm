@@ -39,6 +39,7 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
     ListView lv_update_indent_list;
     TextView tv_total_item;
     AppCompatButton btn_indent_confirm,btn_edit;
+    String indentid;
 
     List boqcomponentslist = new ArrayList();
     final ArrayList<RaiseIndentModel> arrayList = new ArrayList<RaiseIndentModel>();
@@ -54,13 +55,23 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
 
         ArrayList list = (ArrayList) getIntent().getSerializableExtra("arraylist");
 
-        for (int i=0;i<list.size();i++){
+        if(list.size()!=0){
 
-            String[] data = String.valueOf(list.get(i)).split("--");
+            String[] data1 = String.valueOf(list.get(3)).split("--");
 
-            arrayList.add(new RaiseIndentModel(data[2],data[0],data[5],data[3],data[1]));
+            indentid = data1[2];
+
+            for (int i=0;i<list.size();i++){
+
+                String[] data = String.valueOf(list.get(i)).split("--");
+
+                arrayList.add(new RaiseIndentModel(data[0],data[0],data[5],data[2],data[1]));
+
+            }
 
         }
+
+
 
 
         Bundle bundle = getIntent().getExtras();
@@ -124,7 +135,7 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-                RaiseIndentConfirmRequest raiseIndentConfirmRequest = new RaiseIndentConfirmRequest("6");
+                RaiseIndentConfirmRequest raiseIndentConfirmRequest = new RaiseIndentConfirmRequest(indentid);
                 WebServices<Generalresponce> webServices = new WebServices<Generalresponce>(UpateIndentActivity.this);
                 webServices.confirmRaiseIndent(WebServices.ApiType.confirmRaiseIndent,raiseIndentConfirmRequest);
             }
@@ -166,6 +177,7 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
                 Intent intent= new Intent(UpateIndentActivity.this,RaiseIndentActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putBoolean("status",true);
+                bundle.putString("indent_id",indentid);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
