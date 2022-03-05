@@ -1,5 +1,6 @@
 package com.proteam.projectstoremanagement.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -17,6 +18,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,6 +26,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.proteam.projectstoremanagement.Adapters.IndividualIndentListAdapter;
 import com.proteam.projectstoremanagement.Adapters.MaterialDetailsAdapter;
 import com.proteam.projectstoremanagement.Model.IndividualIndentListModel;
@@ -81,6 +86,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        FirebaseMessaging.getInstance().subscribeToTopic("weather")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "done";
+                        if (!task.isSuccessful()) {
+                            msg = "failes";
+                        }
+                       // Log.d(TAG, msg);
+                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
         SharedPreferences sharedPreferences = this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         String user = sharedPreferences.getString("userid", null);
@@ -113,13 +132,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
+                finish();
+                startActivity(getIntent());
+
                 // Your code here
                 Toast.makeText(getApplicationContext(), "Refreshing!", Toast.LENGTH_LONG).show();
                 // To keep animation for 4 seconds
                 new Handler().postDelayed(new Runnable() {
                     @Override public void run() {
                         // Stop animation (This will be after 3 seconds)
-                        mSwipeRefreshLayout.setRefreshing(false);
+                       // mSwipeRefreshLayout.setRefreshing(false);
                         /*callboqupdateapi();
                         callboqupdateapi();*/
                     }

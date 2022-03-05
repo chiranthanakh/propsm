@@ -9,6 +9,7 @@ import android.widget.Adapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import com.proteam.projectstoremanagement.Model.Changepassmodel;
 import com.proteam.projectstoremanagement.Request.ConsumptionDetailsRequest;
 import com.proteam.projectstoremanagement.Request.ConsumptionListRequest;
 import com.proteam.projectstoremanagement.Request.PendingIntentupdaterequest;
@@ -62,7 +63,7 @@ public class WebServices<T> {
     public enum ApiType {
        general,login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus,materialstock,
         materialstockname,deletestockMhome,addmaterial,priview,confirmRaiseIndent,ConsList,
-        consumptionDetails
+        consumptionDetails,boqedit
     }
 
     String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
@@ -172,6 +173,34 @@ public class WebServices<T> {
 
     }
 
+    public void changepass(String api, ApiType apiTypes, Changepassmodel loginmodel)
+    {
+
+
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.changepassword(loginmodel);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
+
     public void constructorlocation( ApiType apiTypes, Constructorlocationrequest constructorlocationrequest)
     {
 
@@ -257,7 +286,33 @@ public class WebServices<T> {
 
     }
 
+    public void editboqapi( ApiType apiTypes, Indentpendingrequest indentpendingrequest)
+    {
 
+
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.editboq(indentpendingrequest);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
 
     public void pendingindent( ApiType apiTypes, PendingIndentRequest pendingIndentRequest)
     {

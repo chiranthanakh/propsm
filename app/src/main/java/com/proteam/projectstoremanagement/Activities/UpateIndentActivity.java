@@ -38,7 +38,7 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
 
     ListView lv_update_indent_list;
     TextView tv_total_item;
-    AppCompatButton btn_indent_confirm;
+    AppCompatButton btn_indent_confirm,btn_edit;
 
     List boqcomponentslist = new ArrayList();
     final ArrayList<RaiseIndentModel> arrayList = new ArrayList<RaiseIndentModel>();
@@ -60,14 +60,13 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
 
             arrayList.add(new RaiseIndentModel(data[2],data[0],data[5],data[3],data[1]));
 
-
         }
 
 
-        /*Bundle bundle = getIntent().getExtras();
+        Bundle bundle = getIntent().getExtras();
          location_id = bundle.getString("location_id");
          sublocation_id =bundle.getString("sublocation_id");
-         store_id = bundle.getString("storeid");*/
+         store_id = bundle.getString("storeid");
 
         initilize();
 
@@ -86,12 +85,12 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
         nav_consumption.setOnClickListener(this);
 
         tv_total_item=findViewById(R.id.tv_update_indent_total_item);
+        btn_edit = findViewById(R.id.btn_indent_edit);
+        btn_edit.setOnClickListener(this);
         lv_update_indent_list=findViewById(R.id.lv_update_indent_list);
         btn_indent_confirm=findViewById(R.id.btn_indent_confirm);
         btn_indent_confirm.setOnClickListener(this);
         callboqupdateapi();
-
-
 
 
     }
@@ -106,9 +105,7 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-
-
-                Boqrequest boqrequest = new Boqrequest("10","2","2");
+                Boqrequest boqrequest = new Boqrequest(store_id,location_id,sublocation_id);
                 WebServices<Boqlist> webServices = new WebServices<Boqlist>(UpateIndentActivity.this);
                 webServices.boqapi(WebServices.ApiType.boq, boqrequest);
             }
@@ -163,6 +160,14 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
             case R.id.btn_indent_confirm:
 
                    callConfirmApi();
+                break;
+
+            case R.id.btn_indent_edit:
+                Intent intent= new Intent(UpateIndentActivity.this,RaiseIndentActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("status",true);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
         }
     }
@@ -227,8 +232,6 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
 
                         Generalresponce generalresponce = (Generalresponce) response;
                         Toast.makeText(this, generalresponce.getStatus(), Toast.LENGTH_SHORT).show();
-
-
 
                     }
                     else

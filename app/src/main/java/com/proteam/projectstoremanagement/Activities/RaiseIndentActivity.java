@@ -33,11 +33,13 @@ import com.proteam.projectstoremanagement.Adapters.RaiseIndentAdapter;
 import com.proteam.projectstoremanagement.Model.RaiseIndentModel;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
+import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
 import com.proteam.projectstoremanagement.Request.RaiseIndentPreview;
 import com.proteam.projectstoremanagement.Request.RaiseIndentPreviewResponse;
 import com.proteam.projectstoremanagement.Request.Raiseintentdataitems;
 import com.proteam.projectstoremanagement.Response.Boqlist;
 import com.proteam.projectstoremanagement.Response.Generalresponce;
+import com.proteam.projectstoremanagement.Response.IndenteditList;
 import com.proteam.projectstoremanagement.Response.PreviewResponsce;
 import com.proteam.projectstoremanagement.Utils.OnChange;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
@@ -75,7 +77,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
 
         Bundle bundle = getIntent().getExtras();
-       location_id = bundle.getString("location_id");
+        location_id = bundle.getString("location_id");
         sublocation_id =bundle.getString("sublocation_id");
         contrctorname_id = bundle.getString("contractor_id");
         location = bundle.getString("location_name");
@@ -141,6 +143,25 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
     }
 
+    private void calleditboq() {
+
+        progressDialog=new ProgressDialog(RaiseIndentActivity.this);
+
+        if(progressDialog!=null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+                //Boqrequest boqrequest = new Boqrequest(storeid, location_id, sublocation_id);
+
+                Indentpendingrequest indentpendingrequest = new Indentpendingrequest("69");
+                WebServices<Boqlist> webServices = new WebServices<Boqlist>(RaiseIndentActivity.this);
+                webServices.editboqapi(WebServices.ApiType.boqedit, indentpendingrequest);
+            }
+        }
+    }
+
     private void callpreviewapi() {
 
         progressDialog=new ProgressDialog(RaiseIndentActivity.this);
@@ -164,14 +185,11 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                 locationdetail.add(new RaiseIndentPreviewResponse(contrctorname_id,location_id,sublocation_id,workorderno,date,storeid,"72","success"));
 
-
-
                 RaiseIndentPreview raiseIndentPreview1 = new RaiseIndentPreview(locationdetail,itemslist);
                 WebServices<Boqlist> webServices = new WebServices<Boqlist>(RaiseIndentActivity.this);
                 webServices.prevewapi(WebServices.ApiType.priview, raiseIndentPreview1);
             }
         }
-
     }
 
 
@@ -180,7 +198,15 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
     protected void onResume() {
         super.onResume();
 
-        callboqupdateapi();
+        Bundle bundle = getIntent().getExtras();
+        Boolean state = bundle.getBoolean("status");
+
+        if(state){
+            calleditboq();
+        }else {
+            callboqupdateapi();
+        }
+
 
         search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -282,6 +308,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                 break;
 
             case priview:
+
                 if(progressDialog!=null)
                 {
                     if(progressDialog.isShowing())
@@ -293,8 +320,6 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
             if (isSucces) {
 
                 if(response!=null) {
-
-
 
                     PreviewResponsce previewResponsce = (PreviewResponsce) response;
 
@@ -319,9 +344,6 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                     }
 
-
-
-
                     Intent intent = new Intent(RaiseIndentActivity.this,UpateIndentActivity.class);
 
                     intent.putExtra("arraylist", prviewlist);
@@ -339,6 +361,55 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                 Toast.makeText(this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
             }
 
+            break;
+
+            case boqedit:
+
+                if(progressDialog!=null)
+                {
+                    if(progressDialog.isShowing())
+                    {
+                        progressDialog.dismiss();
+                    }
+                }
+
+                if (isSucces) {
+
+                    if(response!=null) {
+
+                        IndenteditList indenteditList = (IndenteditList) response;
+
+                        List editlist = new ArrayList();
+                        editlist = indenteditList.getMaterial_details();
+
+                        arrayList.clear();
+                        for (int i=0;i<editlist.size();i++){
+
+                            arrayList.add(new RaiseIndentModel(indenteditList.getMaterial_details().get(i).getMaterial_manual_id(),indenteditList.getMaterial_details().get(i).getMaterial_name(),indenteditList.getMaterial_details().get(i).getBoq_balance_qty(),indenteditList.getMaterial_details().get(i).getBoq_qty(),indenteditList.getMaterial_details().get(i).getMaterial_id()));
+
+                        }
+
+                        tv_raise_indent_total_item.setText(String.valueOf(editlist.size()));
+                        RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(this, arrayList,this);
+                        ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
+
+                        pendingindentstatus.setAdapter(numbersArrayAdapter);
+
+
+                    }
+                    else
+                    {
+                        Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else
+                {
+                    Toast.makeText(this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+                break;
 
         }
     }

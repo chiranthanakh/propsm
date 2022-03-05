@@ -1,5 +1,6 @@
 package com.proteam.projectstoremanagement.Utils;
 
+import com.proteam.projectstoremanagement.Model.Changepassmodel;
 import com.proteam.projectstoremanagement.Request.ConsumptionDetailsRequest;
 import com.proteam.projectstoremanagement.Request.ConsumptionListRequest;
 import com.proteam.projectstoremanagement.Request.PendingIntentupdaterequest;
@@ -18,6 +19,7 @@ import com.proteam.projectstoremanagement.Response.ConsumptionListResponse;
 import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Response.IndentStatusdirectlist;
 import com.proteam.projectstoremanagement.Response.IndentStatuslist;
+import com.proteam.projectstoremanagement.Response.IndenteditList;
 import com.proteam.projectstoremanagement.Response.Indentpending;
 import com.proteam.projectstoremanagement.Response.PendingIndentList;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
@@ -42,6 +44,10 @@ public interface PsmApi {
     @POST("Clients_apis/client_login")
     Call<LoginResponse> validatelogin(@Body Loginmodel logininfo);
 
+    @POST("Clients_apis/change_password")
+    Call<LoginResponse> changepassword(@Body Changepassmodel logininfo);
+
+
     @POST("Clients_apis/contractor_location_list")
     Call<Contractorlocationmodel> c_location(@Body Constructorlocationrequest constructorlocationrequest);
 
@@ -50,6 +56,9 @@ public interface PsmApi {
 
     @POST("Clients_apis/boq_list")
     Call<Boqlist> boq(@Body Boqrequest boqrequest);
+
+    @POST("Clients_apis/preview_boq_indents_edit")
+    Call<IndenteditList> editboq(@Body Indentpendingrequest indentpendingrequest);
 
     @POST("Clients_apis/approver_indent_list")
     Call<PendingIndentList> pendingindent(@Body PendingIndentRequest pendingIndentRequest);

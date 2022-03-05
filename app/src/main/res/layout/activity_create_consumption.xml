@@ -110,7 +110,7 @@
                     android:textSize="15sp" />
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/sp_con_contractorname"
+                    android:id="@+id/sp_con_contractorname1"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginStart="10dp"
@@ -148,7 +148,7 @@
                     android:textSize="15sp" />
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/sp_con_location"
+                    android:id="@+id/sp_con_location1"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginStart="10dp"
@@ -185,7 +185,7 @@
                     android:textSize="15sp" />
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/sp_con_sublocation"
+                    android:id="@+id/sp_con_sublocation1"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginStart="10dp"
@@ -237,7 +237,7 @@
                          android:textSize="15sp" />
                  </com.google.android.material.textfield.TextInputLayout>-->
                     <EditText
-                        android:id="@+id/edt_con_date"
+                        android:id="@+id/edt_con_date1"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:textColor="@color/black"
@@ -271,7 +271,7 @@
 
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edt_con_ordernum"
+                        android:id="@+id/edt_con_ordernum1"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@null"
@@ -288,7 +288,7 @@
 
 
             <EditText
-                android:id="@+id/edt_con_remarks"
+                android:id="@+id/edt_con_remarks1"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:textColor="@color/black"
                 android:maxLines="5"
@@ -308,7 +308,7 @@
                 android:theme="@style/LightTheme" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_con_generate"
+                android:id="@+id/btn_con_generate1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="30dp"

@@ -12,5 +12,8 @@ public class RaiseIndentEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_raise_indent_edit);
+
+
+
     }
 }
