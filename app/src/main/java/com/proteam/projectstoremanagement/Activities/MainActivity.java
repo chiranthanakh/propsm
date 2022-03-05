@@ -191,11 +191,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         indent_status_Count_rejected = findViewById(R.id.indent_status_Count_rejected);
         indent_status_Count_close = findViewById(R.id.indent_status_Count_close);
 
-        if (role.equals("Approver")) {
+     /*   if (role.equals("Approver")) {
 
         } else {
             tv_pending_indent.setVisibility(View.GONE);
-        }
+        }*/
 
         tv_raise_boq_indent.setOnClickListener(this);
         tv_individual_indent.setOnClickListener(this);
@@ -361,11 +361,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (URL) {
 
             case psmdata:
-                if (progressDialog != null) {
+                /*if (progressDialog != null) {
                     if (progressDialog.isShowing()) {
                         progressDialog.dismiss();
                     }
-                }
+                }*/
 
                 if (isSucces) {
 

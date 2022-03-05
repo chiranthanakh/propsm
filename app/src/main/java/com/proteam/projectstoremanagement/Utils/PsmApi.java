@@ -1,6 +1,7 @@
 package com.proteam.projectstoremanagement.Utils;
 
 import com.proteam.projectstoremanagement.Model.Changepassmodel;
+import com.proteam.projectstoremanagement.NotificationPart.RequestNotification;
 import com.proteam.projectstoremanagement.Request.ConsumptionDetailsRequest;
 import com.proteam.projectstoremanagement.Request.ConsumptionListRequest;
 import com.proteam.projectstoremanagement.Request.PendingIntentupdaterequest;
@@ -34,11 +35,19 @@ import com.proteam.projectstoremanagement.Response.PsmDataStatusHome;
 import com.proteam.projectstoremanagement.Response.RaiseIndentConfirmRequest;
 import com.proteam.projectstoremanagement.Response.StockMaterialNameResponse;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface PsmApi {
+
+
+    @Headers({"Authorization: key=AAAAME40VRY:APA91bHlxDUz4qlqRlAsdKZ0o0GLnuPXEQQ-fCTvzmrnbiREdxhW6nHxY95ZusHecIIUY51-5v97J5LSetcdkLoxz98xOxS8D0VoqmEXx5AZWycMA7r5g4qPINRvT13Dwj7tOeOtblTy",
+            "Content-Type:application/json"})
+    @POST("fcm/send")
+    Call<ResponseBody> sendChatNotification(@Body RequestNotification requestNotificaton);
 
 
     @POST("Clients_apis/client_login")

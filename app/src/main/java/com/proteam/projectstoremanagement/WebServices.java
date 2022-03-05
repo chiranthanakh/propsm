@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import com.proteam.projectstoremanagement.Model.Changepassmodel;
+import com.proteam.projectstoremanagement.NotificationPart.RequestNotification;
 import com.proteam.projectstoremanagement.Request.ConsumptionDetailsRequest;
 import com.proteam.projectstoremanagement.Request.ConsumptionListRequest;
 import com.proteam.projectstoremanagement.Request.PendingIntentupdaterequest;
@@ -63,7 +64,7 @@ public class WebServices<T> {
     public enum ApiType {
        general,login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus,materialstock,
         materialstockname,deletestockMhome,addmaterial,priview,confirmRaiseIndent,ConsList,
-        consumptionDetails,boqedit
+        consumptionDetails,boqedit,noti
     }
 
     String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
@@ -144,6 +145,33 @@ public class WebServices<T> {
         return retrofit;
     }
 
+
+    public void notificationapi(String api, ApiType apiTypes, RequestNotification requestNotification)
+    {
+
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient("https://fcm.googleapis.com/");
+
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.sendChatNotification(requestNotification);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
 
     public void login(String api, ApiType apiTypes, Loginmodel loginmodel)
     {
