@@ -59,6 +59,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="123"
+                android:editable="false"
+                android:clickable="false"
                 android:inputType="number"
                 android:textCursorDrawable="@drawable/cursor"
                 android:backgroundTint="@color/grey_dark"

@@ -54,6 +54,8 @@ public class ConsumptionMaterialAdapter extends ArrayAdapter<ConsumptionMaterial
 
 
 
+
+
         // then return the recyclable view
         return currentItemView;
     }
