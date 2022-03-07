@@ -119,7 +119,7 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-                ConsumptionMaterialListRequest consumptionMaterialListRequest = new ConsumptionMaterialListRequest("1","1","1","1");
+                ConsumptionMaterialListRequest consumptionMaterialListRequest = new ConsumptionMaterialListRequest(storeid,location_id,sublocation_id,contrctorname_id);
                 WebServices<ConsumptionMaterialListResponse> webServices = new WebServices<ConsumptionMaterialListResponse>(ConsumptionMaterialActivity.this);
                 webServices.consumptionMaDetails(WebServices.ApiType.consumptionMateriallsit, consumptionMaterialListRequest);
             }
@@ -151,7 +151,7 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
                         arrayList.clear();
                         for (int i=0;i<consumptionmaterial.size();i++){
 
-                            arrayList.add(new ConsumptionMaterialsModel(consumptionMaterialListResponse.getList_of_materials().get(i).getMaterial_manual_id(),consumptionMaterialListResponse.getList_of_materials().get(i).getMaterial_name(),consumptionMaterialListResponse.getList_of_materials().get(i).getIssued_qty()));
+                            arrayList.add(new ConsumptionMaterialsModel(consumptionMaterialListResponse.getList_of_materials().get(i).getMaterial_manual_id(),consumptionMaterialListResponse.getList_of_materials().get(i).getMaterial_name(),"0"));
 
                         }
                         tv_con_total_item.setText(String.valueOf(consumptionmaterial.size()));

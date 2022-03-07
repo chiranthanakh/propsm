@@ -66,7 +66,7 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
 
         initilize();
         sp_con_contractorname.setOnItemSelectedListener(OnCatSpinnerCL);
-        sp_con_location.setOnItemSelectedListener(OnCatSpinnerCL);
+        sp_con_location.setOnItemSelectedListener(OnCatSpinnerCL1);
         sp_con_sublocation.setOnItemSelectedListener(OnCatSpinnerCL);
     }
 
@@ -130,8 +130,10 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
+                String location = String.valueOf(locationmap.get(sp_con_location.getSelectedItem().toString()));
 
-                SubLocationRaiseRequest subLocationRaiseRequest = new SubLocationRaiseRequest("2");
+
+                SubLocationRaiseRequest subLocationRaiseRequest = new SubLocationRaiseRequest(location);
 
                 WebServices<Contractorlocationmodel> webServices = new WebServices<Contractorlocationmodel>(CreateConsumptionActivity.this);
                 webServices.constructorSublocation(WebServices.ApiType.sublocation, subLocationRaiseRequest);
@@ -139,7 +141,7 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
         }
 
     }
-    private void callboqupdateapi() {
+    /*private void callboqupdateapi() {
 
         SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
@@ -149,7 +151,7 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
         WebServices<Boqlist> webServices = new WebServices<Boqlist>(CreateConsumptionActivity.this);
         webServices.boqapi( WebServices.ApiType.boq,boqrequest );
 
-    }
+    }*/
 
 
     @Override
@@ -221,7 +223,7 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
                     String sublocation = String.valueOf(sublocationmap.get(sp_con_sublocation.getSelectedItem().toString()));
                     String contractorname = String.valueOf(contractormap.get(sp_con_contractorname.getSelectedItem().toString()));
 
-                    callboqupdateapi();
+
                     Intent intent = new Intent(CreateConsumptionActivity.this, ConsumptionMaterialActivity.class);
 
                     Bundle bundle = new Bundle();
@@ -283,6 +285,21 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
         }
     };
 
+    private AdapterView.OnItemSelectedListener OnCatSpinnerCL1 = new AdapterView.OnItemSelectedListener() {
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+
+            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+            ((TextView) parent.getChildAt(0)).setTextSize(15);
+            callSublocationapi();
+
+        }
+
+        public void onNothingSelected(AdapterView<?> parent) {
+            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+            ((TextView) parent.getChildAt(0)).setTextSize(15);
+        }
+    };
+
     @Override
     public void onResponse(Object response, WebServices.ApiType URL, boolean isSucces, int code) {
 
@@ -315,6 +332,7 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
                     contractorlist.clear();
                     for(int i = 0; i<list2.size(); i++ ){
 
+                        contractormap.put(contractorlocationmodel.getContractors().get(i).getFull_name(),contractorlocationmodel.getContractors().get(i).getContractor_id());
                         contractorlist.add(contractorlocationmodel.getContractors().get(i).getFull_name());
 
                     }
@@ -326,7 +344,6 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
                     ArrayAdapter adapte=new ArrayAdapter(CreateConsumptionActivity.this,android.R.layout.simple_list_item_1,contractorlist);
                     sp_con_contractorname.setAdapter(adapte);
 
-                    callSublocationapi();
                 }else {
                     Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
 
