@@ -17,6 +17,7 @@ import com.proteam.projectstoremanagement.Request.MaterialStockRequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Request.RaiseIndentPreview;
 import com.proteam.projectstoremanagement.Request.Updatepreviewlist;
+import com.proteam.projectstoremanagement.Response.ConformRaiseindentresponse;
 import com.proteam.projectstoremanagement.Response.ConsumptionDetailsDataResponse;
 import com.proteam.projectstoremanagement.Response.ConsumptionListResponse;
 import com.proteam.projectstoremanagement.Response.ConsumptionMaterialListResponse;
@@ -33,6 +34,7 @@ import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
 import com.proteam.projectstoremanagement.Response.Boqlist;
 import com.proteam.projectstoremanagement.Response.Contractorlocationmodel;
 import com.proteam.projectstoremanagement.Response.LoginResponse;
+import com.proteam.projectstoremanagement.Response.PendingIntentgenaralresponse;
 import com.proteam.projectstoremanagement.Response.PreviewResponsce;
 import com.proteam.projectstoremanagement.Response.PsmDataStatusHome;
 import com.proteam.projectstoremanagement.Response.RaiseIndentConfirmRequest;
@@ -88,7 +90,7 @@ public interface PsmApi {
     Call<IndentStatusdirectlist> indentstatusdirect(@Body Indentstatusrequest indentstatusrequest);
 
     @POST("Clients_apis/approver_approve_indent")
-    Call<Generalresponce> pendingupdate(@Body PendingIntentupdaterequest pendingIntentupdaterequest);
+    Call<PendingIntentgenaralresponse> pendingupdate(@Body PendingIntentupdaterequest pendingIntentupdaterequest);
 
     @POST("Clients_apis/get_meterial_closing_stock_details")
     Call<MaterialStockRequest> materialstockhome(@Body MaterialStockModel materialStockModel);
@@ -112,7 +114,7 @@ public interface PsmApi {
 
 
     @POST("Clients_apis/submit_boq_indents")
-    Call<Generalresponce> confirmraiseindent(@Body RaiseIndentConfirmRequest raiseIndentConfirmRequest);
+    Call<ConformRaiseindentresponse> confirmraiseindent(@Body RaiseIndentConfirmRequest raiseIndentConfirmRequest);
 
     @POST("Clients_apis/client_consumption_list")
     Call<ConsumptionListResponse> consumptionlistdata(@Body ConsumptionListRequest consumptionListRequest);

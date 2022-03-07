@@ -54,13 +54,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId())
         {
             case R.id.btn_login:
-                notifiy();
+                //notifiy();
 
                 /*Intent intent= new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();*/
 
-               /* if(!edt_Email.getText().toString().equals("")){
+                if(!edt_Email.getText().toString().equals("")){
 
                     if (!edt_Pass.getText().toString().equals("")){
 
@@ -72,8 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 }else {
                     Toast.makeText(LoginActivity.this,"Enter your email-id",Toast.LENGTH_LONG).show();
-                }*/
-
+                }
 
 
                 break;
@@ -125,10 +124,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void notifiy(){
 
-        SendNotificatiponmodel sendNotificatiponmodel = new SendNotificatiponmodel("testing","testing");
+        SendNotificatiponmodel sendNotificatiponmodel = new SendNotificatiponmodel("testing1","testing1");
         RequestNotification requestNotification = new RequestNotification();
         requestNotification.setSendNotificatiponmodel(sendNotificatiponmodel);
-        requestNotification.setToken("weather");
+        requestNotification.setToken("/topics/weather");
 
         WebServices<LoginResponse> webServices = new WebServices<LoginResponse>(LoginActivity.this);
         webServices.notificationapi(Utilities.getBaseURL(LoginActivity.this), WebServices.ApiType.noti,requestNotification );

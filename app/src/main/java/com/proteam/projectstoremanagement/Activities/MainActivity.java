@@ -86,20 +86,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        FirebaseMessaging.getInstance().subscribeToTopic("weather")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        String msg = "done";
-                        if (!task.isSuccessful()) {
-                            msg = "failes";
-                        }
-                       // Log.d(TAG, msg);
-                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
         SharedPreferences sharedPreferences = this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         String user = sharedPreferences.getString("userid", null);
@@ -114,6 +100,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         userid = sharedPreferences.getString("userid", null);
         email = sharedPreferences.getString("email", null);
         username = sharedPreferences.getString("username", null);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("85")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "done";
+                        if (!task.isSuccessful()) {
+                            msg = "failes";
+                        }
+                        // Log.d(TAG, msg);
+                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
         initilize();
 
@@ -141,10 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // To keep animation for 4 seconds
                 new Handler().postDelayed(new Runnable() {
                     @Override public void run() {
-                        // Stop animation (This will be after 3 seconds)
-                       // mSwipeRefreshLayout.setRefreshing(false);
-                        /*callboqupdateapi();
-                        callboqupdateapi();*/
+
                     }
                 }, 3000); // Delay in millis
             }
@@ -191,11 +188,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         indent_status_Count_rejected = findViewById(R.id.indent_status_Count_rejected);
         indent_status_Count_close = findViewById(R.id.indent_status_Count_close);
 
-     /*   if (role.equals("Approver")) {
+        if (role.equalsIgnoreCase("Approver")) {
 
         } else {
             tv_pending_indent.setVisibility(View.GONE);
-        }*/
+        }
 
         tv_raise_boq_indent.setOnClickListener(this);
         tv_individual_indent.setOnClickListener(this);
@@ -264,11 +261,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentChangePass);
                 break;
 
-         /*   case R.id.btn_consumption:
+          case R.id.btn_consumption:
             case R.id.tv_consumption_list:
                Intent intentconhome = new Intent(MainActivity.this, ConsumptionListActivity.class);
                 startActivity(intentconhome);
-                break;*/
+                break;
             case R.id.iv_nav_view:
                 drawer_layout.openDrawer(GravityCompat.START);
                 break;

@@ -1,12 +1,14 @@
 package com.proteam.projectstoremanagement.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,7 +35,7 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
     LinearLayout ll_status_click;
     ListView lv_pending_indent_list;
-
+    private SwipeRefreshLayout sc_indent_list_status;
     List pendingindentlist = new ArrayList();
 
 
@@ -62,6 +64,7 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
         userid = sharedPreferences.getString("userid",null);
 
+
     }
 
     @Override
@@ -73,6 +76,8 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
     private void initilize()
     {
+        sc_indent_list_status = (SwipeRefreshLayout) findViewById(R.id.sc_indent_list_status1);
+
         lv_pending_indent_list=findViewById(R.id.lv_pending_indent_list);
         filter = findViewById(R.id.iv_filter);
         filter.setOnClickListener(this);
@@ -84,6 +89,24 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
         nav_Individual_indent.setOnClickListener(this);
         nav_consumption=findViewById(R.id.nav_consumption);
         nav_consumption.setOnClickListener(this);
+
+        sc_indent_list_status.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                finish();
+                startActivity(getIntent());
+
+                // Your code here
+                Toast.makeText(getApplicationContext(), "Refreshing!", Toast.LENGTH_LONG).show();
+                // To keep animation for 4 seconds
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+
+                    }
+                }, 3000); // Delay in millis
+            }
+        });
     }
 
     private void callpendingindentapi() {

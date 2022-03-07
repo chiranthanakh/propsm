@@ -22,12 +22,17 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.proteam.projectstoremanagement.Adapters.PendingIndentAdapter;
 import com.proteam.projectstoremanagement.Model.PendingIndentModel;
+import com.proteam.projectstoremanagement.NotificationPart.RequestNotification;
+import com.proteam.projectstoremanagement.NotificationPart.SendNotificatiponmodel;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
 import com.proteam.projectstoremanagement.Request.PendingIntentupdaterequest;
 import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Response.Indentpending;
+import com.proteam.projectstoremanagement.Response.LoginResponse;
+import com.proteam.projectstoremanagement.Response.PendingIntentgenaralresponse;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
+import com.proteam.projectstoremanagement.Utils.Utilities;
 import com.proteam.projectstoremanagement.WebServices;
 
 import java.util.ArrayList;
@@ -272,7 +277,6 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
                         tv_p_indentdate.setText(indentpending.getIndent_list().get(0).getIndent_date());
 
 
-
                     }
 
                 }
@@ -292,9 +296,20 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
                     if(response!=null) {
 
 
-                        Generalresponce generalresponce = (Generalresponce) response;
+                        //Generalresponce generalresponce = (Generalresponce) response;
+                        PendingIntentgenaralresponse generalresponse = (PendingIntentgenaralresponse) response;
 
-                        Toast.makeText(this, generalresponce.getStatus(), Toast.LENGTH_SHORT).show();
+                        generalresponse.getRiser_id();
+
+                        if(generalresponse.getStatus().equalsIgnoreCase("sucess")){
+
+                            notifiy(generalresponse.getRiser_id(),generalresponse.getMessage());
+
+                        }else {
+                            Toast.makeText(this, generalresponse.getStatus(), Toast.LENGTH_SHORT).show();
+                        }
+
+
 
                     }else {
 
@@ -310,6 +325,18 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
                 break;
 
         }
+    }
+
+    private void notifiy(String id,String msg){
+
+        SendNotificatiponmodel sendNotificatiponmodel = new SendNotificatiponmodel(msg,"Pro Psm");
+        RequestNotification requestNotification = new RequestNotification();
+        requestNotification.setSendNotificatiponmodel(sendNotificatiponmodel);
+        requestNotification.setToken("/topics/"+id);
+
+        WebServices<LoginResponse> webServices = new WebServices<LoginResponse>(PendingIndentActivity.this);
+        webServices.notificationapi(Utilities.getBaseURL(PendingIndentActivity.this), WebServices.ApiType.noti,requestNotification );
+
     }
 
     public void openDialog2(String it) {
