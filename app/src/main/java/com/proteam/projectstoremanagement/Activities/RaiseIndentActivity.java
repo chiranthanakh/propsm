@@ -37,6 +37,8 @@ import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
 import com.proteam.projectstoremanagement.Request.RaiseIndentPreview;
 import com.proteam.projectstoremanagement.Request.RaiseIndentPreviewResponse;
 import com.proteam.projectstoremanagement.Request.Raiseintentdataitems;
+import com.proteam.projectstoremanagement.Request.Updatepreviewitems;
+import com.proteam.projectstoremanagement.Request.Updatepreviewlist;
 import com.proteam.projectstoremanagement.Response.Boqlist;
 import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Response.IndenteditList;
@@ -143,7 +145,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    private void calleditboq() {
+    private void calleditboq(String id) {
 
         progressDialog=new ProgressDialog(RaiseIndentActivity.this);
 
@@ -155,7 +157,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                 //Boqrequest boqrequest = new Boqrequest(storeid, location_id, sublocation_id);
 
-                Indentpendingrequest indentpendingrequest = new Indentpendingrequest("69");
+                Indentpendingrequest indentpendingrequest = new Indentpendingrequest(id);
                 WebServices<Boqlist> webServices = new WebServices<Boqlist>(RaiseIndentActivity.this);
                 webServices.editboqapi(WebServices.ApiType.boqedit, indentpendingrequest);
             }
@@ -176,18 +178,53 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                 for(int i=0;i<arrayList.size();i++){
 
-                    itemslist.add(new Raiseintentdataitems(arrayList.get(i).getMaterial_id(),arrayList.get(i).getBoqbalance(),arrayList.get(i).getRaiseqty()));
+                    itemslist.add(new Raiseintentdataitems(arrayList.get(i).getMaterial_id(),arrayList.get(i).getRaiseqty(),arrayList.get(i).getBoqbalance()));
 
                 }
 
 
                 ArrayList<RaiseIndentPreviewResponse> locationdetail = new ArrayList<RaiseIndentPreviewResponse>();
+                SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                String user = sharedPreferences.getString("userid",null);
 
-                locationdetail.add(new RaiseIndentPreviewResponse(contrctorname_id,location_id,sublocation_id,workorderno,date,storeid,"72","success"));
+                locationdetail.add(new RaiseIndentPreviewResponse(contrctorname_id,location_id,sublocation_id,workorderno,date,storeid,user,"success"));
 
                 RaiseIndentPreview raiseIndentPreview1 = new RaiseIndentPreview(locationdetail,itemslist);
                 WebServices<Boqlist> webServices = new WebServices<Boqlist>(RaiseIndentActivity.this);
                 webServices.prevewapi(WebServices.ApiType.priview, raiseIndentPreview1);
+            }
+        }
+    }
+
+
+    private void callupdatepreviewapi(String id) {
+
+        progressDialog=new ProgressDialog(RaiseIndentActivity.this);
+
+        if(progressDialog!=null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+                ArrayList<Updatepreviewitems> itemslist = new ArrayList<>();
+
+                for(int i=0;i<arrayList.size();i++){
+
+                    itemslist.add(new Updatepreviewitems(id,arrayList.get(i).getRaiseqty(),arrayList.get(i).getMaterial_id()));
+
+                }
+                ArrayList<RaiseIndentPreviewResponse> locationdetail = new ArrayList<RaiseIndentPreviewResponse>();
+                SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                String user = sharedPreferences.getString("userid",null);
+
+               // locationdetail.add(new RaiseIndentPreviewResponse(contrctorname_id,location_id,sublocation_id,workorderno,date,storeid,user,"success"));
+
+                Updatepreviewlist updatepreviewlist = new Updatepreviewlist(itemslist);
+                WebServices<Boqlist> webServices = new WebServices<Boqlist>(RaiseIndentActivity.this);
+                webServices.prevewapiupdate(WebServices.ApiType.priview, updatepreviewlist);
             }
         }
     }
@@ -200,9 +237,10 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
         Bundle bundle = getIntent().getExtras();
         Boolean state = bundle.getBoolean("status");
+        String indentid = bundle.getString("indent_id");
 
         if(state){
-            calleditboq();
+            calleditboq(indentid);
         }else {
             callboqupdateapi();
         }
@@ -263,11 +301,21 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
             case R.id.btn_indent_preview:
                 //callpreviewapi();
 
-                callpreviewapi();
+                Bundle bundle = getIntent().getExtras();
+                Boolean state = bundle.getBoolean("status");
+                String indentid = bundle.getString("indent_id");
+
+                if(state){
+                    callupdatepreviewapi(indentid);
+                }else {
+                    callpreviewapi();
+                }
+
                 break;
         }
 
     }
+
 
     @Override
     public void onResponse(Object response, WebServices.ApiType URL, boolean isSucces, int code) {
@@ -293,7 +341,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                         arrayList.clear();
                         for (int i=0;i<boqcomponentslist.size();i++){
 
-                            arrayList.add(new RaiseIndentModel(boqlist.getBoq_list().get(i).getMaterial_manual_id(),boqlist.getBoq_list().get(i).getMaterial_name(),boqlist.getBoq_list().get(i).getBalance_boq(),boqlist.getBoq_list().get(i).getQty(),boqlist.getBoq_list().get(i).getMaterial_id()));
+                            arrayList.add(new RaiseIndentModel(boqlist.getBoq_list().get(i).getMaterial_manual_id(),boqlist.getBoq_list().get(i).getMaterial_name(),boqlist.getBoq_list().get(i).getBalance_boq(),"0.00",boqlist.getBoq_list().get(i).getMaterial_id()));
 
                         }
 
@@ -332,15 +380,15 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                     for (int i=0;i<list.size();i++){
 
-                        prviewlist.add( previewResponsce.getMaterial_details().get(i).getMaterial_name()+"--"+
+                        prviewlist.add(
+                                previewResponsce.getMaterial_details().get(i).getMaterial_manual_id()+"--"+
+                                previewResponsce.getMaterial_details().get(i).getMaterial_name()+"--"+
+                                        previewResponsce.getMaterial_details().get(i).getBoq_balance_qty()+"--"+
                                 previewResponsce.getMaterial_details().get(i).getMaterial_id()+"--"+
-                                previewResponsce.getMaterial_details().get(i).getIndent_id()+"--"+
+                                        previewResponsce.getMaterial_details().get(i).getIndent_qty()+"--"+
+                                        previewResponsce.getMaterial_details().get(i).getIndent_id()+"--"+
                                 previewResponsce.getMaterial_details().get(i).getBoq_qty()+"--"+
-                                previewResponsce.getMaterial_details().get(i).getIndent_qty()+"--"+
-                                previewResponsce.getMaterial_details().get(i).getBoq_balance_qty()+"--"+
-                                previewResponsce.getMaterial_details().get(i).getClosing_stock()+"--"+
-                                previewResponsce.getMaterial_details().get(i).getMaterial_manual_id());
-
+                                previewResponsce.getMaterial_details().get(i).getClosing_stock());
 
                     }
 
@@ -385,7 +433,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                         arrayList.clear();
                         for (int i=0;i<editlist.size();i++){
 
-                            arrayList.add(new RaiseIndentModel(indenteditList.getMaterial_details().get(i).getMaterial_manual_id(),indenteditList.getMaterial_details().get(i).getMaterial_name(),indenteditList.getMaterial_details().get(i).getBoq_balance_qty(),indenteditList.getMaterial_details().get(i).getBoq_qty(),indenteditList.getMaterial_details().get(i).getMaterial_id()));
+                            arrayList.add(new RaiseIndentModel(indenteditList.getMaterial_details().get(i).getMaterial_manual_id(),indenteditList.getMaterial_details().get(i).getMaterial_name(),indenteditList.getMaterial_details().get(i).getBoq_balance_qty(),indenteditList.getMaterial_details().get(i).getIndent_qty(),indenteditList.getMaterial_details().get(i).getMaterial_id()));
 
                         }
 

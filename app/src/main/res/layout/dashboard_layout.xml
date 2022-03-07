@@ -193,6 +193,7 @@
                     android:layout_margin="2dp"
                     android:layout_weight="1"
                     android:gravity="center"
+
                     android:orientation="vertical">
 
                     <Button
@@ -202,6 +203,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/lato"
+                        android:visibility="gone"
                         android:padding="12dp"
                         android:text="Consumption"
                         android:textColor="@color/black"

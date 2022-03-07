@@ -4,6 +4,7 @@ import com.proteam.projectstoremanagement.Model.Changepassmodel;
 import com.proteam.projectstoremanagement.NotificationPart.RequestNotification;
 import com.proteam.projectstoremanagement.Request.ConsumptionDetailsRequest;
 import com.proteam.projectstoremanagement.Request.ConsumptionListRequest;
+import com.proteam.projectstoremanagement.Request.ConsumptionMaterialListRequest;
 import com.proteam.projectstoremanagement.Request.PendingIntentupdaterequest;
 import com.proteam.projectstoremanagement.Model.ConSubLocationModel;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
@@ -15,8 +16,10 @@ import com.proteam.projectstoremanagement.Request.MaterialStockDeleteRequest;
 import com.proteam.projectstoremanagement.Request.MaterialStockRequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Request.RaiseIndentPreview;
+import com.proteam.projectstoremanagement.Request.Updatepreviewlist;
 import com.proteam.projectstoremanagement.Response.ConsumptionDetailsDataResponse;
 import com.proteam.projectstoremanagement.Response.ConsumptionListResponse;
+import com.proteam.projectstoremanagement.Response.ConsumptionMaterialListResponse;
 import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Response.IndentStatusdirectlist;
 import com.proteam.projectstoremanagement.Response.IndentStatuslist;
@@ -104,6 +107,9 @@ public interface PsmApi {
     @POST("Clients_apis/preview_boq_indents")
     Call<PreviewResponsce> preview(@Body RaiseIndentPreview preview);
 
+    @POST("Clients_apis/preview_boq_indents_update")
+    Call<PreviewResponsce> previewupdate(@Body Updatepreviewlist updatepreviewlist);
+
 
     @POST("Clients_apis/submit_boq_indents")
     Call<Generalresponce> confirmraiseindent(@Body RaiseIndentConfirmRequest raiseIndentConfirmRequest);
@@ -114,4 +120,8 @@ public interface PsmApi {
 
     @POST("Clients_apis/consumption_list_single_data")
     Call<ConsumptionDetailsDataResponse> ConsumptionDataDetails(@Body ConsumptionDetailsRequest consumptionDetailsRequest);
+
+
+    @POST("Clients_apis/list_of_materials_in_consumption")
+    Call<ConsumptionMaterialListResponse> consumptionMaterial(@Body ConsumptionMaterialListRequest consumptionMaterialListRequest);
 }

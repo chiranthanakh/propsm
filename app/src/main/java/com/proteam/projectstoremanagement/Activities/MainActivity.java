@@ -264,11 +264,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentChangePass);
                 break;
 
-            case R.id.btn_consumption:
+         /*   case R.id.btn_consumption:
             case R.id.tv_consumption_list:
-                Intent intentconhome = new Intent(MainActivity.this, ConsumptionListActivity.class);
+               Intent intentconhome = new Intent(MainActivity.this, ConsumptionListActivity.class);
                 startActivity(intentconhome);
-                break;
+                break;*/
             case R.id.iv_nav_view:
                 drawer_layout.openDrawer(GravityCompat.START);
                 break;
