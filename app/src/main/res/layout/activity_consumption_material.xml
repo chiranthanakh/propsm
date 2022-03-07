@@ -93,11 +93,11 @@
 
 
             <LinearLayout
+                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/details"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:orientation="vertical">
 
@@ -319,7 +319,6 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="1"
-
                     app:contentInsetStartWithNavigation="0dp">
 
                     <LinearLayout
@@ -352,13 +351,6 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/iv_search" />
 
-                        <ProgressBar
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:padding="5dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
 
                     </LinearLayout>
                 </androidx.appcompat.widget.Toolbar>
@@ -405,7 +397,7 @@
             <LinearLayout
                 android:id="@+id/data_table"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@id/search">
 
@@ -466,21 +458,21 @@
 
             </LinearLayout>
 
-            <ListView
-                android:id="@+id/lv_Con_detailsList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:nestedScrollingEnabled="true"
-                android:overScrollMode="never"
-                android:paddingBottom="@dimen/margin_70dp"
-                android:smoothScrollbar="true"
-                app:layout_constraintTop_toBottomOf="@id/data_table" />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+        <ListView
+            android:id="@+id/lv_Con_detailsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="true"
+            android:overScrollMode="never"
+            android:paddingBottom="180dp"
+            android:smoothScrollbar="true"
+            app:layout_constraintTop_toBottomOf="@id/data_table" />
     </LinearLayout>
 
     <LinearLayout
