@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ public class ConsumptionListActivity extends AppCompatActivity implements View.O
     ProgressDialog progressDialog;
     final ArrayList<ConsumptionListModel> arrayList = new ArrayList<ConsumptionListModel>();
     List list;
-
+    LinearLayout ll_no_data;
     FloatingActionButton fab_add_consumption;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class ConsumptionListActivity extends AppCompatActivity implements View.O
         nav_boq_indent.setOnClickListener(this);
         nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
         nav_Individual_indent.setOnClickListener(this);
+        ll_no_data = findViewById(R.id.ll_no_data);
 
     }
     private void callConsumptionListAPI() {
@@ -112,16 +114,18 @@ public class ConsumptionListActivity extends AppCompatActivity implements View.O
 
                         for (int i = 0; i<list.size(); i++){
 
-
                             arrayList.add(new ConsumptionListModel(consumptionListResponse.getClient_consumption_list().get(i).getContractor_name(),consumptionListResponse.getClient_consumption_list().get(i).getLocation_name(),consumptionListResponse.getClient_consumption_list().get(i).getDate(),consumptionListResponse.getClient_consumption_list().get(i).getSite_consumption_id()));
-
-
 
                         }
 
-                        ConsumptionListAdapter numbersArrayAdapter = new ConsumptionListAdapter(this, arrayList);
-                        ListView consumptionList = findViewById(R.id.consumption_status_listView);
-                        consumptionList.setAdapter(numbersArrayAdapter);
+                        if(arrayList.size()==0){
+                            ll_no_data.setVisibility(View.VISIBLE);
+                        }else {
+                            ConsumptionListAdapter numbersArrayAdapter = new ConsumptionListAdapter(this, arrayList);
+                            ListView consumptionList = findViewById(R.id.consumption_status_listView);
+                            consumptionList.setAdapter(numbersArrayAdapter);
+                        }
+
 
                     }else {
 

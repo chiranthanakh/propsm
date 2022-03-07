@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         email = sharedPreferences.getString("email", null);
         username = sharedPreferences.getString("username", null);
 
-        FirebaseMessaging.getInstance().subscribeToTopic("85")
+        FirebaseMessaging.getInstance().subscribeToTopic(userid)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
