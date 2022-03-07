@@ -3,12 +3,14 @@ package com.proteam.projectstoremanagement.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -40,7 +42,7 @@ import java.util.List;
 
 public class IndentStatusActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
     ImageView mToolbar,iv_indent_filter;
-
+    private SwipeRefreshLayout sc_indent_list_status;
     BottomNavigationItemView nav_home,nav_Individual_indent,nav_consumption;
 
     FloatingActionButton fab_add_raise;
@@ -77,11 +79,34 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
 
         callapi();
 
+        sc_indent_list_status.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                finish();
+                startActivity(getIntent());
+
+                // Your code here
+                Toast.makeText(getApplicationContext(), "Refreshing!", Toast.LENGTH_LONG).show();
+                // To keep animation for 4 seconds
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        // Stop animation (This will be after 3 seconds)
+                        // mSwipeRefreshLayout.setRefreshing(false);
+                        /*callboqupdateapi();
+                        callboqupdateapi();*/
+                    }
+                }, 3000); // Delay in millis
+            }
+        });
+
     }
 
 
     private void initialize()
     {
+        sc_indent_list_status = (SwipeRefreshLayout) findViewById(R.id.sc_indent_list_status);
+
         fab_add_raise=findViewById(R.id.fab_add_raise);
         fab_add_raise.setOnClickListener(this);
         indent_status_listView=findViewById(R.id.indent_status_listView);

@@ -38,7 +38,7 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
 
     ListView lv_update_indent_list;
     TextView tv_total_item;
-    AppCompatButton btn_indent_confirm,btn_edit;
+    AppCompatButton btn_indent_confirm,btn_edit,btn_indent_back;
     String indentid;
 
     List boqcomponentslist = new ArrayList();
@@ -85,7 +85,8 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
     }
 
     private void initilize() {
-
+        btn_indent_back=findViewById(R.id.btn_indent_back);
+        btn_indent_back.setOnClickListener(this);
         nav_home=findViewById(R.id.nav_home);
         nav_home.setOnClickListener(this);
         nav_boq_indent=findViewById(R.id.nav_boq_indent);
@@ -180,6 +181,12 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
                 bundle.putString("indent_id",indentid);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                break;
+
+            case R.id.btn_indent_back:
+                Intent intent_back = new Intent(UpateIndentActivity.this,IndentStatusActivity.class);
+                startActivity(intent_back);
+                finish();
                 break;
         }
     }
