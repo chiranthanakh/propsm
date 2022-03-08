@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
     android:layout_height="wrap_content">
@@ -47,11 +48,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_marginStart="30dp"
+
                 android:gravity="center"
                 android:text="Pending"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
+            <ImageView
+                android:id="@+id/iv_action_edit_indent"
+                android:layout_width="wrap_content"
+                android:padding="5dp"
+                android:layout_height="match_parent"
+                android:background="?selectableItemBackground"
+                android:src="@drawable/ic_edit"
+                app:tint="@color/icon_color" />
         </LinearLayout>
     </LinearLayout>
     <View

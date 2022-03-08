@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
-    ImageView ivnav, iv_add_material;
+    ImageView ivnav, iv_add_material,iv_notification;
     DrawerLayout drawer_layout;
     TextView tv_raise_boq_indent, tv_individual_indent, tv_pending_indent, tv_consumption, tv_consumption_list,
             indent_status_Count_pending, indent_status_Count_approve, indent_status_Count_rejected,
@@ -152,8 +152,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initilize() {
 
-       mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.sf_container);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.sf_container);
 
+        iv_notification=findViewById(R.id.iv_notification);
+        iv_notification.setOnClickListener(this);
         /*Bundle bundle = getIntent().getExtras();
         role = bundle.getString("role");
         userid = bundle.getString("user_id");*/
@@ -303,6 +305,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
 
+            case R.id.iv_notification:
+                Intent intent_notification = new Intent(MainActivity.this,NotificationActivity.class);
+                startActivity(intent_notification);
+                break;
           /* case R.id.material_delete:
                 openDialog();
                 break;*/

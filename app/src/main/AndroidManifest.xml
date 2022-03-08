@@ -13,12 +13,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectStoreManagement">
+        <activity
+            android:name=".Activities.NotificationActivity"
+            android:exported="false" />
 
         <service
             android:name=".Notification"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
@@ -92,7 +95,5 @@
             android:name=".Activities.LoginActivity"
             android:exported="false" />
     </application>
-
-
 
 </manifest>
