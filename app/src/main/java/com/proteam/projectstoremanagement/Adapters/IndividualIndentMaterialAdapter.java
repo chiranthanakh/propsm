@@ -49,7 +49,7 @@ public class IndividualIndentMaterialAdapter extends ArrayAdapter<IndividualInde
 
         // then according to the position of the view assign the desired TextView 2 for the same
         TextView Individual_material_Mqty = currentItemView.findViewById(R.id.individual_In_mQty);
-        Individual_material_Mqty.setText(currentNumberPosition.getMaterialQty());
+        Individual_material_Mqty.setText(currentNumberPosition.getIndentQty());
 
 
 
