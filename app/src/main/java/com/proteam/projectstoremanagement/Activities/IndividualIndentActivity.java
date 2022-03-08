@@ -134,8 +134,8 @@ public class IndividualIndentActivity extends AppCompatActivity implements View.
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
-            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            ((TextView) parent.getChildAt(0)).setTextSize(15);
+           ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+               ((TextView) parent.getChildAt(0)).setTextSize(15);
         }
     };
 }

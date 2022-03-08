@@ -26,6 +26,8 @@ import com.proteam.projectstoremanagement.Response.IndentStatusdirectlist;
 import com.proteam.projectstoremanagement.Response.IndentStatuslist;
 import com.proteam.projectstoremanagement.Response.IndenteditList;
 import com.proteam.projectstoremanagement.Response.Indentpending;
+import com.proteam.projectstoremanagement.Response.IndividualMaterialListResponse;
+import com.proteam.projectstoremanagement.Response.IndividualMaterialResponseSearlize;
 import com.proteam.projectstoremanagement.Response.PendingIndentList;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.Constructorlocationrequest;
@@ -126,4 +128,7 @@ public interface PsmApi {
 
     @POST("Clients_apis/list_of_materials_in_consumption")
     Call<ConsumptionMaterialListResponse> consumptionMaterial(@Body ConsumptionMaterialListRequest consumptionMaterialListRequest);
+
+
+
 }

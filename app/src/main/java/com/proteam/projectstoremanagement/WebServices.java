@@ -28,6 +28,7 @@ import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Request.RaiseIndentPreview;
 import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
 import com.proteam.projectstoremanagement.Request.Updatepreviewlist;
+import com.proteam.projectstoremanagement.Response.IndividualMaterialListResponse;
 import com.proteam.projectstoremanagement.Response.RaiseIndentConfirmRequest;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
 import com.proteam.projectstoremanagement.Utils.PsmApi;
@@ -66,7 +67,7 @@ public class WebServices<T> {
     public enum ApiType {
        general,login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus,materialstock,
         materialstockname,deletestockMhome,addmaterial,priview,confirmRaiseIndent,ConsList,consumptionMateriallsit,
-        consumptionDetails,boqedit,noti
+        consumptionDetails,boqedit,noti,IndividualMatlistName
     }
 
     String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
