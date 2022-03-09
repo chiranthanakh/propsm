@@ -2,12 +2,12 @@ package com.proteam.projectstoremanagement.Model;
 
 public class IndividualIndentMaterialModel {
 
-    String materialCode, materialName,materialQty;
+    String materialCode, materialName,indentQty;
 
-    public IndividualIndentMaterialModel(String materialCode, String materialName, String materialQty) {
+    public IndividualIndentMaterialModel(String materialCode, String materialName, String indentQty) {
         this.materialCode = materialCode;
         this.materialName = materialName;
-        this.materialQty = materialQty;
+        this.indentQty = indentQty;
     }
 
     public String getMaterialCode() {
@@ -26,11 +26,11 @@ public class IndividualIndentMaterialModel {
         this.materialName = materialName;
     }
 
-    public String getMaterialQty() {
-        return materialQty;
+    public String getIndentQty() {
+        return indentQty;
     }
 
-    public void setMaterialQty(String materialQty) {
-        this.materialQty = materialQty;
+    public void setIndentQty(String indentQty) {
+        this.indentQty = indentQty;
     }
 }
