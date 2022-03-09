@@ -14,6 +14,7 @@ import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
 import com.proteam.projectstoremanagement.Request.Indentstatusrequest;
 import com.proteam.projectstoremanagement.Request.MaterialStockDeleteRequest;
 import com.proteam.projectstoremanagement.Request.MaterialStockRequest;
+import com.proteam.projectstoremanagement.Request.Pendingapprovelistupdaterequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Request.RaiseIndentPreview;
 import com.proteam.projectstoremanagement.Request.Updatepreviewlist;
@@ -112,6 +113,9 @@ public interface PsmApi {
     @POST("Clients_apis/preview_boq_indents_update")
     Call<PreviewResponsce> previewupdate(@Body Updatepreviewlist updatepreviewlist);
 
+    @POST("Clients_apis/pending_for_approval_update")
+    Call<Generalresponce> aproveupdate(@Body Pendingapprovelistupdaterequest pendingapprovelistupdaterequest);
+
 
     @POST("Clients_apis/submit_boq_indents")
     Call<ConformRaiseindentresponse> confirmraiseindent(@Body RaiseIndentConfirmRequest raiseIndentConfirmRequest);
@@ -126,4 +130,8 @@ public interface PsmApi {
 
     @POST("Clients_apis/list_of_materials_in_consumption")
     Call<ConsumptionMaterialListResponse> consumptionMaterial(@Body ConsumptionMaterialListRequest consumptionMaterialListRequest);
+
+    @POST("Clients_apis/pending_for_approval_update_list")
+    Call<IndenteditList> pendingapproval(@Body Indentpendingrequest indentpendingrequest);
+
 }

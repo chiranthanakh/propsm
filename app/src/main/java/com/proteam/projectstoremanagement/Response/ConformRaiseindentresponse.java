@@ -13,6 +13,14 @@ public class ConformRaiseindentresponse {
     @Expose
     private String approver_mail;
 
+    @SerializedName("approver_id")
+    @Expose
+    private String approver_id;
+
+    @SerializedName("message")
+    @Expose
+    private String message;
+
     public String getStatus() {
         return status;
     }
@@ -27,5 +35,21 @@ public class ConformRaiseindentresponse {
 
     public void setApprover_mail(String approver_mail) {
         this.approver_mail = approver_mail;
+    }
+
+    public String getApprover_id() {
+        return approver_id;
+    }
+
+    public void setApprover_id(String approver_id) {
+        this.approver_id = approver_id;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

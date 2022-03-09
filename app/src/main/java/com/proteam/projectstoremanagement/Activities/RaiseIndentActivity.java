@@ -104,14 +104,13 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
         tv_work_order_number=findViewById(R.id.tv_work_order_number);
         btn_indent_preview.setOnClickListener(this);
         lv_raise_indent_list=findViewById(R.id.lv_raise_indent_list);
-        search = findViewById(R.id.edt_search);
+        search = findViewById(R.id.edt_search12);
 
         tv_contractor_name.setText(contrctorname);
         tv_location_name.setText(location);
         tv_sublocation_name.setText(sublocation);
         tv_indent_date.setText(date);
         tv_work_order_number.setText(workorderno);
-
 
         nav_home=findViewById(R.id.nav_home);
         nav_home.setOnClickListener(this);
@@ -122,9 +121,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
         nav_boq_indent=findViewById(R.id.nav_boq_indent);
         nav_boq_indent.setOnClickListener(this);
 
-
     }
-
 
 
     private void callboqupdateapi() {
@@ -454,8 +451,6 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                 {
                     Toast.makeText(this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
                 }
-
-
 
                 break;
 

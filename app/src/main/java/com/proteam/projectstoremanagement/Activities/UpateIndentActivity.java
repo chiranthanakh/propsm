@@ -18,15 +18,20 @@ import com.proteam.projectstoremanagement.Adapters.RaiseIndentAdapter;
 import com.proteam.projectstoremanagement.Adapters.UpdateIndentAdapter;
 
 import com.proteam.projectstoremanagement.Model.RaiseIndentModel;
+import com.proteam.projectstoremanagement.NotificationPart.RequestNotification;
+import com.proteam.projectstoremanagement.NotificationPart.SendNotificatiponmodel;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.MaterialStockDeleteRequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Response.Boqlist;
+import com.proteam.projectstoremanagement.Response.ConformRaiseindentresponse;
 import com.proteam.projectstoremanagement.Response.Generalresponce;
+import com.proteam.projectstoremanagement.Response.LoginResponse;
 import com.proteam.projectstoremanagement.Response.PsmDataStatusHome;
 import com.proteam.projectstoremanagement.Response.RaiseIndentConfirmRequest;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
+import com.proteam.projectstoremanagement.Utils.Utilities;
 import com.proteam.projectstoremanagement.WebServices;
 
 import java.util.ArrayList;
@@ -80,7 +85,6 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
          store_id = bundle.getString("storeid");
 
         initilize();
-
 
     }
 
@@ -248,8 +252,11 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
                     if(response!=null) {
 
 
-                        Generalresponce generalresponce = (Generalresponce) response;
+                        ConformRaiseindentresponse generalresponce = (ConformRaiseindentresponse) response;
                         Toast.makeText(this, generalresponce.getStatus(), Toast.LENGTH_SHORT).show();
+                        if(generalresponce.getStatus().equalsIgnoreCase("sucess")){
+                            notifiy(generalresponce.getApprover_id(),generalresponce.getMessage());
+                        }
 
                     }
                     else
@@ -266,6 +273,18 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
 
 
         }
+
+    }
+
+    private void notifiy(String id,String msg){
+
+        SendNotificatiponmodel sendNotificatiponmodel = new SendNotificatiponmodel(msg,"Pro Psm");
+        RequestNotification requestNotification = new RequestNotification();
+        requestNotification.setSendNotificatiponmodel(sendNotificatiponmodel);
+        requestNotification.setToken("/topics/"+id);
+
+        WebServices<LoginResponse> webServices = new WebServices<LoginResponse>(UpateIndentActivity.this);
+        webServices.notificationapi(Utilities.getBaseURL(UpateIndentActivity.this), WebServices.ApiType.noti,requestNotification );
 
     }
 }

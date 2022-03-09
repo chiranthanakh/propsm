@@ -362,7 +362,7 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:id="@+id/iv_search"
+                            android:id="@+id/iv_search1"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:padding="13dp"
@@ -370,7 +370,7 @@
                             app:tint="@color/grey" />
 
                         <EditText
-                            android:id="@+id/edt_Con_search"
+                            android:id="@+id/edt_con_search"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -381,7 +381,7 @@
                             android:textColorHint="@color/grey_light"
                             android:textSize="18sp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/iv_search" />
+                             />
 
 
                     </LinearLayout>

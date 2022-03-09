@@ -246,26 +246,64 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
 
                         for (int i = 0; i<list.size(); i++){
 
-                            arrayList.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
+                            arrayList.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),
+                                    indentStatuslist.getBoq_indent().get(i).getStatus(),indentStatuslist.getBoq_indent().get(i).getIndent_id(),
+                                    indentStatuslist.getBoq_indent().get(i).getLocation_name(),indentStatuslist.getBoq_indent().get(i).getSub_location_name(),
+                                    indentStatuslist.getBoq_indent().get(i).getContractor(),indentStatuslist.getBoq_indent().get(i).getBlock(),
+                                    indentStatuslist.getBoq_indent().get(i).getLocations(),indentStatuslist.getBoq_indent().get(i).getIndent_date(),
+                                    indentStatuslist.getBoq_indent().get(i).getStore_id()
+                                    ));
 
 
                             if(indentStatuslist.getBoq_indent().get(i).getStatus().contains("Pending")){
 
-                                pendinglist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
-                            }
+                                pendinglist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),
+                                        indentStatuslist.getBoq_indent().get(i).getStatus(),indentStatuslist.getBoq_indent().get(i).getIndent_id(),
+                                        indentStatuslist.getBoq_indent().get(i).getLocation_name(),indentStatuslist.getBoq_indent().get(i).getSub_location_name(),
+                                        indentStatuslist.getBoq_indent().get(i).getContractor(),indentStatuslist.getBoq_indent().get(i).getBlock(),
+                                        indentStatuslist.getBoq_indent().get(i).getLocations(),indentStatuslist.getBoq_indent().get(i).getIndent_date(),
+                                        indentStatuslist.getBoq_indent().get(i).getStore_id()
+                                ));       }
                             else if(indentStatuslist.getBoq_indent().get(i).getStatus().contains("Approved")){
 
-                                approvedlist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
+                                approvedlist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),
+                                        indentStatuslist.getBoq_indent().get(i).getStatus(),indentStatuslist.getBoq_indent().get(i).getIndent_id(),
+                                        indentStatuslist.getBoq_indent().get(i).getLocation_name(),indentStatuslist.getBoq_indent().get(i).getSub_location_name(),
+                                        indentStatuslist.getBoq_indent().get(i).getContractor(),indentStatuslist.getBoq_indent().get(i).getBlock(),
+                                        indentStatuslist.getBoq_indent().get(i).getLocations(),indentStatuslist.getBoq_indent().get(i).getIndent_date(),
+                                        indentStatuslist.getBoq_indent().get(i).getStore_id()
+                                ));
+
                             }else  if(indentStatuslist.getBoq_indent().get(i).getStatus().contains("Rejected")){
 
-                                regectedlist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
+                                regectedlist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),
+                                        indentStatuslist.getBoq_indent().get(i).getStatus(),indentStatuslist.getBoq_indent().get(i).getIndent_id(),
+                                        indentStatuslist.getBoq_indent().get(i).getLocation_name(),indentStatuslist.getBoq_indent().get(i).getSub_location_name(),
+                                        indentStatuslist.getBoq_indent().get(i).getContractor(),indentStatuslist.getBoq_indent().get(i).getBlock(),
+                                        indentStatuslist.getBoq_indent().get(i).getLocations(),indentStatuslist.getBoq_indent().get(i).getIndent_date(),
+                                        indentStatuslist.getBoq_indent().get(i).getStore_id()
+                                ));
+
                             }else  if(indentStatuslist.getBoq_indent().get(i).getStatus().contains("InProgress")){
 
-                                inprogresslist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
+                                inprogresslist.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),
+                                        indentStatuslist.getBoq_indent().get(i).getStatus(),indentStatuslist.getBoq_indent().get(i).getIndent_id(),
+                                        indentStatuslist.getBoq_indent().get(i).getLocation_name(),indentStatuslist.getBoq_indent().get(i).getSub_location_name(),
+                                        indentStatuslist.getBoq_indent().get(i).getContractor(),indentStatuslist.getBoq_indent().get(i).getBlock(),
+                                        indentStatuslist.getBoq_indent().get(i).getLocations(),indentStatuslist.getBoq_indent().get(i).getIndent_date(),
+                                        indentStatuslist.getBoq_indent().get(i).getStore_id()
+                                ));
+
                             }
                             else if(indentStatuslist.getBoq_indent().get(i).getStatus().contains("Issued"))
                             {
-                                Issued.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),indentStatuslist.getBoq_indent().get(i).getStatus()));
+                                Issued.add(new IndentStatusModel(indentStatuslist.getBoq_indent().get(i).getIndent_auto_gen_id(),indentStatuslist.getBoq_indent().get(i).getContractor_name(),
+                                        indentStatuslist.getBoq_indent().get(i).getStatus(),indentStatuslist.getBoq_indent().get(i).getIndent_id(),
+                                        indentStatuslist.getBoq_indent().get(i).getLocation_name(),indentStatuslist.getBoq_indent().get(i).getSub_location_name(),
+                                        indentStatuslist.getBoq_indent().get(i).getContractor(),indentStatuslist.getBoq_indent().get(i).getBlock(),
+                                        indentStatuslist.getBoq_indent().get(i).getLocations(),indentStatuslist.getBoq_indent().get(i).getIndent_date(),
+                                        indentStatuslist.getBoq_indent().get(i).getStore_id()
+                                ));
                             }
                         }
 

@@ -24,6 +24,7 @@ import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
 import com.proteam.projectstoremanagement.Request.Indentstatusrequest;
 import com.proteam.projectstoremanagement.Request.MaterialStockDeleteRequest;
 import com.proteam.projectstoremanagement.Request.PendingIndentRequest;
+import com.proteam.projectstoremanagement.Request.Pendingapprovelistupdaterequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Request.RaiseIndentPreview;
 import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
@@ -66,7 +67,7 @@ public class WebServices<T> {
     public enum ApiType {
        general,login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus,materialstock,
         materialstockname,deletestockMhome,addmaterial,priview,confirmRaiseIndent,ConsList,consumptionMateriallsit,
-        consumptionDetails,boqedit,noti
+        consumptionDetails,boqedit,noti,send
     }
 
     String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
@@ -744,6 +745,55 @@ public class WebServices<T> {
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
         call=(Call<T>)psmApi.previewupdate(updatepreviewlist);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
+
+    public void approveupdate( ApiType apiTypes, Pendingapprovelistupdaterequest pendingapprovelistupdaterequest) {
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.aproveupdate(pendingapprovelistupdaterequest);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
+
+
+    public void pendingapproval( ApiType apiTypes, Indentpendingrequest indentpendingrequest) {
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.pendingapproval(indentpendingrequest);
 
         call.enqueue(new Callback<T>() {
             @Override

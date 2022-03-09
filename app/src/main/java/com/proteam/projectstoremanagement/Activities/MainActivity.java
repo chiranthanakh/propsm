@@ -37,9 +37,11 @@ import com.proteam.projectstoremanagement.Model.MaterialStockModel;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.MaterialStockDeleteRequest;
 import com.proteam.projectstoremanagement.Request.MaterialStockRequest;
+import com.proteam.projectstoremanagement.Request.PendingIndentRequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Response.IndentStatusdirectlist;
+import com.proteam.projectstoremanagement.Response.PendingIndentList;
 import com.proteam.projectstoremanagement.Response.PsmDataStatusHome;
 import com.proteam.projectstoremanagement.Utils.OnClick;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
@@ -117,16 +119,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initilize();
 
-        List pieData = new ArrayList<>();
-        pieData.add(new SliceValue(15, getColor(R.color.red_light)));
-        pieData.add(new SliceValue(25, getColor(R.color.orange_light)));
-        pieData.add(new SliceValue(60, getColor(R.color.green_light)));
-        pieData.add(new SliceValue(10, getColor(R.color.grey_new)));
-
-        PieChartData pieChartData = new PieChartData(pieData);
-        pieChartData.setHasLabels(true).setValueLabelTextSize(11);
-        // pieChartData.setHasCenterCircle(true).setCenterText1("Project Store Management\nStatus").setCenterText1FontSize(9).setCenterText1Color(Color.parseColor("#FF000000"));
-        pieChartView.setPieChartData(pieChartData);
 
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -227,6 +219,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        }
         }*/
 
+    }
+
+    private void callpendingindentapi() {
+        progressDialog=new ProgressDialog(MainActivity.this);
+
+        if(progressDialog!=null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+                PendingIndentRequest pendingIndentRequest = new PendingIndentRequest(userid);
+                WebServices<PendingIndentList> webServices = new WebServices<PendingIndentList>(MainActivity.this);
+                webServices.pendingindent(WebServices.ApiType.pendingindent, pendingIndentRequest);
+            }
+        }
     }
 
     private void callboqupdateapi() {
@@ -354,8 +362,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 webServices.deleteMstockdata(WebServices.ApiType.deletestockMhome, materialStockDeleteRequest);
             }
         }
-
-
     }
 
 
@@ -380,6 +386,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         indent_status_Count_approve.setText(psmDataStatusHome.getApproved());
                         indent_status_Count_rejected.setText(psmDataStatusHome.getRejected());
                         indent_status_Count_close.setText(psmDataStatusHome.getClose());
+
+                        List pieData = new ArrayList<>();
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            pieData.add(new SliceValue(Integer.parseInt(psmDataStatusHome.getPending()), getColor(R.color.orange_light)));
+                            pieData.add(new SliceValue(Integer.parseInt(psmDataStatusHome.getApproved()), getColor(R.color.red_light)));
+                            pieData.add(new SliceValue(Integer.parseInt(psmDataStatusHome.getRejected()), getColor(R.color.green_light)));
+                            pieData.add(new SliceValue(Integer.parseInt(psmDataStatusHome.getClose()), getColor(R.color.grey_new)));
+
+                        }
+                        PieChartData pieChartData = new PieChartData(pieData);
+                        pieChartData.setHasLabels(true).setValueLabelTextSize(11);
+                        // pieChartData.setHasCenterCircle(true).setCenterText1("Project Store Management\nStatus").setCenterText1FontSize(9).setCenterText1Color(Color.parseColor("#FF000000"));
+                        pieChartView.setPieChartData(pieChartData);
+
                     } else {
                         Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
                     }

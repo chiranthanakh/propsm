@@ -64,7 +64,6 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
         userid = sharedPreferences.getString("userid",null);
 
-
     }
 
     @Override
