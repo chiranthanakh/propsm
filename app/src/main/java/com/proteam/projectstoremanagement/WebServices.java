@@ -67,7 +67,7 @@ public class WebServices<T> {
     public enum ApiType {
        general,login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus,materialstock,
         materialstockname,deletestockMhome,addmaterial,priview,confirmRaiseIndent,ConsList,consumptionMateriallsit,
-        consumptionDetails,boqedit,noti,send
+        consumptionDetails,boqedit,noti,send,IndividualMatlistName
     }
 
     String BaseUrl = "https://devrenew.proteam.co.in/en/api/";

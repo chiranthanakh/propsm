@@ -48,7 +48,12 @@
             android:exported="false" />
         <activity
             android:name=".Activities.PendingIndentListActivity"
-            android:exported="false" />
+            android:exported="false">
+            <intent-filter>
+                <action android:name="OPEN_ACTIVITY_1" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Activities.ConsumptionMaterialActivity"
             android:exported="false"
@@ -71,9 +76,13 @@
             android:name=".Activities.UpateIndentActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.PendingIndentActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:name=".Activities.PendingIndentActivity">
+        <intent-filter>
+            <action android:name="OPEN_ACTIVITY" />
+            <!-- Add this OPEN_ACTIVITY string into your data payload while sending the notification from server side. -->
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>>
         <activity
             android:name=".Activities.RaiseIndentActivity"
             android:exported="false"
@@ -96,7 +105,9 @@
         </activity>
         <activity
             android:name=".Activities.LoginActivity"
-            android:exported="false" />
+            android:exported="false" >
+
+        </activity>
     </application>
 
 </manifest>

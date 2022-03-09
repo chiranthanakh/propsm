@@ -71,7 +71,7 @@ public class RaiseIndentAdapter extends ArrayAdapter<RaiseIndentModel> {
             @Override
             public void onClick(View v) {
 
-                mCallback.onChange1(raisequy.getText().toString(),position);
+                mCallback.onChange1(raisequy.getText().toString(),position,currentNumberPosition.getBoqbalance());
 
                // opengcadminDialog(raisequy.getText().toString());
 

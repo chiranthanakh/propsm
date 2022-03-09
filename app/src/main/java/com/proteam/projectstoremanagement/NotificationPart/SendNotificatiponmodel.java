@@ -2,11 +2,12 @@ package com.proteam.projectstoremanagement.NotificationPart;
 
 public class SendNotificatiponmodel {
 
-    private String body,title;
+    private String body,title,click_action;
 
-    public SendNotificatiponmodel(String body, String title) {
+    public SendNotificatiponmodel(String body, String title, String click_action) {
         this.body = body;
         this.title = title;
+        this.click_action = click_action;
     }
 
     public String getBody() {
@@ -23,5 +24,13 @@ public class SendNotificatiponmodel {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getClick_action() {
+        return click_action;
+    }
+
+    public void setClick_action(String click_action) {
+        this.click_action = click_action;
     }
 }

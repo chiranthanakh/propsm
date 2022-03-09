@@ -24,6 +24,7 @@ import com.proteam.projectstoremanagement.Adapters.PendingIndentAdapter;
 import com.proteam.projectstoremanagement.Model.PendingIndentModel;
 import com.proteam.projectstoremanagement.NotificationPart.RequestNotification;
 import com.proteam.projectstoremanagement.NotificationPart.SendNotificatiponmodel;
+import com.proteam.projectstoremanagement.NotificationPart.Senddata;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
 import com.proteam.projectstoremanagement.Request.PendingIntentupdaterequest;
@@ -69,6 +70,14 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
         mToolbar = findViewById(R.id.back_toolbar);
         mToolbar.setOnClickListener(view -> onBackPressed());
 
+        if (getIntent().getExtras() != null) {
+            for (String key : getIntent().getExtras().keySet()) {
+                String value = getIntent().getExtras().getString(key);
+                if (key.equals("click_action")) {
+                    //perform the action you want to do with the key.
+                }
+            }
+        }
         Bundle bundle = getIntent().getExtras();
         id = bundle.getString("indentid");
         status = bundle.getString("status");
@@ -305,6 +314,8 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
                             notifiy(generalresponse.getRiser_id(),generalresponse.getMessage());
 
+                            finish();
+
                         }else {
                             Toast.makeText(this, generalresponse.getStatus(), Toast.LENGTH_SHORT).show();
                         }
@@ -329,9 +340,11 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
     private void notifiy(String id,String msg){
 
-        SendNotificatiponmodel sendNotificatiponmodel = new SendNotificatiponmodel(msg,"Pro Psm");
+        SendNotificatiponmodel sendNotificatiponmodel = new SendNotificatiponmodel(msg,"Pro Psm","OPEN_ACTIVITY_1");
+        Senddata senddata = new Senddata(msg,"PSM approved");
         RequestNotification requestNotification = new RequestNotification();
         requestNotification.setSendNotificatiponmodel(sendNotificatiponmodel);
+        requestNotification.setSenddata(senddata);
         requestNotification.setToken("/topics/"+id);
 
         WebServices<LoginResponse> webServices = new WebServices<LoginResponse>(PendingIndentActivity.this);

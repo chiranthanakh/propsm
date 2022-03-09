@@ -199,7 +199,7 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
 
 
     @Override
-    public void onChange1(String value, int position) {
+    public void onChange1(String value, int position,String boqvalue) {
         opengcadminDialog(value,position);
 
     }

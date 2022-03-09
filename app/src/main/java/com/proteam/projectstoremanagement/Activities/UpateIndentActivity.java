@@ -256,6 +256,10 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
                         Toast.makeText(this, generalresponce.getStatus(), Toast.LENGTH_SHORT).show();
                         if(generalresponce.getStatus().equalsIgnoreCase("sucess")){
                             notifiy(generalresponce.getApprover_id(),generalresponce.getMessage());
+
+                            Intent intent = new Intent(this,IndentStatusActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
 
                     }
@@ -278,7 +282,7 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
 
     private void notifiy(String id,String msg){
 
-        SendNotificatiponmodel sendNotificatiponmodel = new SendNotificatiponmodel(msg,"Pro Psm");
+        SendNotificatiponmodel sendNotificatiponmodel = new SendNotificatiponmodel(msg,"Pro Psm","OPEN_ACTIVITY_1");
         RequestNotification requestNotification = new RequestNotification();
         requestNotification.setSendNotificatiponmodel(sendNotificatiponmodel);
         requestNotification.setToken("/topics/"+id);

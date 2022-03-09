@@ -13,15 +13,18 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.proteam.projectstoremanagement.Model.IndentStatusModel;
 import com.proteam.projectstoremanagement.Model.NotificationModel;
 import com.proteam.projectstoremanagement.R;
 
+import java.util.ArrayList;
+
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder>{
 
-    private NotificationModel[] listdata;
+    private ArrayList<NotificationModel> arrayList;
     private Context context;
-    public NotificationAdapter(NotificationModel[] listdata) {
-        this.listdata = listdata;
+    public NotificationAdapter(ArrayList<NotificationModel> arrayList) {
+        this.arrayList = arrayList;
         this.context = context;
     }
 
@@ -36,10 +39,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final NotificationModel mymailListData = listdata[position];
-        holder.tv_notification.setText(listdata[position].getDescription());
-        holder.tv_notification_title.setText(listdata[position].getTitle());
-        holder.tv_notification_date.setText(listdata[position].getDate());
+        final NotificationModel mymailListData = arrayList.get(position);
+        holder.tv_notification.setText(arrayList.get(position).getDescription());
+        holder.tv_notification_title.setText(arrayList.get(position).getTitle());
+        holder.tv_notification_date.setText(arrayList.get(position).getDate());
        // holder.imageView.setImageResource(listdata[position].getImgId());
         holder.cclayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +58,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public int getItemCount() {
-        return listdata.length;
+        return arrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -65,9 +68,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
            // this.imageView = (ImageView) itemView.findViewById(R.id.rv_mail_image);
-            this.tv_notification_title = (TextView) itemView.findViewById(R.id.tv_notification_title);
+            this.tv_notification_title = (TextView) itemView.findViewById(R.id.tv_notification_date);
             this.tv_notification = (TextView) itemView.findViewById(R.id.tv_notification);
-            this.tv_notification_date = (TextView) itemView.findViewById(R.id.tv_notification_date);
+            this.tv_notification_date = (TextView) itemView.findViewById(R.id.tv_notification_title);
             cclayout = (ConstraintLayout) itemView.findViewById(R.id.cc_layout);
         }
     }

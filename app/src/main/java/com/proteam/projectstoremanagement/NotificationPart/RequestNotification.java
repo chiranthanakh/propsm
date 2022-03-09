@@ -10,6 +10,21 @@ public class RequestNotification {
     @SerializedName("notification")
     private SendNotificatiponmodel sendNotificatiponmodel;
 
+    @SerializedName("data")
+    private Senddata senddata;
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public Senddata getSenddata() {
+        return senddata;
+    }
+
+    public void setSenddata(Senddata senddata) {
+        this.senddata = senddata;
+    }
+
     public String getTo() {
         return to;
     }

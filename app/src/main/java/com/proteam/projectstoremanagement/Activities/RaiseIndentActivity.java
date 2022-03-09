@@ -338,7 +338,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                         arrayList.clear();
                         for (int i=0;i<boqcomponentslist.size();i++){
 
-                            arrayList.add(new RaiseIndentModel(boqlist.getBoq_list().get(i).getMaterial_manual_id(),boqlist.getBoq_list().get(i).getMaterial_name(),boqlist.getBoq_list().get(i).getBalance_boq(),"0.00",boqlist.getBoq_list().get(i).getMaterial_id()));
+                            arrayList.add(new RaiseIndentModel(boqlist.getBoq_list().get(i).getMaterial_manual_id(),boqlist.getBoq_list().get(i).getMaterial_name(),boqlist.getBoq_list().get(i).getBalance_boq(),"0",boqlist.getBoq_list().get(i).getMaterial_id()));
 
                         }
 
@@ -484,20 +484,18 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
             pendingindentstatus.setAdapter(numbersArrayAdapter);
 
         }
-
-
     }
 
 
     @Override
-    public void onChange1(String value, int position) {
+    public void onChange1(String value, int position,String boqvalue) {
 
-        opengcadminDialog(value,position);
+        opengcadminDialog(value,position,boqvalue);
 
 
     }
 
-    private void opengcadminDialog(String value,int position) {
+    private void opengcadminDialog(String value,int position,String boqvalue) {
         final Dialog dialog =new Dialog(this);
 
         dialog.setContentView(R.layout.dialog_gcadmincount);
@@ -510,37 +508,53 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
         Boolean state = false;
 
+
         bt_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(search.getText().toString().equals("")){
 
-                    arrayList.set(position, new RaiseIndentModel(arrayList.get(position).getMaterialcode(),arrayList.get(position).getMaterialname(),arrayList.get(position).getBoqbalance(),et_count.getText().toString(),arrayList.get(position).getMaterial_id()));
+                    int value =Math.round(Float.parseFloat(et_count.getText().toString().trim()));
 
-                    RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(RaiseIndentActivity.this, arrayList,RaiseIndentActivity.this);
-                    ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
-                    pendingindentstatus.setAdapter(numbersArrayAdapter);
 
-                    dialog.dismiss();
+                    if((value>Integer.valueOf(Math.round(Float.parseFloat(boqvalue)))) || (value>Integer.valueOf(Math.round(Float.parseFloat(boqvalue)))) ){
+
+                        dialog.dismiss();
+                    }else {
+                        arrayList.set(position, new RaiseIndentModel(arrayList.get(position).getMaterialcode(),arrayList.get(position).getMaterialname(),arrayList.get(position).getBoqbalance(),et_count.getText().toString(),arrayList.get(position).getMaterial_id()));
+
+                        RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(RaiseIndentActivity.this, arrayList,RaiseIndentActivity.this);
+                        ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
+                        pendingindentstatus.setAdapter(numbersArrayAdapter);
+
+                        dialog.dismiss();
+                    }
 
                 }else {
 
-                    RaiseIndentModel model = temp.get(position);
+                    int value =Math.round(Float.parseFloat(et_count.getText().toString().trim()));
+
+                    if(value>=Integer.valueOf(Math.round(Float.parseFloat(boqvalue)))){
 
 
-                    for(int i=0;i<arrayList.size();i++){
+                    }else {
 
-                        if(arrayList.get(i).getMaterialcode().equals(temp.get(position).getMaterialcode())){
+                        RaiseIndentModel model = temp.get(position);
+                        for(int i=0;i<arrayList.size();i++){
 
-                            arrayList.set(i, new RaiseIndentModel(arrayList.get(i).getMaterialcode(),arrayList.get(i).getMaterialname(),arrayList.get(i).getBoqbalance(),et_count.getText().toString(),arrayList.get(i).getMaterial_id()));
+                            if(arrayList.get(i).getMaterialcode().equals(temp.get(position).getMaterialcode())){
 
-                            RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(RaiseIndentActivity.this, arrayList,RaiseIndentActivity.this);
-                            ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
-                            pendingindentstatus.setAdapter(numbersArrayAdapter);
+                                arrayList.set(i, new RaiseIndentModel(arrayList.get(i).getMaterialcode(),arrayList.get(i).getMaterialname(),arrayList.get(i).getBoqbalance(),et_count.getText().toString(),arrayList.get(i).getMaterial_id()));
 
-                            dialog.dismiss();
+                                RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(RaiseIndentActivity.this, arrayList,RaiseIndentActivity.this);
+                                ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
+                                pendingindentstatus.setAdapter(numbersArrayAdapter);
+
+                                dialog.dismiss();
+                            }
                         }
+
                     }
                 }
 

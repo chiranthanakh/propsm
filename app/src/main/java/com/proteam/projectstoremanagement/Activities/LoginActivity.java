@@ -122,17 +122,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }*/
 
 
-    private void notifiy(){
 
-        SendNotificatiponmodel sendNotificatiponmodel = new SendNotificatiponmodel("testing1","testing1");
-        RequestNotification requestNotification = new RequestNotification();
-        requestNotification.setSendNotificatiponmodel(sendNotificatiponmodel);
-        requestNotification.setToken("/topics/weather");
-
-        WebServices<LoginResponse> webServices = new WebServices<LoginResponse>(LoginActivity.this);
-        webServices.notificationapi(Utilities.getBaseURL(LoginActivity.this), WebServices.ApiType.noti,requestNotification );
-
-    }
 
     @Override
     public void onResponse(Object response, WebServices.ApiType URL, boolean isSucces, int code) {
@@ -158,9 +148,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Bundle bundle1 = new Bundle();
                         bundle1.putString("user_id",loginResponse.getUser_id());
                         bundle1.putString("role",loginResponse.getRole());
-
                         intent.putExtras(bundle1);
-
                         startActivity(intent);
                         SharedPreferences prefs = getSharedPreferences("myPref", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = prefs.edit();

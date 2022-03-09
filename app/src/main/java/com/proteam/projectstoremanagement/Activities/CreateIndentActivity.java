@@ -264,29 +264,29 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
     private AdapterView.OnItemSelectedListener OnCatSpinnerCL = new AdapterView.OnItemSelectedListener() {
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 
-            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            ((TextView) parent.getChildAt(0)).setTextSize(15);
+        //    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+          //  ((TextView) parent.getChildAt(0)).setTextSize(15);
 
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
-          ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-          ((TextView) parent.getChildAt(0)).setTextSize(15);
+//          ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+  //        ((TextView) parent.getChildAt(0)).setTextSize(15);
         }
     };
 
     private AdapterView.OnItemSelectedListener OnCatSpinnerCL1 = new AdapterView.OnItemSelectedListener() {
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 
-            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            ((TextView) parent.getChildAt(0)).setTextSize(15);
+       //     ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+         //   ((TextView) parent.getChildAt(0)).setTextSize(15);
             callSublocationapi();
 
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
-            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            ((TextView) parent.getChildAt(0)).setTextSize(15);
+//            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+  //          ((TextView) parent.getChildAt(0)).setTextSize(15);
         }
     };
 

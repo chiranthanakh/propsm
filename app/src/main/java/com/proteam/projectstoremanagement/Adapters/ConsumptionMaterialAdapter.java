@@ -61,7 +61,7 @@ public class ConsumptionMaterialAdapter extends ArrayAdapter<ConsumptionMaterial
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCallback.onChange1(editText.getText().toString(),position);
+                mCallback.onChange1(editText.getText().toString(),position,currentNumberPosition.getIssued_qty());
             }
         });
 
