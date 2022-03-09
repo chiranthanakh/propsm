@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,7 +58,7 @@ import lecho.lib.hellocharts.view.PieChartView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener, OnClick {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
+    LinearLayout ll_no_Material_stockData;
     ImageView ivnav, iv_add_material,iv_notification;
     DrawerLayout drawer_layout;
     TextView tv_raise_boq_indent, tv_individual_indent, tv_pending_indent, tv_consumption, tv_consumption_list,
@@ -142,8 +143,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    private void initilize() {
-
+    private void initilize()
+    {
+        ll_no_Material_stockData=findViewById(R.id.ll_no_Material_stockData);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.sf_container);
 
         iv_notification=findViewById(R.id.iv_notification);
@@ -391,8 +393,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             pieData.add(new SliceValue(Integer.parseInt(psmDataStatusHome.getPending()), getColor(R.color.orange_light)));
-                            pieData.add(new SliceValue(Integer.parseInt(psmDataStatusHome.getApproved()), getColor(R.color.red_light)));
-                            pieData.add(new SliceValue(Integer.parseInt(psmDataStatusHome.getRejected()), getColor(R.color.green_light)));
+                            pieData.add(new SliceValue(Integer.parseInt(psmDataStatusHome.getApproved()), getColor(R.color.green_light)));
+                            pieData.add(new SliceValue(Integer.parseInt(psmDataStatusHome.getRejected()), getColor(R.color.red_light)));
                             pieData.add(new SliceValue(Integer.parseInt(psmDataStatusHome.getClose()), getColor(R.color.grey_new)));
 
                         }
@@ -432,10 +434,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             arrayList.add(new MaterialSModel(materialStockRequest.getMaterial_closing_details().get(i).getMaterial_manual_id(), materialStockRequest.getMaterial_closing_details().get(i).getMaterial_name(), materialStockRequest.getMaterial_closing_details().get(i).getClosing_stock(), materialStockRequest.getMaterial_closing_details().get(i).getFavorite_id()));
                         }
 
-                        MaterialDetailsAdapter numbersArrayAdapter = new MaterialDetailsAdapter(this, arrayList, this);
-                        ListView materialstocklist = findViewById(R.id.lv_material_stock_home);
-                        materialstocklist.setAdapter(numbersArrayAdapter);
-                        materialstocklist.invalidate();
+                        if(arrayList.size()==0){
+                            ll_no_Material_stockData.setVisibility(View.VISIBLE);
+                        }else {
+                            MaterialDetailsAdapter numbersArrayAdapter = new MaterialDetailsAdapter(this, arrayList, this);
+                            ListView materialstocklist = findViewById(R.id.lv_material_stock_home);
+                            materialstocklist.setAdapter(numbersArrayAdapter);
+                            materialstocklist.invalidate();
+                        }
 
                     } else {
                         Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();

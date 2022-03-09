@@ -454,11 +454,11 @@
 
             </LinearLayout>
 
-
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/sc_raise_indent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <ListView
             android:id="@+id/lv_raise_indent_list"
@@ -470,6 +470,32 @@
             android:paddingBottom="180dp"
             android:smoothScrollbar="true"
             app:layout_constraintTop_toBottomOf="@id/data_table" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_no_data_raiseindent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="parent"
+        android:layout_marginTop="250dp"
+        android:orientation="vertical">
+        <ImageView
+            android:src="@drawable/empty"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+        <TextView
+            android:text="No Data"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton

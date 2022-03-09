@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".Activities.PendingIndentActivity">
 
     <LinearLayout
         android:id="@+id/top_bar"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#1A2562FC">
+        android:background="#1A2562FC"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/back_toolbar"
@@ -80,29 +79,30 @@
     </LinearLayout>
 
     <LinearLayout
-        app:layout_constraintTop_toBottomOf="@id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
 
-        android:orientation="vertical">
+        app:layout_constraintTop_toBottomOf="@id/top_bar">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <LinearLayout
-                android:orientation="vertical"
                 android:id="@+id/cc_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/details"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
-                    android:layout_marginStart="5dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -129,12 +129,12 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:paddingRight="10dp"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingRight="10dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -155,11 +155,11 @@
                                     android:textSize="13sp" />
 
                                 <TextView
-                                    android:layout_marginTop="5dp"
                                     android:id="@+id/tv_p_indent_number"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
                                     android:fontFamily="@font/proxima_nova_bold"
                                     android:text=""
                                     android:textColor="@color/grey_dark"
@@ -171,6 +171,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
+                                android:layout_marginStart="10dp"
                                 android:layout_weight="1"
                                 android:gravity="center_horizontal"
                                 android:orientation="vertical">
@@ -185,11 +186,11 @@
                                     android:textSize="13sp" />
 
                                 <TextView
-                                    android:layout_marginTop="5dp"
                                     android:id="@+id/tv_p_contractorName"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
                                     android:fontFamily="@font/proxima_nova_bold"
                                     android:text=""
                                     android:textAllCaps="false"
@@ -200,12 +201,12 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:paddingRight="10dp"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="6dp"
+                            android:paddingRight="10dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -225,20 +226,22 @@
                                     android:textSize="13sp" />
 
                                 <TextView
-                                    android:layout_marginTop="5dp"
                                     android:id="@+id/tv_p_locationName"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
                                     android:fontFamily="@font/proxima_nova_bold"
                                     android:text=""
                                     android:textColor="@color/grey_dark"
                                     android:textSize="15sp" />
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center_horizontal"
+                                android:layout_marginStart="10dp"
                                 android:layout_weight="1"
                                 android:gravity="center_horizontal"
                                 android:orientation="vertical">
@@ -254,10 +257,10 @@
 
                                 <TextView
                                     android:id="@+id/tv_p_sublocationName"
-                                    android:layout_marginTop="5dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
                                     android:fontFamily="@font/proxima_nova_bold"
                                     android:text=""
                                     android:textColor="@color/grey_dark"
@@ -266,13 +269,12 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:paddingRight="10dp"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
+                            android:orientation="horizontal"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="6dp"
+                            android:paddingRight="10dp">
 
 
                             <LinearLayout
@@ -294,19 +296,21 @@
 
                                 <TextView
                                     android:id="@+id/tv_p_workordernumber"
-                                    android:layout_marginTop="5dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
                                     android:fontFamily="@font/proxima_nova_bold"
                                     android:text="-------"
                                     android:textColor="@color/grey_dark"
                                     android:textSize="15sp" />
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center_horizontal"
+                                android:layout_marginStart="10dp"
                                 android:layout_weight="1"
                                 android:gravity="center_horizontal"
                                 android:orientation="vertical">
@@ -322,10 +326,10 @@
 
                                 <TextView
                                     android:id="@+id/tv_p_indentdate"
-                                    android:layout_marginTop="5dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
                                     android:fontFamily="@font/proxima_nova_bold"
                                     android:text=""
                                     android:textColor="@color/grey_dark"
@@ -335,13 +339,13 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:paddingRight="10dp"
-                            android:paddingLeft="10dp"
-                            android:paddingTop="8dp"
-                            android:layout_marginBottom="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_marginBottom="5dp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="6dp"
+                            android:paddingRight="10dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -362,16 +366,15 @@
 
                                 <TextView
                                     android:id="@+id/tv_p_status"
-                                    android:layout_marginTop="5dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="5dp"
                                     android:fontFamily="@font/proxima_nova_bold"
                                     android:text=""
                                     android:textColor="@color/grey_dark"
                                     android:textSize="15sp" />
                             </LinearLayout>
-
 
 
                         </LinearLayout>
@@ -385,7 +388,7 @@
                     android:id="@+id/search"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:background="@color/electric_blue"
                     app:layout_constraintTop_toBottomOf="@id/details">
 
@@ -394,7 +397,6 @@
                         android:layout_height="50dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
-
                         app:contentInsetStartWithNavigation="0dp">
 
                         <LinearLayout
@@ -470,6 +472,7 @@
 
                 </LinearLayout>
 
+
                 <LinearLayout
                     android:id="@+id/data_table"
                     android:layout_width="match_parent"
@@ -502,8 +505,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
-                            android:layout_weight="1"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:text="Material Name"
                             android:textColor="@color/white"
@@ -532,162 +535,178 @@
 
                 </LinearLayout>
 
+
                 <LinearLayout
-                    android:id="@+id/list_recy"
+                    android:id="@+id/ll_no_data_pending_indent"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="50dp"
+                    android:gravity="center"
                     android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@id/data_table">
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="parent">
 
-                    <ListView
-                        android:id="@+id/lv_pending_indent"
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/empty" />
+
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:nestedScrollingEnabled="true"
-                        android:smoothScrollbar="true"
-                        android:overScrollMode="never"
-                        android:clipToPadding="false"/>
-
-
-
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="30dp"
+                        android:gravity="center"
+                        android:text="No Data"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
                 </LinearLayout>
+
+                <ListView
+                    android:id="@+id/lv_pending_indent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="true"
+                    android:overScrollMode="never"
+                    android:paddingBottom="150dp"
+                    android:smoothScrollbar="true"
+                    app:layout_constraintTop_toBottomOf="@id/data_table" />
 
 
                 <EditText
-                    android:visibility="gone"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:textColor="@color/black"
-                    android:maxLines="5"
-                    android:textColorHint="@color/grey"
-                    android:fontFamily="@font/lato"
-                    app:hintTextColor="@color/black"
-                    android:layout_marginTop="10dp"
-                    android:textCursorDrawable="@drawable/cursor"
-                    android:drawableTint="@color/grey"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:textSize="15sp"
                     android:id="@+id/et_remarks1"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:hint="Remarks"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
                     android:backgroundTint="@color/grey_dark"
-                    android:theme="@style/LightTheme"/>
+                    android:drawableTint="@color/grey"
+                    android:fontFamily="@font/lato"
+                    android:hint="Remarks"
+                    android:maxLines="5"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textCursorDrawable="@drawable/cursor"
+                    android:textSize="15sp"
+                    android:theme="@style/LightTheme"
+                    android:visibility="gone"
+                    app:hintTextColor="@color/black" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:visibility="gone"
                     android:id="@+id/btn_Indent_approved"
-                    android:insetTop="0dp"
-                    android:layout_marginTop="30dp"
-                    android:insetBottom="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:text="Approved"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:fontFamily="@font/proxima_nova_bold"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="10dp"
                     android:backgroundTint="#8fc74a"
-                    android:textColor="@color/white">
-                </androidx.appcompat.widget.AppCompatButton>
+                    android:fontFamily="@font/proxima_nova_bold"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Approved"
+                    android:textColor="@color/white"
+                    android:visibility="gone"></androidx.appcompat.widget.AppCompatButton>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:visibility="gone"
                     android:id="@+id/btn_Indent_rejected"
-                    android:insetTop="0dp"
-                    android:layout_marginTop="30dp"
-                    android:insetBottom="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:text="Rejected"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:fontFamily="@font/proxima_nova_bold"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
                     android:backgroundTint="@color/red_light"
-                    android:textColor="@color/white">
-                </androidx.appcompat.widget.AppCompatButton>
+                    android:fontFamily="@font/proxima_nova_bold"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Rejected"
+                    android:textColor="@color/white"
+                    android:visibility="gone"></androidx.appcompat.widget.AppCompatButton>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_Indent_issued"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="10dp"
-                    android:visibility="gone"
-                    android:layout_marginEnd="10dp"
-                    android:text="Issued"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:fontFamily="@font/proxima_nova_bold"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
                     android:backgroundTint="@color/grey_light"
-                    android:textColor="@color/white">
-                </androidx.appcompat.widget.AppCompatButton>
+                    android:fontFamily="@font/proxima_nova_bold"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Issued"
+                    android:textColor="@color/white"
+                    android:visibility="gone"></androidx.appcompat.widget.AppCompatButton>
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_Indent_InProgress"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="30dp"
-                    android:visibility="gone"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:text="InProgress"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:fontFamily="@font/proxima_nova_bold"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="10dp"
                     android:backgroundTint="#8fc74a"
-                    android:textColor="@color/white">
-                </androidx.appcompat.widget.AppCompatButton>
+                    android:fontFamily="@font/proxima_nova_bold"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="InProgress"
+                    android:textColor="@color/white"
+                    android:visibility="gone"></androidx.appcompat.widget.AppCompatButton>
+
                 <LinearLayout
-                    android:visibility="gone"
-                    android:paddingBottom="120dp"
-                    android:orientation="horizontal"
                     android:id="@+id/pending"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingBottom="120dp"
+                    android:visibility="gone">
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:layout_weight="1"
                         android:id="@+id/btn_approve"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_marginStart="10dp"
-                        android:text="Approve"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:fontFamily="@font/proxima_nova_bold"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
                         android:backgroundTint="#8fc74a"
-                        android:textColor="@color/white">
-                    </androidx.appcompat.widget.AppCompatButton>
-
-                    <androidx.appcompat.widget.AppCompatButton
+                        android:fontFamily="@font/proxima_nova_bold"
                         android:insetTop="0dp"
                         android:insetBottom="0dp"
+                        android:text="Approve"
+                        android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_reject"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:id="@+id/btn_reject"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="10dp"
-                        android:text="Reject"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:fontFamily="@font/proxima_nova_bold"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
                         android:backgroundTint="@color/red_light"
-                        android:textColor="@color/white">
-                    </androidx.appcompat.widget.AppCompatButton>
+                        android:fontFamily="@font/proxima_nova_bold"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="Reject"
+                        android:textColor="@color/white"></androidx.appcompat.widget.AppCompatButton>
                 </LinearLayout>
 
             </LinearLayout>
+
 
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
@@ -696,7 +715,7 @@
         android:id="@+id/nav_bar"
         layout="@layout/app_bar_layout"
         android:layout_width="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

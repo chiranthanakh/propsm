@@ -1,10 +1,12 @@
 package com.proteam.projectstoremanagement.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,7 +32,7 @@ import java.util.List;
 public class ConsumptionListActivity extends AppCompatActivity implements View.OnClickListener , OnResponseListener {
     ImageView mToolbar;
     BottomNavigationItemView nav_home,nav_boq_indent,nav_Individual_indent;
-
+    private SwipeRefreshLayout sc_consumption_list_status;
     ListView consumption_status_listView;
     ProgressDialog progressDialog;
     final ArrayList<ConsumptionListModel> arrayList = new ArrayList<ConsumptionListModel>();
@@ -46,10 +48,32 @@ public class ConsumptionListActivity extends AppCompatActivity implements View.O
 
         initialize();
         callConsumptionListAPI();
+        sc_consumption_list_status.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                finish();
+                startActivity(getIntent());
+
+                // Your code here
+                Toast.makeText(getApplicationContext(), "Refreshing!", Toast.LENGTH_LONG).show();
+                // To keep animation for 4 seconds
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        // Stop animation (This will be after 3 seconds)
+                        // mSwipeRefreshLayout.setRefreshing(false);
+                        /*callboqupdateapi();
+                        callboqupdateapi();*/
+                    }
+                }, 3000); // Delay in millis
+            }
+        });
     }
 
     private void initialize()
     {
+
+        sc_consumption_list_status = (SwipeRefreshLayout) findViewById(R.id.sc_consumption_list_status);
         consumption_status_listView=findViewById(R.id.consumption_status_listView);
         fab_add_consumption=findViewById(R.id.fab_add_consumption);
         fab_add_consumption.setOnClickListener(this);

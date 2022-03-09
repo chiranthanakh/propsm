@@ -1,16 +1,19 @@
 package com.proteam.projectstoremanagement.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -35,8 +38,9 @@ import java.util.List;
 public class IndividualIndentListActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
     ImageView mToolbar,iv_individual_indent_filter;
     BottomNavigationItemView nav_home,nav_boq_indent,nav_consumption;
-
+    private SwipeRefreshLayout sc_Individual_indent_list;
     FloatingActionButton fab_add_individual_indent;
+    LinearLayout ll_no_data_individualIndent;
     ListView lv_individual_indent_status;
     ProgressDialog progressDialog;
     String userid;
@@ -64,11 +68,33 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
         initialize();
 
         callapi();
+        sc_Individual_indent_list.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                finish();
+                startActivity(getIntent());
+
+                // Your code here
+                Toast.makeText(getApplicationContext(), "Refreshing!", Toast.LENGTH_LONG).show();
+                // To keep animation for 4 seconds
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        // Stop animation (This will be after 3 seconds)
+                        // mSwipeRefreshLayout.setRefreshing(false);
+                        /*callboqupdateapi();
+                        callboqupdateapi();*/
+                    }
+                }, 3000); // Delay in millis
+            }
+        });
 
     }
 
     private void initialize()
     {
+        ll_no_data_individualIndent=findViewById(R.id.ll_no_data_individualIndent);
+        sc_Individual_indent_list = (SwipeRefreshLayout) findViewById(R.id.sc_Individual_indent_list);
         nav_home=findViewById(R.id.nav_home);
         nav_home.setOnClickListener(this);
         nav_boq_indent=findViewById(R.id.nav_boq_indent);
@@ -256,13 +282,18 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
     private void individualindentfilter(ArrayList<IndividualIndentListModel> list, String status) {
 
 
-        IndividualIndentListAdapter numbersArrayAdapter = new IndividualIndentListAdapter(this, list);
+        if(list.size()==0){
+            ll_no_data_individualIndent.setVisibility(View.VISIBLE);
+        }else {
 
-        // create the instance of the ListView to set the numbersViewAdapter
-        ListView individualindentlist = findViewById(R.id.lv_individual_indent_status);
+            IndividualIndentListAdapter numbersArrayAdapter = new IndividualIndentListAdapter(this, list);
 
-        // set the numbersViewAdapter for ListView
-        individualindentlist.setAdapter(numbersArrayAdapter);
+            // create the instance of the ListView to set the numbersViewAdapter
+            ListView individualindentlist = findViewById(R.id.lv_individual_indent_status);
+
+            // set the numbersViewAdapter for ListView
+            individualindentlist.setAdapter(numbersArrayAdapter);
+        }
 
 
     }

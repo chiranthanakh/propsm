@@ -33,7 +33,7 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
     ImageView mToolbar, filter;
     BottomNavigationItemView nav_home,nav_boq_indent,nav_Individual_indent,nav_consumption;
 
-    LinearLayout ll_status_click;
+    LinearLayout ll_status_click,ll_no_data_pendingIndent;
     ListView lv_pending_indent_list;
     private SwipeRefreshLayout sc_indent_list_status;
     List pendingindentlist = new ArrayList();
@@ -75,6 +75,7 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
     private void initilize()
     {
+        ll_no_data_pendingIndent=findViewById(R.id.ll_no_data_pendingIndent);
         sc_indent_list_status = (SwipeRefreshLayout) findViewById(R.id.sc_indent_list_status1);
 
         lv_pending_indent_list=findViewById(R.id.lv_pending_indent_list);
@@ -282,14 +283,17 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
     private void adaptormoves(ArrayList<PendingIndentListModel> list, String status) {
 
-        PendingIndentListAdapter numbersArrayAdapter = new PendingIndentListAdapter(this, list,status);
+        if(list.size()==0){
+            ll_no_data_pendingIndent.setVisibility(View.VISIBLE);
+        }else {
+            PendingIndentListAdapter numbersArrayAdapter = new PendingIndentListAdapter(this, list, status);
 
-        // create the instance of the ListView to set the numbersViewAdapter
-        ListView pendingindentlist = findViewById(R.id.lv_pending_indent_list);
+            // create the instance of the ListView to set the numbersViewAdapter
+            ListView pendingindentlist = findViewById(R.id.lv_pending_indent_list);
 
-        // set the numbersViewAdapter for ListView
-        pendingindentlist.setAdapter(numbersArrayAdapter);
-
+            // set the numbersViewAdapter for ListView
+            pendingindentlist.setAdapter(numbersArrayAdapter);
+        }
 
     }
 }
