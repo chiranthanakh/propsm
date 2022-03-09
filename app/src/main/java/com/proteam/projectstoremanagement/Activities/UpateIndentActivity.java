@@ -2,13 +2,16 @@ package com.proteam.projectstoremanagement.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,8 +43,9 @@ import java.util.List;
 public class UpateIndentActivity extends AppCompatActivity implements OnResponseListener, View.OnClickListener {
     ImageView mToolbar;
     BottomNavigationItemView nav_home,nav_boq_indent,nav_Individual_indent,nav_consumption;
-
+    private SwipeRefreshLayout sc_update_indent;
     ListView lv_update_indent_list;
+    LinearLayout ll_no_data_updateIndent;
     TextView tv_total_item;
     AppCompatButton btn_indent_confirm,btn_edit,btn_indent_back;
     String indentid;
@@ -86,9 +90,32 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
 
         initilize();
 
+        sc_update_indent.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                finish();
+                startActivity(getIntent());
+
+                // Your code here
+                Toast.makeText(getApplicationContext(), "Refreshing!", Toast.LENGTH_LONG).show();
+                // To keep animation for 4 seconds
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        // Stop animation (This will be after 3 seconds)
+                        // mSwipeRefreshLayout.setRefreshing(false);
+                        /*callboqupdateapi();
+                        callboqupdateapi();*/
+                    }
+                }, 3000); // Delay in millis
+            }
+        });
+
     }
 
     private void initilize() {
+        ll_no_data_updateIndent=findViewById(R.id.ll_no_data_updateIndent);
+        sc_update_indent = (SwipeRefreshLayout) findViewById(R.id.sc_update_indent);
         btn_indent_back=findViewById(R.id.btn_indent_back);
         btn_indent_back.setOnClickListener(this);
         nav_home=findViewById(R.id.nav_home);
@@ -220,19 +247,15 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
                            // arrayList.add(new RaiseIndentModel(boqlist.getBoq_list().get(i).getMaterial_manual_id(),boqlist.getBoq_list().get(i).getMaterial_name(),boqlist.getBoq_list().get(i).getBalance_boq(),boqlist.getBoq_list().get(i).getQty()));
 
                         }
+                        if(arrayList.size()==0){
+                            ll_no_data_updateIndent.setVisibility(View.VISIBLE);
+                        }else {
 
-                        tv_total_item.setText(String.valueOf(boqcomponentslist.size()));
-
-
-                        // the context and arrayList created above
-                        UpdateIndentAdapter numbersArrayAdapter = new UpdateIndentAdapter(this, arrayList);
-
-                        // create the instance of the ListView to set the numbersViewAdapter
-                        ListView updateindentList = findViewById(R.id.lv_update_indent_list);
-
-                        // set the numbersViewAdapter for ListView
-                        updateindentList.setAdapter(numbersArrayAdapter);
-
+                            tv_total_item.setText(String.valueOf(boqcomponentslist.size()));
+                            UpdateIndentAdapter numbersArrayAdapter = new UpdateIndentAdapter(this, arrayList);
+                            ListView updateindentList = findViewById(R.id.lv_update_indent_list);
+                            updateindentList.setAdapter(numbersArrayAdapter);
+                        }
                     }
 
                 }

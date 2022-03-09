@@ -260,7 +260,6 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
                     android:layout_margin="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
@@ -329,7 +328,10 @@
 
                                 <TextView
                                     android:id="@+id/indent_status_Count_pending"
-                                    android:layout_margin="5dp"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_marginTop="21dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/shape1"
@@ -359,13 +361,16 @@
                                     android:background="?selectableItemBackground"
                                     android:maxLines="2"
                                     android:gravity="center"
-                                    android:text="Approved"
+                                    android:text="Approved/InProgress"
                                     android:textColor="@color/black"
                                     android:textSize="12sp" />
 
                                 <TextView
                                     android:id="@+id/indent_status_Count_approve"
-                                    android:layout_margin="5dp"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_marginTop="5dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/shape3"
@@ -400,7 +405,10 @@
 
                                 <TextView
                                     android:id="@+id/indent_status_Count_rejected"
-                                    android:layout_margin="5dp"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_marginTop="21dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/shape4"
@@ -437,7 +445,10 @@
 
                                 <TextView
                                     android:id="@+id/indent_status_Count_close"
-                                    android:layout_margin="5dp"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_marginTop="21dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/shape2"
@@ -540,6 +551,28 @@
                     android:layout_height="170dp"
                     app:layout_constraintTop_toBottomOf="@id/data_table">
 
+                    <LinearLayout
+                        android:id="@+id/ll_no_Material_stockData"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:src="@drawable/empty"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"/>
+                        <TextView
+                            android:text="No Data"
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginEnd="30dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
                     <ListView
                         android:id="@+id/lv_material_stock_home"
                         android:layout_width="match_parent"

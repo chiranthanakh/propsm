@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -48,6 +49,7 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
     FloatingActionButton fab_add_raise;
     ListView indent_status_listView;
     ProgressDialog progressDialog;
+    LinearLayout ll_no_data_indentstatus;
     final ArrayList<IndentStatusModel> arrayList = new ArrayList<IndentStatusModel>();
     List list;
 
@@ -105,6 +107,7 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
 
     private void initialize()
     {
+        ll_no_data_indentstatus =findViewById(R.id.ll_no_data_indentstatus);
         sc_indent_list_status = (SwipeRefreshLayout) findViewById(R.id.sc_indent_list_status);
 
         fab_add_raise=findViewById(R.id.fab_add_raise);
@@ -334,6 +337,11 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
     private void indentfilter(ArrayList<IndentStatusModel> list, String status) {
 
 
+
+        if(list.size()==0){
+            ll_no_data_indentstatus.setVisibility(View.VISIBLE);
+        }else {
+
         IndentStatusAdapter numbersArrayAdapter = new IndentStatusAdapter(this, list);
 
         // create the instance of the ListView to set the numbersViewAdapter
@@ -341,7 +349,7 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
 
         // set the numbersViewAdapter for ListView
         indentlist.setAdapter(numbersArrayAdapter);
-
+        }
 
     }
 }

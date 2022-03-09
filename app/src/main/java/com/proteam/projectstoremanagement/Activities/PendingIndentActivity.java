@@ -1,6 +1,7 @@
 package com.proteam.projectstoremanagement.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -43,7 +44,7 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
     ImageView mToolbar;
 
     BottomNavigationItemView nav_home,nav_boq_indent,nav_Individual_indent,nav_consumption;
-
+    LinearLayout ll_no_data_pending_indent;
     TextView tv_p_indent_number,tv_p_contractorName,tv_p_locationName,tv_p_sublocationName,
             tv_p_workordernumber,tv_p_status,tv_p_indentdate,tv_pending_indent_total_item;
 
@@ -91,6 +92,7 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
     private void initilze()
     {
+        ll_no_data_pending_indent = findViewById(R.id.ll_no_data_pending_indent);
         nav_home=findViewById(R.id.nav_home);
         nav_home.setOnClickListener(this);
         nav_boq_indent=findViewById(R.id.nav_boq_indent);
@@ -266,25 +268,29 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
                         }
 
-                        tv_pending_indent_total_item.setText(String.valueOf(PendingIndent.size()));
+                        if(arrayList.size()==0){
+                            ll_no_data_pending_indent.setVisibility(View.VISIBLE);
+                        }else {
 
-                        // the context and arrayList created above
-                        PendingIndentAdapter numbersArrayAdapter = new PendingIndentAdapter(this, arrayList);
+                            tv_pending_indent_total_item.setText(String.valueOf(PendingIndent.size()));
 
-                        // create the instance of the ListView to set the numbersViewAdapter
-                        ListView pendingindent = findViewById(R.id.lv_pending_indent);
+                            // the context and arrayList created above
+                            PendingIndentAdapter numbersArrayAdapter = new PendingIndentAdapter(this, arrayList);
 
-                        // set the numbersViewAdapter for ListView
-                        pendingindent.setAdapter(numbersArrayAdapter);
+                            // create the instance of the ListView to set the numbersViewAdapter
+                            ListView pendingindent = findViewById(R.id.lv_pending_indent);
 
-                        tv_p_indent_number.setText(indentpending.getIndent_list().get(0).getIndent_auto_gen_id());
-                        tv_p_contractorName.setText(indentpending.getIndent_list().get(0).getContractor_name());
-                        tv_p_locationName.setText(indentpending.getIndent_list().get(0).getLocation_name());
-                        tv_p_sublocationName.setText(indentpending.getIndent_list().get(0).getSub_location_name());
-                        tv_p_workordernumber.setText(indentpending.getIndent_list().get(0).getWork_order_no());
-                        tv_p_status.setText(indentpending.getIndent_list().get(0).getStatus());
-                        tv_p_indentdate.setText(indentpending.getIndent_list().get(0).getIndent_date());
+                            // set the numbersViewAdapter for ListView
+                            pendingindent.setAdapter(numbersArrayAdapter);
 
+                            tv_p_indent_number.setText(indentpending.getIndent_list().get(0).getIndent_auto_gen_id());
+                            tv_p_contractorName.setText(indentpending.getIndent_list().get(0).getContractor_name());
+                            tv_p_locationName.setText(indentpending.getIndent_list().get(0).getLocation_name());
+                            tv_p_sublocationName.setText(indentpending.getIndent_list().get(0).getSub_location_name());
+                            tv_p_workordernumber.setText(indentpending.getIndent_list().get(0).getWork_order_no());
+                            tv_p_status.setText(indentpending.getIndent_list().get(0).getStatus());
+                            tv_p_indentdate.setText(indentpending.getIndent_list().get(0).getIndent_date());
+                        }
 
                     }
 
