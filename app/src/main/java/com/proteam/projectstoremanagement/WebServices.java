@@ -14,6 +14,7 @@ import com.proteam.projectstoremanagement.NotificationPart.RequestNotification;
 import com.proteam.projectstoremanagement.Request.ConsumptionDetailsRequest;
 import com.proteam.projectstoremanagement.Request.ConsumptionListRequest;
 import com.proteam.projectstoremanagement.Request.ConsumptionMaterialListRequest;
+import com.proteam.projectstoremanagement.Request.IndividualListrequest;
 import com.proteam.projectstoremanagement.Request.PendingIntentupdaterequest;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
 import com.proteam.projectstoremanagement.Model.MaterialStockModel;
@@ -27,6 +28,7 @@ import com.proteam.projectstoremanagement.Request.PendingIndentRequest;
 import com.proteam.projectstoremanagement.Request.Pendingapprovelistupdaterequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Request.RaiseIndentPreview;
+import com.proteam.projectstoremanagement.Request.SaveConsumptionLists;
 import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
 import com.proteam.projectstoremanagement.Request.Updatepreviewlist;
 import com.proteam.projectstoremanagement.Response.RaiseIndentConfirmRequest;
@@ -67,7 +69,7 @@ public class WebServices<T> {
     public enum ApiType {
        general,login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus,materialstock,
         materialstockname,deletestockMhome,addmaterial,priview,confirmRaiseIndent,ConsList,consumptionMateriallsit,
-        consumptionDetails,boqedit,noti,send,IndividualMatlistName
+        consumptionDetails,boqedit,noti,send,IndividualMatlistName,listresponse
     }
 
     String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
@@ -151,7 +153,6 @@ public class WebServices<T> {
 
     public void notificationapi(String api, ApiType apiTypes, RequestNotification requestNotification)
     {
-
         apiTypeVariable = apiTypes;
         Retrofit retrofit=getRetrofitClient("https://fcm.googleapis.com/");
 
@@ -688,7 +689,6 @@ public class WebServices<T> {
     public void consumptionDetails( ApiType apiTypes, ConsumptionDetailsRequest consumptionDetailsRequest)
     {
 
-
         apiTypeVariable = apiTypes;
         Retrofit retrofit=getRetrofitClient(BaseUrl);
 
@@ -721,6 +721,31 @@ public class WebServices<T> {
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
         call=(Call<T>)psmApi.consumptionMaterial(consumptionMaterialListRequest);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
+
+    public void consumptionupdate( ApiType apiTypes, SaveConsumptionLists saveConsumptionLists)
+    {
+
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.consumptionMaterialupdate(saveConsumptionLists);
 
         call.enqueue(new Callback<T>() {
             @Override
@@ -794,6 +819,29 @@ public class WebServices<T> {
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
         call=(Call<T>)psmApi.pendingapproval(indentpendingrequest);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+    }
+
+    public void individualapprove( ApiType apiTypes, IndividualListrequest individualListrequest) {
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.individualapproval(individualListrequest);
 
         call.enqueue(new Callback<T>() {
             @Override

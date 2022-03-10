@@ -71,7 +71,12 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Activities.IndentStatusActivity"
-            android:exported="false" />
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="OPEN_ACTIVITY_2" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Activities.UpateIndentActivity"
             android:exported="false" />

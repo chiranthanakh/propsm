@@ -220,11 +220,8 @@ public class IndividualIndentActivity extends AppCompatActivity implements View.
 
                 }else {
                     Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
-
                 }
                 break;
-
-
         }
 
     }

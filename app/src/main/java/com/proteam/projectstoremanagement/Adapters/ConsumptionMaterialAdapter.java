@@ -55,9 +55,10 @@ public class ConsumptionMaterialAdapter extends ArrayAdapter<ConsumptionMaterial
 
         // then according to the position of the view assign the desired TextView 2 for the same
         TextView consumption_Ma_issueQty = currentItemView.findViewById(R.id.tv_con_materialDeQty);
-        consumption_Ma_issueQty.setText(currentNumberPosition.getIssued_qty());
+        consumption_Ma_issueQty.setText(currentNumberPosition.getLast_updated_qty());
 
         EditText editText  = currentItemView.findViewById(R.id.tv_con_materialDeConQty);
+        editText.setText(currentNumberPosition.getIssued_qty());
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

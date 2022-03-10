@@ -346,7 +346,7 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
     private void notifiy(String id,String msg){
 
-        SendNotificatiponmodel sendNotificatiponmodel = new SendNotificatiponmodel(msg,"Pro Psm","OPEN_ACTIVITY_1");
+        SendNotificatiponmodel sendNotificatiponmodel = new SendNotificatiponmodel(msg,"Pro Psm","OPEN_ACTIVITY_2");
         Senddata senddata = new Senddata(msg,"PSM approved");
         RequestNotification requestNotification = new RequestNotification();
         requestNotification.setSendNotificatiponmodel(sendNotificatiponmodel);

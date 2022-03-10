@@ -185,7 +185,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         indent_status_Count_close = findViewById(R.id.indent_status_Count_close);
 
         if (role.equalsIgnoreCase("Approver")) {
-
+            tv_raise_boq_indent.setOnClickListener(this);
+            tv_individual_indent.setOnClickListener(this);
+            tv_consumption_list.setOnClickListener(this);
         } else {
             tv_pending_indent.setVisibility(View.GONE);
         }

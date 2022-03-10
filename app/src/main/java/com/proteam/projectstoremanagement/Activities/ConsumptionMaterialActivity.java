@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.proteam.projectstoremanagement.Adapters.ConsumptionMaterialAdapter;
@@ -24,8 +25,13 @@ import com.proteam.projectstoremanagement.Model.RaiseIndentModel;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.ConsumptionMaterialListRequest;
+import com.proteam.projectstoremanagement.Request.Raiseintentdataitems;
+import com.proteam.projectstoremanagement.Request.SaveConsumptionLists;
+import com.proteam.projectstoremanagement.Request.Saveconsuptionmaterialdetails;
+import com.proteam.projectstoremanagement.Request.Saveconsuptionstoredetails;
 import com.proteam.projectstoremanagement.Response.Boqlist;
 import com.proteam.projectstoremanagement.Response.ConsumptionMaterialListResponse;
+import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Utils.OnChange;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
 import com.proteam.projectstoremanagement.WebServices;
@@ -95,7 +101,8 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
         tv_con_locationName.setText(location);
         tv_con_workOrder.setText(workorderno);
         tv_con_conDate.setText(date);
-        String text = search.getText().toString();
+        btn_Con_save.setOnClickListener(this);
+       // String text = search.getText().toString();
 
        // For Navigation
         nav_home=findViewById(R.id.nav_home);
@@ -129,6 +136,44 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
 
     }
 
+    private void callConsumtionsaveapi() {
+
+        progressDialog=new ProgressDialog(ConsumptionMaterialActivity.this);
+
+        if(progressDialog!=null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+                ArrayList<Saveconsuptionmaterialdetails> materiallist = new ArrayList<>();
+
+                for(int i=0;i<arrayList.size();i++){
+
+                    materiallist.add(new Saveconsuptionmaterialdetails(arrayList.get(i).getMaterial_id(),arrayList.get(i).getIssued_qty()));
+
+                }
+
+                ArrayList<Saveconsuptionstoredetails> contractorstoredetails = new ArrayList<>();
+
+                SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                String user = sharedPreferences.getString("userid",null);
+
+
+                contractorstoredetails.add(new Saveconsuptionstoredetails(contrctorname_id,location_id,sublocation_id,date,user));
+
+                SaveConsumptionLists saveConsumptionLists = new SaveConsumptionLists(contractorstoredetails,materiallist);
+                WebServices<ConsumptionMaterialListResponse> webServices = new WebServices<ConsumptionMaterialListResponse>(ConsumptionMaterialActivity.this);
+                webServices.consumptionupdate(WebServices.ApiType.general, saveConsumptionLists);
+            }
+        }
+
+    }
+
+
+
+
     @Override
     public void onResponse(Object response, WebServices.ApiType URL, boolean isSucces, int code)
     {
@@ -153,17 +198,50 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
                         arrayList.clear();
                         for (int i=0;i<consumptionmaterial.size();i++){
 
-                            arrayList.add(new ConsumptionMaterialsModel(consumptionMaterialListResponse.getList_of_materials().get(i).getMaterial_manual_id(),consumptionMaterialListResponse.getList_of_materials().get(i).getMaterial_name(),"0"));
+                            arrayList.add(new ConsumptionMaterialsModel(consumptionMaterialListResponse.getList_of_materials().get(i).getMaterial_manual_id(),
+                                    consumptionMaterialListResponse.getList_of_materials().get(i).getMaterial_name(),"0",
+                                    consumptionMaterialListResponse.getList_of_materials().get(i).getMaterial_id(),
+                                    consumptionMaterialListResponse.getList_of_materials().get(i).getLast_updated_qty()));
 
                         }
                         tv_con_total_item.setText(String.valueOf(consumptionmaterial.size()));
 
                        ConsumptionMaterialAdapter numbersArrayAdapter = new ConsumptionMaterialAdapter(this, arrayList,this);
                         ListView consumptionMaterialDetails = findViewById(R.id.lv_Con_detailsList);
-
                         consumptionMaterialDetails.setAdapter(numbersArrayAdapter);
 
+                    }else {
+                        Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
                     }
+                }else {
+                    Toast.makeText(this, "Check your internet connection", Toast.LENGTH_SHORT).show();
+
+                }
+                break;
+
+            case general:
+
+                if(progressDialog!=null)
+                {
+                    if(progressDialog.isShowing())
+                    {
+                        progressDialog.dismiss();
+                    }
+                }
+
+                if (isSucces) {
+
+                    if(response!=null) {
+
+                        Generalresponce generalresponce = new Generalresponce();
+                        Toast.makeText(this, generalresponce.getStatus(), Toast.LENGTH_SHORT).show();
+
+                    }else {
+                        Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(this, "Check your internet connection", Toast.LENGTH_SHORT).show();
+
                 }
                 break;
         }
@@ -193,10 +271,13 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
                 startActivity(intent_com);
                 finishAffinity();
                 break;
+
+            case R.id.btn_Con_save:
+                callConsumtionsaveapi();
+                break;
         }
 
     }
-
 
     @Override
     public void onChange1(String value, int position,String boqvalue) {
@@ -206,13 +287,11 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
 
     private void opengcadminDialog(String value,int position) {
         final Dialog dialog =new Dialog(this);
-
         dialog.setContentView(R.layout.dialog_gcadmincount);
         dialog.show();
 
         EditText et_count = dialog.findViewById(R.id.edt_gc_count);
         et_count.setText(value);
-
         Button bt_submit = dialog.findViewById(R.id.btn_gc_submit);
 
         Boolean state = false;
@@ -221,7 +300,8 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
             @Override
             public void onClick(View v) {
 
-                    arrayList.set(position, new ConsumptionMaterialsModel(arrayList.get(position).getMaterial_manual_id(),arrayList.get(position).getMaterial_name(),et_count.getText().toString()));
+                    arrayList.set(position, new ConsumptionMaterialsModel(arrayList.get(position).getMaterial_manual_id(),
+                            arrayList.get(position).getMaterial_name(),et_count.getText().toString(),arrayList.get(position).getMaterial_id(),arrayList.get(position).getLast_updated_qty()));
 
                     ConsumptionMaterialAdapter numbersArrayAdapter = new ConsumptionMaterialAdapter(ConsumptionMaterialActivity.this, arrayList,ConsumptionMaterialActivity.this);
                     ListView consumptionMaterialDetails = findViewById(R.id.lv_Con_detailsList);

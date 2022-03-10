@@ -23,6 +23,7 @@ import com.proteam.projectstoremanagement.Adapters.UpdateIndentAdapter;
 import com.proteam.projectstoremanagement.Model.RaiseIndentModel;
 import com.proteam.projectstoremanagement.NotificationPart.RequestNotification;
 import com.proteam.projectstoremanagement.NotificationPart.SendNotificatiponmodel;
+import com.proteam.projectstoremanagement.NotificationPart.Senddata;
 import com.proteam.projectstoremanagement.R;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.MaterialStockDeleteRequest;
@@ -306,8 +307,10 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
     private void notifiy(String id,String msg){
 
         SendNotificatiponmodel sendNotificatiponmodel = new SendNotificatiponmodel(msg,"Pro Psm","OPEN_ACTIVITY_1");
+        Senddata senddata = new Senddata(msg,"PSM Raised");
         RequestNotification requestNotification = new RequestNotification();
         requestNotification.setSendNotificatiponmodel(sendNotificatiponmodel);
+        requestNotification.setSenddata(senddata);
         requestNotification.setToken("/topics/"+id);
 
         WebServices<LoginResponse> webServices = new WebServices<LoginResponse>(UpateIndentActivity.this);

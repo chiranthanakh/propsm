@@ -5,6 +5,7 @@ import com.proteam.projectstoremanagement.NotificationPart.RequestNotification;
 import com.proteam.projectstoremanagement.Request.ConsumptionDetailsRequest;
 import com.proteam.projectstoremanagement.Request.ConsumptionListRequest;
 import com.proteam.projectstoremanagement.Request.ConsumptionMaterialListRequest;
+import com.proteam.projectstoremanagement.Request.IndividualListrequest;
 import com.proteam.projectstoremanagement.Request.PendingIntentupdaterequest;
 import com.proteam.projectstoremanagement.Model.ConSubLocationModel;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
@@ -17,6 +18,7 @@ import com.proteam.projectstoremanagement.Request.MaterialStockRequest;
 import com.proteam.projectstoremanagement.Request.Pendingapprovelistupdaterequest;
 import com.proteam.projectstoremanagement.Request.PsmDataRequest;
 import com.proteam.projectstoremanagement.Request.RaiseIndentPreview;
+import com.proteam.projectstoremanagement.Request.SaveConsumptionLists;
 import com.proteam.projectstoremanagement.Request.Updatepreviewlist;
 import com.proteam.projectstoremanagement.Response.ConformRaiseindentresponse;
 import com.proteam.projectstoremanagement.Response.ConsumptionDetailsDataResponse;
@@ -27,6 +29,7 @@ import com.proteam.projectstoremanagement.Response.IndentStatusdirectlist;
 import com.proteam.projectstoremanagement.Response.IndentStatuslist;
 import com.proteam.projectstoremanagement.Response.IndenteditList;
 import com.proteam.projectstoremanagement.Response.Indentpending;
+import com.proteam.projectstoremanagement.Response.Individualresponse;
 import com.proteam.projectstoremanagement.Response.PendingIndentList;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
 import com.proteam.projectstoremanagement.Request.Constructorlocationrequest;
@@ -49,12 +52,10 @@ import retrofit2.http.POST;
 
 public interface PsmApi {
 
-
     @Headers({"Authorization: key=AAAAME40VRY:APA91bHlxDUz4qlqRlAsdKZ0o0GLnuPXEQQ-fCTvzmrnbiREdxhW6nHxY95ZusHecIIUY51-5v97J5LSetcdkLoxz98xOxS8D0VoqmEXx5AZWycMA7r5g4qPINRvT13Dwj7tOeOtblTy",
             "Content-Type:application/json"})
     @POST("fcm/send")
     Call<ResponseBody> sendChatNotification(@Body RequestNotification requestNotificaton);
-
 
     @POST("Clients_apis/client_login")
     Call<LoginResponse> validatelogin(@Body Loginmodel logininfo);
@@ -131,7 +132,14 @@ public interface PsmApi {
     @POST("Clients_apis/list_of_materials_in_consumption")
     Call<ConsumptionMaterialListResponse> consumptionMaterial(@Body ConsumptionMaterialListRequest consumptionMaterialListRequest);
 
+    @POST("Clients_apis/save_consumption_list")
+    Call<Generalresponce> consumptionMaterialupdate(@Body SaveConsumptionLists saveConsumptionLists);
+
+
     @POST("Clients_apis/pending_for_approval_update_list")
     Call<IndenteditList> pendingapproval(@Body Indentpendingrequest indentpendingrequest);
+
+    @POST("Clients_apis/submit_individual_indent")
+    Call<Individualresponse> individualapproval(@Body IndividualListrequest individualListrequest);
 
 }
