@@ -356,6 +356,14 @@
                     android:text="Indent Qty"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Action"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 

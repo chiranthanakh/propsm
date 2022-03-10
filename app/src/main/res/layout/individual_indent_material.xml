@@ -51,6 +51,14 @@
             android:textSize="12sp"
             android:theme="@style/LightTheme" />
 
+        <ImageView
+            android:id="@+id/iv_action_edit_indent"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="?selectableItemBackground"
+            android:src="@drawable/delete"
+            app:tint="@color/icon_color" />
+
     </LinearLayout>
     <View
         android:layout_width="match_parent"

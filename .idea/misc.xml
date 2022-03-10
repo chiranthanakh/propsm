@@ -43,6 +43,7 @@
         <entry key="..\:/Users/Personal/Downloads/PSM/app/src/main/res/layout/activity_store.xml" value="0.1" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/drawable/bottom_shape.xml" value="0.2203125" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/drawable/c_pass.xml" value="0.2203125" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/drawable/delete.xml" value="0.147" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/drawable/exit.xml" value="0.2203125" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/drawable/eye.xml" value="0.2203125" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/drawable/gradient_back_profile.xml" value="0.2203125" />
@@ -59,7 +60,7 @@
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_indent_create.xml" value="0.2" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_indent_status.xml" value="0.19444444444444445" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_individual_indent.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_individual_indent_list.xml" value="0.19010416666666666" />
+        <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_individual_indent_list.xml" value="0.33" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_individual_indent_material.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Pro-Team/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_main.xml" value="0.20102564102564102" />
