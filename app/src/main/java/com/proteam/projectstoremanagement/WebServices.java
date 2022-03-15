@@ -797,7 +797,6 @@ public class WebServices<T> {
                 onResponseListner.onResponse(null, apiTypeVariable, false,0);
             }
         });
-
     }
 
 
