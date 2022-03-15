@@ -29,7 +29,6 @@ public class MaterialDetailsAdapter extends ArrayAdapter<MaterialSModel> {
     private OnClick mClick;
 
 
-
     public MaterialDetailsAdapter(@NonNull Context context, ArrayList<MaterialSModel> arrayList, OnClick listner) {
         super(context, 0, arrayList);
         this.mClick = listner;

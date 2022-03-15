@@ -25,10 +25,21 @@ public class Boqitems {
     @Expose
     private String qty;
 
-
     @SerializedName("balance_boq")
     @Expose
     private String balance_boq;
+
+    @SerializedName("boq_closing_stock")
+    @Expose
+    private String boq_closing_stock;
+
+    @SerializedName("boq_issued_qty")
+    @Expose
+    private String boq_issued_qty;
+
+    @SerializedName("boq_consumption_qty")
+    @Expose
+    private String boq_consumption_qty;
 
     public String getMaterial_id() {
         return material_id;
@@ -76,5 +87,29 @@ public class Boqitems {
 
     public void setBalance_boq(String balance_boq) {
         this.balance_boq = balance_boq;
+    }
+
+    public String getBoq_closing_stock() {
+        return boq_closing_stock;
+    }
+
+    public void setBoq_closing_stock(String boq_closing_stock) {
+        this.boq_closing_stock = boq_closing_stock;
+    }
+
+    public String getBoq_issued_qty() {
+        return boq_issued_qty;
+    }
+
+    public void setBoq_issued_qty(String boq_issued_qty) {
+        this.boq_issued_qty = boq_issued_qty;
+    }
+
+    public String getBoq_consumption_qty() {
+        return boq_consumption_qty;
+    }
+
+    public void setBoq_consumption_qty(String boq_consumption_qty) {
+        this.boq_consumption_qty = boq_consumption_qty;
     }
 }

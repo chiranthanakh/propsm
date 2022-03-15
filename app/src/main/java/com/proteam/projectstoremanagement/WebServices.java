@@ -14,7 +14,9 @@ import com.proteam.projectstoremanagement.NotificationPart.RequestNotification;
 import com.proteam.projectstoremanagement.Request.ConsumptionDetailsRequest;
 import com.proteam.projectstoremanagement.Request.ConsumptionListRequest;
 import com.proteam.projectstoremanagement.Request.ConsumptionMaterialListRequest;
+import com.proteam.projectstoremanagement.Request.IndividualDeleteRequest;
 import com.proteam.projectstoremanagement.Request.IndividualListrequest;
+import com.proteam.projectstoremanagement.Request.Individual_updateList;
 import com.proteam.projectstoremanagement.Request.PendingIntentupdaterequest;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
 import com.proteam.projectstoremanagement.Model.MaterialStockModel;
@@ -69,10 +71,10 @@ public class WebServices<T> {
     public enum ApiType {
        general,login,location,sublocation,boq,pendingindent,pendingindentsignle,psmdata,indentstatus,materialstock,
         materialstockname,deletestockMhome,addmaterial,priview,confirmRaiseIndent,ConsList,consumptionMateriallsit,
-        consumptionDetails,boqedit,noti,send,IndividualMatlistName,listresponse
+        consumptionDetails,boqedit,noti,send,IndividualMatlistName,listresponse,materiallist,updateresponse
     }
 
-    String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
+    String BaseUrl = "https://renew.proteam.co.in/en/api/";
 
     public WebServices(OnResponseListener<T> onResponseListner) {
         this.onResponseListner = onResponseListner;
@@ -108,7 +110,6 @@ public class WebServices<T> {
         this.context = context;
         builder = getHttpClient();
     }
-
 
     public OkHttpClient.Builder getHttpClient() {
 
@@ -180,11 +181,8 @@ public class WebServices<T> {
     public void login(String api, ApiType apiTypes, Loginmodel loginmodel)
     {
 
-
         apiTypeVariable = apiTypes;
         Retrofit retrofit=getRetrofitClient(BaseUrl);
-
-
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
         call=(Call<T>)psmApi.validatelogin(loginmodel);
@@ -211,7 +209,6 @@ public class WebServices<T> {
 
         apiTypeVariable = apiTypes;
         Retrofit retrofit=getRetrofitClient(BaseUrl);
-
 
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
@@ -348,14 +345,11 @@ public class WebServices<T> {
 
     public void pendingindent( ApiType apiTypes, PendingIndentRequest pendingIndentRequest)
     {
-
-
         apiTypeVariable = apiTypes;
         Retrofit retrofit=getRetrofitClient(BaseUrl);
 
 
         PsmApi psmApi=retrofit.create(PsmApi.class);
-
         call=(Call<T>)psmApi.pendingindent(pendingIndentRequest);
 
         call.enqueue(new Callback<T>() {
@@ -378,11 +372,8 @@ public class WebServices<T> {
     public void pendingIndentsingle( ApiType apiTypes, Indentpendingrequest pendingIndentRequest)
     {
 
-
         apiTypeVariable = apiTypes;
         Retrofit retrofit=getRetrofitClient(BaseUrl);
-
-
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
         call=(Call<T>)psmApi.pendingindentsinglestatus(pendingIndentRequest);
@@ -735,12 +726,10 @@ public class WebServices<T> {
                 onResponseListner.onResponse(null, apiTypeVariable, false,0);
             }
         });
-
     }
 
     public void consumptionupdate( ApiType apiTypes, SaveConsumptionLists saveConsumptionLists)
     {
-
         apiTypeVariable = apiTypes;
         Retrofit retrofit=getRetrofitClient(BaseUrl);
         PsmApi psmApi=retrofit.create(PsmApi.class);
@@ -859,6 +848,77 @@ public class WebServices<T> {
 
     }
 
+    public void individuallist( ApiType apiTypes, Indentpendingrequest indentpendingrequest) {
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.indentlist(indentpendingrequest);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
+
+    public void individuallistdelete( ApiType apiTypes, IndividualDeleteRequest individualDeleteRequest) {
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.indentlistdelete(individualDeleteRequest);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
+
+    public void individualupdate( ApiType apiTypes, Individual_updateList individual_updateList) {
+        apiTypeVariable = apiTypes;
+        Retrofit retrofit=getRetrofitClient(BaseUrl);
+
+        PsmApi psmApi=retrofit.create(PsmApi.class);
+
+        call=(Call<T>)psmApi.indentlistupdate(individual_updateList);
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, Response<T> response) {
+                System.out.println("usercompany===="+response.body());
+                t=(T)response.body();
+                onResponseListner.onResponse(t, apiTypeVariable, true,response.code());
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+                onResponseListner.onResponse(null, apiTypeVariable, false,0);
+            }
+        });
+
+    }
 
 }
 

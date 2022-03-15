@@ -25,16 +25,26 @@ import com.proteam.projectstoremanagement.Adapters.IndividualIndentMaterialAdapt
 import com.proteam.projectstoremanagement.Model.IndentStatusModel;
 import com.proteam.projectstoremanagement.Model.IndividualIndentMaterialModel;
 import com.proteam.projectstoremanagement.R;
+import com.proteam.projectstoremanagement.Request.Indentpendingrequest;
+import com.proteam.projectstoremanagement.Request.IndividualDeleteRequest;
 import com.proteam.projectstoremanagement.Request.IndividualListrequest;
+import com.proteam.projectstoremanagement.Request.Individual_updateList;
+import com.proteam.projectstoremanagement.Request.Individual_updateitems;
 import com.proteam.projectstoremanagement.Request.Individuallistitems;
 import com.proteam.projectstoremanagement.Request.Individualmaterialdetails;
+import com.proteam.projectstoremanagement.Request.MaterialStockDeleteRequest;
 import com.proteam.projectstoremanagement.Request.Raiseintentdataitems;
 import com.proteam.projectstoremanagement.Request.SubLocationRaiseRequest;
 import com.proteam.projectstoremanagement.Response.Contractorlocationmodel;
+import com.proteam.projectstoremanagement.Response.Generalresponce;
 import com.proteam.projectstoremanagement.Response.IndividualMaterialListResponse;
+import com.proteam.projectstoremanagement.Response.Individualintentlistitems;
+import com.proteam.projectstoremanagement.Response.Individualintentlistresponse;
 import com.proteam.projectstoremanagement.Response.Individualresponse;
 import com.proteam.projectstoremanagement.Response.StockMaterialNameResponse;
+import com.proteam.projectstoremanagement.Utils.OnClick;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
+import com.proteam.projectstoremanagement.Utils.SqlDb;
 import com.proteam.projectstoremanagement.WebServices;
 
 import java.util.ArrayList;
@@ -42,7 +52,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class IndividualIndentMaterialActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
+public class IndividualIndentMaterialActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener, OnClick {
     ImageView mToolbar;
     BottomNavigationItemView nav_home, nav_boq_indent, nav_Individual_indent, nav_consumption;
     ProgressDialog progressDialog;
@@ -55,7 +65,10 @@ public class IndividualIndentMaterialActivity extends AppCompatActivity implemen
     final ArrayList<IndividualIndentMaterialModel> arrayList = new ArrayList<IndividualIndentMaterialModel>();
     Map map = new HashMap();
     String location,sublocation,contrctorname,storeid,location_id,sublocation_id,contrctorname_id,date,workorderno;
+    String indent_id;
+    Boolean state;
 
+    ArrayList <Individualintentlistresponse> individuallist = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +81,15 @@ public class IndividualIndentMaterialActivity extends AppCompatActivity implemen
         SharedPreferences.Editor editor=sharedPreferences.edit();
         storeid = sharedPreferences.getString("store_id",null);
 
+        Bundle bundle1 = getIntent().getExtras();
+        indent_id = bundle1.getString("indentid");
+        state =bundle1.getBoolean("state");
+
+        if(state){
+
+        }else {
+
+        }
 
         Bundle bundle = getIntent().getExtras();
         location_id = bundle.getString("location_id");
@@ -103,7 +125,9 @@ public class IndividualIndentMaterialActivity extends AppCompatActivity implemen
         nav_Individual_indent.setOnClickListener(this);
         nav_consumption = findViewById(R.id.nav_consumption);
         nav_consumption.setOnClickListener(this);
-        callIndividualMatList();
+        //callIndividualMatList();
+        calllistapi();
+
 
         add_meterial.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +146,7 @@ public class IndividualIndentMaterialActivity extends AppCompatActivity implemen
 
                 }
 
-                IndividualIndentMaterialAdapter numbersArrayAdapter = new IndividualIndentMaterialAdapter(IndividualIndentMaterialActivity.this, arrayList);
+                IndividualIndentMaterialAdapter numbersArrayAdapter = new IndividualIndentMaterialAdapter(IndividualIndentMaterialActivity.this, arrayList,IndividualIndentMaterialActivity.this);
                 ListView indentStatusList = findViewById(R.id.lv_individual_in_material);
                 indentStatusList.setAdapter(numbersArrayAdapter);
 
@@ -133,13 +157,18 @@ public class IndividualIndentMaterialActivity extends AppCompatActivity implemen
             @Override
             public void onClick(View v) {
 
-                callIndividuaintentapproval();
+                if (state) {
+                    callIndividuaintentUpdate();
+                }else {
+                    callIndividuaintentapproval();
 
+                }
             }
         });
     }
 
-    private void callIndividualMatList() {
+
+    private void calllistapi() {
 
         progressDialog = new ProgressDialog(IndividualIndentMaterialActivity.this);
 
@@ -155,6 +184,25 @@ public class IndividualIndentMaterialActivity extends AppCompatActivity implemen
         }
     }
 
+    //api for list when singele intent
+    private void callIndividualMatList() {
+
+        progressDialog = new ProgressDialog(IndividualIndentMaterialActivity.this);
+
+        if (progressDialog != null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+                Indentpendingrequest indentpendingrequest = new Indentpendingrequest(indent_id);
+
+                WebServices<IndividualMaterialListResponse> webServices = new WebServices<IndividualMaterialListResponse>(IndividualIndentMaterialActivity.this);
+                webServices.individuallist(WebServices.ApiType.materiallist,indentpendingrequest);
+            }
+        }
+    }
+
 
     private void callIndividuaintentapproval() {
 
@@ -162,7 +210,6 @@ public class IndividualIndentMaterialActivity extends AppCompatActivity implemen
         SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
         String user = sharedPreferences.getString("userid",null);
-
 
         if (progressDialog != null) {
             if (!progressDialog.isShowing()) {
@@ -187,6 +234,32 @@ public class IndividualIndentMaterialActivity extends AppCompatActivity implemen
         }
     }
 
+    private void callIndividuaintentUpdate() {
+
+        progressDialog = new ProgressDialog(IndividualIndentMaterialActivity.this);
+        SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        String user = sharedPreferences.getString("userid",null);
+
+        if (progressDialog != null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+                ArrayList<Individual_updateitems> individuallist = new ArrayList<>();
+
+                for(int i=0;i<arrayList.size();i++){
+                    individuallist.add(new Individual_updateitems(arrayList.get(i).getMaterialCode(),"remarks",arrayList.get(i).getIndentQty(),indent_id));
+                }
+
+                Individual_updateList individual_updateList = new Individual_updateList(individuallist);
+
+                WebServices<IndividualMaterialListResponse> webServices = new WebServices<IndividualMaterialListResponse>(IndividualIndentMaterialActivity.this);
+                webServices.individualupdate(WebServices.ApiType.updateresponse, individual_updateList);
+            }
+        }
+    }
 
 
     @Override
@@ -198,6 +271,9 @@ public class IndividualIndentMaterialActivity extends AppCompatActivity implemen
                     if (progressDialog.isShowing()) {
                         progressDialog.dismiss();
                     }
+                }
+                if(state){
+                    callIndividualMatList();
                 }
                 if (isSucces) {
                     if (response != null) {
@@ -230,7 +306,6 @@ public class IndividualIndentMaterialActivity extends AppCompatActivity implemen
 
             case listresponse:
 
-
                 if (progressDialog != null) {
                     if (progressDialog.isShowing()) {
                         progressDialog.dismiss();
@@ -242,6 +317,91 @@ public class IndividualIndentMaterialActivity extends AppCompatActivity implemen
                         Individualresponse individualresponse = (Individualresponse) response;
                         Toast.makeText(this, individualresponse.getStatus(), Toast.LENGTH_SHORT).show();
 
+
+                    } else {
+                        Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
+
+                    }
+                } else {
+                    Toast.makeText(this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+
+                break;
+
+            case materiallist:
+
+                if (progressDialog != null) {
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                }
+                if (isSucces) {
+                    if (response != null) {
+
+                        List list = new ArrayList();
+                        Individualintentlistitems individualintentlistitems = (Individualintentlistitems) response;
+
+                        list = individualintentlistitems.getMaterial_details();
+                        for (int i=0;i<list.size();i++){
+
+                            arrayList.add(new IndividualIndentMaterialModel(individualintentlistitems.getMaterial_details().get(i).getMaterial_id(),
+                                    individualintentlistitems.getMaterial_details().get(i).getMaterial_name()
+                                    , individualintentlistitems.getMaterial_details().get(i).getIndent_qty()));
+
+                        }
+                        IndividualIndentMaterialAdapter numbersArrayAdapter = new IndividualIndentMaterialAdapter(IndividualIndentMaterialActivity.this, arrayList,this);
+                        ListView indentStatusList = findViewById(R.id.lv_individual_in_material);
+                        indentStatusList.setAdapter(numbersArrayAdapter);
+
+                    } else {
+                        Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
+
+                    }
+                } else {
+                    Toast.makeText(this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+
+                break;
+
+            case deletestockMhome:
+
+
+                if (progressDialog != null) {
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                }
+                if (isSucces) {
+                    if (response != null) {
+
+                       Generalresponce generalresponce = (Generalresponce) response;
+                        Toast.makeText(this, generalresponce.getStatus(), Toast.LENGTH_SHORT).show();
+                        callIndividualMatList();
+
+                    } else {
+                        Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
+
+                    }
+                } else {
+                    Toast.makeText(this, "Check Your Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+
+                break;
+
+            case updateresponse:
+
+
+                if (progressDialog != null) {
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                }
+                if (isSucces) {
+                    if (response != null) {
+
+                        Generalresponce generalresponce = (Generalresponce) response;
+                        Toast.makeText(this, generalresponce.getStatus(), Toast.LENGTH_SHORT).show();
+                        finish();
 
                     } else {
                         Toast.makeText(this, "Server busy", Toast.LENGTH_SHORT).show();
@@ -308,4 +468,24 @@ public class IndividualIndentMaterialActivity extends AppCompatActivity implemen
     };
 
 
+    @Override
+    public void onClickitem(String value) {
+
+        progressDialog = new ProgressDialog(IndividualIndentMaterialActivity.this);
+
+        if (progressDialog != null) {
+            if (!progressDialog.isShowing()) {
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
+
+
+                IndividualDeleteRequest individualDeleteRequest = new IndividualDeleteRequest(indent_id,value);
+                WebServices<Generalresponce> webServices = new WebServices<Generalresponce>(IndividualIndentMaterialActivity.this);
+                webServices.individuallistdelete(WebServices.ApiType.deletestockMhome, individualDeleteRequest);
+
+            }
+        }
+
+    }
 }

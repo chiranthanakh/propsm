@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,13 +50,14 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
     AppCompatButton btn_Con_save,btn_Con_back;
     TextView tv_con_contractor_name,tv_con_locationName,tv_con_subLocationName,tv_con_workOrder,tv_con_conDate,tv_con_total_item;
     ListView lv_Con_detailsList;
-    EditText search;
+    EditText edt_consume_search;
     String location,sublocation,contrctorname,storeid,location_id,sublocation_id,contrctorname_id,date,workorderno;
 
 
     List consumptionmaterial = new ArrayList();
     final ArrayList<ConsumptionMaterialsModel> arrayList = new ArrayList<ConsumptionMaterialsModel>();
-
+    final ArrayList<ConsumptionMaterialsModel> temp = new ArrayList<ConsumptionMaterialsModel>();
+    ConsumptionMaterialListResponse consumptionMaterialListResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,10 +95,9 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
         lv_Con_detailsList=findViewById(R.id.lv_Con_detailsList);
 
         tv_con_total_item=findViewById(R.id.tv_con_total_item);
-
+        edt_consume_search = findViewById(R.id.edt_consume_search);
         btn_Con_save=findViewById(R.id.btn_Con_save);
         btn_Con_back=findViewById(R.id.btn_Con_back);
-        search=findViewById(R.id.edt_con_search);
         tv_con_contractor_name.setText(contrctorname);
         tv_con_subLocationName.setText(sublocation);
         tv_con_locationName.setText(location);
@@ -115,6 +117,32 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
         nav_boq_indent.setOnClickListener(this);
 
         callConsumptionMDetails();
+
+    }
+
+    //Text listner
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        edt_consume_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                filter(s.toString());
+            }
+        });
 
     }
 
@@ -192,7 +220,7 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
 
                     if(response!=null) {
 
-                        ConsumptionMaterialListResponse consumptionMaterialListResponse = (ConsumptionMaterialListResponse) response;
+                         consumptionMaterialListResponse = (ConsumptionMaterialListResponse) response;
                         consumptionmaterial = consumptionMaterialListResponse.getList_of_materials();
 
                         arrayList.clear();
@@ -300,14 +328,34 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
             @Override
             public void onClick(View v) {
 
+                if(edt_consume_search.getText().toString().trim()==""){
+
                     arrayList.set(position, new ConsumptionMaterialsModel(arrayList.get(position).getMaterial_manual_id(),
                             arrayList.get(position).getMaterial_name(),et_count.getText().toString(),arrayList.get(position).getMaterial_id(),arrayList.get(position).getLast_updated_qty()));
 
                     ConsumptionMaterialAdapter numbersArrayAdapter = new ConsumptionMaterialAdapter(ConsumptionMaterialActivity.this, arrayList,ConsumptionMaterialActivity.this);
                     ListView consumptionMaterialDetails = findViewById(R.id.lv_Con_detailsList);
-
                     consumptionMaterialDetails.setAdapter(numbersArrayAdapter);
                     dialog.dismiss();
+
+                }else {
+                    ConsumptionMaterialsModel model = temp.get(position);
+                    for(int i=0;i<arrayList.size();i++){
+
+                        if(arrayList.get(i).getMaterial_name().equals(temp.get(position).getMaterial_name())){
+
+                            arrayList.set(i, new ConsumptionMaterialsModel(arrayList.get(position).getMaterial_manual_id(),
+                                    arrayList.get(position).getMaterial_name(),et_count.getText().toString(),arrayList.get(position).getMaterial_id(),arrayList.get(position).getLast_updated_qty()));
+
+                            ConsumptionMaterialAdapter numbersArrayAdapter = new ConsumptionMaterialAdapter(ConsumptionMaterialActivity.this, arrayList,ConsumptionMaterialActivity.this);
+                            ListView consumptionMaterialDetails = findViewById(R.id.lv_Con_detailsList);
+                            consumptionMaterialDetails.setAdapter(numbersArrayAdapter);
+                            dialog.dismiss();
+
+                        }
+                    }
+                }
+
 
                 /*else {
 
@@ -332,5 +380,49 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
         });
 
     }
+
+    void filter(String text){
+
+        Bundle bundle = getIntent().getExtras();
+        Boolean state = bundle.getBoolean("status");
+        String indentid = bundle.getString("indent_id");
+
+
+        if(text.equals("")){
+
+            ConsumptionMaterialAdapter numbersArrayAdapter = new ConsumptionMaterialAdapter(this, arrayList,this);
+            ListView consumptionMaterialDetails = findViewById(R.id.lv_Con_detailsList);
+            consumptionMaterialDetails.setAdapter(numbersArrayAdapter);
+
+        }else {
+
+            temp.clear();
+            for (int i=0;i<consumptionmaterial.size();i++){
+                //or use .equal(text) with you want equal match
+                //use .toLowerCase() for better matches
+
+                ConsumptionMaterialsModel model = arrayList.get(i);
+
+                    if(consumptionMaterialListResponse.getList_of_materials().get(i).getMaterial_name().toLowerCase().trim().contains(text.toLowerCase().trim())){
+                        temp.add(new ConsumptionMaterialsModel(consumptionMaterialListResponse.getList_of_materials().get(i).getMaterial_manual_id(),
+                                consumptionMaterialListResponse.getList_of_materials().get(i).getMaterial_name(),"0",
+                                consumptionMaterialListResponse.getList_of_materials().get(i).getMaterial_id(),
+                                consumptionMaterialListResponse.getList_of_materials().get(i).getLast_updated_qty()));
+                }
+            }
+
+            if(temp.size()==0){
+                //ll_no_data_raiseindent.setVisibility(View.VISIBLE);
+            }else{
+               // ll_no_data_raiseindent.setVisibility(View.GONE);
+            }
+
+            ConsumptionMaterialAdapter numbersArrayAdapter = new ConsumptionMaterialAdapter(this, temp,this);
+            ListView consumptionMaterialDetails = findViewById(R.id.lv_Con_detailsList);
+            consumptionMaterialDetails.setAdapter(numbersArrayAdapter);
+
+        }
+    }
+
 
 }

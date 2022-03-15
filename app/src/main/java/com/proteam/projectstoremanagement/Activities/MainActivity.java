@@ -46,6 +46,7 @@ import com.proteam.projectstoremanagement.Response.PendingIndentList;
 import com.proteam.projectstoremanagement.Response.PsmDataStatusHome;
 import com.proteam.projectstoremanagement.Utils.OnClick;
 import com.proteam.projectstoremanagement.Utils.OnResponseListener;
+import com.proteam.projectstoremanagement.Utils.SqlDb;
 import com.proteam.projectstoremanagement.WebServices;
 
 import java.util.ArrayList;
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ListView lv_material_stock_home;
     String role, userid, email, username;
     SharedPreferences.Editor editor;
-
+    SqlDb sqlDb=new SqlDb(this);
     final ArrayList<MaterialSModel> arrayList = new ArrayList<MaterialSModel>();
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -104,10 +105,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         email = sharedPreferences.getString("email", null);
         username = sharedPreferences.getString("username", null);
 
+        System.out.println("userid"+userid);
         FirebaseMessaging.getInstance().subscribeToTopic(userid)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        System.out.println("userid2"+userid);
                         String msg = "done";
                         if (!task.isSuccessful()) {
                             msg = "failes";
@@ -119,8 +122,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         initilize();
-
-
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -185,11 +186,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         indent_status_Count_close = findViewById(R.id.indent_status_Count_close);
 
         if (role.equalsIgnoreCase("Approver")) {
-            tv_raise_boq_indent.setOnClickListener(this);
-            tv_individual_indent.setOnClickListener(this);
-            tv_consumption_list.setOnClickListener(this);
+            tv_raise_boq_indent.setVisibility(View.GONE);
+            tv_individual_indent.setVisibility(View.GONE);
+            tv_consumption_list.setVisibility(View.GONE);
+            btn_raise_indent.setVisibility(View.GONE);
         } else {
             tv_pending_indent.setVisibility(View.GONE);
+            //tv_individual_indent.setVisibility(View.GONE);
+            //tv_consumption_list.setVisibility(View.GONE);
         }
 
         tv_raise_boq_indent.setOnClickListener(this);
@@ -309,8 +313,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             case R.id.btn_logout:
+                FirebaseMessaging.getInstance().unsubscribeFromTopic(userid);
+                sqlDb.deleteItem();
                 editor.clear();
+                editor.apply();
                 editor.commit();
+
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();

@@ -285,16 +285,13 @@ public class IndividualIndentListActivity extends AppCompatActivity implements V
         if(list.size()==0){
             ll_no_data_individualIndent.setVisibility(View.VISIBLE);
         }else {
-
+            ll_no_data_individualIndent.setVisibility(View.GONE);
+        }
             IndividualIndentListAdapter numbersArrayAdapter = new IndividualIndentListAdapter(this, list);
-
             // create the instance of the ListView to set the numbersViewAdapter
             ListView individualindentlist = findViewById(R.id.lv_individual_indent_status);
-
             // set the numbersViewAdapter for ListView
             individualindentlist.setAdapter(numbersArrayAdapter);
-        }
-
 
     }
 }

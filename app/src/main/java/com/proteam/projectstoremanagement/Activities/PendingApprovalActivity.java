@@ -173,7 +173,7 @@ public class PendingApprovalActivity extends AppCompatActivity implements OnResp
                         arrayList.clear();
                         for (int i=0;i<editlist.size();i++){
 
-                            arrayList.add(new RaiseIndentModel(indenteditList.getMaterial_details().get(i).getMaterial_manual_id(),indenteditList.getMaterial_details().get(i).getMaterial_name(),indenteditList.getMaterial_details().get(i).getBoq_balance_qty(),indenteditList.getMaterial_details().get(i).getIndent_qty(),indenteditList.getMaterial_details().get(i).getMaterial_id()));
+                            arrayList.add(new RaiseIndentModel(indenteditList.getMaterial_details().get(i).getMaterial_manual_id(),indenteditList.getMaterial_details().get(i).getMaterial_name(),indenteditList.getMaterial_details().get(i).getBoq_balance_qty(),indenteditList.getMaterial_details().get(i).getIndent_qty(),indenteditList.getMaterial_details().get(i).getMaterial_id(),"0","0","0"));
 
                         }
 

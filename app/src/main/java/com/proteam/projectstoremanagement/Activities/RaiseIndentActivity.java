@@ -138,7 +138,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-                Boqrequest boqrequest = new Boqrequest(storeid, location_id, sublocation_id);
+                Boqrequest boqrequest = new Boqrequest(storeid, location_id, sublocation_id,contrctorname_id);
                 WebServices<Boqlist> webServices = new WebServices<Boqlist>(RaiseIndentActivity.this);
                 webServices.boqapi(WebServices.ApiType.boq, boqrequest);
             }
@@ -182,7 +182,6 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                     itemslist.add(new Raiseintentdataitems(arrayList.get(i).getMaterial_id(),arrayList.get(i).getRaiseqty(),arrayList.get(i).getBoqbalance()));
 
                 }
-
 
                 ArrayList<RaiseIndentPreviewResponse> locationdetail = new ArrayList<RaiseIndentPreviewResponse>();
                 SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
@@ -342,7 +341,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                         arrayList.clear();
                         for (int i=0;i<boqcomponentslist.size();i++){
 
-                            arrayList.add(new RaiseIndentModel(boqlist.getBoq_list().get(i).getMaterial_manual_id(),boqlist.getBoq_list().get(i).getMaterial_name(),boqlist.getBoq_list().get(i).getBalance_boq(),"0",boqlist.getBoq_list().get(i).getMaterial_id()));
+                            arrayList.add(new RaiseIndentModel(boqlist.getBoq_list().get(i).getMaterial_manual_id(),boqlist.getBoq_list().get(i).getMaterial_name(),boqlist.getBoq_list().get(i).getBalance_boq(),"0",boqlist.getBoq_list().get(i).getMaterial_id(),boqlist.getBoq_list().get(i).getBoq_closing_stock(),boqlist.getBoq_list().get(i).getBoq_issued_qty(),boqlist.getBoq_list().get(i).getBoq_consumption_qty()));
 
                         }
 
@@ -378,12 +377,10 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                     PreviewResponsce previewResponsce = (PreviewResponsce) response;
 
-
                     ArrayList prviewlist = new ArrayList();
                     List list = new ArrayList();
 
                     list = previewResponsce.getMaterial_details();
-
 
                     for (int i=0;i<list.size();i++){
 
@@ -443,7 +440,8 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                         arrayList.clear();
                         for (int i=0;i<editlist.size();i++){
 
-                            arrayList.add(new RaiseIndentModel(indenteditList.getMaterial_details().get(i).getMaterial_manual_id(),indenteditList.getMaterial_details().get(i).getMaterial_name(),indenteditList.getMaterial_details().get(i).getBoq_balance_qty(),indenteditList.getMaterial_details().get(i).getIndent_qty(),indenteditList.getMaterial_details().get(i).getMaterial_id()));
+                           arrayList.add(new RaiseIndentModel(indenteditList.getMaterial_details().get(i).getMaterial_manual_id(),indenteditList.getMaterial_details().get(i).getMaterial_name(),indenteditList.getMaterial_details().get(i).getBoq_balance_qty(),indenteditList.getMaterial_details().get(i).getIndent_qty(),
+                                   indenteditList.getMaterial_details().get(i).getMaterial_id(), indenteditList.getMaterial_details().get(i).getBoq_closing_stock(), indenteditList.getMaterial_details().get(i).getBoq_issued_qty(), indenteditList.getMaterial_details().get(i).getBoq_consumption_qty()));
 
                         }
 
@@ -497,11 +495,11 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                 if(state){
                     if(indenteditList.getMaterial_details().get(i).getMaterial_name().toLowerCase().trim().contains(text.toLowerCase().trim())){
-                        temp.add(new RaiseIndentModel(model.getMaterialcode(),model.getMaterialname(),model.getBoqbalance(),model.getRaiseqty(),model.getMaterial_id()));
+                        temp.add(new RaiseIndentModel(model.getMaterialcode(),model.getMaterialname(),model.getBoqbalance(),model.getRaiseqty(),model.getMaterial_id(),model.getClosing_stock(),model.getIssued_stock(),model.getConsumed_stock()));
                     }
                 }else {
                     if(boqlist.getBoq_list().get(i).getMaterial_name().toLowerCase().trim().contains(text.toLowerCase().trim())){
-                        temp.add(new RaiseIndentModel(model.getMaterialcode(),model.getMaterialname(),model.getBoqbalance(),model.getRaiseqty(),model.getMaterial_id()));
+                        temp.add(new RaiseIndentModel(model.getMaterialcode(),model.getMaterialname(),model.getBoqbalance(),model.getRaiseqty(),model.getMaterial_id(),model.getClosing_stock(),model.getIssued_stock(),model.getConsumed_stock()));
                     }
                 }
             }
@@ -527,7 +525,6 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
         opengcadminDialog(value,position,boqvalue);
 
-
     }
 
     private void opengcadminDialog(String value,int position,String boqvalue) {
@@ -540,9 +537,16 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
         et_count.setText(value);
 
         Button bt_submit = dialog.findViewById(R.id.btn_gc_submit);
-
+        TextView textvisable = dialog.findViewById(R.id.textvisable);
+        TextView tv_consume_stock = dialog.findViewById(R.id.tv_consume_stock);
+        TextView tv_issued_stock = dialog.findViewById(R.id.tv_issued_stock);
+        TextView tv_closing_stock = dialog.findViewById(R.id.tv_closing_stock);
         Boolean state = false;
 
+        String data[] = boqvalue.split("--");
+        tv_closing_stock.setText(data[1]);
+        tv_issued_stock.setText(data[2]);
+        tv_consume_stock.setText(data[3]);
 
         bt_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -552,12 +556,13 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                     int value =Math.round(Float.parseFloat(et_count.getText().toString().trim()));
 
-
-                    if((value>Integer.valueOf(Math.round(Float.parseFloat(boqvalue)))) || (value>Integer.valueOf(Math.round(Float.parseFloat(boqvalue)))) ){
-
-                        dialog.dismiss();
+                    if((value>Integer.valueOf(Math.round(Float.parseFloat(data[0])))) || (value==Integer.valueOf(Math.round(Float.parseFloat(data[0])))) ){
+                        textvisable.setVisibility(View.VISIBLE);
+                        //dialog.dismiss();
+                       // Toast.makeText(RaiseIndentActivity.this, "Indent quantity is more than BOQ balance", Toast.LENGTH_SHORT).show();
                     }else {
-                        arrayList.set(position, new RaiseIndentModel(arrayList.get(position).getMaterialcode(),arrayList.get(position).getMaterialname(),arrayList.get(position).getBoqbalance(),et_count.getText().toString(),arrayList.get(position).getMaterial_id()));
+                        textvisable.setVisibility(View.GONE);
+                        arrayList.set(position, new RaiseIndentModel(arrayList.get(position).getMaterialcode(),arrayList.get(position).getMaterialname(),arrayList.get(position).getBoqbalance(),et_count.getText().toString(),arrayList.get(position).getMaterial_id(),arrayList.get(position).getClosing_stock(),arrayList.get(position).getIssued_stock(),arrayList.get(position).getConsumed_stock()));
 
                         RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(RaiseIndentActivity.this, arrayList,RaiseIndentActivity.this);
                         ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
@@ -570,8 +575,11 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                     int value =Math.round(Float.parseFloat(et_count.getText().toString().trim()));
 
-                    if(value>=Integer.valueOf(Math.round(Float.parseFloat(boqvalue)))){
+                    if((value>Integer.valueOf(Math.round(Float.parseFloat(boqvalue)))) || (value==Integer.valueOf(Math.round(Float.parseFloat(boqvalue)))) ){
 
+                        textvisable.setVisibility(View.VISIBLE);
+                        //dialog.dismiss();
+                        //Toast.makeText(RaiseIndentActivity.this, "Indent quantity is more than BOQ balance", Toast.LENGTH_SHORT).show();
 
                     }else {
 
@@ -580,7 +588,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                             if(arrayList.get(i).getMaterialcode().equals(temp.get(position).getMaterialcode())){
 
-                                arrayList.set(i, new RaiseIndentModel(arrayList.get(i).getMaterialcode(),arrayList.get(i).getMaterialname(),arrayList.get(i).getBoqbalance(),et_count.getText().toString(),arrayList.get(i).getMaterial_id()));
+                                arrayList.set(i, new RaiseIndentModel(arrayList.get(i).getMaterialcode(),arrayList.get(i).getMaterialname(),arrayList.get(i).getBoqbalance(),et_count.getText().toString(),arrayList.get(i).getMaterial_id(),arrayList.get(position).getClosing_stock(),arrayList.get(position).getIssued_stock(),arrayList.get(position).getConsumed_stock()));
 
                                 RaiseIndentAdapter numbersArrayAdapter = new RaiseIndentAdapter(RaiseIndentActivity.this, arrayList,RaiseIndentActivity.this);
                                 ListView pendingindentstatus = findViewById(R.id.lv_raise_indent_list);
@@ -597,6 +605,4 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
         });
 
     }
-
-
 }

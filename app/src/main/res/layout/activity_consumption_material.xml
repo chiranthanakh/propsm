@@ -338,9 +338,9 @@
                             app:tint="@color/grey" />
 
                         <EditText
-                            android:id="@+id/edt_search"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/edt_consume_search"
                             android:layout_weight="1"
                             android:background="@null"
                             android:gravity="center_vertical"
@@ -349,8 +349,8 @@
                             android:textColorHint="@color/grey_light"
                             android:textSize="18sp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/iv_search" />
-
+                            app:layout_constraintStart_toEndOf="@id/iv_search"
+                            />
 
                     </LinearLayout>
                 </androidx.appcompat.widget.Toolbar>

@@ -5,7 +5,9 @@ import com.proteam.projectstoremanagement.NotificationPart.RequestNotification;
 import com.proteam.projectstoremanagement.Request.ConsumptionDetailsRequest;
 import com.proteam.projectstoremanagement.Request.ConsumptionListRequest;
 import com.proteam.projectstoremanagement.Request.ConsumptionMaterialListRequest;
+import com.proteam.projectstoremanagement.Request.IndividualDeleteRequest;
 import com.proteam.projectstoremanagement.Request.IndividualListrequest;
+import com.proteam.projectstoremanagement.Request.Individual_updateList;
 import com.proteam.projectstoremanagement.Request.PendingIntentupdaterequest;
 import com.proteam.projectstoremanagement.Model.ConSubLocationModel;
 import com.proteam.projectstoremanagement.Model.Loginmodel;
@@ -29,6 +31,7 @@ import com.proteam.projectstoremanagement.Response.IndentStatusdirectlist;
 import com.proteam.projectstoremanagement.Response.IndentStatuslist;
 import com.proteam.projectstoremanagement.Response.IndenteditList;
 import com.proteam.projectstoremanagement.Response.Indentpending;
+import com.proteam.projectstoremanagement.Response.Individualintentlistitems;
 import com.proteam.projectstoremanagement.Response.Individualresponse;
 import com.proteam.projectstoremanagement.Response.PendingIndentList;
 import com.proteam.projectstoremanagement.Request.Boqrequest;
@@ -135,11 +138,18 @@ public interface PsmApi {
     @POST("Clients_apis/save_consumption_list")
     Call<Generalresponce> consumptionMaterialupdate(@Body SaveConsumptionLists saveConsumptionLists);
 
-
     @POST("Clients_apis/pending_for_approval_update_list")
     Call<IndenteditList> pendingapproval(@Body Indentpendingrequest indentpendingrequest);
 
     @POST("Clients_apis/submit_individual_indent")
     Call<Individualresponse> individualapproval(@Body IndividualListrequest individualListrequest);
 
+    @POST("Clients_apis/individual_indent_update_list")
+    Call<Individualintentlistitems> indentlist(@Body Indentpendingrequest indentpendingrequest);
+
+    @POST("Clients_apis/delete_individual_indent_material_list")
+    Call<Generalresponce> indentlistdelete(@Body IndividualDeleteRequest individualDeleteRequest);
+
+    @POST("Clients_apis/update_individual_indent_material_list")
+    Call<Generalresponce> indentlistupdate(@Body Individual_updateList individual_updateList);
 }

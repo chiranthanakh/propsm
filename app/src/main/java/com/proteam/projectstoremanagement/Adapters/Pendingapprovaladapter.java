@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 public class Pendingapprovaladapter extends ArrayAdapter {
 
-
     public Pendingapprovaladapter(@NonNull Context context, ArrayList<RaiseIndentModel> arrayList) {
         super(context, 0, arrayList);
         notifyDataSetChanged();
@@ -47,6 +46,7 @@ public class Pendingapprovaladapter extends ArrayAdapter {
         // then according to the position of the view assign the desired image for the same
         TextView raisematerialcode = currentItemView.findViewById(R.id.tv_indent_materialCode11);
         raisematerialcode.setText(currentNumberPosition.getMaterialcode());
+        LinearLayout linearLayout = currentItemView.findViewById(R.id.layout_li);
 
         // then according to the position of the view assign the desired TextView 1 for the same
         TextView raisematerialname = currentItemView.findViewById(R.id.tv_indent_materialName11);
@@ -58,6 +58,7 @@ public class Pendingapprovaladapter extends ArrayAdapter {
 
         TextView raisequy = currentItemView.findViewById(R.id.edt_indent_materialRaiseQty11);
         raisequy.setText(currentNumberPosition.getRaiseqty());
+
 
         // then return the recyclable view
         return currentItemView;

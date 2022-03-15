@@ -259,7 +259,6 @@ public class IndividualIndentActivity extends AppCompatActivity implements View.
                     bundle.putString("sublocation_name", sp_indi_sublocation.getSelectedItem().toString());
                     bundle.putString("date", edt_indi_date.getText().toString());
                     bundle.putString("workorderno", edt_indi_orderNumber.getText().toString());
-
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }

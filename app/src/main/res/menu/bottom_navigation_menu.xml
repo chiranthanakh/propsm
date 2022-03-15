@@ -10,16 +10,19 @@
     <item
         android:id="@+id/nav_boq_indent"
         android:enabled="true"
+        android:visible="false"
         android:icon="@drawable/indent_bottom"
         android:title="BOQ Indents"/>
     <item
         android:id="@+id/nav_Individual_indent"
         android:enabled="true"
+        android:visible="false"
         android:icon="@drawable/ind_indent"
         android:title="Individual Indent" />
     <item
         android:id="@+id/nav_consumption"
         android:enabled="true"
+        android:visible="false"
         android:icon="@drawable/consumption"
         android:title="Consumptions"/>
 
