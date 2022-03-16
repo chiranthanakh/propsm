@@ -96,10 +96,13 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
         nav_home=findViewById(R.id.nav_home);
         nav_home.setOnClickListener(this);
         nav_boq_indent=findViewById(R.id.nav_boq_indent);
+        nav_boq_indent.setVisibility(View.GONE);
         nav_boq_indent.setOnClickListener(this);
         nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
         nav_Individual_indent.setOnClickListener(this);
+        nav_Individual_indent.setVisibility(View.GONE);
         nav_consumption=findViewById(R.id.nav_consumption);
+        nav_consumption.setVisibility(View.GONE);
         nav_consumption.setOnClickListener(this);
 
         tv_pending_indent_total_item=findViewById(R.id.tv_pending_indent_total_item);
@@ -262,7 +265,7 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
                         for (int i=0;i<PendingIndent.size();i++){
 
-                            arrayList.add(new PendingIndentModel(indentpending.getIndent_boq_list().get(i).getMaterial_manual_id(),indentpending.getIndent_boq_list().get(i).getMaterial_name(),indentpending.getIndent_boq_list().get(i).getBalance_boq(),indentpending.getIndent_boq_list().get(i).getIndent_qty()));
+                            arrayList.add(new PendingIndentModel(indentpending.getIndent_boq_list().get(i).getMaterial_manual_id(),indentpending.getIndent_boq_list().get(i).getMaterial_name(),indentpending.getIndent_boq_list().get(i).getBalance_boq(),indentpending.getIndent_boq_list().get(i).getIndent_qty(),indentpending.getIndent_boq_list().get(i).getBoq_closing_stock(),indentpending.getIndent_boq_list().get(i).getBoq_net_issue(),indentpending.getIndent_boq_list().get(i).getBoq_consumption_qty()));
 
                             indentids.add(indentpending.getIndent_list().get(0).getIndent_id());
 

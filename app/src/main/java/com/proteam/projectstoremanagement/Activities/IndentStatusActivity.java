@@ -64,12 +64,17 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
     final ArrayList<IndentStatusModel> Issued = new ArrayList<IndentStatusModel>();
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        callapi();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indent_status);
         mToolbar = findViewById(R.id.back_toolbar);
         mToolbar.setOnClickListener(view -> onBackPressed());
-
 
         SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
         editor=sharedPreferences.edit();
@@ -79,7 +84,7 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
 
         initialize();
 
-        callapi();
+
 
         sc_indent_list_status.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -119,13 +124,17 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
         nav_home=findViewById(R.id.nav_home);
         nav_home.setOnClickListener(this);
         nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
+        nav_Individual_indent.setVisibility(View.GONE);
         nav_Individual_indent.setOnClickListener(this);
         nav_consumption=findViewById(R.id.nav_consumption);
+        nav_consumption.setVisibility(View.GONE);
         nav_consumption.setOnClickListener(this);
     }
 
 
     private void callapi() {
+
+
 
         progressDialog=new ProgressDialog(IndentStatusActivity.this);
         if(progressDialog!=null)
@@ -340,8 +349,16 @@ public class IndentStatusActivity extends AppCompatActivity implements View.OnCl
 
         if(list.size()==0){
             ll_no_data_indentstatus.setVisibility(View.VISIBLE);
-        }else {
 
+            IndentStatusAdapter numbersArrayAdapter = new IndentStatusAdapter(this, list);
+
+            // create the instance of the ListView to set the numbersViewAdapter
+            ListView indentlist = findViewById(R.id.indent_status_listView);
+
+            // set the numbersViewAdapter for ListView
+            indentlist.setAdapter(numbersArrayAdapter);
+        }else {
+            ll_no_data_indentstatus.setVisibility(View.GONE);
         IndentStatusAdapter numbersArrayAdapter = new IndentStatusAdapter(this, list);
 
         // create the instance of the ListView to set the numbersViewAdapter

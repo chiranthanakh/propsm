@@ -3,7 +3,7 @@ package com.proteam.projectstoremanagement.Response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class IndentEdititems {
+public class Individualintentlistresponse {
 
     @SerializedName("material_id")
     @Expose
@@ -33,19 +33,9 @@ public class IndentEdititems {
     @Expose
     private String material_name;
 
-    @SerializedName("boq_closing_stock")
+    @SerializedName("closing_stock")
     @Expose
-    private String boq_closing_stock;
-
-
-    @SerializedName("boq_issued_qty")
-    @Expose
-    private String boq_issued_qty;
-
-
-    @SerializedName("boq_consumption_qty")
-    @Expose
-    private String boq_consumption_qty;
+    private String closing_stock;
 
     public String getMaterial_id() {
         return material_id;
@@ -103,27 +93,11 @@ public class IndentEdititems {
         this.material_name = material_name;
     }
 
-    public String getBoq_closing_stock() {
-        return boq_closing_stock;
+    public String getClosing_stock() {
+        return closing_stock;
     }
 
-    public void setBoq_closing_stock(String boq_closing_stock) {
-        this.boq_closing_stock = boq_closing_stock;
-    }
-
-    public String getBoq_issued_qty() {
-        return boq_issued_qty;
-    }
-
-    public void setBoq_issued_qty(String boq_issued_qty) {
-        this.boq_issued_qty = boq_issued_qty;
-    }
-
-    public String getBoq_consumption_qty() {
-        return boq_consumption_qty;
-    }
-
-    public void setBoq_consumption_qty(String boq_consumption_qty) {
-        this.boq_consumption_qty = boq_consumption_qty;
+    public void setClosing_stock(String closing_stock) {
+        this.closing_stock = closing_stock;
     }
 }

@@ -1,16 +1,21 @@
 package com.proteam.projectstoremanagement.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.proteam.projectstoremanagement.Activities.IndividualIndentMaterialActivity;
+import com.proteam.projectstoremanagement.Activities.PendingIndentActivity;
 import com.proteam.projectstoremanagement.Model.IndentStatusModel;
 import com.proteam.projectstoremanagement.Model.IndividualIndentListModel;
 import com.proteam.projectstoremanagement.R;
@@ -49,6 +54,22 @@ public class IndividualIndentListAdapter extends ArrayAdapter<IndividualIndentLi
         // then according to the position of the view assign the desired TextView 2 for the same
         TextView Individual_IStatus = currentItemView.findViewById(R.id.tv_individual_indent_Status);
         Individual_IStatus.setText(currentNumberPosition.getIndividualIndentStatus());
+
+
+        ImageView edit = currentItemView.findViewById(R.id.iv_action_edit_individual);
+        View finalCurrentItemView = currentItemView;
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentEvent1 = new Intent(getContext(), IndividualIndentMaterialActivity.class);
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("indentid",currentNumberPosition.getIndividualIndentNo());
+                bundle1.putBoolean("state",true);
+                intentEvent1.putExtras(bundle1);
+                finalCurrentItemView.getContext().startActivity(intentEvent1);
+
+            }
+        });
 
 
         if(currentNumberPosition.getIndividualIndentStatus().contains("Pending")){

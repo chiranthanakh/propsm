@@ -75,14 +75,11 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
 
                 String[] data = String.valueOf(list.get(i)).split("--");
 
-                arrayList.add(new RaiseIndentModel(data[0],data[1],data[2],data[4],data[3]));
+                arrayList.add(new RaiseIndentModel(data[0],data[1],data[2],data[4],data[3],"0","0","0"));
 
             }
 
         }
-
-
-
 
         Bundle bundle = getIntent().getExtras();
          location_id = bundle.getString("location_id");
@@ -90,6 +87,17 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
          store_id = bundle.getString("storeid");
 
         initilize();
+
+        if(arrayList.size()==0){
+            ll_no_data_updateIndent.setVisibility(View.VISIBLE);
+        }else {
+            ll_no_data_updateIndent.setVisibility(View.GONE);
+
+            tv_total_item.setText(String.valueOf(boqcomponentslist.size()));
+            UpdateIndentAdapter numbersArrayAdapter = new UpdateIndentAdapter(this, arrayList);
+            ListView updateindentList = findViewById(R.id.lv_update_indent_list);
+            updateindentList.setAdapter(numbersArrayAdapter);
+        }
 
         sc_update_indent.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -134,7 +142,7 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
         lv_update_indent_list=findViewById(R.id.lv_update_indent_list);
         btn_indent_confirm=findViewById(R.id.btn_indent_confirm);
         btn_indent_confirm.setOnClickListener(this);
-        callboqupdateapi();
+        //callboqupdateapi();
 
 
     }
@@ -149,7 +157,7 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-                Boqrequest boqrequest = new Boqrequest(store_id,location_id,sublocation_id);
+                Boqrequest boqrequest = new Boqrequest(store_id,location_id,sublocation_id,"1");
                 WebServices<Boqlist> webServices = new WebServices<Boqlist>(UpateIndentActivity.this);
                 webServices.boqapi(WebServices.ApiType.boq, boqrequest);
             }
@@ -206,12 +214,13 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
                 break;
 
             case R.id.btn_indent_edit:
-                Intent intent= new Intent(UpateIndentActivity.this,RaiseIndentActivity.class);
+               /* Intent intent= new Intent(UpateIndentActivity.this,RaiseIndentActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putBoolean("status",true);
                 bundle.putString("indent_id",indentid);
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivity(intent);*/
+                finish();
                 break;
 
             case R.id.btn_indent_back:
@@ -245,12 +254,13 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
 
                         for (int i=0;i<boqcomponentslist.size();i++){
 
-                           // arrayList.add(new RaiseIndentModel(boqlist.getBoq_list().get(i).getMaterial_manual_id(),boqlist.getBoq_list().get(i).getMaterial_name(),boqlist.getBoq_list().get(i).getBalance_boq(),boqlist.getBoq_list().get(i).getQty()));
+                           //arrayList.add(new RaiseIndentModel(boqlist.getBoq_list().get(i).getMaterial_manual_id(),boqlist.getBoq_list().get(i).getMaterial_name(),boqlist.getBoq_list().get(i).getBalance_boq(),boqlist.getBoq_list().get(i).getQty()));
 
                         }
                         if(arrayList.size()==0){
                             ll_no_data_updateIndent.setVisibility(View.VISIBLE);
                         }else {
+                            ll_no_data_updateIndent.setVisibility(View.GONE);
 
                             tv_total_item.setText(String.valueOf(boqcomponentslist.size()));
                             UpdateIndentAdapter numbersArrayAdapter = new UpdateIndentAdapter(this, arrayList);
@@ -298,8 +308,6 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
                 }
 
                 break;
-
-
         }
 
     }

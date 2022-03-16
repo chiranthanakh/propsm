@@ -150,7 +150,7 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         }
 
     }
-    private void callboqupdateapi() {
+    /*private void callboqupdateapi() {
 
         SharedPreferences sharedPreferences=this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=sharedPreferences.edit();
@@ -167,7 +167,7 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
         WebServices<Boqlist> webServices = new WebServices<Boqlist>(CreateIndentActivity.this);
         webServices.boqapi( WebServices.ApiType.boq,boqrequest );
 
-    }
+    }*/
 
 
 
@@ -213,7 +213,7 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
                     String sublocation = String.valueOf(sublocationmap.get(spinner_sublocation.getSelectedItem().toString()));
                     String contractorname = String.valueOf(contractormap.get(spinner_contractor_name.getSelectedItem().toString()));
 
-                    callboqupdateapi();
+                   // callboqupdateapi();
                     Intent intent = new Intent(CreateIndentActivity.this, RaiseIndentActivity.class);
 
                     Bundle bundle = new Bundle();
@@ -264,29 +264,29 @@ public class CreateIndentActivity extends AppCompatActivity implements View.OnCl
     private AdapterView.OnItemSelectedListener OnCatSpinnerCL = new AdapterView.OnItemSelectedListener() {
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 
-        //    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-          //  ((TextView) parent.getChildAt(0)).setTextSize(15);
+            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+            ((TextView) parent.getChildAt(0)).setTextSize(15);
 
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
-//          ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-  //        ((TextView) parent.getChildAt(0)).setTextSize(15);
+          ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+         ((TextView) parent.getChildAt(0)).setTextSize(15);
         }
     };
 
     private AdapterView.OnItemSelectedListener OnCatSpinnerCL1 = new AdapterView.OnItemSelectedListener() {
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 
-       //     ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-         //   ((TextView) parent.getChildAt(0)).setTextSize(15);
+            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+            ((TextView) parent.getChildAt(0)).setTextSize(15);
             callSublocationapi();
 
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
-//            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-  //          ((TextView) parent.getChildAt(0)).setTextSize(15);
+            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+           ((TextView) parent.getChildAt(0)).setTextSize(15);
         }
     };
 

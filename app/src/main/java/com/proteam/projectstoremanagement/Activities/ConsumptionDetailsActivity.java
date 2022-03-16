@@ -84,8 +84,6 @@ public class ConsumptionDetailsActivity extends AppCompatActivity implements Vie
                 progressDialog.setMessage("Please wait...");
                 progressDialog.show();
 
-
-
                 ConsumptionDetailsRequest consumptionDetailsRequest = new ConsumptionDetailsRequest(id);
                 WebServices<ConsumptionDetailsDataResponse> webServices = new WebServices<ConsumptionDetailsDataResponse>(ConsumptionDetailsActivity.this);
                 webServices.consumptionDetails(WebServices.ApiType.consumptionDetails, consumptionDetailsRequest);
@@ -142,7 +140,6 @@ public class ConsumptionDetailsActivity extends AppCompatActivity implements Vie
                         tv_Consumption_ConLastDate.setText(consumptionDetailsDataResponse.getContractor_location().get(0).getLast_updated_date());
 
                     }
-
                 }
                 break;
         }

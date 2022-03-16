@@ -91,7 +91,7 @@
         <activity
             android:name=".Activities.RaiseIndentActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Activities.CreateIndentActivity"
             android:exported="false"

@@ -45,6 +45,18 @@ public class Indentpendingitems2 {
     @Expose
     private String balance_boq;
 
+    @SerializedName("boq_closing_stock")
+    @Expose
+    private String boq_closing_stock;
+
+    @SerializedName("boq_net_issue")
+    @Expose
+    private String boq_net_issue;
+
+    @SerializedName("boq_consumption_qty")
+    @Expose
+    private String boq_consumption_qty;
+
     public String getIndent_det_id() {
         return indent_det_id;
     }
@@ -123,5 +135,29 @@ public class Indentpendingitems2 {
 
     public void setBalance_boq(String balance_boq) {
         this.balance_boq = balance_boq;
+    }
+
+    public String getBoq_closing_stock() {
+        return boq_closing_stock;
+    }
+
+    public void setBoq_closing_stock(String boq_closing_stock) {
+        this.boq_closing_stock = boq_closing_stock;
+    }
+
+    public String getBoq_net_issue() {
+        return boq_net_issue;
+    }
+
+    public void setBoq_net_issue(String boq_net_issue) {
+        this.boq_net_issue = boq_net_issue;
+    }
+
+    public String getBoq_consumption_qty() {
+        return boq_consumption_qty;
+    }
+
+    public void setBoq_consumption_qty(String boq_consumption_qty) {
+        this.boq_consumption_qty = boq_consumption_qty;
     }
 }

@@ -38,19 +38,19 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
     private SwipeRefreshLayout sc_indent_list_status;
     List pendingindentlist = new ArrayList();
 
-
-
     final ArrayList<PendingIndentListModel> arrayList = new ArrayList<PendingIndentListModel>();
     final ArrayList<PendingIndentListModel> approvedlist = new ArrayList<PendingIndentListModel>();
     final ArrayList<PendingIndentListModel> pendinglist = new ArrayList<PendingIndentListModel>();
     final ArrayList<PendingIndentListModel> regectedlist = new ArrayList<PendingIndentListModel>();
     final ArrayList<PendingIndentListModel> inprogresslist = new ArrayList<PendingIndentListModel>();
     final ArrayList<PendingIndentListModel> Issued = new ArrayList<PendingIndentListModel>();
-
+    String laststate;
     ProgressDialog progressDialog;
 
     String userid;
     SharedPreferences.Editor editor;
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +63,9 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
         String user = sharedPreferences.getString("userid",null);
 
         userid = sharedPreferences.getString("userid",null);
+
+        prefs = getSharedPreferences("lastState", Context.MODE_PRIVATE);
+        editor1 = prefs.edit();
 
     }
 
@@ -84,11 +87,14 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
         nav_home=findViewById(R.id.nav_home);
         nav_home.setOnClickListener(this);
         nav_boq_indent=findViewById(R.id.nav_boq_indent);
+        nav_boq_indent.setVisibility(View.GONE);
         nav_boq_indent.setOnClickListener(this);
         nav_Individual_indent=findViewById(R.id.nav_Individual_indent);
+        nav_Individual_indent.setVisibility(View.GONE);
         nav_Individual_indent.setOnClickListener(this);
         nav_consumption=findViewById(R.id.nav_consumption);
         nav_consumption.setOnClickListener(this);
+        nav_consumption.setVisibility(View.GONE);
 
         sc_indent_list_status.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -96,6 +102,38 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
                 finish();
                 startActivity(getIntent());
+
+
+                /* laststate = prefs.getString("lastState",null);
+
+                if(!laststate.isEmpty()) {
+                }else {
+
+                    if(laststate.equals("Pending")){
+
+                        adaptormoves(pendinglist,"1");
+
+                    }else if(laststate.equals("Approved")){
+
+                        adaptormoves(approvedlist,"2");
+
+                    }else if(laststate.equals("Rejected")){
+
+                        adaptormoves(regectedlist, "3");
+
+                    }else if(laststate.equals("InProgress")){
+
+                        adaptormoves(inprogresslist, "4");
+
+                    }else if(laststate.equals("All")){
+
+                        adaptormoves(arrayList, "5");
+
+                    }else if(laststate.equals("Issued"))
+                    {
+                        adaptormoves(Issued,"6");
+                    }
+                }*/
 
                 // Your code here
                 Toast.makeText(getApplicationContext(), "Refreshing!", Toast.LENGTH_LONG).show();
@@ -191,6 +229,11 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
                             adaptormoves(Issued,"6");
                         }
 
+
+                        editor1.putString("liststate", String.valueOf(menuItem.getTitle()));
+                        editor1.commit();
+
+
                         Toast.makeText(PendingIndentListActivity.this, "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
                         return true;
                     }
@@ -230,31 +273,35 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
                         regectedlist.clear();
                         inprogresslist.clear();
                         Issued.clear();
-                        for (int i=0;i<pendingindentlist.size();i++){
+                        if(pendingindentlist.size()!=0){
+
+                            for (int i=0;i<pendingindentlist.size();i++){
 
 
-                            arrayList.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
+                                arrayList.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
 
-                            if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("Pending")){
+                                if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("Pending")){
 
-                                pendinglist.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
-                            }else if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("Approved")){
+                                    pendinglist.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
+                                }else if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("Approved")){
 
-                                approvedlist.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
-                            }else  if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("Rejected")){
+                                    approvedlist.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
+                                }else  if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("Rejected")){
 
-                                regectedlist.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
-                            }else  if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("InProgress")){
+                                    regectedlist.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
+                                }else  if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("InProgress")){
 
-                                inprogresslist.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
+                                    inprogresslist.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
+                                }
+                                else if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("Issued"))
+                                {
+                                    Issued.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
+                                }
                             }
-                            else if(pendingIndentModel.getIndent_list().get(i).getStatus().equalsIgnoreCase("Issued"))
-                            {
-                                Issued.add(new PendingIndentListModel(pendingIndentModel.getIndent_list().get(i).getIndent_auto_gen_id(),pendingIndentModel.getIndent_list().get(i).getContractor_name(),pendingIndentModel.getIndent_list().get(i).getStatus(),pendingIndentModel.getIndent_list().get(i).getIndent_id()));
-                            }
+                            adaptormoves(pendinglist,"0");
+                        } else{
+                            Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
                         }
-
-                        adaptormoves(pendinglist,"0");
 
                         //tv_raise_indent_total_item.setText(String.valueOf(boqcomponentslist.size()));
 
@@ -286,14 +333,15 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
         if(list.size()==0){
             ll_no_data_pendingIndent.setVisibility(View.VISIBLE);
         }else {
-            PendingIndentListAdapter numbersArrayAdapter = new PendingIndentListAdapter(this, list, status);
+            ll_no_data_pendingIndent.setVisibility(View.GONE);
+        }
 
+            PendingIndentListAdapter numbersArrayAdapter = new PendingIndentListAdapter(this, list, status);
             // create the instance of the ListView to set the numbersViewAdapter
             ListView pendingindentlist = findViewById(R.id.lv_pending_indent_list);
-
             // set the numbersViewAdapter for ListView
             pendingindentlist.setAdapter(numbersArrayAdapter);
-        }
+
 
     }
 }
