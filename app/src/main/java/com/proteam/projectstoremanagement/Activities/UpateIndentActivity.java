@@ -78,11 +78,7 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
                 arrayList.add(new RaiseIndentModel(data[0],data[1],data[2],data[4],data[3],"0","0","0"));
 
             }
-
         }
-
-
-
 
         Bundle bundle = getIntent().getExtras();
          location_id = bundle.getString("location_id");
@@ -311,8 +307,6 @@ public class UpateIndentActivity extends AppCompatActivity implements OnResponse
                 }
 
                 break;
-
-
         }
 
     }

@@ -280,8 +280,8 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
-           // ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-           // ((TextView) parent.getChildAt(0)).setTextSize(15);
+            ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+           ((TextView) parent.getChildAt(0)).setTextSize(15);
         }
     };
 
@@ -295,8 +295,8 @@ public class CreateConsumptionActivity extends AppCompatActivity implements View
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
-           // ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-            //((TextView) parent.getChildAt(0)).setTextSize(15);
+           ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+            ((TextView) parent.getChildAt(0)).setTextSize(15);
         }
     };
 

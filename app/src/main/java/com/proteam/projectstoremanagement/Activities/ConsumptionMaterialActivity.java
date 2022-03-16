@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -317,18 +318,18 @@ public class ConsumptionMaterialActivity extends AppCompatActivity implements Vi
         final Dialog dialog =new Dialog(this);
         dialog.setContentView(R.layout.dialog_gcadmincount);
         dialog.show();
-
+        LinearLayout ll_layout = dialog.findViewById(R.id.ll_layout);
+        ll_layout.setVisibility(View.GONE);
         EditText et_count = dialog.findViewById(R.id.edt_gc_count);
         et_count.setText(value);
         Button bt_submit = dialog.findViewById(R.id.btn_gc_submit);
-
         Boolean state = false;
-
         bt_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(edt_consume_search.getText().toString().trim()==""){
+                String sdsd = edt_consume_search.getText().toString();
+                if(edt_consume_search.getText().toString().trim().equals("")){
 
                     arrayList.set(position, new ConsumptionMaterialsModel(arrayList.get(position).getMaterial_manual_id(),
                             arrayList.get(position).getMaterial_name(),et_count.getText().toString(),arrayList.get(position).getMaterial_id(),arrayList.get(position).getLast_updated_qty()));

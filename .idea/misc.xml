@@ -14,13 +14,16 @@
         <entry key="..\:/Users/Personal/AndroidStudioProjects/propsm/app/src/main/res/layout/activity_upate_indent.xml" value="0.17" />
         <entry key="..\:/Users/Personal/AndroidStudioProjects/propsm/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.15677083333333333" />
         <entry key="..\:/Users/Personal/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/drawable/button_shape.xml" value="0.1435" />
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/activity_consumption_details.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/activity_consumption_list.xml" value="0.15885416666666666" />
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/activity_consumption_material.xml" value="0.15416666666666667" />
+        <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/activity_create_consumption.xml" value="0.11822916666666666" />
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/activity_indent_create.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/activity_indent_status.xml" value="0.171875" />
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/activity_individual_indent.xml" value="0.140625" />
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/activity_individual_indent_material.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/activity_login.xml" value="0.15052083333333333" />
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/activity_pending_approval.xml" value="0.25" />
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/activity_pending_indent.xml" value="0.18385416666666668" />
@@ -31,7 +34,7 @@
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/consumption_details_layout.xml" value="0.67" />
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/consumption_material_layout.xml" value="0.22" />
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/dashboard_layout.xml" value="0.18" />
-        <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/dialog_gcadmincount.xml" value="0.33" />
+        <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/dialog_gcadmincount.xml" value="0.25" />
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/dialog_quantity_display.xml" value="0.15572916666666667" />
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/indent_status_list_layout.xml" value="0.1" />
         <entry key="..\:/Users/Personal/Desktop/5March22 527 PM/propsm/app/src/main/res/layout/individual_indent_material.xml" value="0.20416666666666666" />

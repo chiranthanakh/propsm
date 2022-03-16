@@ -156,8 +156,6 @@ public class WebServices<T> {
     {
         apiTypeVariable = apiTypes;
         Retrofit retrofit=getRetrofitClient("https://fcm.googleapis.com/");
-
-
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
         call=(Call<T>)psmApi.sendChatNotification(requestNotification);
@@ -175,7 +173,6 @@ public class WebServices<T> {
                 onResponseListner.onResponse(null, apiTypeVariable, false,0);
             }
         });
-
     }
 
     public void login(String api, ApiType apiTypes, Loginmodel loginmodel)
@@ -232,8 +229,6 @@ public class WebServices<T> {
 
     public void constructorlocation( ApiType apiTypes, Constructorlocationrequest constructorlocationrequest)
     {
-
-
         apiTypeVariable = apiTypes;
         Retrofit retrofit=getRetrofitClient(BaseUrl);
 
@@ -255,7 +250,6 @@ public class WebServices<T> {
                 onResponseListner.onResponse(null, apiTypeVariable, false,0);
             }
         });
-
     }
 
     public void constructorSublocation( ApiType apiTypes, SubLocationRaiseRequest subLocationRaiseRequest)
@@ -450,7 +444,6 @@ public class WebServices<T> {
     {
         apiTypeVariable = apiTypes;
         Retrofit retrofit=getRetrofitClient(BaseUrl);
-
 
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
@@ -654,7 +647,6 @@ public class WebServices<T> {
     {
         apiTypeVariable = apiTypes;
         Retrofit retrofit=getRetrofitClient(BaseUrl);
-
 
         PsmApi psmApi=retrofit.create(PsmApi.class);
 

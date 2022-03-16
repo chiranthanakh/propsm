@@ -26,7 +26,8 @@ public class ChangePasswordActivity extends AppCompatActivity implements OnRespo
     Button btn_continue;
     EditText edt_old_password, edt_new_password,edt_confirm_password;
     ProgressDialog progressDialog;
-
+    SharedPreferences.Editor editor;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements OnRespo
         mToolbar.setOnClickListener(view -> onBackPressed());
 
         initilize();
-
 
     }
 
