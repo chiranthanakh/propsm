@@ -60,7 +60,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
     ListView lv_raise_indent_list;
     EditText search;
     Boqlist boqlist;
-    ArrayList<RaiseIndentModel> temp = new ArrayList();;
+    ArrayList<RaiseIndentModel> temp = new ArrayList();
 
     List boqcomponentslist = new ArrayList();
     final ArrayList<RaiseIndentModel> arrayList = new ArrayList<RaiseIndentModel>();
@@ -556,11 +556,11 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
 
                     int value =Math.round(Float.parseFloat(et_count.getText().toString().trim()));
 
-                    if((value>Integer.valueOf(Math.round(Float.parseFloat(data[0])))) || (value==Integer.valueOf(Math.round(Float.parseFloat(data[0])))) ){
-                        textvisable.setVisibility(View.VISIBLE);
+                    //if((value>Integer.valueOf(Math.round(Float.parseFloat(data[0])))) || (value==Integer.valueOf(Math.round(Float.parseFloat(data[0])))) ){
+                     //   textvisable.setVisibility(View.VISIBLE);
                         //dialog.dismiss();
                        // Toast.makeText(RaiseIndentActivity.this, "Indent quantity is more than BOQ balance", Toast.LENGTH_SHORT).show();
-                    }else {
+                   // }else {
                         textvisable.setVisibility(View.GONE);
                         arrayList.set(position, new RaiseIndentModel(arrayList.get(position).getMaterialcode(),arrayList.get(position).getMaterialname(),arrayList.get(position).getBoqbalance(),et_count.getText().toString(),arrayList.get(position).getMaterial_id(),arrayList.get(position).getClosing_stock(),arrayList.get(position).getIssued_stock(),arrayList.get(position).getConsumed_stock()));
 
@@ -569,19 +569,19 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                         pendingindentstatus.setAdapter(numbersArrayAdapter);
 
                         dialog.dismiss();
-                    }
+                   // }
 
                 }else {
 
                     int value =Math.round(Float.parseFloat(et_count.getText().toString().trim()));
 
-                    if((value>Integer.valueOf(Math.round(Float.parseFloat(boqvalue)))) || (value==Integer.valueOf(Math.round(Float.parseFloat(boqvalue)))) ){
+                    //if((value>Integer.valueOf(Math.round(Float.parseFloat(boqvalue)))) || (value==Integer.valueOf(Math.round(Float.parseFloat(boqvalue)))) ){
 
-                        textvisable.setVisibility(View.VISIBLE);
+                      //  textvisable.setVisibility(View.VISIBLE);
                         //dialog.dismiss();
                         //Toast.makeText(RaiseIndentActivity.this, "Indent quantity is more than BOQ balance", Toast.LENGTH_SHORT).show();
 
-                    }else {
+                    //}else {
 
                         RaiseIndentModel model = temp.get(position);
                         for(int i=0;i<arrayList.size();i++){
@@ -598,7 +598,7 @@ public class RaiseIndentActivity extends AppCompatActivity implements View.OnCli
                             }
                         }
 
-                    }
+                    //}
                 }
 
             }
