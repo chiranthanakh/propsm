@@ -255,10 +255,8 @@ public class WebServices<T> {
     public void constructorSublocation( ApiType apiTypes, SubLocationRaiseRequest subLocationRaiseRequest)
     {
 
-
         apiTypeVariable = apiTypes;
         Retrofit retrofit=getRetrofitClient(BaseUrl);
-
 
         PsmApi psmApi=retrofit.create(PsmApi.class);
 
