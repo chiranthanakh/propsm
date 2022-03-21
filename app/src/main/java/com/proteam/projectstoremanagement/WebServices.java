@@ -74,7 +74,9 @@ public class WebServices<T> {
         consumptionDetails,boqedit,noti,send,IndividualMatlistName,listresponse,materiallist,updateresponse
     }
 
-    String BaseUrl = "https://renew.proteam.co.in/en/api/";
+    //String BaseUrl = "https://renew.proteam.co.in/en/api/";
+
+    String BaseUrl = "https://devrenew.proteam.co.in/en/api/";
 
     public WebServices(OnResponseListener<T> onResponseListner) {
         this.onResponseListner = onResponseListner;
