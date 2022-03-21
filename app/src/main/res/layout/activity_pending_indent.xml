@@ -82,7 +82,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-
         app:layout_constraintTop_toBottomOf="@id/top_bar">
 
         <androidx.core.widget.NestedScrollView
@@ -163,7 +162,7 @@
                                     android:fontFamily="@font/proxima_nova_bold"
                                     android:text=""
                                     android:textColor="@color/grey_dark"
-                                    android:textSize="15sp" />
+                                    android:textSize="14sp" />
 
                             </LinearLayout>
 
@@ -195,7 +194,7 @@
                                     android:text=""
                                     android:textAllCaps="false"
                                     android:textColor="@color/grey_dark"
-                                    android:textSize="15sp" />
+                                    android:textSize="14sp" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -234,7 +233,7 @@
                                     android:fontFamily="@font/proxima_nova_bold"
                                     android:text=""
                                     android:textColor="@color/grey_dark"
-                                    android:textSize="15sp" />
+                                    android:textSize="14sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -264,7 +263,7 @@
                                     android:fontFamily="@font/proxima_nova_bold"
                                     android:text=""
                                     android:textColor="@color/grey_dark"
-                                    android:textSize="15sp" />
+                                    android:textSize="14sp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -303,7 +302,7 @@
                                     android:fontFamily="@font/proxima_nova_bold"
                                     android:text="-------"
                                     android:textColor="@color/grey_dark"
-                                    android:textSize="15sp" />
+                                    android:textSize="14sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -333,7 +332,7 @@
                                     android:fontFamily="@font/proxima_nova_bold"
                                     android:text=""
                                     android:textColor="@color/grey_dark"
-                                    android:textSize="15sp" />
+                                    android:textSize="14sp" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -373,7 +372,7 @@
                                     android:fontFamily="@font/proxima_nova_bold"
                                     android:text=""
                                     android:textColor="@color/grey_dark"
-                                    android:textSize="15sp" />
+                                    android:textSize="14sp" />
                             </LinearLayout>
 
 
@@ -475,6 +474,7 @@
 
 
                 <LinearLayout
+                    android:layout_marginTop="5dp"
                     android:id="@+id/data_table"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -497,7 +497,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
                             android:layout_marginStart="5dp"
-                            android:layout_weight="0.8"
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp"
                             android:layout_marginLeft="@dimen/margin_30dp"
                             android:gravity="center_vertical"
                             android:text="Material Code"
@@ -507,11 +508,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
-                            android:layout_marginStart="10dp"
                             android:layout_weight="1"
-                            android:gravity="center_vertical"
+                            android:paddingLeft="20dp"
+                            android:gravity="start|center"
                             android:text="Material Name"
-                            android:layout_marginLeft="@dimen/margin_35dp"
                             android:textColor="@color/white"
                             android:textSize="12sp" />
 

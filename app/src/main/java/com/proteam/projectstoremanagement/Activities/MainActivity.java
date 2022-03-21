@@ -92,8 +92,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         SharedPreferences sharedPreferences = this.getSharedPreferences("myPref", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        //String user = sharedPreferences.getString("userid", null);
-          String user="72";
+        String user = sharedPreferences.getString("userid", null);
+          //String user="72";
         if (user == null) {
 
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
