@@ -6,6 +6,8 @@
     android:background="@color/white"
     android:layout_height="wrap_content">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,10 +25,9 @@
                 android:id="@+id/update_indent_m_code"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:gravity="center"
                 android:text="1458848"
-                android:layout_marginStart="10dp"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
@@ -56,10 +57,10 @@
                 android:id="@+id/update_indent_m_raiseqty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:gravity="center"
                 android:text="123"
+                android:paddingLeft="10dp"
                 android:textCursorDrawable="@drawable/cursor"
                 android:backgroundTint="@color/grey_dark"
                 android:theme="@style/LightTheme"

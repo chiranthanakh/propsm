@@ -7,6 +7,7 @@
     android:layout_height="wrap_content">
 
 
+
     <LinearLayout
         android:id="@+id/ll_status_click"
         android:layout_width="match_parent"
@@ -34,11 +35,12 @@
 
             <TextView
                 android:id="@+id/tv_pending_indent_contactor"
-                android:layout_width="170dp"
-                android:layout_height="match_parent"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/proxima_family"
                 android:gravity="center"
-                android:layout_marginStart="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="25dp"
                 android:text="Mondal Enterprises"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
@@ -47,19 +49,18 @@
                 android:id="@+id/pending_indent_status"
                 android:fontFamily="@font/proxima_nova_bold"
                 android:layout_width="100dp"
+                android:layout_marginStart="15dp"
                 android:layout_height="match_parent"
                 android:gravity="start|center"
-                android:layout_marginStart="2dp"
                 android:text="Pending"
                 android:textSize="13sp" />
 
             <ImageView
                 android:id="@+id/iv_action_view"
-                android:fontFamily="@font/proxima_nova_bold"
                 android:layout_width="50dp"
-                android:layout_marginEnd="10dp"
-                android:padding="4dp"
-                android:visibility="gone"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:paddingRight="30dp"
                 android:layout_height="match_parent"
                 android:background="?selectableItemBackground"
                 android:src="@drawable/eye"

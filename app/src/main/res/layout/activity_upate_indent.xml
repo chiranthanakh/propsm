@@ -187,9 +187,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_weight="0.8"
-                android:gravity="center"
-                android:layout_marginLeft="@dimen/dimen_25dp"
+                android:layout_weight="0.4"
+                android:gravity="start|center"
+                android:paddingLeft="15dp"
                 android:text="Material Code"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
@@ -198,6 +198,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_weight="1"
+                android:paddingLeft="10dp"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dimen_25dp"
                 android:text="Material Name"
@@ -217,7 +218,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:gravity="center"
                 android:text="Raised Qty"
                 android:textColor="@color/white"
