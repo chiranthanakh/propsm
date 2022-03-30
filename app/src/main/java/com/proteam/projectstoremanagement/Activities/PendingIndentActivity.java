@@ -373,7 +373,6 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
                 callupdateapi(it);
                 dialog.cancel();
 
-
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
