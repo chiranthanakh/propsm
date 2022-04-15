@@ -93,12 +93,9 @@ public class Notification extends FirebaseMessagingService {
         }
         mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(msg));
 
-        mBuilder.setContentTitle(msg);
+        mBuilder.setContentTitle("Pro PIMS");
         mBuilder.setContentText(msg);
         mBuilder.setContentIntent(pendingIntent);
-
-
-
 
         //If you don't want all notifications to overwrite add int m to unique value
         Random random = new Random();

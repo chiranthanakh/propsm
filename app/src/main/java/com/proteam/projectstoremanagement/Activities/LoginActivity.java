@@ -144,7 +144,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     if(loginResponse.getStatus().equals("true")){
 
-                        if(loginResponse.getRole().equalsIgnoreCase("Approver")) {
+                        //if(loginResponse.getRole().equalsIgnoreCase("Approver")) {
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             Bundle bundle1 = new Bundle();
@@ -162,9 +162,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             editor.commit();
                             finish();
 
-                        }else {
-                            Toast.makeText(this, "You are not allowed to login", Toast.LENGTH_SHORT).show();
-                        }
+                       // }else {
+                         //   Toast.makeText(this, "You are not allowed to login", Toast.LENGTH_SHORT).show();
+                        //}
 
                     }else{
                         Toast.makeText(this, "Please enter correct login details", Toast.LENGTH_SHORT).show();
