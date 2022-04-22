@@ -27,6 +27,7 @@ import com.proteam.projectstoremanagement.Utils.OnResponseListener;
 import com.proteam.projectstoremanagement.WebServices;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PendingIndentListActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
@@ -266,6 +267,7 @@ public class PendingIndentListActivity extends AppCompatActivity implements View
 
                         PendingIndentList pendingIndentModel = (PendingIndentList) response;
                         pendingindentlist = pendingIndentModel.getIndent_list();
+                        Collections.reverse(pendingindentlist);
 
                         arrayList.clear();
                         pendinglist.clear();

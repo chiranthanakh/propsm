@@ -38,6 +38,8 @@ import com.proteam.projectstoremanagement.Utils.Utilities;
 import com.proteam.projectstoremanagement.WebServices;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class PendingIndentActivity extends AppCompatActivity implements View.OnClickListener, OnResponseListener {
@@ -260,6 +262,7 @@ public class PendingIndentActivity extends AppCompatActivity implements View.OnC
 
                          indentpending = (Indentpending) response;
                         PendingIndent = indentpending.getIndent_boq_list();
+                        //Collections.reverse(PendingIndent);
 
                         arrayList.clear();
 
